@@ -1,0 +1,32 @@
+name: app-clinica-ami
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: ami-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      PGDATA: /var/lib/postgresql/data/pgdata
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - ami_postgres_data:/var/lib/postgresql/data
+      - ./database/migrations/001_especialidades_medicos.sql:/docker-entrypoint-initdb.d/001_especialidades_medicos.sql:ro
+      - ./database/migrations/002_modulos_clinicos.sql:/docker-entrypoint-initdb.d/002_modulos_clinicos.sql:ro
+      - ./database/migrations/003_seguridad_facturacion_inventario.sql:/docker-entrypoint-initdb.d/003_seguridad_facturacion_inventario.sql:ro
+      - ./database/migrations/004_ajustes_y_modulos_publicos.sql:/docker-entrypoint-initdb.d/004_ajustes_y_modulos_publicos.sql:ro
+      - ./database/seed.sql:/docker-entrypoint-initdb.d/900_seed.sql:ro
+      - ./database/tests:/database-tests:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 10s
+
+volumes:
+  ami_postgres_data:
+    name: ami_postgres_data

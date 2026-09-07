@@ -1,0 +1,506 @@
+generator client {
+  provider        = "prisma-client"
+  output          = "../src/generated/prisma"
+  previewFeatures = ["partialIndexes"]
+  moduleFormat    = "cjs"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model tb_anuncios {
+  id             Int             @id @default(autoincrement())
+  titulo         String          @db.VarChar(150)
+  descripcion    String?
+  estilo_id      Int
+  fecha_inicio   DateTime        @db.Date
+  fecha_fin      DateTime        @db.Date
+  imagen_url     String?         @db.VarChar(500)
+  estado         Boolean         @default(true)
+  promocion_id   Int?
+  fecha_creacion DateTime        @default(now()) @db.Timestamp(6)
+  tb_estilos     tb_estilos      @relation(fields: [estilo_id], references: [id], map: "fk_tb_anuncios_estilo")
+  tb_promociones tb_promociones? @relation(fields: [promocion_id], references: [id], onDelete: Restrict, map: "fk_tb_anuncios_promocion")
+
+  @@index([estilo_id], map: "ix_tb_anuncios_estilo")
+  @@index([promocion_id], map: "ix_tb_anuncios_promocion")
+  @@index([estado, fecha_inicio, fecha_fin], map: "ix_tb_anuncios_vigencia")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model tb_archivos_estudios {
+  id_archivo   Int          @id @default(autoincrement())
+  id_paciente  Int
+  id_consulta  Int
+  tipo_estudio String       @db.VarChar(100)
+  ruta_archivo String       @db.VarChar(500)
+  fecha_subida DateTime     @default(now()) @db.Timestamp(6)
+  id_usuario   Int
+  descripcion  String?
+  estado       Boolean      @default(true)
+  tb_consultas tb_consultas @relation(fields: [id_consulta], references: [id_consulta], map: "fk_tb_archivos_consulta")
+  tb_pacientes tb_pacientes @relation(fields: [id_paciente], references: [id_paciente], map: "fk_tb_archivos_paciente")
+  tb_usuarios  tb_usuarios  @relation(fields: [id_usuario], references: [id_usuario], map: "fk_tb_archivos_usuario")
+
+  @@index([id_consulta], map: "ix_tb_archivos_consulta")
+  @@index([id_paciente], map: "ix_tb_archivos_paciente")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+/// This model contains an expression index which requires additional setup for migrations. Visit https://pris.ly/d/expression-indexes for more info.
+model tb_catalogo_examenes {
+  id_examen                 Int                         @id @default(autoincrement())
+  nombre                    String                      @db.VarChar(150)
+  categoria                 String                      @db.VarChar(100)
+  valores_referencia        String?                     @db.VarChar(255)
+  unidad_medida             String?                     @db.VarChar(50)
+  estado                    Boolean                     @default(true)
+  fecha_creacion            DateTime                    @default(now()) @db.Timestamp(6)
+  tb_resultados_laboratorio tb_resultados_laboratorio[]
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model tb_citas {
+  id_cita        Int           @id @default(autoincrement())
+  id_paciente    Int
+  id_doctor      Int
+  fecha_hora     DateTime      @db.Timestamp(6)
+  motivo_cita    String        @db.VarChar(255)
+  estado         String        @default("programada") @db.VarChar(20)
+  fecha_creacion DateTime      @default(now()) @db.Timestamp(6)
+  tb_medicos     tb_medicos    @relation(fields: [id_doctor], references: [id], map: "fk_tb_citas_doctor")
+  tb_pacientes   tb_pacientes  @relation(fields: [id_paciente], references: [id_paciente], map: "fk_tb_citas_paciente")
+  tb_consultas   tb_consultas?
+
+  @@unique([id_doctor, fecha_hora], map: "uq_tb_citas_doctor_fecha")
+  @@unique([id_paciente, fecha_hora], map: "uq_tb_citas_paciente_fecha")
+  @@index([estado], map: "ix_tb_citas_estado")
+  @@index([fecha_hora], map: "ix_tb_citas_fecha_hora")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model tb_clinicas {
+  id_clinica     Int        @id @default(autoincrement())
+  numero_clinica String     @unique @db.VarChar(30)
+  sala           String     @db.VarChar(100)
+  id_doctor      Int
+  estado         Boolean    @default(true)
+  horario        String
+  fecha_creacion DateTime   @default(now()) @db.Timestamp(6)
+  tb_medicos     tb_medicos @relation(fields: [id_doctor], references: [id], map: "fk_tb_clinicas_doctor")
+
+  @@index([id_doctor], map: "ix_tb_clinicas_doctor")
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model tb_consentimientos_informados {
+  id_consentimiento Int          @id @default(autoincrement())
+  id_paciente       Int
+  id_servicio       Int
+  fecha_firma       DateTime?    @db.Timestamp(6)
+  estado_firma      String       @default("pendiente") @db.VarChar(20)
+  ruta_documento    String?      @db.VarChar(500)
+  id_usuario        Int?
+  observaciones     String?
+  fecha_creacion    DateTime     @default(now()) @db.Timestamp(6)
+  tb_pacientes      tb_pacientes @relation(fields: [id_paciente], references: [id_paciente], map: "fk_tb_consentimientos_paciente")
+  tb_servicios      tb_servicios @relation(fields: [id_servicio], references: [id], map: "fk_tb_consentimientos_servicio")
+  tb_usuarios       tb_usuarios? @relation(fields: [id_usuario], references: [id_usuario], onDelete: Restrict, map: "fk_tb_consentimientos_usuario")
+
+  @@index([id_paciente], map: "ix_tb_consentimientos_paciente")
+  @@index([id_servicio], map: "ix_tb_consentimientos_servicio")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model tb_consulta_servicios {
+  id_detalle                  Int          @id @default(autoincrement())
+  id_consulta                 Int
+  id_servicio                 Int
+  observaciones_procedimiento String?
+  tb_consultas                tb_consultas @relation(fields: [id_consulta], references: [id_consulta], map: "fk_tb_consulta_servicios_consulta")
+  tb_servicios                tb_servicios @relation(fields: [id_servicio], references: [id], map: "fk_tb_consulta_servicios_servicio")
+
+  @@index([id_consulta], map: "ix_tb_consulta_servicios_consulta")
+  @@index([id_servicio], map: "ix_tb_consulta_servicios_servicio")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model tb_consultas {
+  id_consulta               Int                         @id @default(autoincrement())
+  id_cita                   Int                         @unique
+  motivo_consulta           String
+  notas_evolucion           String?
+  diagnostico_cie10         String?                     @db.VarChar(20)
+  fecha_registro            DateTime                    @default(now()) @db.Timestamp(6)
+  tb_archivos_estudios      tb_archivos_estudios[]
+  tb_consulta_servicios     tb_consulta_servicios[]
+  tb_citas                  tb_citas                    @relation(fields: [id_cita], references: [id_cita], map: "fk_tb_consultas_cita")
+  tb_signos_vitales_medidas tb_signos_vitales_medidas[]
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+/// This model contains an expression index which requires additional setup for migrations. Visit https://pris.ly/d/expression-indexes for more info.
+model tb_contacto {
+  id               Int      @id @default(autoincrement())
+  nombre_empresa   String   @db.VarChar(150)
+  nombre_corto     String?  @db.VarChar(100)
+  telefono         String   @db.VarChar(20)
+  correo           String?  @db.VarChar(150)
+  facebook         String?  @db.VarChar(255)
+  instagram        String?  @db.VarChar(255)
+  logo_url         String?  @db.VarChar(255)
+  ubicacion        String   @db.VarChar(255)
+  google_maps_url  String?  @db.VarChar(500)
+  video_inicio_url String?  @db.VarChar(500)
+  slogan           String?  @db.VarChar(255)
+  horario_semana   String?
+  horario_sabado   String?
+  estado           Boolean  @default(true)
+  fecha_creacion   DateTime @default(now()) @db.Timestamp(6)
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model tb_detalle_factura {
+  id_detalle      Int         @id @default(autoincrement())
+  id_factura      Int
+  concepto        String      @db.VarChar(255)
+  cantidad        Decimal     @db.Decimal(10, 2)
+  precio_unitario Decimal     @db.Decimal(12, 2)
+  subtotal        Decimal?    @default(dbgenerated("round((cantidad * precio_unitario), 2)")) @db.Decimal(12, 2)
+  estado          Boolean     @default(true)
+  tb_facturas     tb_facturas @relation(fields: [id_factura], references: [id_factura], map: "fk_tb_detalle_factura")
+
+  @@index([id_factura], map: "ix_tb_detalle_factura")
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model tb_detalle_receta {
+  id_detalle      Int             @id @default(autoincrement())
+  id_receta       Int
+  id_medicamento  Int
+  dosis           String          @db.VarChar(100)
+  duracion_dias   Int
+  tb_medicamentos tb_medicamentos @relation(fields: [id_medicamento], references: [id_medicamento], map: "fk_tb_detalle_medicamento")
+  tb_recetas      tb_recetas      @relation(fields: [id_receta], references: [id_receta], map: "fk_tb_detalle_receta")
+
+  @@unique([id_receta, id_medicamento], map: "uq_tb_detalle_receta_medicamento")
+  @@index([id_medicamento], map: "ix_tb_detalle_receta_medicamento")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+/// This model contains an expression index which requires additional setup for migrations. Visit https://pris.ly/d/expression-indexes for more info.
+model tb_especialidades {
+  id             Int          @id @default(autoincrement())
+  nombre         String       @db.VarChar(150)
+  descripcion    String?
+  estado         Boolean      @default(true)
+  fecha_creacion DateTime     @default(now()) @db.Timestamp(6)
+  tb_medicos     tb_medicos[]
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model tb_estilos {
+  id          Int           @id @default(autoincrement())
+  nombre      String        @unique @db.VarChar(100)
+  color_fondo String        @db.VarChar(7)
+  color_texto String        @db.VarChar(7)
+  icono       String?       @db.VarChar(100)
+  posicion    String        @default("inferior_derecha") @db.VarChar(30)
+  estado      Boolean       @default(true)
+  tb_anuncios tb_anuncios[]
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model tb_facturas {
+  id_factura         Int                  @id @default(autoincrement())
+  id_paciente        Int
+  id_usuario         Int
+  fecha_emision      DateTime             @default(now()) @db.Timestamp(6)
+  total              Decimal              @default(0) @db.Decimal(12, 2)
+  metodo_pago        String               @db.VarChar(20)
+  estado             String               @default("pagada") @db.VarChar(20)
+  observaciones      String?
+  tb_detalle_factura tb_detalle_factura[]
+  tb_pacientes       tb_pacientes         @relation(fields: [id_paciente], references: [id_paciente], map: "fk_tb_facturas_paciente")
+  tb_usuarios        tb_usuarios          @relation(fields: [id_usuario], references: [id_usuario], map: "fk_tb_facturas_usuario")
+
+  @@index([fecha_emision], map: "ix_tb_facturas_fecha")
+  @@index([id_paciente], map: "ix_tb_facturas_paciente")
+  @@index([id_usuario], map: "ix_tb_facturas_usuario")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model tb_galeria {
+  id             Int      @id @default(autoincrement())
+  titulo         String   @db.VarChar(150)
+  definicion     String?
+  imagen_url     String   @db.VarChar(500)
+  estado         Boolean  @default(true)
+  fecha_creacion DateTime @default(now()) @db.Timestamp(6)
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+/// This model contains an expression index which requires additional setup for migrations. Visit https://pris.ly/d/expression-indexes for more info.
+model tb_insumos_inventario {
+  id_insumo                 Int                         @id @default(autoincrement())
+  nombre                    String                      @db.VarChar(150)
+  tipo                      String                      @db.VarChar(30)
+  id_proveedor              Int?
+  id_medicamento            Int?
+  stock_actual              Decimal                     @default(0) @db.Decimal(12, 2)
+  stock_minimo              Decimal                     @default(0) @db.Decimal(12, 2)
+  precio_costo              Decimal                     @default(0) @db.Decimal(12, 2)
+  unidad_medida             String                      @default("unidad") @db.VarChar(30)
+  estado                    Boolean                     @default(true)
+  fecha_creacion            DateTime                    @default(now()) @db.Timestamp(6)
+  tb_medicamentos           tb_medicamentos?            @relation(fields: [id_medicamento], references: [id_medicamento], onDelete: Restrict, map: "fk_tb_insumos_medicamento")
+  tb_proveedores            tb_proveedores?             @relation(fields: [id_proveedor], references: [id_proveedor], onDelete: Restrict, map: "fk_tb_insumos_proveedor")
+  tb_movimientos_inventario tb_movimientos_inventario[]
+
+  @@index([id_medicamento], map: "ix_tb_insumos_medicamento")
+  @@index([id_proveedor], map: "ix_tb_insumos_proveedor")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+/// This model contains an expression index which requires additional setup for migrations. Visit https://pris.ly/d/expression-indexes for more info.
+model tb_medicamentos {
+  id_medicamento        Int                     @id @default(autoincrement())
+  nombre_comercial      String                  @db.VarChar(150)
+  principio_activo      String                  @db.VarChar(150)
+  presentacion          String                  @db.VarChar(50)
+  concentracion         String                  @db.VarChar(50)
+  estado                Boolean                 @default(true)
+  fecha_creacion        DateTime                @default(now()) @db.Timestamp(6)
+  tb_detalle_receta     tb_detalle_receta[]
+  tb_insumos_inventario tb_insumos_inventario[]
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+/// This model contains an expression index which requires additional setup for migrations. Visit https://pris.ly/d/expression-indexes for more info.
+model tb_medicos {
+  id                     Int                      @id @default(autoincrement())
+  nombre                 String                   @db.VarChar(150)
+  dpi                    String?                  @unique(map: "uq_tb_medicos_dpi") @db.VarChar(13)
+  colegiado              String?                  @db.VarChar(50)
+  numero_telefono        String?                  @db.VarChar(20)
+  correo                 String?                  @db.VarChar(150)
+  estado                 Boolean                  @default(true)
+  fecha_inicio           DateTime?                @db.Date
+  especialidad_id        Int
+  fecha_creacion         DateTime                 @default(now()) @db.Timestamp(6)
+  tb_citas               tb_citas[]
+  tb_clinicas            tb_clinicas[]
+  tb_especialidades      tb_especialidades        @relation(fields: [especialidad_id], references: [id], map: "fk_tb_medicos_especialidad")
+  tb_ordenes_laboratorio tb_ordenes_laboratorio[]
+  tb_recetas             tb_recetas[]
+  tb_usuarios            tb_usuarios?
+
+  @@index([especialidad_id], map: "ix_tb_medicos_especialidad_id")
+  @@index([estado], map: "ix_tb_medicos_estado")
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model tb_movimientos_inventario {
+  id_movimiento         Int                   @id @default(autoincrement())
+  id_insumo             Int
+  tipo_movimiento       String                @db.VarChar(20)
+  cantidad              Decimal               @db.Decimal(12, 2)
+  fecha                 DateTime              @default(now()) @db.Timestamp(6)
+  id_usuario            Int
+  observaciones         String?
+  tb_insumos_inventario tb_insumos_inventario @relation(fields: [id_insumo], references: [id_insumo], map: "fk_tb_movimientos_insumo")
+  tb_usuarios           tb_usuarios           @relation(fields: [id_usuario], references: [id_usuario], map: "fk_tb_movimientos_usuario")
+
+  @@index([fecha], map: "ix_tb_movimientos_fecha")
+  @@index([id_insumo], map: "ix_tb_movimientos_insumo")
+  @@index([id_usuario], map: "ix_tb_movimientos_usuario")
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model tb_ordenes_laboratorio {
+  id_orden                  Int                         @id @default(autoincrement())
+  id_paciente               Int
+  id_doctor                 Int?
+  fecha_orden               DateTime                    @default(now()) @db.Timestamp(6)
+  estado                    String                      @default("pendiente") @db.VarChar(20)
+  tb_medicos                tb_medicos?                 @relation(fields: [id_doctor], references: [id], onDelete: Restrict, map: "fk_tb_ordenes_doctor")
+  tb_pacientes              tb_pacientes                @relation(fields: [id_paciente], references: [id_paciente], map: "fk_tb_ordenes_paciente")
+  tb_resultados_laboratorio tb_resultados_laboratorio[]
+
+  @@index([id_doctor], map: "ix_tb_ordenes_doctor")
+  @@index([estado], map: "ix_tb_ordenes_estado")
+  @@index([id_paciente], map: "ix_tb_ordenes_paciente")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+/// This model contains an expression index which requires additional setup for migrations. Visit https://pris.ly/d/expression-indexes for more info.
+model tb_pacientes {
+  id_paciente                   Int                             @id @default(autoincrement())
+  nombres                       String                          @db.VarChar(150)
+  apellidos                     String                          @db.VarChar(150)
+  fecha_nacimiento              DateTime                        @db.Date
+  genero                        String?                         @db.VarChar(30)
+  telefono                      String                          @db.VarChar(20)
+  email                         String?                         @db.VarChar(150)
+  tipo_sangre                   String?                         @db.VarChar(5)
+  antecedentes_personales       String?
+  estado                        Boolean                         @default(true)
+  fecha_creacion                DateTime                        @default(now()) @db.Timestamp(6)
+  tb_archivos_estudios          tb_archivos_estudios[]
+  tb_citas                      tb_citas[]
+  tb_consentimientos_informados tb_consentimientos_informados[]
+  tb_facturas                   tb_facturas[]
+  tb_ordenes_laboratorio        tb_ordenes_laboratorio[]
+  tb_recetas                    tb_recetas[]
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model tb_permisos_rol {
+  id_rol         Int
+  modulo         String   @db.VarChar(100)
+  puede_leer     Boolean  @default(false)
+  puede_escribir Boolean  @default(false)
+  puede_borrar   Boolean  @default(false)
+  tb_roles       tb_roles @relation(fields: [id_rol], references: [id_rol], map: "fk_tb_permisos_rol")
+
+  @@id([id_rol, modulo])
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model tb_promociones {
+  id             Int           @id @default(autoincrement())
+  titulo         String        @db.VarChar(150)
+  descripcion    String?
+  fecha_inicio   DateTime      @db.Date
+  fecha_fin      DateTime      @db.Date
+  imagen_url     String?       @db.VarChar(500)
+  estado         Boolean       @default(true)
+  fecha_creacion DateTime      @default(now()) @db.Timestamp(6)
+  tb_anuncios    tb_anuncios[]
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+/// This model contains an expression index which requires additional setup for migrations. Visit https://pris.ly/d/expression-indexes for more info.
+model tb_proveedores {
+  id_proveedor          Int                     @id @default(autoincrement())
+  nombre_empresa        String                  @db.VarChar(150)
+  contacto              String?                 @db.VarChar(150)
+  telefono              String                  @db.VarChar(20)
+  correo                String?                 @db.VarChar(150)
+  direccion             String?
+  estado                Boolean                 @default(true)
+  fecha_creacion        DateTime                @default(now()) @db.Timestamp(6)
+  tb_insumos_inventario tb_insumos_inventario[]
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model tb_recetas {
+  id_receta         Int                 @id @default(autoincrement())
+  id_doctor         Int
+  id_paciente       Int
+  fecha_emision     DateTime            @default(now()) @db.Timestamp(6)
+  diagnostico       String
+  tb_detalle_receta tb_detalle_receta[]
+  tb_medicos        tb_medicos          @relation(fields: [id_doctor], references: [id], map: "fk_tb_recetas_doctor")
+  tb_pacientes      tb_pacientes        @relation(fields: [id_paciente], references: [id_paciente], map: "fk_tb_recetas_paciente")
+
+  @@index([id_doctor], map: "ix_tb_recetas_doctor")
+  @@index([id_paciente], map: "ix_tb_recetas_paciente")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model tb_resultados_laboratorio {
+  id_resultado           Int                    @id @default(autoincrement())
+  id_orden               Int
+  id_examen              Int
+  valor_obtenido         String?                @db.VarChar(255)
+  observaciones          String?
+  fecha_resultado        DateTime?              @db.Timestamp(6)
+  tb_catalogo_examenes   tb_catalogo_examenes   @relation(fields: [id_examen], references: [id_examen], map: "fk_tb_resultados_examen")
+  tb_ordenes_laboratorio tb_ordenes_laboratorio @relation(fields: [id_orden], references: [id_orden], map: "fk_tb_resultados_orden")
+
+  @@unique([id_orden, id_examen], map: "uq_tb_resultados_orden_examen")
+  @@index([id_examen], map: "ix_tb_resultados_examen")
+  @@index([id_orden], map: "ix_tb_resultados_orden")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+/// This model contains an expression index which requires additional setup for migrations. Visit https://pris.ly/d/expression-indexes for more info.
+model tb_roles {
+  id_rol          Int               @id @default(autoincrement())
+  nombre_rol      String            @unique @db.VarChar(80)
+  descripcion     String?
+  estado          Boolean           @default(true)
+  fecha_creacion  DateTime          @default(now()) @db.Timestamp(6)
+  tb_permisos_rol tb_permisos_rol[]
+  tb_usuarios     tb_usuarios[]
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+/// This model contains an expression index which requires additional setup for migrations. Visit https://pris.ly/d/expression-indexes for more info.
+model tb_servicios {
+  id                            Int                             @id @default(autoincrement())
+  nombre                        String                          @db.VarChar(150)
+  descripcion                   String?
+  precio                        Decimal                         @default(0) @db.Decimal(10, 2)
+  imagen_url                    String?                         @db.VarChar(255)
+  estado                        Boolean                         @default(true)
+  fecha_creacion                DateTime                        @default(now()) @db.Timestamp(6)
+  tb_consentimientos_informados tb_consentimientos_informados[]
+  tb_consulta_servicios         tb_consulta_servicios[]
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model tb_signos_vitales_medidas {
+  id_medicion         Int          @id @default(autoincrement())
+  id_consulta         Int
+  peso_kg             Decimal?     @db.Decimal(6, 2)
+  estatura_cm         Decimal?     @db.Decimal(6, 2)
+  presion_arterial    String?      @db.VarChar(20)
+  frecuencia_cardiaca Int?         @db.SmallInt
+  temperatura         Decimal?     @db.Decimal(4, 1)
+  imc                 Decimal?     @default(dbgenerated("\nCASE\n    WHEN ((peso_kg IS NOT NULL) AND (estatura_cm > (0)::numeric)) THEN round((peso_kg / ((estatura_cm / 100.0) * (estatura_cm / 100.0))), 2)\n    ELSE NULL::numeric\nEND")) @db.Decimal(6, 2)
+  fecha_medicion      DateTime     @default(now()) @db.Timestamp(6)
+  tb_consultas        tb_consultas @relation(fields: [id_consulta], references: [id_consulta], map: "fk_tb_signos_consulta")
+
+  @@index([id_consulta], map: "ix_tb_signos_consulta")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+/// This model contains an expression index which requires additional setup for migrations. Visit https://pris.ly/d/expression-indexes for more info.
+model tb_usuarios {
+  id_usuario                    Int                             @id @default(autoincrement())
+  username                      String                          @unique @db.VarChar(80)
+  nombre                        String                          @db.VarChar(150)
+  correo                        String?                         @db.VarChar(150)
+  password_hash                 String                          @db.VarChar(255)
+  id_rol                        Int
+  id_doctor                     Int?                            @unique(map: "ux_tb_usuarios_doctor", where: raw("(id_doctor IS NOT NULL)"))
+  estado                        Boolean                         @default(true)
+  debe_cambiar_password         Boolean                         @default(true)
+  ultimo_acceso                 DateTime?                       @db.Timestamp(6)
+  fecha_creacion                DateTime                        @default(now()) @db.Timestamp(6)
+  tb_archivos_estudios          tb_archivos_estudios[]
+  tb_consentimientos_informados tb_consentimientos_informados[]
+  tb_facturas                   tb_facturas[]
+  tb_movimientos_inventario     tb_movimientos_inventario[]
+  tb_medicos                    tb_medicos?                     @relation(fields: [id_doctor], references: [id], onDelete: Restrict, map: "fk_tb_usuarios_doctor")
+  tb_roles                      tb_roles                        @relation(fields: [id_rol], references: [id_rol], map: "fk_tb_usuarios_rol")
+
+  @@index([id_rol], map: "ix_tb_usuarios_rol")
+}
