@@ -10,7 +10,6 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@ami/contracts": "workspace:*",
     "@ami/database": "workspace:*",
     "@fastify/cookie": "11.1.2",
     "@fastify/helmet": "13.1.1",
@@ -27,6 +26,7 @@
     "rxjs": "7.8.2"
   },
   "devDependencies": {
+    "@ami/contracts": "workspace:*",
     "@nestjs/cli": "11.0.10",
     "@nestjs/testing": "11.2.3",
     "@types/node": "24.10.1",

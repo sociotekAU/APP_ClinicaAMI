@@ -96,27 +96,24 @@ estos archivos cuando el volumen ya contiene una base inicializada.
 La instancia local preparada usa el puerto `5432`. Los valores concretos de
 usuario, base y contraseña se mantienen en `.env`, archivo excluido de Git.
 
-## Estructura prevista
+## Estructura actual
 
 ```text
 APP_ClinicaAMI/
 ├── apps/
-│   ├── web/                 # Página pública
-│   └── admin/               # Panel administrativo y clínico
+│   ├── admin/               # Panel administrativo y clínico
+│   └── api/                 # API REST con NestJS y Fastify
 ├── packages/
-│   ├── api/                 # Reglas y endpoints compartidos
+│   ├── contracts/           # Contratos compartidos del API
 │   ├── database/            # Acceso a PostgreSQL
-│   ├── ui/                  # Componentes visuales compartidos
-│   └── config/              # Configuración común
+│   └── ui/                  # Componentes visuales compartidos
 ├── database/
 │   ├── migrations/          # Migraciones SQL versionadas
 │   └── seed.sql             # Datos iniciales y de demostración
 ├── docker-compose.yml       # PostgreSQL local y carga inicial
+├── Dockerfile               # Imágenes de producción para admin y API
 └── README.md
 ```
-
-La estructura es una propuesta inicial y podrá ajustarse cuando se confirme el
-framework del frontend, backend y ORM.
 
 ## Identidad visual
 
@@ -136,20 +133,67 @@ general del proyecto.
 - Modelo aplicado: 30 tablas, cinco triggers y datos iniciales.
 - Seed validado con profesionales, usuarios y datos de demostración.
 - Prueba de humo disponible en `database/tests/smoke.sql`.
-- Desarrollo de la aplicación todavía no iniciado.
-- Framework y estrategia final de despliegue en Dockploy pendientes de definir.
+- Monorepo configurado con pnpm y Turborepo.
+- Panel administrativo construido con Next.js y API con NestJS/Fastify.
+- Acceso, renovación de sesión y cambio de contraseña conectados a PostgreSQL.
+- Menú ERP, dashboard y autorización por módulo conectados a `tb_permisos_rol`.
+- Prueba de aislamiento disponible en `database/tests/authorization.sql`.
+- Dockerfile multi-stage preparado para construir el panel y el API por separado.
 
-## Despliegue futuro en Dockploy
+## Imágenes Docker de la aplicación
 
-El repositorio deberá incluir posteriormente:
+El `Dockerfile` raíz tiene dos destinos independientes y ejecuta los procesos
+como el usuario no privilegiado `node`.
 
-- `Dockerfile` para cada aplicación o servicio.
-- Archivo de variables de ejemplo sin secretos (`.env.example`).
-- Configuración de conexión a PostgreSQL mediante variables de entorno.
-- Comprobaciones de salud para web, admin y API.
-- Migraciones ejecutadas de forma explícita y segura antes de iniciar la app.
-- Volumen o almacenamiento externo privado para estudios clínicos.
-- Respaldos automáticos de PostgreSQL.
+Construir el API:
+
+```bash
+docker build --target api-runner -t clinica-ami-api .
+```
+
+Construir el panel indicando la URL pública del API que utilizará el navegador:
+
+```bash
+docker build \
+  --target admin-runner \
+  --build-arg NEXT_PUBLIC_API_URL=https://api.ejemplo.com/api/v1 \
+  -t clinica-ami-admin .
+```
+
+Ejecutar localmente las imágenes construidas:
+
+```bash
+docker run --rm \
+  --network app-clinica-ami_default \
+  --env-file .env \
+  -e DATABASE_URL= \
+  -e POSTGRES_HOST=postgres \
+  -e NODE_ENV=development \
+  -p 4000:4000 \
+  clinica-ami-api
+docker run --rm -p 3000:3000 clinica-ami-admin
+```
+
+El valor `NODE_ENV=development` de este ejemplo permite probar las cookies por
+HTTP local. Dockploy debe ejecutar el API en modo producción detrás de HTTPS.
+
+El contenedor del API requiere `DATABASE_URL`, `JWT_ACCESS_SECRET`,
+`JWT_REFRESH_SECRET`, `JWT_ISSUER`, `JWT_AUDIENCE` y `ADMIN_ORIGINS`. Los
+secretos JWT deben ser distintos y tener al menos 32 caracteres. El panel no
+recibe secretos; `NEXT_PUBLIC_API_URL` se incorpora durante su compilación.
+
+### Configuración en Dockploy
+
+Se deben crear dos servicios desde el mismo repositorio y `Dockerfile`:
+
+- API: destino de build `api-runner`, puerto `4000` y variables privadas del
+  entorno.
+- Administración: destino de build `admin-runner`, puerto `3000` y argumento
+  de build `NEXT_PUBLIC_API_URL` apuntando al dominio HTTPS del API.
+
+Ambas imágenes incluyen una comprobación de salud. PostgreSQL, las migraciones,
+el almacenamiento clínico privado y los respaldos se administran como servicios
+separados.
 
 No se debe ejecutar el seed de demostración automáticamente sobre una base de
 datos que ya contenga información de producción.

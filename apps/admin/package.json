@@ -10,7 +10,6 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@ami/contracts": "workspace:*",
     "@hookform/resolvers": "5.9.1",
     "@tanstack/react-table": "8.21.3",
     "lucide-react": "1.42.0",
@@ -22,6 +21,7 @@
     "zod": "4.5.4"
   },
   "devDependencies": {
+    "@ami/contracts": "workspace:*",
     "@tailwindcss/postcss": "4.3.3",
     "@types/node": "24.10.1",
     "@types/react": "19.2.2",
