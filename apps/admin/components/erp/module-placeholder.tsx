@@ -2,6 +2,10 @@
 
 import { ArrowLeft, Check, LockKeyhole, ShieldCheck } from "lucide-react";
 import Link from "next/link";
+import { AdministrationWorkspace } from "../administration/administration-workspace";
+import { AgendaWorkspace } from "../care/agenda-workspace";
+import { ClinicalRecordsWorkspace } from "../care/clinical-records-workspace";
+import { PatientsManager } from "../care/patients-manager";
 import { getModuleIcon, useErpContext } from "./erp-shell";
 
 export function ModulePlaceholder({ moduleCode }: Readonly<{ moduleCode: string }>) {
@@ -22,42 +26,50 @@ export function ModulePlaceholder({ moduleCode }: Readonly<{ moduleCode: string 
   }
 
   const Icon = getModuleIcon(item.module);
+  const isImplemented = ["seguridad", "pacientes", "agenda", "expediente_general", "expediente_psicologia"].includes(item.module);
   return (
-    <div className="module-page">
-      <section className="module-intro">
-        <span className="module-intro-icon"><Icon aria-hidden="true" /></span>
-        <div>
-          <p className="eyebrow">{item.section}</p>
-          <h2>{item.label}</h2>
-          <p>{item.description}</p>
-        </div>
-      </section>
+    <div className="module-page-stack">
+      <div className={`module-page${isImplemented ? " module-page-administration" : ""}`}>
+        <section className="module-intro">
+          <span className="module-intro-icon"><Icon aria-hidden="true" /></span>
+          <div>
+            <p className="eyebrow">{item.section}</p>
+            <h2>{item.label}</h2>
+            <p>{item.description}</p>
+          </div>
+        </section>
 
-      <section className="module-readiness" aria-labelledby="readiness-title">
-        <div>
-          <p className="eyebrow">Base de autorización lista</p>
-          <h2 id="readiness-title">Permisos efectivos del rol</h2>
-          <p>El contenido funcional de este módulo se incorporará en los pasos de CRUD posteriores.</p>
-        </div>
-        <ul>
-          <li className={permission.canRead ? "is-granted" : ""}>
-            {permission.canRead ? <Check aria-hidden="true" /> : <LockKeyhole aria-hidden="true" />}
-            Lectura
-          </li>
-          <li className={permission.canWrite ? "is-granted" : ""}>
-            {permission.canWrite ? <Check aria-hidden="true" /> : <LockKeyhole aria-hidden="true" />}
-            Escritura
-          </li>
-          <li className={permission.canDelete ? "is-granted" : ""}>
-            {permission.canDelete ? <Check aria-hidden="true" /> : <LockKeyhole aria-hidden="true" />}
-            Eliminación
-          </li>
-        </ul>
-        <div className="module-security-note">
-          <ShieldCheck aria-hidden="true" />
-          <p>La interfaz oculta accesos no autorizados y el API vuelve a validar el permiso contra PostgreSQL.</p>
-        </div>
-      </section>
+        {!isImplemented && <section className="module-readiness" aria-labelledby="readiness-title">
+          <div>
+            <p className="eyebrow">Base de autorización lista</p>
+            <h2 id="readiness-title">Permisos efectivos del rol</h2>
+            <p>El contenido funcional de este módulo se incorporará en los pasos de CRUD posteriores.</p>
+          </div>
+          <ul>
+            <li className={permission.canRead ? "is-granted" : ""}>
+              {permission.canRead ? <Check aria-hidden="true" /> : <LockKeyhole aria-hidden="true" />}
+              Lectura
+            </li>
+            <li className={permission.canWrite ? "is-granted" : ""}>
+              {permission.canWrite ? <Check aria-hidden="true" /> : <LockKeyhole aria-hidden="true" />}
+              Escritura
+            </li>
+            <li className={permission.canDelete ? "is-granted" : ""}>
+              {permission.canDelete ? <Check aria-hidden="true" /> : <LockKeyhole aria-hidden="true" />}
+              Eliminación
+            </li>
+          </ul>
+          <div className="module-security-note">
+            <ShieldCheck aria-hidden="true" />
+            <p>La interfaz oculta accesos no autorizados y el API vuelve a validar el permiso contra PostgreSQL.</p>
+          </div>
+        </section>}
+      </div>
+      {item.module === "seguridad" && <AdministrationWorkspace canWrite={permission.canWrite} />}
+      {item.module === "pacientes" && <section className="administration-workspace"><PatientsManager canWrite={permission.canWrite} /></section>}
+      {item.module === "agenda" && <AgendaWorkspace canWrite={permission.canWrite} />}
+      {item.module === "expediente_general" && <ClinicalRecordsWorkspace canWrite={permission.canWrite} type="general" />}
+      {item.module === "expediente_psicologia" && <ClinicalRecordsWorkspace canWrite={permission.canWrite} type="psychology" />}
     </div>
   );
 }

@@ -4,12 +4,20 @@ import type {
   DashboardMetric,
   ErpContext,
   ErpModuleCode,
+  PaginatedData,
+  PermissionListItem,
   RolePermission,
 } from "@ami/contracts";
 import { AuthorizationService } from "../authorization/authorization.service";
-import { ERP_NAVIGATION } from "../authorization/authorization.constants";
+import {
+  ERP_MODULE_CODES,
+  ERP_NAVIGATION,
+  PERMISSION_FIELD,
+} from "../authorization/authorization.constants";
 import { AppException } from "../common/errors/app.exception";
+import { createPageMeta, paginationOffset } from "../common/pagination/pagination";
 import { DatabaseService } from "../database/database.service";
+import type { ListPermissionsDto } from "./dto/list-permissions.dto";
 
 interface CountResult {
   total: bigint;
@@ -44,6 +52,72 @@ export class ErpService {
       permissions,
       navigation,
       metrics,
+    };
+  }
+
+  async listPermissions(query: ListPermissionsDto): Promise<PaginatedData<PermissionListItem>> {
+    const normalizedSearch = query.search?.trim();
+    const capabilityField = query.capability ? PERMISSION_FIELD[query.capability] : undefined;
+    const where = {
+      modulo: query.module ?? { in: [...ERP_MODULE_CODES] },
+      ...(capabilityField ? { [capabilityField]: true } : {}),
+      ...(normalizedSearch
+        ? {
+            OR: [
+              { modulo: { contains: normalizedSearch, mode: "insensitive" as const } },
+              {
+                tb_roles: {
+                  nombre_rol: { contains: normalizedSearch, mode: "insensitive" as const },
+                },
+              },
+            ],
+          }
+        : {}),
+    };
+    const orderBy = query.sortBy === "role"
+      ? [
+          { tb_roles: { nombre_rol: query.sortDirection } },
+          { modulo: "asc" as const },
+        ]
+      : [
+          { modulo: query.sortDirection },
+          { id_rol: "asc" as const },
+        ];
+
+    const [rows, totalItems] = await Promise.all([
+      this.database.client.tb_permisos_rol.findMany({
+        where,
+        include: { tb_roles: true },
+        orderBy,
+        skip: paginationOffset(query.page, query.pageSize),
+        take: query.pageSize,
+      }),
+      this.database.client.tb_permisos_rol.count({ where }),
+    ]);
+
+    const moduleLabels = new Map(
+      ERP_NAVIGATION.map((item) => [item.module, item.label] as const),
+    );
+    const items = rows.flatMap<PermissionListItem>((permission) => {
+      const moduleLabel = moduleLabels.get(permission.modulo as ErpModuleCode);
+      if (!moduleLabel) return [];
+      return [{
+        id: `${permission.id_rol}:${permission.modulo}`,
+        role: {
+          id: permission.tb_roles.id_rol,
+          name: permission.tb_roles.nombre_rol,
+        },
+        module: permission.modulo as ErpModuleCode,
+        moduleLabel,
+        canRead: permission.puede_leer,
+        canWrite: permission.puede_escribir,
+        canDelete: permission.puede_borrar,
+      }];
+    });
+
+    return {
+      items,
+      pagination: createPageMeta(query.page, query.pageSize, totalItems),
     };
   }
 

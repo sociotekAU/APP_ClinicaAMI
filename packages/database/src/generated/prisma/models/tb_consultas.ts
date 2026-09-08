@@ -43,6 +43,7 @@ export type Tb_consultasMinAggregateOutputType = {
   notas_evolucion: string | null
   diagnostico_cie10: string | null
   fecha_registro: Date | null
+  tipo_expediente: string | null
 }
 
 export type Tb_consultasMaxAggregateOutputType = {
@@ -52,6 +53,7 @@ export type Tb_consultasMaxAggregateOutputType = {
   notas_evolucion: string | null
   diagnostico_cie10: string | null
   fecha_registro: Date | null
+  tipo_expediente: string | null
 }
 
 export type Tb_consultasCountAggregateOutputType = {
@@ -61,6 +63,7 @@ export type Tb_consultasCountAggregateOutputType = {
   notas_evolucion: number
   diagnostico_cie10: number
   fecha_registro: number
+  tipo_expediente: number
   _all: number
 }
 
@@ -82,6 +85,7 @@ export type Tb_consultasMinAggregateInputType = {
   notas_evolucion?: true
   diagnostico_cie10?: true
   fecha_registro?: true
+  tipo_expediente?: true
 }
 
 export type Tb_consultasMaxAggregateInputType = {
@@ -91,6 +95,7 @@ export type Tb_consultasMaxAggregateInputType = {
   notas_evolucion?: true
   diagnostico_cie10?: true
   fecha_registro?: true
+  tipo_expediente?: true
 }
 
 export type Tb_consultasCountAggregateInputType = {
@@ -100,6 +105,7 @@ export type Tb_consultasCountAggregateInputType = {
   notas_evolucion?: true
   diagnostico_cie10?: true
   fecha_registro?: true
+  tipo_expediente?: true
   _all?: true
 }
 
@@ -196,6 +202,7 @@ export type Tb_consultasGroupByOutputType = {
   notas_evolucion: string | null
   diagnostico_cie10: string | null
   fecha_registro: Date
+  tipo_expediente: string
   _count: Tb_consultasCountAggregateOutputType | null
   _avg: Tb_consultasAvgAggregateOutputType | null
   _sum: Tb_consultasSumAggregateOutputType | null
@@ -228,6 +235,7 @@ export type tb_consultasWhereInput = {
   notas_evolucion?: Prisma.StringNullableFilter<"tb_consultas"> | string | null
   diagnostico_cie10?: Prisma.StringNullableFilter<"tb_consultas"> | string | null
   fecha_registro?: Prisma.DateTimeFilter<"tb_consultas"> | Date | string
+  tipo_expediente?: Prisma.StringFilter<"tb_consultas"> | string
   tb_archivos_estudios?: Prisma.Tb_archivos_estudiosListRelationFilter
   tb_consulta_servicios?: Prisma.Tb_consulta_serviciosListRelationFilter
   tb_citas?: Prisma.XOR<Prisma.Tb_citasScalarRelationFilter, Prisma.tb_citasWhereInput>
@@ -241,6 +249,7 @@ export type tb_consultasOrderByWithRelationInput = {
   notas_evolucion?: Prisma.SortOrderInput | Prisma.SortOrder
   diagnostico_cie10?: Prisma.SortOrderInput | Prisma.SortOrder
   fecha_registro?: Prisma.SortOrder
+  tipo_expediente?: Prisma.SortOrder
   tb_archivos_estudios?: Prisma.tb_archivos_estudiosOrderByRelationAggregateInput
   tb_consulta_servicios?: Prisma.tb_consulta_serviciosOrderByRelationAggregateInput
   tb_citas?: Prisma.tb_citasOrderByWithRelationInput
@@ -257,6 +266,7 @@ export type tb_consultasWhereUniqueInput = Prisma.AtLeast<{
   notas_evolucion?: Prisma.StringNullableFilter<"tb_consultas"> | string | null
   diagnostico_cie10?: Prisma.StringNullableFilter<"tb_consultas"> | string | null
   fecha_registro?: Prisma.DateTimeFilter<"tb_consultas"> | Date | string
+  tipo_expediente?: Prisma.StringFilter<"tb_consultas"> | string
   tb_archivos_estudios?: Prisma.Tb_archivos_estudiosListRelationFilter
   tb_consulta_servicios?: Prisma.Tb_consulta_serviciosListRelationFilter
   tb_citas?: Prisma.XOR<Prisma.Tb_citasScalarRelationFilter, Prisma.tb_citasWhereInput>
@@ -270,6 +280,7 @@ export type tb_consultasOrderByWithAggregationInput = {
   notas_evolucion?: Prisma.SortOrderInput | Prisma.SortOrder
   diagnostico_cie10?: Prisma.SortOrderInput | Prisma.SortOrder
   fecha_registro?: Prisma.SortOrder
+  tipo_expediente?: Prisma.SortOrder
   _count?: Prisma.tb_consultasCountOrderByAggregateInput
   _avg?: Prisma.tb_consultasAvgOrderByAggregateInput
   _max?: Prisma.tb_consultasMaxOrderByAggregateInput
@@ -287,6 +298,7 @@ export type tb_consultasScalarWhereWithAggregatesInput = {
   notas_evolucion?: Prisma.StringNullableWithAggregatesFilter<"tb_consultas"> | string | null
   diagnostico_cie10?: Prisma.StringNullableWithAggregatesFilter<"tb_consultas"> | string | null
   fecha_registro?: Prisma.DateTimeWithAggregatesFilter<"tb_consultas"> | Date | string
+  tipo_expediente?: Prisma.StringWithAggregatesFilter<"tb_consultas"> | string
 }
 
 export type tb_consultasCreateInput = {
@@ -294,6 +306,7 @@ export type tb_consultasCreateInput = {
   notas_evolucion?: string | null
   diagnostico_cie10?: string | null
   fecha_registro?: Date | string
+  tipo_expediente: string
   tb_archivos_estudios?: Prisma.tb_archivos_estudiosCreateNestedManyWithoutTb_consultasInput
   tb_consulta_servicios?: Prisma.tb_consulta_serviciosCreateNestedManyWithoutTb_consultasInput
   tb_citas: Prisma.tb_citasCreateNestedOneWithoutTb_consultasInput
@@ -307,6 +320,7 @@ export type tb_consultasUncheckedCreateInput = {
   notas_evolucion?: string | null
   diagnostico_cie10?: string | null
   fecha_registro?: Date | string
+  tipo_expediente: string
   tb_archivos_estudios?: Prisma.tb_archivos_estudiosUncheckedCreateNestedManyWithoutTb_consultasInput
   tb_consulta_servicios?: Prisma.tb_consulta_serviciosUncheckedCreateNestedManyWithoutTb_consultasInput
   tb_signos_vitales_medidas?: Prisma.tb_signos_vitales_medidasUncheckedCreateNestedManyWithoutTb_consultasInput
@@ -317,6 +331,7 @@ export type tb_consultasUpdateInput = {
   notas_evolucion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   diagnostico_cie10?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fecha_registro?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tipo_expediente?: Prisma.StringFieldUpdateOperationsInput | string
   tb_archivos_estudios?: Prisma.tb_archivos_estudiosUpdateManyWithoutTb_consultasNestedInput
   tb_consulta_servicios?: Prisma.tb_consulta_serviciosUpdateManyWithoutTb_consultasNestedInput
   tb_citas?: Prisma.tb_citasUpdateOneRequiredWithoutTb_consultasNestedInput
@@ -330,6 +345,7 @@ export type tb_consultasUncheckedUpdateInput = {
   notas_evolucion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   diagnostico_cie10?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fecha_registro?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tipo_expediente?: Prisma.StringFieldUpdateOperationsInput | string
   tb_archivos_estudios?: Prisma.tb_archivos_estudiosUncheckedUpdateManyWithoutTb_consultasNestedInput
   tb_consulta_servicios?: Prisma.tb_consulta_serviciosUncheckedUpdateManyWithoutTb_consultasNestedInput
   tb_signos_vitales_medidas?: Prisma.tb_signos_vitales_medidasUncheckedUpdateManyWithoutTb_consultasNestedInput
@@ -342,6 +358,7 @@ export type tb_consultasCreateManyInput = {
   notas_evolucion?: string | null
   diagnostico_cie10?: string | null
   fecha_registro?: Date | string
+  tipo_expediente: string
 }
 
 export type tb_consultasUpdateManyMutationInput = {
@@ -349,6 +366,7 @@ export type tb_consultasUpdateManyMutationInput = {
   notas_evolucion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   diagnostico_cie10?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fecha_registro?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tipo_expediente?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type tb_consultasUncheckedUpdateManyInput = {
@@ -358,6 +376,7 @@ export type tb_consultasUncheckedUpdateManyInput = {
   notas_evolucion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   diagnostico_cie10?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fecha_registro?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tipo_expediente?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type Tb_consultasScalarRelationFilter = {
@@ -377,6 +396,7 @@ export type tb_consultasCountOrderByAggregateInput = {
   notas_evolucion?: Prisma.SortOrder
   diagnostico_cie10?: Prisma.SortOrder
   fecha_registro?: Prisma.SortOrder
+  tipo_expediente?: Prisma.SortOrder
 }
 
 export type tb_consultasAvgOrderByAggregateInput = {
@@ -391,6 +411,7 @@ export type tb_consultasMaxOrderByAggregateInput = {
   notas_evolucion?: Prisma.SortOrder
   diagnostico_cie10?: Prisma.SortOrder
   fecha_registro?: Prisma.SortOrder
+  tipo_expediente?: Prisma.SortOrder
 }
 
 export type tb_consultasMinOrderByAggregateInput = {
@@ -400,6 +421,7 @@ export type tb_consultasMinOrderByAggregateInput = {
   notas_evolucion?: Prisma.SortOrder
   diagnostico_cie10?: Prisma.SortOrder
   fecha_registro?: Prisma.SortOrder
+  tipo_expediente?: Prisma.SortOrder
 }
 
 export type tb_consultasSumOrderByAggregateInput = {
@@ -486,6 +508,7 @@ export type tb_consultasCreateWithoutTb_archivos_estudiosInput = {
   notas_evolucion?: string | null
   diagnostico_cie10?: string | null
   fecha_registro?: Date | string
+  tipo_expediente: string
   tb_consulta_servicios?: Prisma.tb_consulta_serviciosCreateNestedManyWithoutTb_consultasInput
   tb_citas: Prisma.tb_citasCreateNestedOneWithoutTb_consultasInput
   tb_signos_vitales_medidas?: Prisma.tb_signos_vitales_medidasCreateNestedManyWithoutTb_consultasInput
@@ -498,6 +521,7 @@ export type tb_consultasUncheckedCreateWithoutTb_archivos_estudiosInput = {
   notas_evolucion?: string | null
   diagnostico_cie10?: string | null
   fecha_registro?: Date | string
+  tipo_expediente: string
   tb_consulta_servicios?: Prisma.tb_consulta_serviciosUncheckedCreateNestedManyWithoutTb_consultasInput
   tb_signos_vitales_medidas?: Prisma.tb_signos_vitales_medidasUncheckedCreateNestedManyWithoutTb_consultasInput
 }
@@ -523,6 +547,7 @@ export type tb_consultasUpdateWithoutTb_archivos_estudiosInput = {
   notas_evolucion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   diagnostico_cie10?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fecha_registro?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tipo_expediente?: Prisma.StringFieldUpdateOperationsInput | string
   tb_consulta_servicios?: Prisma.tb_consulta_serviciosUpdateManyWithoutTb_consultasNestedInput
   tb_citas?: Prisma.tb_citasUpdateOneRequiredWithoutTb_consultasNestedInput
   tb_signos_vitales_medidas?: Prisma.tb_signos_vitales_medidasUpdateManyWithoutTb_consultasNestedInput
@@ -535,6 +560,7 @@ export type tb_consultasUncheckedUpdateWithoutTb_archivos_estudiosInput = {
   notas_evolucion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   diagnostico_cie10?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fecha_registro?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tipo_expediente?: Prisma.StringFieldUpdateOperationsInput | string
   tb_consulta_servicios?: Prisma.tb_consulta_serviciosUncheckedUpdateManyWithoutTb_consultasNestedInput
   tb_signos_vitales_medidas?: Prisma.tb_signos_vitales_medidasUncheckedUpdateManyWithoutTb_consultasNestedInput
 }
@@ -544,6 +570,7 @@ export type tb_consultasCreateWithoutTb_citasInput = {
   notas_evolucion?: string | null
   diagnostico_cie10?: string | null
   fecha_registro?: Date | string
+  tipo_expediente: string
   tb_archivos_estudios?: Prisma.tb_archivos_estudiosCreateNestedManyWithoutTb_consultasInput
   tb_consulta_servicios?: Prisma.tb_consulta_serviciosCreateNestedManyWithoutTb_consultasInput
   tb_signos_vitales_medidas?: Prisma.tb_signos_vitales_medidasCreateNestedManyWithoutTb_consultasInput
@@ -555,6 +582,7 @@ export type tb_consultasUncheckedCreateWithoutTb_citasInput = {
   notas_evolucion?: string | null
   diagnostico_cie10?: string | null
   fecha_registro?: Date | string
+  tipo_expediente: string
   tb_archivos_estudios?: Prisma.tb_archivos_estudiosUncheckedCreateNestedManyWithoutTb_consultasInput
   tb_consulta_servicios?: Prisma.tb_consulta_serviciosUncheckedCreateNestedManyWithoutTb_consultasInput
   tb_signos_vitales_medidas?: Prisma.tb_signos_vitales_medidasUncheckedCreateNestedManyWithoutTb_consultasInput
@@ -581,6 +609,7 @@ export type tb_consultasUpdateWithoutTb_citasInput = {
   notas_evolucion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   diagnostico_cie10?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fecha_registro?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tipo_expediente?: Prisma.StringFieldUpdateOperationsInput | string
   tb_archivos_estudios?: Prisma.tb_archivos_estudiosUpdateManyWithoutTb_consultasNestedInput
   tb_consulta_servicios?: Prisma.tb_consulta_serviciosUpdateManyWithoutTb_consultasNestedInput
   tb_signos_vitales_medidas?: Prisma.tb_signos_vitales_medidasUpdateManyWithoutTb_consultasNestedInput
@@ -592,6 +621,7 @@ export type tb_consultasUncheckedUpdateWithoutTb_citasInput = {
   notas_evolucion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   diagnostico_cie10?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fecha_registro?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tipo_expediente?: Prisma.StringFieldUpdateOperationsInput | string
   tb_archivos_estudios?: Prisma.tb_archivos_estudiosUncheckedUpdateManyWithoutTb_consultasNestedInput
   tb_consulta_servicios?: Prisma.tb_consulta_serviciosUncheckedUpdateManyWithoutTb_consultasNestedInput
   tb_signos_vitales_medidas?: Prisma.tb_signos_vitales_medidasUncheckedUpdateManyWithoutTb_consultasNestedInput
@@ -602,6 +632,7 @@ export type tb_consultasCreateWithoutTb_consulta_serviciosInput = {
   notas_evolucion?: string | null
   diagnostico_cie10?: string | null
   fecha_registro?: Date | string
+  tipo_expediente: string
   tb_archivos_estudios?: Prisma.tb_archivos_estudiosCreateNestedManyWithoutTb_consultasInput
   tb_citas: Prisma.tb_citasCreateNestedOneWithoutTb_consultasInput
   tb_signos_vitales_medidas?: Prisma.tb_signos_vitales_medidasCreateNestedManyWithoutTb_consultasInput
@@ -614,6 +645,7 @@ export type tb_consultasUncheckedCreateWithoutTb_consulta_serviciosInput = {
   notas_evolucion?: string | null
   diagnostico_cie10?: string | null
   fecha_registro?: Date | string
+  tipo_expediente: string
   tb_archivos_estudios?: Prisma.tb_archivos_estudiosUncheckedCreateNestedManyWithoutTb_consultasInput
   tb_signos_vitales_medidas?: Prisma.tb_signos_vitales_medidasUncheckedCreateNestedManyWithoutTb_consultasInput
 }
@@ -639,6 +671,7 @@ export type tb_consultasUpdateWithoutTb_consulta_serviciosInput = {
   notas_evolucion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   diagnostico_cie10?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fecha_registro?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tipo_expediente?: Prisma.StringFieldUpdateOperationsInput | string
   tb_archivos_estudios?: Prisma.tb_archivos_estudiosUpdateManyWithoutTb_consultasNestedInput
   tb_citas?: Prisma.tb_citasUpdateOneRequiredWithoutTb_consultasNestedInput
   tb_signos_vitales_medidas?: Prisma.tb_signos_vitales_medidasUpdateManyWithoutTb_consultasNestedInput
@@ -651,6 +684,7 @@ export type tb_consultasUncheckedUpdateWithoutTb_consulta_serviciosInput = {
   notas_evolucion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   diagnostico_cie10?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fecha_registro?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tipo_expediente?: Prisma.StringFieldUpdateOperationsInput | string
   tb_archivos_estudios?: Prisma.tb_archivos_estudiosUncheckedUpdateManyWithoutTb_consultasNestedInput
   tb_signos_vitales_medidas?: Prisma.tb_signos_vitales_medidasUncheckedUpdateManyWithoutTb_consultasNestedInput
 }
@@ -660,6 +694,7 @@ export type tb_consultasCreateWithoutTb_signos_vitales_medidasInput = {
   notas_evolucion?: string | null
   diagnostico_cie10?: string | null
   fecha_registro?: Date | string
+  tipo_expediente: string
   tb_archivos_estudios?: Prisma.tb_archivos_estudiosCreateNestedManyWithoutTb_consultasInput
   tb_consulta_servicios?: Prisma.tb_consulta_serviciosCreateNestedManyWithoutTb_consultasInput
   tb_citas: Prisma.tb_citasCreateNestedOneWithoutTb_consultasInput
@@ -672,6 +707,7 @@ export type tb_consultasUncheckedCreateWithoutTb_signos_vitales_medidasInput = {
   notas_evolucion?: string | null
   diagnostico_cie10?: string | null
   fecha_registro?: Date | string
+  tipo_expediente: string
   tb_archivos_estudios?: Prisma.tb_archivos_estudiosUncheckedCreateNestedManyWithoutTb_consultasInput
   tb_consulta_servicios?: Prisma.tb_consulta_serviciosUncheckedCreateNestedManyWithoutTb_consultasInput
 }
@@ -697,6 +733,7 @@ export type tb_consultasUpdateWithoutTb_signos_vitales_medidasInput = {
   notas_evolucion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   diagnostico_cie10?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fecha_registro?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tipo_expediente?: Prisma.StringFieldUpdateOperationsInput | string
   tb_archivos_estudios?: Prisma.tb_archivos_estudiosUpdateManyWithoutTb_consultasNestedInput
   tb_consulta_servicios?: Prisma.tb_consulta_serviciosUpdateManyWithoutTb_consultasNestedInput
   tb_citas?: Prisma.tb_citasUpdateOneRequiredWithoutTb_consultasNestedInput
@@ -709,6 +746,7 @@ export type tb_consultasUncheckedUpdateWithoutTb_signos_vitales_medidasInput = {
   notas_evolucion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   diagnostico_cie10?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fecha_registro?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tipo_expediente?: Prisma.StringFieldUpdateOperationsInput | string
   tb_archivos_estudios?: Prisma.tb_archivos_estudiosUncheckedUpdateManyWithoutTb_consultasNestedInput
   tb_consulta_servicios?: Prisma.tb_consulta_serviciosUncheckedUpdateManyWithoutTb_consultasNestedInput
 }
@@ -769,6 +807,7 @@ export type tb_consultasSelect<ExtArgs extends runtime.Types.Extensions.Internal
   notas_evolucion?: boolean
   diagnostico_cie10?: boolean
   fecha_registro?: boolean
+  tipo_expediente?: boolean
   tb_archivos_estudios?: boolean | Prisma.tb_consultas$tb_archivos_estudiosArgs<ExtArgs>
   tb_consulta_servicios?: boolean | Prisma.tb_consultas$tb_consulta_serviciosArgs<ExtArgs>
   tb_citas?: boolean | Prisma.tb_citasDefaultArgs<ExtArgs>
@@ -783,6 +822,7 @@ export type tb_consultasSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   notas_evolucion?: boolean
   diagnostico_cie10?: boolean
   fecha_registro?: boolean
+  tipo_expediente?: boolean
   tb_citas?: boolean | Prisma.tb_citasDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["tb_consultas"]>
 
@@ -793,6 +833,7 @@ export type tb_consultasSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   notas_evolucion?: boolean
   diagnostico_cie10?: boolean
   fecha_registro?: boolean
+  tipo_expediente?: boolean
   tb_citas?: boolean | Prisma.tb_citasDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["tb_consultas"]>
 
@@ -803,9 +844,10 @@ export type tb_consultasSelectScalar = {
   notas_evolucion?: boolean
   diagnostico_cie10?: boolean
   fecha_registro?: boolean
+  tipo_expediente?: boolean
 }
 
-export type tb_consultasOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id_consulta" | "id_cita" | "motivo_consulta" | "notas_evolucion" | "diagnostico_cie10" | "fecha_registro", ExtArgs["result"]["tb_consultas"]>
+export type tb_consultasOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id_consulta" | "id_cita" | "motivo_consulta" | "notas_evolucion" | "diagnostico_cie10" | "fecha_registro" | "tipo_expediente", ExtArgs["result"]["tb_consultas"]>
 export type tb_consultasInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tb_archivos_estudios?: boolean | Prisma.tb_consultas$tb_archivos_estudiosArgs<ExtArgs>
   tb_consulta_servicios?: boolean | Prisma.tb_consultas$tb_consulta_serviciosArgs<ExtArgs>
@@ -835,6 +877,7 @@ export type $tb_consultasPayload<ExtArgs extends runtime.Types.Extensions.Intern
     notas_evolucion: string | null
     diagnostico_cie10: string | null
     fecha_registro: Date
+    tipo_expediente: string
   }, ExtArgs["result"]["tb_consultas"]>
   composites: {}
 }
@@ -1268,6 +1311,7 @@ export interface tb_consultasFieldRefs {
   readonly notas_evolucion: Prisma.FieldRef<"tb_consultas", 'String'>
   readonly diagnostico_cie10: Prisma.FieldRef<"tb_consultas", 'String'>
   readonly fecha_registro: Prisma.FieldRef<"tb_consultas", 'DateTime'>
+  readonly tipo_expediente: Prisma.FieldRef<"tb_consultas", 'String'>
 }
     
 

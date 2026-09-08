@@ -43,4 +43,50 @@ describe("ErpService", () => {
       "active_professionals",
     ]);
   });
+
+  it("pagina, ordena y filtra permisos desde el servidor", async () => {
+    const findMany = vi.fn().mockResolvedValue([
+      {
+        id_rol: 1,
+        modulo: "seguridad",
+        puede_leer: true,
+        puede_escribir: true,
+        puede_borrar: false,
+        tb_roles: { id_rol: 1, nombre_rol: "Administrador" },
+      },
+    ]);
+    const count = vi.fn().mockResolvedValue(29);
+    const database = {
+      client: { tb_permisos_rol: { findMany, count } },
+    } as unknown as DatabaseService;
+    const service = new ErpService(database, {} as AuthorizationService);
+
+    const result = await service.listPermissions({
+      page: 2,
+      pageSize: 10,
+      search: "admin",
+      capability: "read",
+      sortBy: "role",
+      sortDirection: "desc",
+    });
+
+    expect(findMany).toHaveBeenCalledWith(expect.objectContaining({
+      skip: 10,
+      take: 10,
+      orderBy: [
+        { tb_roles: { nombre_rol: "desc" } },
+        { modulo: "asc" },
+      ],
+    }));
+    expect(result.pagination).toEqual({
+      page: 2,
+      pageSize: 10,
+      totalItems: 29,
+      totalPages: 3,
+    });
+    expect(result.items[0]).toMatchObject({
+      id: "1:seguridad",
+      moduleLabel: "Usuarios y seguridad",
+    });
+  });
 });

@@ -64,7 +64,10 @@ Orden de ejecución preparado:
 2. `002_modulos_clinicos.sql`
 3. `003_seguridad_facturacion_inventario.sql`
 4. `004_ajustes_y_modulos_publicos.sql`
-5. `seed.sql`
+5. `005_indices_listados_crud.sql`
+6. `006_indices_administracion_erp.sql`
+7. `007_pacientes_agenda_expediente.sql`
+8. `seed.sql`
 
 En una base y volumen nuevos, Docker ejecuta las migraciones y el seed en ese
 orden mediante `/docker-entrypoint-initdb.d`. PostgreSQL no vuelve a ejecutar
@@ -137,6 +140,11 @@ general del proyecto.
 - Panel administrativo construido con Next.js y API con NestJS/Fastify.
 - Acceso, renovación de sesión y cambio de contraseña conectados a PostgreSQL.
 - Menú ERP, dashboard y autorización por módulo conectados a `tb_permisos_rol`.
+- Infraestructura CRUD reutilizable con listados paginados, filtros, modales y errores tipados.
+- CRUD administrativo de usuarios, profesionales, especialidades y servicios.
+- CRUD de pacientes, agenda de citas y consultorios con paginación del servidor.
+- Expedientes general y psicológico separados, con notas, diagnóstico CIE-10 e historial de signos vitales.
+- Alcance por profesional vinculado para médicos y psicólogos en agenda y expedientes.
 - Prueba de aislamiento disponible en `database/tests/authorization.sql`.
 - Dockerfile multi-stage preparado para construir el panel y el API por separado.
 

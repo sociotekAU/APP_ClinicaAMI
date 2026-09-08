@@ -1,9 +1,9 @@
 import { HttpException, type HttpStatus } from "@nestjs/common";
-import type { ApiErrorDetail } from "@ami/contracts";
+import type { ApiErrorCode, ApiErrorDetail } from "@ami/contracts";
 
 export class AppException extends HttpException {
   constructor(
-    readonly code: string,
+    readonly code: ApiErrorCode,
     message: string,
     status: HttpStatus,
     readonly details?: ApiErrorDetail[],

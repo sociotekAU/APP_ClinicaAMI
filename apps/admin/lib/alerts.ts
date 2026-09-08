@@ -32,3 +32,43 @@ export async function confirmLogout(): Promise<boolean> {
   });
   return result.isConfirmed;
 }
+
+export async function confirmStatusChange(entityLabel: string, nextActive: boolean): Promise<boolean> {
+  const action = nextActive ? "activar" : "desactivar";
+  const result = await alert.fire({
+    icon: "warning",
+    title: `¿${nextActive ? "Activar" : "Desactivar"} registro?`,
+    text: `Se va a ${action} ${entityLabel}. El historial permanecerá disponible.`,
+    showCancelButton: true,
+    confirmButtonText: `Sí, ${action}`,
+    cancelButtonText: "Cancelar",
+    reverseButtons: true,
+  });
+  return result.isConfirmed;
+}
+
+export async function confirmDiscardChanges(): Promise<boolean> {
+  const result = await alert.fire({
+    icon: "question",
+    title: "¿Descartar cambios?",
+    text: "Los datos que todavía no se guardaron se perderán.",
+    showCancelButton: true,
+    confirmButtonText: "Sí, descartar",
+    cancelButtonText: "Continuar editando",
+    reverseButtons: true,
+  });
+  return result.isConfirmed;
+}
+
+export async function confirmAppointmentStatus(statusLabel: string): Promise<boolean> {
+  const result = await alert.fire({
+    icon: "warning",
+    title: "¿Cambiar estado de la cita?",
+    text: `La cita se marcará como ${statusLabel}. Los estados finales no podrán revertirse.`,
+    showCancelButton: true,
+    confirmButtonText: "Sí, cambiar estado",
+    cancelButtonText: "Cancelar",
+    reverseButtons: true,
+  });
+  return result.isConfirmed;
+}

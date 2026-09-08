@@ -18,6 +18,9 @@ services:
       - ./database/migrations/002_modulos_clinicos.sql:/docker-entrypoint-initdb.d/002_modulos_clinicos.sql:ro
       - ./database/migrations/003_seguridad_facturacion_inventario.sql:/docker-entrypoint-initdb.d/003_seguridad_facturacion_inventario.sql:ro
       - ./database/migrations/004_ajustes_y_modulos_publicos.sql:/docker-entrypoint-initdb.d/004_ajustes_y_modulos_publicos.sql:ro
+      - ./database/migrations/005_indices_listados_crud.sql:/docker-entrypoint-initdb.d/005_indices_listados_crud.sql:ro
+      - ./database/migrations/006_indices_administracion_erp.sql:/docker-entrypoint-initdb.d/006_indices_administracion_erp.sql:ro
+      - ./database/migrations/007_pacientes_agenda_expediente.sql:/docker-entrypoint-initdb.d/007_pacientes_agenda_expediente.sql:ro
       - ./database/seed.sql:/docker-entrypoint-initdb.d/900_seed.sql:ro
       - ./database/tests:/database-tests:ro
     healthcheck:

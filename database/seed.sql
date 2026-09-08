@@ -360,16 +360,18 @@ SET sala = EXCLUDED.sala,
     horario = EXCLUDED.horario;
 
 INSERT INTO tb_citas (
-    id_paciente, id_doctor, fecha_hora, motivo_cita, estado
+    id_paciente, id_doctor, id_clinica, fecha_hora, motivo_cita, estado
 )
 SELECT
     p.id_paciente,
     m.id,
+    cl.id_clinica,
     CURRENT_TIMESTAMP - INTERVAL '1 day',
     'Consulta clínica de demostración',
     'completada'
 FROM tb_pacientes p
 JOIN tb_medicos m ON LOWER(m.nombre) = LOWER('Dr. Moisés Valdez')
+JOIN tb_clinicas cl ON cl.id_doctor = m.id AND cl.estado = TRUE
 WHERE LOWER(p.email) = LOWER('paciente.demo@example.invalid')
   AND NOT EXISTS (
       SELECT 1
@@ -380,13 +382,14 @@ WHERE LOWER(p.email) = LOWER('paciente.demo@example.invalid')
   );
 
 INSERT INTO tb_consultas (
-    id_cita, motivo_consulta, notas_evolucion, diagnostico_cie10
+    id_cita, motivo_consulta, notas_evolucion, diagnostico_cie10, tipo_expediente
 )
 SELECT
     c.id_cita,
     'Consulta de demostración',
     'Notas ficticias para validar el expediente clínico.',
-    'Z00.0'
+    'Z00.0',
+    'general'
 FROM tb_citas c
 WHERE c.motivo_cita = 'Consulta clínica de demostración'
   AND NOT EXISTS (

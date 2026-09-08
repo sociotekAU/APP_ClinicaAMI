@@ -7,10 +7,11 @@ import {
   HttpStatus,
   Logger,
 } from "@nestjs/common";
-import type { ApiError, ApiErrorDetail } from "@ami/contracts";
+import type { ApiError, ApiErrorCode, ApiErrorDetail } from "@ami/contracts";
 import type { FastifyReply, FastifyRequest } from "fastify";
 import { randomUUID } from "node:crypto";
 import { AppException } from "./app.exception";
+import { classifyDatabaseError, validationDetail } from "./error-catalog";
 
 interface NestErrorResponse {
   message?: string | string[];
@@ -27,9 +28,10 @@ export class ApiExceptionFilter implements ExceptionFilter {
     const requestId = request.id || randomUUID();
 
     let status = HttpStatus.INTERNAL_SERVER_ERROR;
-    let code = "INTERNAL_ERROR";
+    let code: ApiErrorCode = "INTERNAL_ERROR";
     let message = "No fue posible completar la solicitud.";
     let details: ApiErrorDetail[] | undefined;
+    const databaseError = classifyDatabaseError(exception);
 
     if (exception instanceof AppException) {
       status = exception.getStatus();
@@ -44,12 +46,10 @@ export class ApiExceptionFilter implements ExceptionFilter {
       const validationMessages = Array.isArray(errorResponse.message)
         ? errorResponse.message
         : [errorResponse.message].filter((item): item is string => Boolean(item));
-      details = validationMessages.map((validationMessage) => ({
-        message: validationMessage,
-      }));
+      details = validationMessages.map(validationDetail);
     } else if (exception instanceof HttpException) {
       status = exception.getStatus();
-      const safeHttpErrors: Record<number, { code: string; message: string }> = {
+      const safeHttpErrors: Record<number, { code: ApiErrorCode; message: string }> = {
         [HttpStatus.BAD_REQUEST]: {
           code: "VALIDATION_ERROR",
           message: "Revise los datos enviados.",
@@ -66,6 +66,10 @@ export class ApiExceptionFilter implements ExceptionFilter {
           code: "RESOURCE_NOT_FOUND",
           message: "El recurso solicitado no existe.",
         },
+        [HttpStatus.CONFLICT]: {
+          code: "RESOURCE_CONFLICT",
+          message: "La operación entra en conflicto con el estado actual del registro.",
+        },
         [HttpStatus.TOO_MANY_REQUESTS]: {
           code: "RATE_LIMIT_EXCEEDED",
           message: "Demasiados intentos. Espere un momento antes de volver a intentar.",
@@ -74,6 +78,11 @@ export class ApiExceptionFilter implements ExceptionFilter {
       const safeError = safeHttpErrors[status];
       code = safeError?.code ?? "HTTP_ERROR";
       message = safeError?.message ?? "No fue posible completar la solicitud.";
+    } else if (databaseError) {
+      status = databaseError.status;
+      code = databaseError.code;
+      message = databaseError.message;
+      this.logger.warn(`Error de persistencia ${String((exception as { code?: unknown }).code)} en ${request.method} ${request.url}`);
     } else {
       const stack = exception instanceof Error ? exception.stack : String(exception);
       this.logger.error(`Error no controlado en ${request.method} ${request.url}`, stack);

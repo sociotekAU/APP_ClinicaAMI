@@ -31,12 +31,14 @@ export type Tb_citasAvgAggregateOutputType = {
   id_cita: number | null
   id_paciente: number | null
   id_doctor: number | null
+  id_clinica: number | null
 }
 
 export type Tb_citasSumAggregateOutputType = {
   id_cita: number | null
   id_paciente: number | null
   id_doctor: number | null
+  id_clinica: number | null
 }
 
 export type Tb_citasMinAggregateOutputType = {
@@ -47,6 +49,7 @@ export type Tb_citasMinAggregateOutputType = {
   motivo_cita: string | null
   estado: string | null
   fecha_creacion: Date | null
+  id_clinica: number | null
 }
 
 export type Tb_citasMaxAggregateOutputType = {
@@ -57,6 +60,7 @@ export type Tb_citasMaxAggregateOutputType = {
   motivo_cita: string | null
   estado: string | null
   fecha_creacion: Date | null
+  id_clinica: number | null
 }
 
 export type Tb_citasCountAggregateOutputType = {
@@ -67,6 +71,7 @@ export type Tb_citasCountAggregateOutputType = {
   motivo_cita: number
   estado: number
   fecha_creacion: number
+  id_clinica: number
   _all: number
 }
 
@@ -75,12 +80,14 @@ export type Tb_citasAvgAggregateInputType = {
   id_cita?: true
   id_paciente?: true
   id_doctor?: true
+  id_clinica?: true
 }
 
 export type Tb_citasSumAggregateInputType = {
   id_cita?: true
   id_paciente?: true
   id_doctor?: true
+  id_clinica?: true
 }
 
 export type Tb_citasMinAggregateInputType = {
@@ -91,6 +98,7 @@ export type Tb_citasMinAggregateInputType = {
   motivo_cita?: true
   estado?: true
   fecha_creacion?: true
+  id_clinica?: true
 }
 
 export type Tb_citasMaxAggregateInputType = {
@@ -101,6 +109,7 @@ export type Tb_citasMaxAggregateInputType = {
   motivo_cita?: true
   estado?: true
   fecha_creacion?: true
+  id_clinica?: true
 }
 
 export type Tb_citasCountAggregateInputType = {
@@ -111,6 +120,7 @@ export type Tb_citasCountAggregateInputType = {
   motivo_cita?: true
   estado?: true
   fecha_creacion?: true
+  id_clinica?: true
   _all?: true
 }
 
@@ -208,6 +218,7 @@ export type Tb_citasGroupByOutputType = {
   motivo_cita: string
   estado: string
   fecha_creacion: Date
+  id_clinica: number | null
   _count: Tb_citasCountAggregateOutputType | null
   _avg: Tb_citasAvgAggregateOutputType | null
   _sum: Tb_citasSumAggregateOutputType | null
@@ -241,6 +252,8 @@ export type tb_citasWhereInput = {
   motivo_cita?: Prisma.StringFilter<"tb_citas"> | string
   estado?: Prisma.StringFilter<"tb_citas"> | string
   fecha_creacion?: Prisma.DateTimeFilter<"tb_citas"> | Date | string
+  id_clinica?: Prisma.IntNullableFilter<"tb_citas"> | number | null
+  tb_clinicas?: Prisma.XOR<Prisma.Tb_clinicasNullableScalarRelationFilter, Prisma.tb_clinicasWhereInput> | null
   tb_medicos?: Prisma.XOR<Prisma.Tb_medicosScalarRelationFilter, Prisma.tb_medicosWhereInput>
   tb_pacientes?: Prisma.XOR<Prisma.Tb_pacientesScalarRelationFilter, Prisma.tb_pacientesWhereInput>
   tb_consultas?: Prisma.XOR<Prisma.Tb_consultasNullableScalarRelationFilter, Prisma.tb_consultasWhereInput> | null
@@ -254,6 +267,8 @@ export type tb_citasOrderByWithRelationInput = {
   motivo_cita?: Prisma.SortOrder
   estado?: Prisma.SortOrder
   fecha_creacion?: Prisma.SortOrder
+  id_clinica?: Prisma.SortOrderInput | Prisma.SortOrder
+  tb_clinicas?: Prisma.tb_clinicasOrderByWithRelationInput
   tb_medicos?: Prisma.tb_medicosOrderByWithRelationInput
   tb_pacientes?: Prisma.tb_pacientesOrderByWithRelationInput
   tb_consultas?: Prisma.tb_consultasOrderByWithRelationInput
@@ -272,6 +287,8 @@ export type tb_citasWhereUniqueInput = Prisma.AtLeast<{
   motivo_cita?: Prisma.StringFilter<"tb_citas"> | string
   estado?: Prisma.StringFilter<"tb_citas"> | string
   fecha_creacion?: Prisma.DateTimeFilter<"tb_citas"> | Date | string
+  id_clinica?: Prisma.IntNullableFilter<"tb_citas"> | number | null
+  tb_clinicas?: Prisma.XOR<Prisma.Tb_clinicasNullableScalarRelationFilter, Prisma.tb_clinicasWhereInput> | null
   tb_medicos?: Prisma.XOR<Prisma.Tb_medicosScalarRelationFilter, Prisma.tb_medicosWhereInput>
   tb_pacientes?: Prisma.XOR<Prisma.Tb_pacientesScalarRelationFilter, Prisma.tb_pacientesWhereInput>
   tb_consultas?: Prisma.XOR<Prisma.Tb_consultasNullableScalarRelationFilter, Prisma.tb_consultasWhereInput> | null
@@ -285,6 +302,7 @@ export type tb_citasOrderByWithAggregationInput = {
   motivo_cita?: Prisma.SortOrder
   estado?: Prisma.SortOrder
   fecha_creacion?: Prisma.SortOrder
+  id_clinica?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.tb_citasCountOrderByAggregateInput
   _avg?: Prisma.tb_citasAvgOrderByAggregateInput
   _max?: Prisma.tb_citasMaxOrderByAggregateInput
@@ -303,6 +321,7 @@ export type tb_citasScalarWhereWithAggregatesInput = {
   motivo_cita?: Prisma.StringWithAggregatesFilter<"tb_citas"> | string
   estado?: Prisma.StringWithAggregatesFilter<"tb_citas"> | string
   fecha_creacion?: Prisma.DateTimeWithAggregatesFilter<"tb_citas"> | Date | string
+  id_clinica?: Prisma.IntNullableWithAggregatesFilter<"tb_citas"> | number | null
 }
 
 export type tb_citasCreateInput = {
@@ -310,6 +329,7 @@ export type tb_citasCreateInput = {
   motivo_cita: string
   estado?: string
   fecha_creacion?: Date | string
+  tb_clinicas?: Prisma.tb_clinicasCreateNestedOneWithoutTb_citasInput
   tb_medicos: Prisma.tb_medicosCreateNestedOneWithoutTb_citasInput
   tb_pacientes: Prisma.tb_pacientesCreateNestedOneWithoutTb_citasInput
   tb_consultas?: Prisma.tb_consultasCreateNestedOneWithoutTb_citasInput
@@ -323,6 +343,7 @@ export type tb_citasUncheckedCreateInput = {
   motivo_cita: string
   estado?: string
   fecha_creacion?: Date | string
+  id_clinica?: number | null
   tb_consultas?: Prisma.tb_consultasUncheckedCreateNestedOneWithoutTb_citasInput
 }
 
@@ -331,6 +352,7 @@ export type tb_citasUpdateInput = {
   motivo_cita?: Prisma.StringFieldUpdateOperationsInput | string
   estado?: Prisma.StringFieldUpdateOperationsInput | string
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tb_clinicas?: Prisma.tb_clinicasUpdateOneWithoutTb_citasNestedInput
   tb_medicos?: Prisma.tb_medicosUpdateOneRequiredWithoutTb_citasNestedInput
   tb_pacientes?: Prisma.tb_pacientesUpdateOneRequiredWithoutTb_citasNestedInput
   tb_consultas?: Prisma.tb_consultasUpdateOneWithoutTb_citasNestedInput
@@ -344,6 +366,7 @@ export type tb_citasUncheckedUpdateInput = {
   motivo_cita?: Prisma.StringFieldUpdateOperationsInput | string
   estado?: Prisma.StringFieldUpdateOperationsInput | string
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  id_clinica?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   tb_consultas?: Prisma.tb_consultasUncheckedUpdateOneWithoutTb_citasNestedInput
 }
 
@@ -355,6 +378,7 @@ export type tb_citasCreateManyInput = {
   motivo_cita: string
   estado?: string
   fecha_creacion?: Date | string
+  id_clinica?: number | null
 }
 
 export type tb_citasUpdateManyMutationInput = {
@@ -372,6 +396,7 @@ export type tb_citasUncheckedUpdateManyInput = {
   motivo_cita?: Prisma.StringFieldUpdateOperationsInput | string
   estado?: Prisma.StringFieldUpdateOperationsInput | string
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  id_clinica?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type tb_citasId_doctorFecha_horaCompoundUniqueInput = {
@@ -392,12 +417,14 @@ export type tb_citasCountOrderByAggregateInput = {
   motivo_cita?: Prisma.SortOrder
   estado?: Prisma.SortOrder
   fecha_creacion?: Prisma.SortOrder
+  id_clinica?: Prisma.SortOrder
 }
 
 export type tb_citasAvgOrderByAggregateInput = {
   id_cita?: Prisma.SortOrder
   id_paciente?: Prisma.SortOrder
   id_doctor?: Prisma.SortOrder
+  id_clinica?: Prisma.SortOrder
 }
 
 export type tb_citasMaxOrderByAggregateInput = {
@@ -408,6 +435,7 @@ export type tb_citasMaxOrderByAggregateInput = {
   motivo_cita?: Prisma.SortOrder
   estado?: Prisma.SortOrder
   fecha_creacion?: Prisma.SortOrder
+  id_clinica?: Prisma.SortOrder
 }
 
 export type tb_citasMinOrderByAggregateInput = {
@@ -418,17 +446,14 @@ export type tb_citasMinOrderByAggregateInput = {
   motivo_cita?: Prisma.SortOrder
   estado?: Prisma.SortOrder
   fecha_creacion?: Prisma.SortOrder
+  id_clinica?: Prisma.SortOrder
 }
 
 export type tb_citasSumOrderByAggregateInput = {
   id_cita?: Prisma.SortOrder
   id_paciente?: Prisma.SortOrder
   id_doctor?: Prisma.SortOrder
-}
-
-export type Tb_citasScalarRelationFilter = {
-  is?: Prisma.tb_citasWhereInput
-  isNot?: Prisma.tb_citasWhereInput
+  id_clinica?: Prisma.SortOrder
 }
 
 export type Tb_citasListRelationFilter = {
@@ -439,6 +464,53 @@ export type Tb_citasListRelationFilter = {
 
 export type tb_citasOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
+}
+
+export type Tb_citasScalarRelationFilter = {
+  is?: Prisma.tb_citasWhereInput
+  isNot?: Prisma.tb_citasWhereInput
+}
+
+export type tb_citasCreateNestedManyWithoutTb_clinicasInput = {
+  create?: Prisma.XOR<Prisma.tb_citasCreateWithoutTb_clinicasInput, Prisma.tb_citasUncheckedCreateWithoutTb_clinicasInput> | Prisma.tb_citasCreateWithoutTb_clinicasInput[] | Prisma.tb_citasUncheckedCreateWithoutTb_clinicasInput[]
+  connectOrCreate?: Prisma.tb_citasCreateOrConnectWithoutTb_clinicasInput | Prisma.tb_citasCreateOrConnectWithoutTb_clinicasInput[]
+  createMany?: Prisma.tb_citasCreateManyTb_clinicasInputEnvelope
+  connect?: Prisma.tb_citasWhereUniqueInput | Prisma.tb_citasWhereUniqueInput[]
+}
+
+export type tb_citasUncheckedCreateNestedManyWithoutTb_clinicasInput = {
+  create?: Prisma.XOR<Prisma.tb_citasCreateWithoutTb_clinicasInput, Prisma.tb_citasUncheckedCreateWithoutTb_clinicasInput> | Prisma.tb_citasCreateWithoutTb_clinicasInput[] | Prisma.tb_citasUncheckedCreateWithoutTb_clinicasInput[]
+  connectOrCreate?: Prisma.tb_citasCreateOrConnectWithoutTb_clinicasInput | Prisma.tb_citasCreateOrConnectWithoutTb_clinicasInput[]
+  createMany?: Prisma.tb_citasCreateManyTb_clinicasInputEnvelope
+  connect?: Prisma.tb_citasWhereUniqueInput | Prisma.tb_citasWhereUniqueInput[]
+}
+
+export type tb_citasUpdateManyWithoutTb_clinicasNestedInput = {
+  create?: Prisma.XOR<Prisma.tb_citasCreateWithoutTb_clinicasInput, Prisma.tb_citasUncheckedCreateWithoutTb_clinicasInput> | Prisma.tb_citasCreateWithoutTb_clinicasInput[] | Prisma.tb_citasUncheckedCreateWithoutTb_clinicasInput[]
+  connectOrCreate?: Prisma.tb_citasCreateOrConnectWithoutTb_clinicasInput | Prisma.tb_citasCreateOrConnectWithoutTb_clinicasInput[]
+  upsert?: Prisma.tb_citasUpsertWithWhereUniqueWithoutTb_clinicasInput | Prisma.tb_citasUpsertWithWhereUniqueWithoutTb_clinicasInput[]
+  createMany?: Prisma.tb_citasCreateManyTb_clinicasInputEnvelope
+  set?: Prisma.tb_citasWhereUniqueInput | Prisma.tb_citasWhereUniqueInput[]
+  disconnect?: Prisma.tb_citasWhereUniqueInput | Prisma.tb_citasWhereUniqueInput[]
+  delete?: Prisma.tb_citasWhereUniqueInput | Prisma.tb_citasWhereUniqueInput[]
+  connect?: Prisma.tb_citasWhereUniqueInput | Prisma.tb_citasWhereUniqueInput[]
+  update?: Prisma.tb_citasUpdateWithWhereUniqueWithoutTb_clinicasInput | Prisma.tb_citasUpdateWithWhereUniqueWithoutTb_clinicasInput[]
+  updateMany?: Prisma.tb_citasUpdateManyWithWhereWithoutTb_clinicasInput | Prisma.tb_citasUpdateManyWithWhereWithoutTb_clinicasInput[]
+  deleteMany?: Prisma.tb_citasScalarWhereInput | Prisma.tb_citasScalarWhereInput[]
+}
+
+export type tb_citasUncheckedUpdateManyWithoutTb_clinicasNestedInput = {
+  create?: Prisma.XOR<Prisma.tb_citasCreateWithoutTb_clinicasInput, Prisma.tb_citasUncheckedCreateWithoutTb_clinicasInput> | Prisma.tb_citasCreateWithoutTb_clinicasInput[] | Prisma.tb_citasUncheckedCreateWithoutTb_clinicasInput[]
+  connectOrCreate?: Prisma.tb_citasCreateOrConnectWithoutTb_clinicasInput | Prisma.tb_citasCreateOrConnectWithoutTb_clinicasInput[]
+  upsert?: Prisma.tb_citasUpsertWithWhereUniqueWithoutTb_clinicasInput | Prisma.tb_citasUpsertWithWhereUniqueWithoutTb_clinicasInput[]
+  createMany?: Prisma.tb_citasCreateManyTb_clinicasInputEnvelope
+  set?: Prisma.tb_citasWhereUniqueInput | Prisma.tb_citasWhereUniqueInput[]
+  disconnect?: Prisma.tb_citasWhereUniqueInput | Prisma.tb_citasWhereUniqueInput[]
+  delete?: Prisma.tb_citasWhereUniqueInput | Prisma.tb_citasWhereUniqueInput[]
+  connect?: Prisma.tb_citasWhereUniqueInput | Prisma.tb_citasWhereUniqueInput[]
+  update?: Prisma.tb_citasUpdateWithWhereUniqueWithoutTb_clinicasInput | Prisma.tb_citasUpdateWithWhereUniqueWithoutTb_clinicasInput[]
+  updateMany?: Prisma.tb_citasUpdateManyWithWhereWithoutTb_clinicasInput | Prisma.tb_citasUpdateManyWithWhereWithoutTb_clinicasInput[]
+  deleteMany?: Prisma.tb_citasScalarWhereInput | Prisma.tb_citasScalarWhereInput[]
 }
 
 export type tb_citasCreateNestedOneWithoutTb_consultasInput = {
@@ -539,11 +611,73 @@ export type tb_citasUncheckedUpdateManyWithoutTb_pacientesNestedInput = {
   deleteMany?: Prisma.tb_citasScalarWhereInput | Prisma.tb_citasScalarWhereInput[]
 }
 
+export type tb_citasCreateWithoutTb_clinicasInput = {
+  fecha_hora: Date | string
+  motivo_cita: string
+  estado?: string
+  fecha_creacion?: Date | string
+  tb_medicos: Prisma.tb_medicosCreateNestedOneWithoutTb_citasInput
+  tb_pacientes: Prisma.tb_pacientesCreateNestedOneWithoutTb_citasInput
+  tb_consultas?: Prisma.tb_consultasCreateNestedOneWithoutTb_citasInput
+}
+
+export type tb_citasUncheckedCreateWithoutTb_clinicasInput = {
+  id_cita?: number
+  id_paciente: number
+  id_doctor: number
+  fecha_hora: Date | string
+  motivo_cita: string
+  estado?: string
+  fecha_creacion?: Date | string
+  tb_consultas?: Prisma.tb_consultasUncheckedCreateNestedOneWithoutTb_citasInput
+}
+
+export type tb_citasCreateOrConnectWithoutTb_clinicasInput = {
+  where: Prisma.tb_citasWhereUniqueInput
+  create: Prisma.XOR<Prisma.tb_citasCreateWithoutTb_clinicasInput, Prisma.tb_citasUncheckedCreateWithoutTb_clinicasInput>
+}
+
+export type tb_citasCreateManyTb_clinicasInputEnvelope = {
+  data: Prisma.tb_citasCreateManyTb_clinicasInput | Prisma.tb_citasCreateManyTb_clinicasInput[]
+  skipDuplicates?: boolean
+}
+
+export type tb_citasUpsertWithWhereUniqueWithoutTb_clinicasInput = {
+  where: Prisma.tb_citasWhereUniqueInput
+  update: Prisma.XOR<Prisma.tb_citasUpdateWithoutTb_clinicasInput, Prisma.tb_citasUncheckedUpdateWithoutTb_clinicasInput>
+  create: Prisma.XOR<Prisma.tb_citasCreateWithoutTb_clinicasInput, Prisma.tb_citasUncheckedCreateWithoutTb_clinicasInput>
+}
+
+export type tb_citasUpdateWithWhereUniqueWithoutTb_clinicasInput = {
+  where: Prisma.tb_citasWhereUniqueInput
+  data: Prisma.XOR<Prisma.tb_citasUpdateWithoutTb_clinicasInput, Prisma.tb_citasUncheckedUpdateWithoutTb_clinicasInput>
+}
+
+export type tb_citasUpdateManyWithWhereWithoutTb_clinicasInput = {
+  where: Prisma.tb_citasScalarWhereInput
+  data: Prisma.XOR<Prisma.tb_citasUpdateManyMutationInput, Prisma.tb_citasUncheckedUpdateManyWithoutTb_clinicasInput>
+}
+
+export type tb_citasScalarWhereInput = {
+  AND?: Prisma.tb_citasScalarWhereInput | Prisma.tb_citasScalarWhereInput[]
+  OR?: Prisma.tb_citasScalarWhereInput[]
+  NOT?: Prisma.tb_citasScalarWhereInput | Prisma.tb_citasScalarWhereInput[]
+  id_cita?: Prisma.IntFilter<"tb_citas"> | number
+  id_paciente?: Prisma.IntFilter<"tb_citas"> | number
+  id_doctor?: Prisma.IntFilter<"tb_citas"> | number
+  fecha_hora?: Prisma.DateTimeFilter<"tb_citas"> | Date | string
+  motivo_cita?: Prisma.StringFilter<"tb_citas"> | string
+  estado?: Prisma.StringFilter<"tb_citas"> | string
+  fecha_creacion?: Prisma.DateTimeFilter<"tb_citas"> | Date | string
+  id_clinica?: Prisma.IntNullableFilter<"tb_citas"> | number | null
+}
+
 export type tb_citasCreateWithoutTb_consultasInput = {
   fecha_hora: Date | string
   motivo_cita: string
   estado?: string
   fecha_creacion?: Date | string
+  tb_clinicas?: Prisma.tb_clinicasCreateNestedOneWithoutTb_citasInput
   tb_medicos: Prisma.tb_medicosCreateNestedOneWithoutTb_citasInput
   tb_pacientes: Prisma.tb_pacientesCreateNestedOneWithoutTb_citasInput
 }
@@ -556,6 +690,7 @@ export type tb_citasUncheckedCreateWithoutTb_consultasInput = {
   motivo_cita: string
   estado?: string
   fecha_creacion?: Date | string
+  id_clinica?: number | null
 }
 
 export type tb_citasCreateOrConnectWithoutTb_consultasInput = {
@@ -579,6 +714,7 @@ export type tb_citasUpdateWithoutTb_consultasInput = {
   motivo_cita?: Prisma.StringFieldUpdateOperationsInput | string
   estado?: Prisma.StringFieldUpdateOperationsInput | string
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tb_clinicas?: Prisma.tb_clinicasUpdateOneWithoutTb_citasNestedInput
   tb_medicos?: Prisma.tb_medicosUpdateOneRequiredWithoutTb_citasNestedInput
   tb_pacientes?: Prisma.tb_pacientesUpdateOneRequiredWithoutTb_citasNestedInput
 }
@@ -591,6 +727,7 @@ export type tb_citasUncheckedUpdateWithoutTb_consultasInput = {
   motivo_cita?: Prisma.StringFieldUpdateOperationsInput | string
   estado?: Prisma.StringFieldUpdateOperationsInput | string
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  id_clinica?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type tb_citasCreateWithoutTb_medicosInput = {
@@ -598,6 +735,7 @@ export type tb_citasCreateWithoutTb_medicosInput = {
   motivo_cita: string
   estado?: string
   fecha_creacion?: Date | string
+  tb_clinicas?: Prisma.tb_clinicasCreateNestedOneWithoutTb_citasInput
   tb_pacientes: Prisma.tb_pacientesCreateNestedOneWithoutTb_citasInput
   tb_consultas?: Prisma.tb_consultasCreateNestedOneWithoutTb_citasInput
 }
@@ -609,6 +747,7 @@ export type tb_citasUncheckedCreateWithoutTb_medicosInput = {
   motivo_cita: string
   estado?: string
   fecha_creacion?: Date | string
+  id_clinica?: number | null
   tb_consultas?: Prisma.tb_consultasUncheckedCreateNestedOneWithoutTb_citasInput
 }
 
@@ -638,24 +777,12 @@ export type tb_citasUpdateManyWithWhereWithoutTb_medicosInput = {
   data: Prisma.XOR<Prisma.tb_citasUpdateManyMutationInput, Prisma.tb_citasUncheckedUpdateManyWithoutTb_medicosInput>
 }
 
-export type tb_citasScalarWhereInput = {
-  AND?: Prisma.tb_citasScalarWhereInput | Prisma.tb_citasScalarWhereInput[]
-  OR?: Prisma.tb_citasScalarWhereInput[]
-  NOT?: Prisma.tb_citasScalarWhereInput | Prisma.tb_citasScalarWhereInput[]
-  id_cita?: Prisma.IntFilter<"tb_citas"> | number
-  id_paciente?: Prisma.IntFilter<"tb_citas"> | number
-  id_doctor?: Prisma.IntFilter<"tb_citas"> | number
-  fecha_hora?: Prisma.DateTimeFilter<"tb_citas"> | Date | string
-  motivo_cita?: Prisma.StringFilter<"tb_citas"> | string
-  estado?: Prisma.StringFilter<"tb_citas"> | string
-  fecha_creacion?: Prisma.DateTimeFilter<"tb_citas"> | Date | string
-}
-
 export type tb_citasCreateWithoutTb_pacientesInput = {
   fecha_hora: Date | string
   motivo_cita: string
   estado?: string
   fecha_creacion?: Date | string
+  tb_clinicas?: Prisma.tb_clinicasCreateNestedOneWithoutTb_citasInput
   tb_medicos: Prisma.tb_medicosCreateNestedOneWithoutTb_citasInput
   tb_consultas?: Prisma.tb_consultasCreateNestedOneWithoutTb_citasInput
 }
@@ -667,6 +794,7 @@ export type tb_citasUncheckedCreateWithoutTb_pacientesInput = {
   motivo_cita: string
   estado?: string
   fecha_creacion?: Date | string
+  id_clinica?: number | null
   tb_consultas?: Prisma.tb_consultasUncheckedCreateNestedOneWithoutTb_citasInput
 }
 
@@ -696,6 +824,47 @@ export type tb_citasUpdateManyWithWhereWithoutTb_pacientesInput = {
   data: Prisma.XOR<Prisma.tb_citasUpdateManyMutationInput, Prisma.tb_citasUncheckedUpdateManyWithoutTb_pacientesInput>
 }
 
+export type tb_citasCreateManyTb_clinicasInput = {
+  id_cita?: number
+  id_paciente: number
+  id_doctor: number
+  fecha_hora: Date | string
+  motivo_cita: string
+  estado?: string
+  fecha_creacion?: Date | string
+}
+
+export type tb_citasUpdateWithoutTb_clinicasInput = {
+  fecha_hora?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  motivo_cita?: Prisma.StringFieldUpdateOperationsInput | string
+  estado?: Prisma.StringFieldUpdateOperationsInput | string
+  fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tb_medicos?: Prisma.tb_medicosUpdateOneRequiredWithoutTb_citasNestedInput
+  tb_pacientes?: Prisma.tb_pacientesUpdateOneRequiredWithoutTb_citasNestedInput
+  tb_consultas?: Prisma.tb_consultasUpdateOneWithoutTb_citasNestedInput
+}
+
+export type tb_citasUncheckedUpdateWithoutTb_clinicasInput = {
+  id_cita?: Prisma.IntFieldUpdateOperationsInput | number
+  id_paciente?: Prisma.IntFieldUpdateOperationsInput | number
+  id_doctor?: Prisma.IntFieldUpdateOperationsInput | number
+  fecha_hora?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  motivo_cita?: Prisma.StringFieldUpdateOperationsInput | string
+  estado?: Prisma.StringFieldUpdateOperationsInput | string
+  fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tb_consultas?: Prisma.tb_consultasUncheckedUpdateOneWithoutTb_citasNestedInput
+}
+
+export type tb_citasUncheckedUpdateManyWithoutTb_clinicasInput = {
+  id_cita?: Prisma.IntFieldUpdateOperationsInput | number
+  id_paciente?: Prisma.IntFieldUpdateOperationsInput | number
+  id_doctor?: Prisma.IntFieldUpdateOperationsInput | number
+  fecha_hora?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  motivo_cita?: Prisma.StringFieldUpdateOperationsInput | string
+  estado?: Prisma.StringFieldUpdateOperationsInput | string
+  fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
 export type tb_citasCreateManyTb_medicosInput = {
   id_cita?: number
   id_paciente: number
@@ -703,6 +872,7 @@ export type tb_citasCreateManyTb_medicosInput = {
   motivo_cita: string
   estado?: string
   fecha_creacion?: Date | string
+  id_clinica?: number | null
 }
 
 export type tb_citasUpdateWithoutTb_medicosInput = {
@@ -710,6 +880,7 @@ export type tb_citasUpdateWithoutTb_medicosInput = {
   motivo_cita?: Prisma.StringFieldUpdateOperationsInput | string
   estado?: Prisma.StringFieldUpdateOperationsInput | string
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tb_clinicas?: Prisma.tb_clinicasUpdateOneWithoutTb_citasNestedInput
   tb_pacientes?: Prisma.tb_pacientesUpdateOneRequiredWithoutTb_citasNestedInput
   tb_consultas?: Prisma.tb_consultasUpdateOneWithoutTb_citasNestedInput
 }
@@ -721,6 +892,7 @@ export type tb_citasUncheckedUpdateWithoutTb_medicosInput = {
   motivo_cita?: Prisma.StringFieldUpdateOperationsInput | string
   estado?: Prisma.StringFieldUpdateOperationsInput | string
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  id_clinica?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   tb_consultas?: Prisma.tb_consultasUncheckedUpdateOneWithoutTb_citasNestedInput
 }
 
@@ -731,6 +903,7 @@ export type tb_citasUncheckedUpdateManyWithoutTb_medicosInput = {
   motivo_cita?: Prisma.StringFieldUpdateOperationsInput | string
   estado?: Prisma.StringFieldUpdateOperationsInput | string
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  id_clinica?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type tb_citasCreateManyTb_pacientesInput = {
@@ -740,6 +913,7 @@ export type tb_citasCreateManyTb_pacientesInput = {
   motivo_cita: string
   estado?: string
   fecha_creacion?: Date | string
+  id_clinica?: number | null
 }
 
 export type tb_citasUpdateWithoutTb_pacientesInput = {
@@ -747,6 +921,7 @@ export type tb_citasUpdateWithoutTb_pacientesInput = {
   motivo_cita?: Prisma.StringFieldUpdateOperationsInput | string
   estado?: Prisma.StringFieldUpdateOperationsInput | string
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tb_clinicas?: Prisma.tb_clinicasUpdateOneWithoutTb_citasNestedInput
   tb_medicos?: Prisma.tb_medicosUpdateOneRequiredWithoutTb_citasNestedInput
   tb_consultas?: Prisma.tb_consultasUpdateOneWithoutTb_citasNestedInput
 }
@@ -758,6 +933,7 @@ export type tb_citasUncheckedUpdateWithoutTb_pacientesInput = {
   motivo_cita?: Prisma.StringFieldUpdateOperationsInput | string
   estado?: Prisma.StringFieldUpdateOperationsInput | string
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  id_clinica?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   tb_consultas?: Prisma.tb_consultasUncheckedUpdateOneWithoutTb_citasNestedInput
 }
 
@@ -768,6 +944,7 @@ export type tb_citasUncheckedUpdateManyWithoutTb_pacientesInput = {
   motivo_cita?: Prisma.StringFieldUpdateOperationsInput | string
   estado?: Prisma.StringFieldUpdateOperationsInput | string
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  id_clinica?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 
@@ -780,6 +957,8 @@ export type tb_citasSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   motivo_cita?: boolean
   estado?: boolean
   fecha_creacion?: boolean
+  id_clinica?: boolean
+  tb_clinicas?: boolean | Prisma.tb_citas$tb_clinicasArgs<ExtArgs>
   tb_medicos?: boolean | Prisma.tb_medicosDefaultArgs<ExtArgs>
   tb_pacientes?: boolean | Prisma.tb_pacientesDefaultArgs<ExtArgs>
   tb_consultas?: boolean | Prisma.tb_citas$tb_consultasArgs<ExtArgs>
@@ -793,6 +972,8 @@ export type tb_citasSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   motivo_cita?: boolean
   estado?: boolean
   fecha_creacion?: boolean
+  id_clinica?: boolean
+  tb_clinicas?: boolean | Prisma.tb_citas$tb_clinicasArgs<ExtArgs>
   tb_medicos?: boolean | Prisma.tb_medicosDefaultArgs<ExtArgs>
   tb_pacientes?: boolean | Prisma.tb_pacientesDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["tb_citas"]>
@@ -805,6 +986,8 @@ export type tb_citasSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   motivo_cita?: boolean
   estado?: boolean
   fecha_creacion?: boolean
+  id_clinica?: boolean
+  tb_clinicas?: boolean | Prisma.tb_citas$tb_clinicasArgs<ExtArgs>
   tb_medicos?: boolean | Prisma.tb_medicosDefaultArgs<ExtArgs>
   tb_pacientes?: boolean | Prisma.tb_pacientesDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["tb_citas"]>
@@ -817,19 +1000,23 @@ export type tb_citasSelectScalar = {
   motivo_cita?: boolean
   estado?: boolean
   fecha_creacion?: boolean
+  id_clinica?: boolean
 }
 
-export type tb_citasOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id_cita" | "id_paciente" | "id_doctor" | "fecha_hora" | "motivo_cita" | "estado" | "fecha_creacion", ExtArgs["result"]["tb_citas"]>
+export type tb_citasOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id_cita" | "id_paciente" | "id_doctor" | "fecha_hora" | "motivo_cita" | "estado" | "fecha_creacion" | "id_clinica", ExtArgs["result"]["tb_citas"]>
 export type tb_citasInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  tb_clinicas?: boolean | Prisma.tb_citas$tb_clinicasArgs<ExtArgs>
   tb_medicos?: boolean | Prisma.tb_medicosDefaultArgs<ExtArgs>
   tb_pacientes?: boolean | Prisma.tb_pacientesDefaultArgs<ExtArgs>
   tb_consultas?: boolean | Prisma.tb_citas$tb_consultasArgs<ExtArgs>
 }
 export type tb_citasIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  tb_clinicas?: boolean | Prisma.tb_citas$tb_clinicasArgs<ExtArgs>
   tb_medicos?: boolean | Prisma.tb_medicosDefaultArgs<ExtArgs>
   tb_pacientes?: boolean | Prisma.tb_pacientesDefaultArgs<ExtArgs>
 }
 export type tb_citasIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  tb_clinicas?: boolean | Prisma.tb_citas$tb_clinicasArgs<ExtArgs>
   tb_medicos?: boolean | Prisma.tb_medicosDefaultArgs<ExtArgs>
   tb_pacientes?: boolean | Prisma.tb_pacientesDefaultArgs<ExtArgs>
 }
@@ -837,6 +1024,7 @@ export type tb_citasIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Ext
 export type $tb_citasPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "tb_citas"
   objects: {
+    tb_clinicas: Prisma.$tb_clinicasPayload<ExtArgs> | null
     tb_medicos: Prisma.$tb_medicosPayload<ExtArgs>
     tb_pacientes: Prisma.$tb_pacientesPayload<ExtArgs>
     tb_consultas: Prisma.$tb_consultasPayload<ExtArgs> | null
@@ -849,6 +1037,7 @@ export type $tb_citasPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     motivo_cita: string
     estado: string
     fecha_creacion: Date
+    id_clinica: number | null
   }, ExtArgs["result"]["tb_citas"]>
   composites: {}
 }
@@ -1243,6 +1432,7 @@ readonly fields: tb_citasFieldRefs;
  */
 export interface Prisma__tb_citasClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  tb_clinicas<T extends Prisma.tb_citas$tb_clinicasArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.tb_citas$tb_clinicasArgs<ExtArgs>>): Prisma.Prisma__tb_clinicasClient<runtime.Types.Result.GetResult<Prisma.$tb_clinicasPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   tb_medicos<T extends Prisma.tb_medicosDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.tb_medicosDefaultArgs<ExtArgs>>): Prisma.Prisma__tb_medicosClient<runtime.Types.Result.GetResult<Prisma.$tb_medicosPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   tb_pacientes<T extends Prisma.tb_pacientesDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.tb_pacientesDefaultArgs<ExtArgs>>): Prisma.Prisma__tb_pacientesClient<runtime.Types.Result.GetResult<Prisma.$tb_pacientesPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   tb_consultas<T extends Prisma.tb_citas$tb_consultasArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.tb_citas$tb_consultasArgs<ExtArgs>>): Prisma.Prisma__tb_consultasClient<runtime.Types.Result.GetResult<Prisma.$tb_consultasPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
@@ -1282,6 +1472,7 @@ export interface tb_citasFieldRefs {
   readonly motivo_cita: Prisma.FieldRef<"tb_citas", 'String'>
   readonly estado: Prisma.FieldRef<"tb_citas", 'String'>
   readonly fecha_creacion: Prisma.FieldRef<"tb_citas", 'DateTime'>
+  readonly id_clinica: Prisma.FieldRef<"tb_citas", 'Int'>
 }
     
 
@@ -1680,6 +1871,25 @@ export type tb_citasDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inte
    * Limit how many tb_citas to delete.
    */
   limit?: number
+}
+
+/**
+ * tb_citas.tb_clinicas
+ */
+export type tb_citas$tb_clinicasArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the tb_clinicas
+   */
+  select?: Prisma.tb_clinicasSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the tb_clinicas
+   */
+  omit?: Prisma.tb_clinicasOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.tb_clinicasInclude<ExtArgs> | null
+  where?: Prisma.tb_clinicasWhereInput
 }
 
 /**

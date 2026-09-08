@@ -2756,7 +2756,8 @@ export const Tb_citasScalarFieldEnum = {
   fecha_hora: 'fecha_hora',
   motivo_cita: 'motivo_cita',
   estado: 'estado',
-  fecha_creacion: 'fecha_creacion'
+  fecha_creacion: 'fecha_creacion',
+  id_clinica: 'id_clinica'
 } as const
 
 export type Tb_citasScalarFieldEnum = (typeof Tb_citasScalarFieldEnum)[keyof typeof Tb_citasScalarFieldEnum]
@@ -2806,7 +2807,8 @@ export const Tb_consultasScalarFieldEnum = {
   motivo_consulta: 'motivo_consulta',
   notas_evolucion: 'notas_evolucion',
   diagnostico_cie10: 'diagnostico_cie10',
-  fecha_registro: 'fecha_registro'
+  fecha_registro: 'fecha_registro',
+  tipo_expediente: 'tipo_expediente'
 } as const
 
 export type Tb_consultasScalarFieldEnum = (typeof Tb_consultasScalarFieldEnum)[keyof typeof Tb_consultasScalarFieldEnum]

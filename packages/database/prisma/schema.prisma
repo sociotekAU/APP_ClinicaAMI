@@ -72,6 +72,8 @@ model tb_citas {
   motivo_cita    String        @db.VarChar(255)
   estado         String        @default("programada") @db.VarChar(20)
   fecha_creacion DateTime      @default(now()) @db.Timestamp(6)
+  id_clinica     Int?
+  tb_clinicas    tb_clinicas?  @relation(fields: [id_clinica], references: [id_clinica], onDelete: Restrict, map: "fk_tb_citas_clinica")
   tb_medicos     tb_medicos    @relation(fields: [id_doctor], references: [id], map: "fk_tb_citas_doctor")
   tb_pacientes   tb_pacientes  @relation(fields: [id_paciente], references: [id_paciente], map: "fk_tb_citas_paciente")
   tb_consultas   tb_consultas?
@@ -80,6 +82,10 @@ model tb_citas {
   @@unique([id_paciente, fecha_hora], map: "uq_tb_citas_paciente_fecha")
   @@index([estado], map: "ix_tb_citas_estado")
   @@index([fecha_hora], map: "ix_tb_citas_fecha_hora")
+  @@index([id_clinica, fecha_hora, id_cita], map: "ix_tb_citas_clinica_fecha_id", where: raw("(id_clinica IS NOT NULL)"))
+  @@index([id_doctor, fecha_hora, id_cita], map: "ix_tb_citas_doctor_fecha_id")
+  @@index([estado, fecha_hora, id_cita], map: "ix_tb_citas_estado_fecha_id")
+  @@index([id_paciente, fecha_hora, id_cita], map: "ix_tb_citas_paciente_fecha_id")
 }
 
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
@@ -91,9 +97,11 @@ model tb_clinicas {
   estado         Boolean    @default(true)
   horario        String
   fecha_creacion DateTime   @default(now()) @db.Timestamp(6)
+  tb_citas       tb_citas[]
   tb_medicos     tb_medicos @relation(fields: [id_doctor], references: [id], map: "fk_tb_clinicas_doctor")
 
   @@index([id_doctor], map: "ix_tb_clinicas_doctor")
+  @@index([estado, id_clinica], map: "ix_tb_clinicas_estado_id")
 }
 
 /// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
@@ -137,10 +145,13 @@ model tb_consultas {
   notas_evolucion           String?
   diagnostico_cie10         String?                     @db.VarChar(20)
   fecha_registro            DateTime                    @default(now()) @db.Timestamp(6)
+  tipo_expediente           String                      @db.VarChar(20)
   tb_archivos_estudios      tb_archivos_estudios[]
   tb_consulta_servicios     tb_consulta_servicios[]
   tb_citas                  tb_citas                    @relation(fields: [id_cita], references: [id_cita], map: "fk_tb_consultas_cita")
   tb_signos_vitales_medidas tb_signos_vitales_medidas[]
+
+  @@index([tipo_expediente, fecha_registro(sort: Desc), id_consulta], map: "ix_tb_consultas_tipo_fecha_id")
 }
 
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
@@ -203,6 +214,8 @@ model tb_especialidades {
   estado         Boolean      @default(true)
   fecha_creacion DateTime     @default(now()) @db.Timestamp(6)
   tb_medicos     tb_medicos[]
+
+  @@index([estado, id], map: "ix_tb_especialidades_estado_id")
 }
 
 /// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
@@ -308,6 +321,7 @@ model tb_medicos {
 
   @@index([especialidad_id], map: "ix_tb_medicos_especialidad_id")
   @@index([estado], map: "ix_tb_medicos_estado")
+  @@index([especialidad_id, estado, id], map: "ix_tb_medicos_especialidad_estado_id")
 }
 
 /// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
@@ -365,6 +379,9 @@ model tb_pacientes {
   tb_facturas                   tb_facturas[]
   tb_ordenes_laboratorio        tb_ordenes_laboratorio[]
   tb_recetas                    tb_recetas[]
+
+  @@index([apellidos, nombres, id_paciente], map: "ix_tb_pacientes_apellidos_nombres_id")
+  @@index([estado, id_paciente], map: "ix_tb_pacientes_estado_id")
 }
 
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
@@ -377,6 +394,7 @@ model tb_permisos_rol {
   tb_roles       tb_roles @relation(fields: [id_rol], references: [id_rol], map: "fk_tb_permisos_rol")
 
   @@id([id_rol, modulo])
+  @@index([modulo, id_rol], map: "ix_tb_permisos_rol_modulo_rol")
 }
 
 /// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
@@ -462,6 +480,8 @@ model tb_servicios {
   fecha_creacion                DateTime                        @default(now()) @db.Timestamp(6)
   tb_consentimientos_informados tb_consentimientos_informados[]
   tb_consulta_servicios         tb_consulta_servicios[]
+
+  @@index([estado, id], map: "ix_tb_servicios_estado_id")
 }
 
 /// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
@@ -479,6 +499,7 @@ model tb_signos_vitales_medidas {
   tb_consultas        tb_consultas @relation(fields: [id_consulta], references: [id_consulta], map: "fk_tb_signos_consulta")
 
   @@index([id_consulta], map: "ix_tb_signos_consulta")
+  @@index([id_consulta, fecha_medicion(sort: Desc), id_medicion], map: "ix_tb_signos_consulta_fecha_id")
 }
 
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
@@ -503,4 +524,5 @@ model tb_usuarios {
   tb_roles                      tb_roles                        @relation(fields: [id_rol], references: [id_rol], map: "fk_tb_usuarios_rol")
 
   @@index([id_rol], map: "ix_tb_usuarios_rol")
+  @@index([id_rol, estado, id_usuario], map: "ix_tb_usuarios_rol_estado_id")
 }

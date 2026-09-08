@@ -17,7 +17,7 @@ export const PERMISSION_FIELD: Record<PermissionAction, "puede_leer" | "puede_es
   delete: "puede_borrar",
 };
 
-export const ERP_MODULES = new Set<ErpModuleCode>([
+export const ERP_MODULE_CODES: readonly ErpModuleCode[] = [
   "seguridad",
   "pacientes",
   "agenda",
@@ -29,7 +29,9 @@ export const ERP_MODULES = new Set<ErpModuleCode>([
   "inventario",
   "archivos_estudios",
   "consentimientos",
-]);
+];
+
+export const ERP_MODULES = new Set<ErpModuleCode>(ERP_MODULE_CODES);
 
 export const ERP_NAVIGATION: readonly ErpNavigationItem[] = [
   {

@@ -1,0 +1,30 @@
+import "reflect-metadata";
+import { plainToInstance } from "class-transformer";
+import { validate } from "class-validator";
+import { describe, expect, it } from "vitest";
+import { ListPermissionsDto } from "./list-permissions.dto";
+
+describe("ListPermissionsDto", () => {
+  it("transforma la paginación y conserva valores predeterminados seguros", async () => {
+    const query = plainToInstance(ListPermissionsDto, { page: "2", pageSize: "20" });
+    expect(await validate(query)).toHaveLength(0);
+    expect(query).toMatchObject({
+      page: 2,
+      pageSize: 20,
+      sortBy: "role",
+      sortDirection: "asc",
+    });
+  });
+
+  it("rechaza tamaños y módulos fuera del contrato", async () => {
+    const query = plainToInstance(ListPermissionsDto, {
+      pageSize: "500",
+      module: "expediente_sin_control",
+    });
+    const errors = await validate(query);
+    expect(errors.map((error) => error.property)).toEqual(expect.arrayContaining([
+      "pageSize",
+      "module",
+    ]));
+  });
+});
