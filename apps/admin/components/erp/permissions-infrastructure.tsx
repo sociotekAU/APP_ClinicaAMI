@@ -5,6 +5,7 @@ import type {
   PageMeta,
   PermissionAction,
   PermissionListItem,
+  PermissionOptions,
 } from "@ami/contracts";
 import type { ColumnDef, OnChangeFn, SortingState } from "@tanstack/react-table";
 import { Eye, Filter, RefreshCw, Search, ShieldCheck } from "lucide-react";
@@ -12,7 +13,7 @@ import { type FormEvent, useCallback, useEffect, useMemo, useState } from "react
 import { DataTable } from "../crud/data-table";
 import { DetailModal } from "../crud/modal";
 import { StatusBadge } from "../crud/status-badge";
-import { ApiClientError, apiPaginatedRequest } from "../../lib/api-client";
+import { ApiClientError, apiPaginatedRequest, apiRequest } from "../../lib/api-client";
 import { buildListQuery } from "../../lib/crud-query";
 import { useErpContext } from "./erp-shell";
 
@@ -23,14 +24,20 @@ const EMPTY_PAGINATION: PageMeta = {
   totalPages: 0,
 };
 
-const CAPABILITY_OPTIONS: Array<{ value: PermissionAction; label: string }> = [
-  { value: "read", label: "Con lectura" },
-  { value: "write", label: "Con escritura" },
-  { value: "delete", label: "Con eliminación" },
+type CapabilityFilter = "" | `${PermissionAction}:with` | `${PermissionAction}:without`;
+
+const CAPABILITY_OPTIONS: Array<{ value: CapabilityFilter; label: string }> = [
+  { value: "read:with", label: "Con lectura" },
+  { value: "read:without", label: "Sin lectura" },
+  { value: "write:with", label: "Con escritura" },
+  { value: "write:without", label: "Sin escritura" },
+  { value: "delete:with", label: "Con eliminación" },
+  { value: "delete:without", label: "Sin eliminación" },
 ];
 
 export function PermissionsInfrastructure() {
-  const context = useErpContext();
+  useErpContext();
+  const [options, setOptions] = useState<PermissionOptions | null>(null);
   const [items, setItems] = useState<PermissionListItem[]>([]);
   const [pagination, setPagination] = useState<PageMeta>(EMPTY_PAGINATION);
   const [page, setPage] = useState(1);
@@ -38,7 +45,8 @@ export function PermissionsInfrastructure() {
   const [searchInput, setSearchInput] = useState("");
   const [search, setSearch] = useState("");
   const [module, setModule] = useState<ErpModuleCode | "">("");
-  const [capability, setCapability] = useState<PermissionAction | "">("");
+  const [roleId, setRoleId] = useState(0);
+  const [capabilityFilter, setCapabilityFilter] = useState<CapabilityFilter>("");
   const [sorting, setSorting] = useState<SortingState>([{ id: "role", desc: false }]);
   const [selected, setSelected] = useState<PermissionListItem | null>(null);
   const [loading, setLoading] = useState(true);
@@ -46,6 +54,12 @@ export function PermissionsInfrastructure() {
   const [reload, setReload] = useState(0);
 
   const sort = sorting[0];
+  const [capability, capabilityAccess] = capabilityFilter.split(":") as [PermissionAction | "", "with" | "without" | undefined];
+  useEffect(() => {
+    apiRequest<PermissionOptions>("/erp/permissions/options").then(setOptions).catch((reason: unknown) => {
+      setError(reason instanceof ApiClientError ? reason : new ApiClientError("No fue posible cargar los filtros.", "INTERNAL_ERROR", 500));
+    });
+  }, []);
   useEffect(() => {
     const controller = new AbortController();
     setLoading(true);
@@ -56,6 +70,8 @@ export function PermissionsInfrastructure() {
       search,
       module,
       capability,
+      capabilityAccess,
+      roleId: roleId || undefined,
       sortBy: sort?.id === "module" ? "module" : "role",
       sortDirection: sort?.desc ? "desc" : "asc",
     });
@@ -78,7 +94,7 @@ export function PermissionsInfrastructure() {
       });
 
     return () => controller.abort();
-  }, [capability, module, page, pageSize, reload, search, sort?.desc, sort?.id]);
+  }, [capability, capabilityAccess, module, page, pageSize, reload, roleId, search, sort?.desc, sort?.id]);
 
   const closeDetail = useCallback(() => setSelected(null), []);
   const columns = useMemo<ColumnDef<PermissionListItem>[]>(() => [
@@ -146,9 +162,9 @@ export function PermissionsInfrastructure() {
         <div>
           <p className="eyebrow">Infraestructura CRUD en operación</p>
           <h2 id="permissions-title">Matriz de permisos</h2>
-          <p>Consulta paginada desde PostgreSQL. Esta vista no modifica asignaciones.</p>
+          <p>Consulte cómo está configurado cada rol. La edición se realiza en la ruta administrativa protegida.</p>
         </div>
-        <span><ShieldCheck aria-hidden="true" /> Solo administradores</span>
+        <span><ShieldCheck aria-hidden="true" /> Vista de consulta</span>
       </header>
 
       <div className="table-toolbar">
@@ -167,6 +183,13 @@ export function PermissionsInfrastructure() {
         <div className="table-filters">
           <Filter aria-hidden="true" />
           <label>
+            <span className="sr-only">Filtrar por rol</span>
+            <select value={roleId} onChange={(event) => { setRoleId(Number(event.target.value)); setPage(1); }}>
+              <option value={0}>Todos los roles</option>
+              {options?.roles.map((role) => <option key={role.id} value={role.id}>{role.label}{role.active ? "" : " (inactivo)"}</option>)}
+            </select>
+          </label>
+          <label>
             <span className="sr-only">Filtrar por módulo</span>
             <select
               value={module}
@@ -176,17 +199,17 @@ export function PermissionsInfrastructure() {
               }}
             >
               <option value="">Todos los módulos</option>
-              {context.navigation.map((item) => (
-                <option value={item.module} key={item.module}>{item.label}</option>
+              {options?.modules.map((item) => (
+                <option value={item.code} key={item.code}>{item.label}</option>
               ))}
             </select>
           </label>
           <label>
             <span className="sr-only">Filtrar por capacidad</span>
             <select
-              value={capability}
+              value={capabilityFilter}
               onChange={(event) => {
-                setCapability(event.target.value as PermissionAction | "");
+                setCapabilityFilter(event.target.value as CapabilityFilter);
                 setPage(1);
               }}
             >
@@ -194,6 +217,15 @@ export function PermissionsInfrastructure() {
               {CAPABILITY_OPTIONS.map((option) => (
                 <option value={option.value} key={option.value}>{option.label}</option>
               ))}
+            </select>
+          </label>
+          <label>
+            <span className="sr-only">Cambiar el orden</span>
+            <select value={`${sort?.id === "module" ? "module" : "role"}:${sort?.desc ? "desc" : "asc"}`} onChange={(event) => { const [id = "role", direction = "asc"] = event.target.value.split(":"); setSorting([{ id, desc: direction === "desc" }]); setPage(1); }}>
+              <option value="role:asc">Rol A–Z</option>
+              <option value="role:desc">Rol Z–A</option>
+              <option value="module:asc">Módulo A–Z</option>
+              <option value="module:desc">Módulo Z–A</option>
             </select>
           </label>
           <label>

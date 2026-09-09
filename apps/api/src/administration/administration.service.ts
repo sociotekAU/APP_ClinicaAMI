@@ -69,6 +69,7 @@ export class AdministrationService {
       data: {
         nombre: input.name.trim(),
         descripcion: optionalText(input.description),
+        admite_expediente_psicologico: input.psychologicalRecordEligible ?? false,
       },
       include: { _count: { select: { tb_medicos: true } } },
     });
@@ -81,6 +82,9 @@ export class AdministrationService {
       data: {
         nombre: input.name.trim(),
         descripcion: optionalText(input.description),
+        ...(input.psychologicalRecordEligible === undefined
+          ? {}
+          : { admite_expediente_psicologico: input.psychologicalRecordEligible }),
       },
       include: { _count: { select: { tb_medicos: true } } },
     });
@@ -444,6 +448,7 @@ export class AdministrationService {
     id: number;
     nombre: string;
     descripcion: string | null;
+    admite_expediente_psicologico: boolean;
     estado: boolean;
     fecha_creacion: Date;
     _count: { tb_medicos: number };
@@ -452,6 +457,7 @@ export class AdministrationService {
       id: row.id,
       name: row.nombre,
       description: row.descripcion,
+      psychologicalRecordEligible: row.admite_expediente_psicologico,
       active: row.estado,
       professionalCount: row._count.tb_medicos,
       createdAt: row.fecha_creacion.toISOString(),

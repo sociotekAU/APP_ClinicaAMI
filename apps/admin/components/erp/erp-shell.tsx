@@ -9,12 +9,14 @@ import {
   Boxes,
   Brain,
   CalendarDays,
+  ChevronDown,
   ChevronRight,
   ClipboardList,
   FileCheck2,
   Files,
   FlaskConical,
   LayoutDashboard,
+  KeyRound,
   LoaderCircle,
   LogOut,
   Menu,
@@ -23,6 +25,7 @@ import {
   Pill,
   ReceiptText,
   ShieldCheck,
+  ScrollText,
   UsersRound,
   X,
   type LucideIcon,
@@ -40,6 +43,7 @@ import {
 } from "react";
 import { ApiClientError, apiRequest } from "../../lib/api-client";
 import { confirmLogout, showError } from "../../lib/alerts";
+import { isAdministratorRole } from "../../lib/roles";
 
 const NAVIGATION_SECTIONS: ErpNavigationSection[] = [
   "Atención",
@@ -47,6 +51,7 @@ const NAVIGATION_SECTIONS: ErpNavigationSection[] = [
   "Operación",
   "Administración",
 ];
+const ADMIN_PERMISSIONS_PATH = "/panel/modulos/permisos";
 
 const MODULE_ICONS: Record<ErpModuleCode, LucideIcon> = {
   seguridad: ShieldCheck,
@@ -60,6 +65,7 @@ const MODULE_ICONS: Record<ErpModuleCode, LucideIcon> = {
   inventario: Boxes,
   archivos_estudios: Files,
   consentimientos: FileCheck2,
+  auditoria: ScrollText,
 };
 
 const ErpContextState = createContext<ErpContext | null>(null);
@@ -81,6 +87,9 @@ export function ErpShell({ children }: Readonly<{ children: ReactNode }>) {
   const [accessError, setAccessError] = useState<string | null>(null);
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [openSections, setOpenSections] = useState<Set<ErpNavigationSection>>(
+    () => new Set(NAVIGATION_SECTIONS),
+  );
 
   useEffect(() => {
     let active = true;
@@ -113,6 +122,28 @@ export function ErpShell({ children }: Readonly<{ children: ReactNode }>) {
     () => context?.navigation.find((item) => pathname === item.href),
     [context, pathname],
   );
+
+  useEffect(() => {
+    const activeSection = pathname === ADMIN_PERMISSIONS_PATH
+      ? "Administración"
+      : currentItem?.section;
+    if (!activeSection) return;
+    setOpenSections((current) => {
+      if (current.has(activeSection)) return current;
+      const next = new Set(current);
+      next.add(activeSection);
+      return next;
+    });
+  }, [currentItem?.section, pathname]);
+
+  function toggleSection(section: ErpNavigationSection) {
+    setOpenSections((current) => {
+      const next = new Set(current);
+      if (next.has(section)) next.delete(section);
+      else next.add(section);
+      return next;
+    });
+  }
 
   async function logout() {
     if (!(await confirmLogout())) return;
@@ -153,6 +184,8 @@ export function ErpShell({ children }: Readonly<{ children: ReactNode }>) {
     .join("")
     .toUpperCase();
   const pageTitle = currentItem?.label ?? "Resumen general";
+  const isAdmin = isAdministratorRole(context.user.role.name);
+  const resolvedPageTitle = pathname === ADMIN_PERMISSIONS_PATH ? "Administración de permisos" : pageTitle;
 
   return (
     <ErpContextState.Provider value={context}>
@@ -187,26 +220,31 @@ export function ErpShell({ children }: Readonly<{ children: ReactNode }>) {
             </Link>
             {NAVIGATION_SECTIONS.map((section) => {
               const items = context.navigation.filter((item) => item.section === section);
-              if (items.length === 0) return null;
+              const showPermissionAdministration = isAdmin && section === "Administración";
+              if (items.length === 0 && !showPermissionAdministration) return null;
+              const sectionOpen = openSections.has(section);
               return (
                 <div className="erp-nav-section" key={section}>
-                  <p>{section}</p>
-                  {items.map((item) => {
-                    const Icon = MODULE_ICONS[item.module];
-                    const active = pathname === item.href;
-                    return (
-                      <Link
-                        className={`erp-nav-link${active ? " is-active" : ""}`}
-                        href={item.href}
-                        key={item.module}
-                        aria-current={active ? "page" : undefined}
-                        title={collapsed ? item.label : undefined}
-                      >
-                        <Icon aria-hidden="true" />
-                        <span>{item.label}</span>
-                      </Link>
-                    );
-                  })}
+                  <button className="erp-nav-section-toggle" type="button" aria-expanded={sectionOpen} onClick={() => toggleSection(section)} title={collapsed ? section : undefined}><span>{section}</span><ChevronDown aria-hidden="true" /></button>
+                  <div className="erp-nav-section-items" hidden={!sectionOpen}>
+                    {items.map((item) => {
+                      const Icon = MODULE_ICONS[item.module];
+                      const active = pathname === item.href;
+                      return (
+                        <Link
+                          className={`erp-nav-link${active ? " is-active" : ""}`}
+                          href={item.href}
+                          key={item.module}
+                          aria-current={active ? "page" : undefined}
+                          title={collapsed ? item.label : undefined}
+                        >
+                          <Icon aria-hidden="true" />
+                          <span>{item.label}</span>
+                        </Link>
+                      );
+                    })}
+                    {showPermissionAdministration && <Link className={`erp-nav-link${pathname === ADMIN_PERMISSIONS_PATH ? " is-active" : ""}`} href={ADMIN_PERMISSIONS_PATH} aria-current={pathname === ADMIN_PERMISSIONS_PATH ? "page" : undefined} title={collapsed ? "Administrar permisos" : undefined}><KeyRound aria-hidden="true" /><span>Administrar permisos</span></Link>}
+                  </div>
                 </div>
               );
             })}
@@ -250,8 +288,9 @@ export function ErpShell({ children }: Readonly<{ children: ReactNode }>) {
                       <span aria-current="page">{currentItem.label}</span>
                     </>
                   )}
+                  {pathname === ADMIN_PERMISSIONS_PATH && <><ChevronRight aria-hidden="true" /><span aria-current="page">Administración de permisos</span></>}
                 </nav>
-                <h1>{pageTitle}</h1>
+                <h1>{resolvedPageTitle}</h1>
               </div>
             </div>
 

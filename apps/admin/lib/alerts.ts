@@ -72,3 +72,57 @@ export async function confirmAppointmentStatus(statusLabel: string): Promise<boo
   });
   return result.isConfirmed;
 }
+
+export async function requestAnnulmentReason(): Promise<string | null> {
+  const result = await alert.fire({
+    icon: "warning",
+    title: "¿Anular esta receta?",
+    text: "La receta se conservará como historial y no podrá reactivarse.",
+    input: "textarea",
+    inputLabel: "Motivo de anulación",
+    inputPlaceholder: "Explique brevemente el motivo…",
+    inputAttributes: { maxlength: "2000" },
+    inputValidator: (value) => value.trim().length < 5 ? "Escriba al menos 5 caracteres." : undefined,
+    showCancelButton: true,
+    confirmButtonText: "Sí, anular receta",
+    cancelButtonText: "Cancelar",
+    reverseButtons: true,
+  });
+  return result.isConfirmed ? String(result.value).trim() : null;
+}
+
+export async function confirmLabCompletion(): Promise<boolean> {
+  const result = await alert.fire({
+    icon: "warning",
+    title: "¿Finalizar la orden?",
+    text: "Los resultados quedarán bloqueados y la orden no podrá reabrirse.",
+    showCancelButton: true,
+    confirmButtonText: "Sí, finalizar",
+    cancelButtonText: "Cancelar",
+    reverseButtons: true,
+  });
+  return result.isConfirmed;
+}
+
+export async function requestPermissionPin(): Promise<string | null> {
+  const result = await alert.fire({
+    icon: "warning",
+    title: "Autorizar cambios de permisos",
+    text: "Ingrese la clave numérica administrativa de 6 dígitos. El cambio quedará registrado en auditoría.",
+    input: "password",
+    inputLabel: "Clave numérica",
+    inputPlaceholder: "••••••",
+    inputAttributes: {
+      autocomplete: "off",
+      inputmode: "numeric",
+      maxlength: "6",
+      pattern: "[0-9]{6}",
+    },
+    inputValidator: (value) => /^\d{6}$/.test(value) ? undefined : "Ingrese exactamente 6 dígitos.",
+    showCancelButton: true,
+    confirmButtonText: "Validar y guardar",
+    cancelButtonText: "Cancelar",
+    reverseButtons: true,
+  });
+  return result.isConfirmed ? String(result.value) : null;
+}

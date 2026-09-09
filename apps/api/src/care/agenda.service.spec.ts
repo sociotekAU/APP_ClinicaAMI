@@ -24,4 +24,27 @@ describe("AgendaService", () => {
     await expect(service.setAppointmentStatus(1, { status: "cancelada" }, user)).rejects.toMatchObject({ code: "RESOURCE_CONFLICT" });
     expect(update).not.toHaveBeenCalled();
   });
+
+  it("busca un nombre completo aunque sus partes estén en columnas distintas", async () => {
+    const findMany = vi.fn().mockResolvedValue([]);
+    const database = { client: { tb_citas: { findMany, count: vi.fn().mockResolvedValue(0) } } } as unknown as DatabaseService;
+    const access = { professionalScope: vi.fn().mockResolvedValue(null) } as unknown as CareAccessService;
+    const service = new AgendaService(database, access);
+
+    await service.listAppointments({
+      page: 1,
+      pageSize: 10,
+      search: "nery diaz",
+      status: "all",
+      sortBy: "scheduledAt",
+      sortDirection: "asc",
+    }, user);
+
+    const call = findMany.mock.calls[0]?.[0] as { where?: { AND?: Array<{ OR?: unknown[] }> } };
+    expect(call.where?.AND).toHaveLength(2);
+    expect(call.where?.AND?.[1]?.OR).toEqual(expect.arrayContaining([
+      expect.objectContaining({ tb_pacientes: { apellidos: { contains: "diaz", mode: "insensitive" } } }),
+      expect.objectContaining({ tb_pacientes: { apellidos: { contains: "díaz", mode: "insensitive" } } }),
+    ]));
+  });
 });

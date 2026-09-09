@@ -142,15 +142,15 @@ export class VitalSignsInputDto {
   @IsOptional()
   @Type(() => Number)
   @IsNumber({ maxDecimalPlaces: 2 }, { message: "weightKg debe ser un número válido." })
-  @Min(0.01, { message: "weightKg debe ser mayor que cero." })
-  @Max(9999.99, { message: "weightKg supera el máximo permitido." })
+  @Min(0.5, { message: "weightKg debe ser al menos 0.5 kg." })
+  @Max(500, { message: "weightKg no puede superar 500 kg." })
   weightKg?: number | null;
 
   @IsOptional()
   @Type(() => Number)
   @IsNumber({ maxDecimalPlaces: 2 }, { message: "heightCm debe ser un número válido." })
-  @Min(0.01, { message: "heightCm debe ser mayor que cero." })
-  @Max(9999.99, { message: "heightCm supera el máximo permitido." })
+  @Min(0.5, { message: "heightCm debe ser al menos 0.5 m o 50 cm." })
+  @Max(300, { message: "heightCm no puede superar 300 cm." })
   heightCm?: number | null;
 
   @IsOptional()

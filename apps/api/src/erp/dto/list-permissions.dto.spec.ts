@@ -27,4 +27,22 @@ describe("ListPermissionsDto", () => {
       "module",
     ]));
   });
+
+  it("acepta el filtro de permisos sin escritura y rechaza valores desconocidos", async () => {
+    const valid = plainToInstance(ListPermissionsDto, { writeAccess: "without" });
+    expect(await validate(valid)).toHaveLength(0);
+
+    const invalid = plainToInstance(ListPermissionsDto, { writeAccess: "none" });
+    expect((await validate(invalid)).map((error) => error.property)).toContain("writeAccess");
+  });
+
+  it("acepta filtros por rol y capacidades ausentes", async () => {
+    const valid = plainToInstance(ListPermissionsDto, {
+      roleId: "3",
+      capability: "delete",
+      capabilityAccess: "without",
+    });
+    expect(await validate(valid)).toHaveLength(0);
+    expect(valid.roleId).toBe(3);
+  });
 });

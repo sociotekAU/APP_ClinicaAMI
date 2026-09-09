@@ -67,7 +67,10 @@ Orden de ejecución preparado:
 5. `005_indices_listados_crud.sql`
 6. `006_indices_administracion_erp.sql`
 7. `007_pacientes_agenda_expediente.sql`
-8. `seed.sql`
+8. `008_recetas_procedimientos_laboratorio.sql`
+9. `009_auditoria_trazabilidad.sql`
+10. `010_especialidades_expediente_psicologico.sql`
+11. `seed.sql`
 
 En una base y volumen nuevos, Docker ejecuta las migraciones y el seed en ese
 orden mediante `/docker-entrypoint-initdb.d`. PostgreSQL no vuelve a ejecutar
@@ -133,7 +136,7 @@ general del proyecto.
 
 - Contexto institucional consolidado.
 - PostgreSQL 16 desplegado localmente mediante Docker y marcado como saludable.
-- Modelo aplicado: 30 tablas, cinco triggers y datos iniciales.
+- Modelo aplicado: 31 tablas, reglas de integridad y datos iniciales.
 - Seed validado con profesionales, usuarios y datos de demostración.
 - Prueba de humo disponible en `database/tests/smoke.sql`.
 - Monorepo configurado con pnpm y Turborepo.
@@ -145,6 +148,9 @@ general del proyecto.
 - CRUD de pacientes, agenda de citas y consultorios con paginación del servidor.
 - Expedientes general y psicológico separados, con notas, diagnóstico CIE-10 e historial de signos vitales.
 - Alcance por profesional vinculado para médicos y psicólogos en agenda y expedientes.
+- Recetas inmutables con anulación justificada, procedimientos y laboratorio con finalización protegida.
+- Bitácora append-only de creaciones, modificaciones y cambios sensibles, con snapshots saneados antes/después.
+- Visor de auditoría exclusivo para administradores, con filtros, paginación y detalle en modal.
 - Prueba de aislamiento disponible en `database/tests/authorization.sql`.
 - Dockerfile multi-stage preparado para construir el panel y el API por separado.
 

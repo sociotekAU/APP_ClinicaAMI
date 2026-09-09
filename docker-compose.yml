@@ -21,6 +21,9 @@ services:
       - ./database/migrations/005_indices_listados_crud.sql:/docker-entrypoint-initdb.d/005_indices_listados_crud.sql:ro
       - ./database/migrations/006_indices_administracion_erp.sql:/docker-entrypoint-initdb.d/006_indices_administracion_erp.sql:ro
       - ./database/migrations/007_pacientes_agenda_expediente.sql:/docker-entrypoint-initdb.d/007_pacientes_agenda_expediente.sql:ro
+      - ./database/migrations/008_recetas_procedimientos_laboratorio.sql:/docker-entrypoint-initdb.d/008_recetas_procedimientos_laboratorio.sql:ro
+      - ./database/migrations/009_auditoria_trazabilidad.sql:/docker-entrypoint-initdb.d/009_auditoria_trazabilidad.sql:ro
+      - ./database/migrations/010_especialidades_expediente_psicologico.sql:/docker-entrypoint-initdb.d/010_especialidades_expediente_psicologico.sql:ro
       - ./database/seed.sql:/docker-entrypoint-initdb.d/900_seed.sql:ro
       - ./database/tests:/database-tests:ro
     healthcheck:

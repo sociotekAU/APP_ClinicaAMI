@@ -44,6 +44,9 @@ export type ApiErrorCode =
   | "AUTH_REQUIRED"
   | "AUTH_PASSWORD_CHANGE_REQUIRED"
   | "AUTH_FORBIDDEN"
+  | "AUTH_ADMIN_REQUIRED"
+  | "AUTH_ADMIN_PIN_INVALID"
+  | "ADMIN_PIN_NOT_CONFIGURED"
   | "ERP_ACCESS_NOT_CONFIGURED"
   | "NETWORK_RESPONSE_ERROR"
   | "NETWORK_UNAVAILABLE";
@@ -85,7 +88,8 @@ export type ErpModuleCode =
   | "facturacion"
   | "inventario"
   | "archivos_estudios"
-  | "consentimientos";
+  | "consentimientos"
+  | "auditoria";
 
 export interface RolePermission {
   module: ErpModuleCode;
@@ -147,6 +151,21 @@ export interface PermissionListItem {
   canDelete: boolean;
 }
 
+export interface PermissionOptions {
+  modules: Array<{ code: ErpModuleCode; label: string }>;
+  roles: AdministrationOption[];
+}
+
+export interface RolePermissionConfiguration {
+  permissions: RolePermission[];
+  role: AdministrationOption;
+}
+
+export interface RolePermissionsUpdateInput {
+  permissions: RolePermission[];
+  validationPin: string;
+}
+
 export interface PaginatedData<T> {
   items: T[];
   pagination: PageMeta;
@@ -158,6 +177,7 @@ export interface SpecialtyListItem {
   id: number;
   name: string;
   description: string | null;
+  psychologicalRecordEligible: boolean;
   active: boolean;
   professionalCount: number;
   createdAt: string;
@@ -166,6 +186,7 @@ export interface SpecialtyListItem {
 export interface SpecialtyInput {
   name: string;
   description?: string;
+  psychologicalRecordEligible: boolean;
 }
 
 export interface ServiceListItem {
@@ -411,5 +432,193 @@ export interface ClinicalRecordOptions {
     label: string;
     patientId: number;
     professionalId: number;
+    scheduledAt: string;
+    patient: { id: number; name: string };
+    professional: { id: number; name: string; specialty: string };
   }>;
+}
+
+export interface MedicationListItem {
+  id: number;
+  commercialName: string;
+  activeIngredient: string;
+  presentation: string;
+  concentration: string;
+  active: boolean;
+  prescriptionCount: number;
+  createdAt: string;
+}
+
+export interface MedicationInput {
+  commercialName: string;
+  activeIngredient: string;
+  presentation: string;
+  concentration: string;
+}
+
+export type PrescriptionStatus = "emitida" | "anulada";
+
+export interface PrescriptionItem {
+  id: number;
+  medication: { id: number; label: string };
+  dose: string;
+  durationDays: number;
+}
+
+export interface PrescriptionListItem {
+  id: number;
+  issuedAt: string;
+  diagnosis: string;
+  status: PrescriptionStatus;
+  annulledAt: string | null;
+  annulmentReason: string | null;
+  patient: { id: number; name: string };
+  professional: { id: number; name: string; specialty: string };
+  itemCount: number;
+}
+
+export interface PrescriptionDetail extends PrescriptionListItem {
+  items: PrescriptionItem[];
+}
+
+export interface PrescriptionInput {
+  patientId: number;
+  professionalId: number;
+  diagnosis: string;
+  items: Array<{ medicationId: number; dose: string; durationDays: number }>;
+}
+
+export interface PrescriptionOptions {
+  patients: CareOption[];
+  professionals: CareOption[];
+  medications: CareOption[];
+}
+
+export interface ProcedureListItem {
+  id: number;
+  clinicalRecordId: number;
+  clinicalRecordType: ClinicalRecordType;
+  service: { id: number; name: string };
+  patient: { id: number; name: string };
+  professional: { id: number; name: string };
+  observations: string | null;
+  active: boolean;
+  recordedAt: string;
+}
+
+export interface ProcedureInput {
+  clinicalRecordId: number;
+  serviceId: number;
+  observations?: string;
+}
+
+export interface ProcedureOptions {
+  clinicalRecords: Array<{ id: number; label: string }>;
+  services: CareOption[];
+}
+
+export interface ClinicalOperationsOptions extends PrescriptionOptions, ProcedureOptions {}
+
+export interface LabTestListItem {
+  id: number;
+  name: string;
+  category: string;
+  referenceValues: string | null;
+  unit: string | null;
+  active: boolean;
+  orderCount: number;
+  createdAt: string;
+}
+
+export interface LabTestInput {
+  name: string;
+  category: string;
+  referenceValues?: string;
+  unit?: string;
+}
+
+export type LabOrderStatus = "pendiente" | "procesando" | "finalizado";
+
+export interface LabResultItem {
+  id: number;
+  test: { id: number; name: string; category: string; referenceValues: string | null; unit: string | null };
+  value: string | null;
+  observations: string | null;
+  resultedAt: string | null;
+}
+
+export interface LabOrderListItem {
+  id: number;
+  orderedAt: string;
+  status: LabOrderStatus;
+  observations: string | null;
+  finalizedAt: string | null;
+  patient: { id: number; name: string };
+  professional: { id: number; name: string } | null;
+  resultCount: number;
+  completedResultCount: number;
+}
+
+export interface LabOrderDetail extends LabOrderListItem {
+  results: LabResultItem[];
+}
+
+export interface LabOrderInput {
+  patientId: number;
+  professionalId?: number | null;
+  observations?: string;
+  testIds: number[];
+}
+
+export interface LabResultInput {
+  value: string;
+  observations?: string;
+}
+
+export interface LabOrderOptions {
+  patients: CareOption[];
+  professionals: CareOption[];
+  tests: CareOption[];
+}
+
+export type AuditAction =
+  | "creacion"
+  | "modificacion"
+  | "cambio_estado"
+  | "desactivacion"
+  | "reactivacion"
+  | "anulacion"
+  | "cancelacion"
+  | "finalizacion"
+  | "eliminacion"
+  | "cambio_password"
+  | "sistema";
+
+export interface AuditEventListItem {
+  id: string;
+  occurredAt: string;
+  user: { id: number | null; username: string; role: string | null };
+  module: string;
+  entity: string;
+  recordId: string | null;
+  action: AuditAction;
+  changedFields: string[];
+  reason: string | null;
+  requestId: string | null;
+  ipAddress: string | null;
+  route: string | null;
+  method: string | null;
+  origin: "api" | "sistema" | "base_datos";
+}
+
+export interface AuditEventDetail extends AuditEventListItem {
+  previousData: Record<string, unknown> | null;
+  newData: Record<string, unknown> | null;
+  userAgent: string | null;
+}
+
+export interface AuditOptions {
+  actions: AuditAction[];
+  modules: string[];
+  users: Array<{ id: number; label: string }>;
 }

@@ -29,6 +29,7 @@ export const ERP_MODULE_CODES: readonly ErpModuleCode[] = [
   "inventario",
   "archivos_estudios",
   "consentimientos",
+  "auditoria",
 ];
 
 export const ERP_MODULES = new Set<ErpModuleCode>(ERP_MODULE_CODES);
@@ -103,6 +104,13 @@ export const ERP_NAVIGATION: readonly ErpNavigationItem[] = [
     description: "Existencias, insumos y movimientos.",
     href: "/panel/modulos/inventario",
     section: "Operación",
+  },
+  {
+    module: "auditoria",
+    label: "Auditoría",
+    description: "Trazabilidad de cambios y operaciones sensibles.",
+    href: "/panel/modulos/auditoria",
+    section: "Administración",
   },
   {
     module: "seguridad",

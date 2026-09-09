@@ -17,7 +17,7 @@ import {
 const PASSWORD_POLICY = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).+$/;
 const OPTIONAL_MEDIA_URL = /^(\/[^\s]*|https?:\/\/[^\s]+)$/i;
 
-export class SpecialtyInputDto {
+class NamedDescriptionInputDto {
   @IsString({ message: "name debe ser texto." })
   @MinLength(2, { message: "name debe tener al menos 2 caracteres." })
   @MaxLength(150, { message: "name no puede superar 150 caracteres." })
@@ -29,7 +29,13 @@ export class SpecialtyInputDto {
   description?: string;
 }
 
-export class ServiceInputDto extends SpecialtyInputDto {
+export class SpecialtyInputDto extends NamedDescriptionInputDto {
+  @IsOptional()
+  @IsBoolean({ message: "psychologicalRecordEligible debe ser verdadero o falso." })
+  psychologicalRecordEligible?: boolean;
+}
+
+export class ServiceInputDto extends NamedDescriptionInputDto {
   @Type(() => Number)
   @IsNumber({ maxDecimalPlaces: 2 }, { message: "price debe ser un monto válido." })
   @Min(0, { message: "price no puede ser negativo." })

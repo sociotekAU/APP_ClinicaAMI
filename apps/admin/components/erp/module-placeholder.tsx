@@ -1,17 +1,23 @@
 "use client";
 
-import { ArrowLeft, Check, LockKeyhole, ShieldCheck } from "lucide-react";
+import { ArrowLeft, Check, LockKeyhole } from "lucide-react";
 import Link from "next/link";
 import { AdministrationWorkspace } from "../administration/administration-workspace";
+import { AuditViewer } from "../audit/audit-viewer";
 import { AgendaWorkspace } from "../care/agenda-workspace";
 import { ClinicalRecordsWorkspace } from "../care/clinical-records-workspace";
 import { PatientsManager } from "../care/patients-manager";
+import { ClinicalOperationsWorkspace } from "../clinical-operations/clinical-operations-workspace";
+import { LaboratoryWorkspace } from "../laboratory/laboratory-workspace";
+import { PermissionManagement } from "./permission-management";
 import { getModuleIcon, useErpContext } from "./erp-shell";
 
 export function ModulePlaceholder({ moduleCode }: Readonly<{ moduleCode: string }>) {
   const context = useErpContext();
   const item = context.navigation.find((entry) => entry.module === moduleCode);
   const permission = context.permissions.find((entry) => entry.module === moduleCode);
+
+  if (moduleCode === "permisos") return <PermissionManagement />;
 
   if (!item || !permission?.canRead) {
     return (
@@ -26,7 +32,7 @@ export function ModulePlaceholder({ moduleCode }: Readonly<{ moduleCode: string 
   }
 
   const Icon = getModuleIcon(item.module);
-  const isImplemented = ["seguridad", "pacientes", "agenda", "expediente_general", "expediente_psicologia"].includes(item.module);
+  const isImplemented = ["seguridad", "pacientes", "agenda", "expediente_general", "expediente_psicologia", "recetas", "laboratorio", "auditoria"].includes(item.module);
   return (
     <div className="module-page-stack">
       <div className={`module-page${isImplemented ? " module-page-administration" : ""}`}>
@@ -59,10 +65,6 @@ export function ModulePlaceholder({ moduleCode }: Readonly<{ moduleCode: string 
               Eliminación
             </li>
           </ul>
-          <div className="module-security-note">
-            <ShieldCheck aria-hidden="true" />
-            <p>La interfaz oculta accesos no autorizados y el API vuelve a validar el permiso contra PostgreSQL.</p>
-          </div>
         </section>}
       </div>
       {item.module === "seguridad" && <AdministrationWorkspace canWrite={permission.canWrite} />}
@@ -70,6 +72,9 @@ export function ModulePlaceholder({ moduleCode }: Readonly<{ moduleCode: string 
       {item.module === "agenda" && <AgendaWorkspace canWrite={permission.canWrite} />}
       {item.module === "expediente_general" && <ClinicalRecordsWorkspace canWrite={permission.canWrite} type="general" />}
       {item.module === "expediente_psicologia" && <ClinicalRecordsWorkspace canWrite={permission.canWrite} type="psychology" />}
+      {item.module === "recetas" && <ClinicalOperationsWorkspace canWrite={permission.canWrite} />}
+      {item.module === "laboratorio" && <LaboratoryWorkspace canWrite={permission.canWrite} />}
+      {item.module === "auditoria" && <AuditViewer />}
     </div>
   );
 }

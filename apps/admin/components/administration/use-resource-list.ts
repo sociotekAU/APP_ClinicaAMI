@@ -14,6 +14,7 @@ const EMPTY_PAGINATION: PageMeta = {
 };
 
 interface ResourceListOptions {
+  defaultSortDescending?: boolean;
   defaultStatus?: string;
   defaultSort: string;
   endpoint: string;
@@ -21,7 +22,7 @@ interface ResourceListOptions {
   includeStatus?: boolean;
 }
 
-export function useResourceList<T>({ defaultSort, defaultStatus = "all", endpoint, extraQuery = {}, includeStatus = true }: ResourceListOptions) {
+export function useResourceList<T>({ defaultSort, defaultSortDescending = false, defaultStatus = "all", endpoint, extraQuery = {}, includeStatus = true }: ResourceListOptions) {
   const [items, setItems] = useState<T[]>([]);
   const [pagination, setPagination] = useState<PageMeta>(EMPTY_PAGINATION);
   const [page, setPage] = useState(1);
@@ -29,7 +30,7 @@ export function useResourceList<T>({ defaultSort, defaultStatus = "all", endpoin
   const [searchInput, setSearchInput] = useState("");
   const [search, setSearch] = useState("");
   const [status, setStatusState] = useState(defaultStatus);
-  const [sorting, setSortingState] = useState<SortingState>([{ id: defaultSort, desc: false }]);
+  const [sorting, setSortingState] = useState<SortingState>([{ id: defaultSort, desc: defaultSortDescending }]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<ApiClientError | null>(null);
   const [reloadToken, setReloadToken] = useState(0);

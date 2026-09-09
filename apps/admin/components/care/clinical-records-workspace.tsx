@@ -3,18 +3,19 @@
 import type { ClinicalRecordDetail, ClinicalRecordInput, ClinicalRecordListItem, ClinicalRecordOptions, ClinicalRecordType, VitalSignsInput, VitalSignsItem } from "@ami/contracts";
 import { zodResolver } from "@hookform/resolvers/zod";
 import type { ColumnDef } from "@tanstack/react-table";
-import { Activity, Eye, FilePenLine, HeartPulse, ShieldCheck } from "lucide-react";
+import { Activity, Eye, FilePenLine, HeartPulse, Printer, ShieldCheck } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { ApiClientError, apiRequest } from "../../lib/api-client";
 import { confirmDiscardChanges, showError, showSuccess } from "../../lib/alerts";
 import { applyApiFormErrors } from "../administration/form-api-error";
-import { formatDateTime } from "../administration/formatters";
+import { formatDateTimeWithWeekday } from "../administration/formatters";
 import { ResourcePanel } from "../administration/resource-panel";
 import { useResourceList } from "../administration/use-resource-list";
 import { FormField, FormSection } from "../crud/form-field";
 import { DetailModal, FormModal } from "../crud/modal";
+import { openPrintDocument } from "../../lib/print-document";
 
 const recordSchema = z.object({
   appointmentId: z.number().int().positive("Seleccione una cita."),
@@ -26,8 +27,8 @@ type RecordForm = z.infer<typeof recordSchema>;
 const RECORD_DEFAULTS: RecordForm = { appointmentId: 0, consultationReason: "", evolutionNotes: "", diagnosisCie10: "" };
 
 const vitalSchema = z.object({
-  weightKg: z.number().positive("Debe ser mayor que cero.").max(9999.99).optional(),
-  heightCm: z.number().positive("Debe ser mayor que cero.").max(9999.99).optional(),
+  weightKg: z.number().min(0.5, "Debe ser al menos 0.5 kg.").max(500, "No puede superar 500 kg.").optional(),
+  heightCm: z.number().min(0.5, "Debe ser al menos 0.5 m o 50 cm.").max(300, "No puede superar 300 cm.").refine((value) => value <= 3 || value >= 50, "Use metros (1.70) o centímetros (170).").optional(),
   bloodPressure: z.string().trim().refine((value) => !value || /^\d{2,3}\/\d{2,3}$/.test(value), "Use el formato 120/80."),
   heartRate: z.number().int().positive("Debe ser mayor que cero.").max(300).optional(),
   temperature: z.number().min(25).max(50).optional(),
@@ -52,6 +53,8 @@ export function ClinicalRecordsWorkspace({ canWrite, type }: Readonly<{ canWrite
   const [detailLoading, setDetailLoading] = useState(false);
   const form = useForm<RecordForm>({ resolver: zodResolver(recordSchema), defaultValues: RECORD_DEFAULTS });
   const vitalForm = useForm<VitalForm>({ resolver: zodResolver(vitalSchema), defaultValues: VITAL_DEFAULTS });
+  const selectedAppointmentId = form.watch("appointmentId");
+  const selectedAppointment = options?.appointments.find((option) => option.id === selectedAppointmentId) ?? null;
 
   function loadOptions() {
     apiRequest<ClinicalRecordOptions>(`${endpoint}/options`).then(setOptions).catch((reason: unknown) => {
@@ -105,10 +108,41 @@ export function ClinicalRecordsWorkspace({ canWrite, type }: Readonly<{ canWrite
     }
   });
 
+  function printClinicalRecord(record: ClinicalRecordDetail) {
+    const opened = openPrintDocument({
+      title: `Expediente clínico general #${record.id}`,
+      subtitle: "Resumen para uso clínico autorizado",
+      fields: [
+        { label: "Profesional", value: `${record.professional.name} · ${record.professional.specialty}` },
+        { label: "Paciente", value: record.patient.name },
+        { label: "Fecha y hora de la cita", value: formatDateTimeWithWeekday(record.appointmentAt) },
+        { label: "Motivo de consulta", value: record.consultationReason },
+        { label: "Diagnóstico CIE-10", value: record.diagnosisCie10 ?? "Pendiente" },
+        { label: "Notas de evolución", value: record.evolutionNotes ?? "Sin notas" },
+        { label: "Antecedentes", value: record.personalHistory ?? "Sin antecedentes registrados" },
+      ],
+      tables: [{
+        title: "Historial de signos vitales",
+        columns: ["Fecha", "Peso", "Estatura", "Presión", "Frecuencia", "Temperatura", "IMC"],
+        rows: record.vitalSigns.map((vital) => [
+          formatDateTimeWithWeekday(vital.measuredAt),
+          vital.weightKg === null ? "—" : `${vital.weightKg} kg`,
+          vital.heightCm === null ? "—" : `${vital.heightCm} cm`,
+          vital.bloodPressure ?? "—",
+          vital.heartRate === null ? "—" : `${vital.heartRate} lpm`,
+          vital.temperature === null ? "—" : `${vital.temperature} °C`,
+          vital.bmi === null ? "—" : String(vital.bmi),
+        ]),
+      }],
+      footer: `Documento generado el ${formatDateTimeWithWeekday(new Date().toISOString())}. Información clínica confidencial.`,
+    });
+    if (!opened) void showError("No se abrió la impresión", "Permita ventanas emergentes para imprimir el expediente.");
+  }
+
   const columns: ColumnDef<ClinicalRecordListItem>[] = [
-    { id: "recordedAt", accessorKey: "recordedAt", header: "Registro", cell: ({ row }) => <strong className="table-primary-text">{formatDateTime(row.original.recordedAt)}</strong> },
-    { id: "patient", accessorFn: (row) => row.patient.name, header: "Paciente" },
     { id: "professional", accessorFn: (row) => row.professional.name, header: "Profesional", cell: ({ row }) => <div className="table-module-cell"><strong>{row.original.professional.name}</strong><span>{row.original.professional.specialty}</span></div> },
+    { id: "patient", accessorFn: (row) => row.patient.name, header: "Paciente" },
+    { id: "recordedAt", accessorKey: "recordedAt", header: "Fecha, hora y día", cell: ({ row }) => <strong className="table-primary-text">{formatDateTimeWithWeekday(row.original.appointmentAt)}</strong> },
     { id: "diagnosis", header: "CIE-10", enableSorting: false, cell: ({ row }) => row.original.diagnosisCie10 ?? "Pendiente" },
     { id: "vitals", header: "Mediciones", enableSorting: false, cell: ({ row }) => row.original.measurementCount },
     { id: "actions", header: "Acciones", enableSorting: false, cell: ({ row }) => <div className="record-actions"><button className="table-action-button" type="button" disabled={detailLoading} onClick={() => { void openDetail(row.original); }}><Eye aria-hidden="true" /> Detalle</button>{canWrite && <button className="table-action-button" type="button" onClick={() => openEdit(row.original)}><FilePenLine aria-hidden="true" /> Editar</button>}</div> },
@@ -120,21 +154,23 @@ export function ClinicalRecordsWorkspace({ canWrite, type }: Readonly<{ canWrite
 
     <FormModal open={formOpen} onClose={() => { void closeForm(); }} onSubmit={save} isSubmitting={form.formState.isSubmitting} submitLabel={editing ? "Guardar cambios" : "Abrir expediente"} title={editing ? "Editar consulta" : "Nueva consulta"} description="La cita quedará completada al abrir el expediente." size="lg">
       <FormSection title="Consulta">
-        <FormField htmlFor="record-appointment" label="Cita" required error={form.formState.errors.appointmentId?.message}><select {...form.register("appointmentId", { valueAsNumber: true })} disabled={editing !== null}><option value={0}>Seleccione una cita</option>{editing && <option value={editing.appointmentId}>{editing.patient.name} · {formatDateTime(editing.appointmentAt)}</option>}{options?.appointments.map((option) => <option key={option.id} value={option.id}>{option.label}</option>)}</select></FormField>
+        <FormField htmlFor="record-appointment" label="Cita" required help={type === "psychology" ? "Solo aparecen citas sin expediente cuya especialidad admite expediente psicológico." : "Solo aparecen citas clínicas elegibles que todavía no tienen expediente."} error={form.formState.errors.appointmentId?.message}><select {...form.register("appointmentId", { valueAsNumber: true })} disabled={editing !== null || (!editing && options?.appointments.length === 0)}><option value={0}>{options && options.appointments.length === 0 ? (type === "psychology" ? "No hay citas psicológicas disponibles" : "No hay citas disponibles") : "Seleccione una cita"}</option>{editing && <option value={editing.appointmentId}>{editing.patient.name} · {formatDateTimeWithWeekday(editing.appointmentAt)}</option>}{options?.appointments.map((option) => <option key={option.id} value={option.id}>{option.label}</option>)}</select></FormField>
+        {!editing && type === "psychology" && selectedAppointment && <aside className="selected-professional-card" aria-live="polite"><p>Información del profesional seleccionado</p><dl><div><dt>Profesional</dt><dd>{selectedAppointment.professional.name}</dd></div><div><dt>Especialidad</dt><dd>{selectedAppointment.professional.specialty}</dd></div><div><dt>Paciente</dt><dd>{selectedAppointment.patient.name}</dd></div><div><dt>Fecha, hora y día</dt><dd>{formatDateTimeWithWeekday(selectedAppointment.scheduledAt)}</dd></div></dl></aside>}
+        {!editing && options?.appointments.length === 0 && <p className="form-empty-notice" role="status">Programe primero una cita con un profesional de {type === "psychology" ? "una especialidad habilitada para expediente psicológico" : "una especialidad clínica"} para habilitar esta consulta.</p>}
         <FormField htmlFor="record-reason" label="Motivo de consulta" required error={form.formState.errors.consultationReason?.message}><textarea {...form.register("consultationReason")} rows={4} /></FormField>
         <FormField htmlFor="record-notes" label="Notas de evolución" error={form.formState.errors.evolutionNotes?.message}><textarea {...form.register("evolutionNotes")} rows={6} /></FormField>
         <FormField htmlFor="record-diagnosis" label="Diagnóstico CIE-10" help="Ejemplo: J00 o F41.1" error={form.formState.errors.diagnosisCie10?.message}><input {...form.register("diagnosisCie10")} autoComplete="off" /></FormField>
       </FormSection>
     </FormModal>
 
-    <DetailModal open={detail !== null} onClose={() => setDetail(null)} title={label} size="lg" footer={<><button className="button button-secondary" type="button" onClick={() => setDetail(null)}>Cerrar</button>{canWrite && <button className="button button-primary" type="button" onClick={() => openVital()}><HeartPulse aria-hidden="true" /> Nueva medición</button>}</>}>
-      {detail && <div className="clinical-detail"><dl className="permission-detail-list"><div><dt>Paciente</dt><dd>{detail.patient.name}</dd></div><div><dt>Profesional</dt><dd>{detail.professional.name} · {detail.professional.specialty}</dd></div><div><dt>Cita</dt><dd>{formatDateTime(detail.appointmentAt)}</dd></div><div><dt>Motivo</dt><dd>{detail.consultationReason}</dd></div><div><dt>Evolución</dt><dd>{detail.evolutionNotes || "Sin notas"}</dd></div><div><dt>CIE-10</dt><dd>{detail.diagnosisCie10 || "Pendiente"}</dd></div><div><dt>Antecedentes</dt><dd>{detail.personalHistory || "Sin antecedentes registrados"}</dd></div></dl><section className="vitals-history" aria-labelledby="vitals-title"><h3 id="vitals-title"><Activity aria-hidden="true" /> Historial de signos vitales</h3>{detail.vitalSigns.length === 0 ? <p>Sin mediciones registradas.</p> : detail.vitalSigns.map((vital) => <article key={vital.id}><div><strong>{formatDateTime(vital.measuredAt)}</strong>{canWrite && <button className="table-action-button" type="button" onClick={() => openVital(vital)}><FilePenLine aria-hidden="true" /> Editar</button>}</div><dl><div><dt>Peso</dt><dd>{vital.weightKg ?? "—"} {vital.weightKg === null ? "" : "kg"}</dd></div><div><dt>Estatura</dt><dd>{vital.heightCm ?? "—"} {vital.heightCm === null ? "" : "cm"}</dd></div><div><dt>Presión</dt><dd>{vital.bloodPressure ?? "—"}</dd></div><div><dt>Frecuencia</dt><dd>{vital.heartRate ?? "—"}</dd></div><div><dt>Temperatura</dt><dd>{vital.temperature ?? "—"} {vital.temperature === null ? "" : "°C"}</dd></div><div><dt>IMC</dt><dd>{vital.bmi ?? "—"}</dd></div></dl></article>)}</section></div>}
+    <DetailModal open={detail !== null} onClose={() => setDetail(null)} title={label} size="lg" footer={<><button className="button button-secondary" type="button" onClick={() => setDetail(null)}>Cerrar</button>{detail && type === "general" && <button className="button button-secondary" type="button" onClick={() => printClinicalRecord(detail)}><Printer aria-hidden="true" /> Imprimir expediente</button>}{canWrite && <button className="button button-primary" type="button" onClick={() => openVital()}><HeartPulse aria-hidden="true" /> Nueva medición</button>}</>}>
+      {detail && <div className="clinical-detail"><dl className="permission-detail-list"><div><dt>Profesional</dt><dd>{detail.professional.name} · {detail.professional.specialty}</dd></div><div><dt>Paciente</dt><dd>{detail.patient.name}</dd></div><div><dt>Fecha, hora y día</dt><dd>{formatDateTimeWithWeekday(detail.appointmentAt)}</dd></div><div><dt>Motivo</dt><dd>{detail.consultationReason}</dd></div><div><dt>Evolución</dt><dd>{detail.evolutionNotes || "Sin notas"}</dd></div><div><dt>CIE-10</dt><dd>{detail.diagnosisCie10 || "Pendiente"}</dd></div><div><dt>Antecedentes</dt><dd>{detail.personalHistory || "Sin antecedentes registrados"}</dd></div></dl><section className="vitals-history" aria-labelledby="vitals-title"><h3 id="vitals-title"><Activity aria-hidden="true" /> Historial de signos vitales</h3>{detail.vitalSigns.length === 0 ? <p>Sin mediciones registradas.</p> : detail.vitalSigns.map((vital) => <article key={vital.id}><div><strong>{formatDateTimeWithWeekday(vital.measuredAt)}</strong>{canWrite && <button className="table-action-button" type="button" onClick={() => openVital(vital)}><FilePenLine aria-hidden="true" /> Editar</button>}</div><dl><div><dt>Peso</dt><dd>{vital.weightKg ?? "—"} {vital.weightKg === null ? "" : "kg"}</dd></div><div><dt>Estatura</dt><dd>{vital.heightCm ?? "—"} {vital.heightCm === null ? "" : "cm"}</dd></div><div><dt>Presión</dt><dd>{vital.bloodPressure ?? "—"}</dd></div><div><dt>Frecuencia</dt><dd>{vital.heartRate ?? "—"}</dd></div><div><dt>Temperatura</dt><dd>{vital.temperature ?? "—"} {vital.temperature === null ? "" : "°C"}</dd></div><div><dt>IMC</dt><dd>{vital.bmi ?? "—"}</dd></div></dl></article>)}</section></div>}
     </DetailModal>
 
     <FormModal open={vitalOpen} onClose={() => { void closeVital(); }} onSubmit={saveVital} isSubmitting={vitalForm.formState.isSubmitting} submitLabel={editingVital ? "Guardar medición" : "Registrar medición"} title={editingVital ? "Editar signos vitales" : "Nuevos signos vitales"} description="Ingrese al menos una medición.">
       <FormSection title="Mediciones"><div className="crud-form-grid">
-        <FormField htmlFor="vital-weight" label="Peso (kg)" error={vitalForm.formState.errors.weightKg?.message}><input {...vitalForm.register("weightKg", numberInput())} type="number" min="0.01" step="0.01" /></FormField>
-        <FormField htmlFor="vital-height" label="Estatura (cm)" error={vitalForm.formState.errors.heightCm?.message}><input {...vitalForm.register("heightCm", numberInput())} type="number" min="0.01" step="0.01" /></FormField>
+        <FormField htmlFor="vital-weight" label="Peso (kg)" error={vitalForm.formState.errors.weightKg?.message}><input {...vitalForm.register("weightKg", numberInput())} type="number" min="0.5" max="500" step="0.01" /></FormField>
+        <FormField htmlFor="vital-height" label="Estatura (cm o m)" help="Ejemplo: 170 cm o 1.70 m" error={vitalForm.formState.errors.heightCm?.message}><input {...vitalForm.register("heightCm", numberInput())} type="number" min="0.5" max="300" step="0.01" /></FormField>
         <FormField htmlFor="vital-pressure" label="Presión arterial" help="Formato 120/80" error={vitalForm.formState.errors.bloodPressure?.message}><input {...vitalForm.register("bloodPressure")} inputMode="numeric" /></FormField>
         <FormField htmlFor="vital-heart-rate" label="Frecuencia cardiaca" error={vitalForm.formState.errors.heartRate?.message}><input {...vitalForm.register("heartRate", numberInput())} type="number" min="1" max="300" /></FormField>
         <FormField htmlFor="vital-temperature" label="Temperatura (°C)" error={vitalForm.formState.errors.temperature?.message}><input {...vitalForm.register("temperature", numberInput())} type="number" min="25" max="50" step="0.1" /></FormField>

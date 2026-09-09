@@ -32,6 +32,11 @@ const DATABASE_ERROR_CATALOG: Record<string, ClassifiedError> = {
     message: "Los datos no cumplen una regla de integridad del sistema.",
     status: HttpStatus.BAD_REQUEST,
   },
+  P2020: {
+    code: "VALIDATION_ERROR",
+    message: "Uno de los valores numéricos está fuera del rango permitido.",
+    status: HttpStatus.BAD_REQUEST,
+  },
   P2011: {
     code: "VALIDATION_ERROR",
     message: "Falta un dato obligatorio para completar la operación.",

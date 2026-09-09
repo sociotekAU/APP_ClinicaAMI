@@ -426,7 +426,8 @@ export const ModelName = {
   tb_roles: 'tb_roles',
   tb_servicios: 'tb_servicios',
   tb_signos_vitales_medidas: 'tb_signos_vitales_medidas',
-  tb_usuarios: 'tb_usuarios'
+  tb_usuarios: 'tb_usuarios',
+  tb_auditoria: 'tb_auditoria'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -442,7 +443,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "tb_anuncios" | "tb_archivos_estudios" | "tb_catalogo_examenes" | "tb_citas" | "tb_clinicas" | "tb_consentimientos_informados" | "tb_consulta_servicios" | "tb_consultas" | "tb_contacto" | "tb_detalle_factura" | "tb_detalle_receta" | "tb_especialidades" | "tb_estilos" | "tb_facturas" | "tb_galeria" | "tb_insumos_inventario" | "tb_medicamentos" | "tb_medicos" | "tb_movimientos_inventario" | "tb_ordenes_laboratorio" | "tb_pacientes" | "tb_permisos_rol" | "tb_promociones" | "tb_proveedores" | "tb_recetas" | "tb_resultados_laboratorio" | "tb_roles" | "tb_servicios" | "tb_signos_vitales_medidas" | "tb_usuarios"
+    modelProps: "tb_anuncios" | "tb_archivos_estudios" | "tb_catalogo_examenes" | "tb_citas" | "tb_clinicas" | "tb_consentimientos_informados" | "tb_consulta_servicios" | "tb_consultas" | "tb_contacto" | "tb_detalle_factura" | "tb_detalle_receta" | "tb_especialidades" | "tb_estilos" | "tb_facturas" | "tb_galeria" | "tb_insumos_inventario" | "tb_medicamentos" | "tb_medicos" | "tb_movimientos_inventario" | "tb_ordenes_laboratorio" | "tb_pacientes" | "tb_permisos_rol" | "tb_promociones" | "tb_proveedores" | "tb_recetas" | "tb_resultados_laboratorio" | "tb_roles" | "tb_servicios" | "tb_signos_vitales_medidas" | "tb_usuarios" | "tb_auditoria"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -2666,6 +2667,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    tb_auditoria: {
+      payload: Prisma.$tb_auditoriaPayload<ExtArgs>
+      fields: Prisma.tb_auditoriaFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.tb_auditoriaFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$tb_auditoriaPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.tb_auditoriaFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$tb_auditoriaPayload>
+        }
+        findFirst: {
+          args: Prisma.tb_auditoriaFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$tb_auditoriaPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.tb_auditoriaFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$tb_auditoriaPayload>
+        }
+        findMany: {
+          args: Prisma.tb_auditoriaFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$tb_auditoriaPayload>[]
+        }
+        create: {
+          args: Prisma.tb_auditoriaCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$tb_auditoriaPayload>
+        }
+        createMany: {
+          args: Prisma.tb_auditoriaCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.tb_auditoriaCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$tb_auditoriaPayload>[]
+        }
+        delete: {
+          args: Prisma.tb_auditoriaDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$tb_auditoriaPayload>
+        }
+        update: {
+          args: Prisma.tb_auditoriaUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$tb_auditoriaPayload>
+        }
+        deleteMany: {
+          args: Prisma.tb_auditoriaDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.tb_auditoriaUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.tb_auditoriaUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$tb_auditoriaPayload>[]
+        }
+        upsert: {
+          args: Prisma.tb_auditoriaUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$tb_auditoriaPayload>
+        }
+        aggregate: {
+          args: Prisma.Tb_auditoriaAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateTb_auditoria>
+        }
+        groupBy: {
+          args: Prisma.tb_auditoriaGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.Tb_auditoriaGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.tb_auditoriaCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.Tb_auditoriaCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -2795,7 +2870,9 @@ export const Tb_consulta_serviciosScalarFieldEnum = {
   id_detalle: 'id_detalle',
   id_consulta: 'id_consulta',
   id_servicio: 'id_servicio',
-  observaciones_procedimiento: 'observaciones_procedimiento'
+  observaciones_procedimiento: 'observaciones_procedimiento',
+  estado: 'estado',
+  fecha_registro: 'fecha_registro'
 } as const
 
 export type Tb_consulta_serviciosScalarFieldEnum = (typeof Tb_consulta_serviciosScalarFieldEnum)[keyof typeof Tb_consulta_serviciosScalarFieldEnum]
@@ -2864,6 +2941,7 @@ export const Tb_especialidadesScalarFieldEnum = {
   id: 'id',
   nombre: 'nombre',
   descripcion: 'descripcion',
+  admite_expediente_psicologico: 'admite_expediente_psicologico',
   estado: 'estado',
   fecha_creacion: 'fecha_creacion'
 } as const
@@ -2974,7 +3052,9 @@ export const Tb_ordenes_laboratorioScalarFieldEnum = {
   id_paciente: 'id_paciente',
   id_doctor: 'id_doctor',
   fecha_orden: 'fecha_orden',
-  estado: 'estado'
+  estado: 'estado',
+  observaciones: 'observaciones',
+  fecha_finalizacion: 'fecha_finalizacion'
 } as const
 
 export type Tb_ordenes_laboratorioScalarFieldEnum = (typeof Tb_ordenes_laboratorioScalarFieldEnum)[keyof typeof Tb_ordenes_laboratorioScalarFieldEnum]
@@ -3041,7 +3121,10 @@ export const Tb_recetasScalarFieldEnum = {
   id_doctor: 'id_doctor',
   id_paciente: 'id_paciente',
   fecha_emision: 'fecha_emision',
-  diagnostico: 'diagnostico'
+  diagnostico: 'diagnostico',
+  estado: 'estado',
+  fecha_anulacion: 'fecha_anulacion',
+  motivo_anulacion: 'motivo_anulacion'
 } as const
 
 export type Tb_recetasScalarFieldEnum = (typeof Tb_recetasScalarFieldEnum)[keyof typeof Tb_recetasScalarFieldEnum]
@@ -3115,12 +3198,45 @@ export const Tb_usuariosScalarFieldEnum = {
 export type Tb_usuariosScalarFieldEnum = (typeof Tb_usuariosScalarFieldEnum)[keyof typeof Tb_usuariosScalarFieldEnum]
 
 
+export const Tb_auditoriaScalarFieldEnum = {
+  id_auditoria: 'id_auditoria',
+  fecha_evento: 'fecha_evento',
+  id_usuario: 'id_usuario',
+  usuario: 'usuario',
+  rol: 'rol',
+  modulo: 'modulo',
+  entidad: 'entidad',
+  id_registro: 'id_registro',
+  accion: 'accion',
+  datos_anteriores: 'datos_anteriores',
+  datos_nuevos: 'datos_nuevos',
+  campos_modificados: 'campos_modificados',
+  motivo: 'motivo',
+  request_id: 'request_id',
+  direccion_ip: 'direccion_ip',
+  agente_usuario: 'agente_usuario',
+  ruta: 'ruta',
+  metodo: 'metodo',
+  origen: 'origen'
+} as const
+
+export type Tb_auditoriaScalarFieldEnum = (typeof Tb_auditoriaScalarFieldEnum)[keyof typeof Tb_auditoriaScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
 } as const
 
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
+
+
+export const NullableJsonNullValueInput = {
+  DbNull: DbNull,
+  JsonNull: JsonNull
+} as const
+
+export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
 
 
 export const QueryMode = {
@@ -3137,6 +3253,15 @@ export const NullsOrder = {
 } as const
 
 export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
+export const JsonNullValueFilter = {
+  DbNull: DbNull,
+  JsonNull: JsonNull,
+  AnyNull: AnyNull
+} as const
+
+export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
 
 
 
@@ -3205,6 +3330,34 @@ export type DecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel,
  * Reference to a field of type 'Decimal[]'
  */
 export type ListDecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal[]'>
+
+
+
+/**
+ * Reference to a field of type 'BigInt'
+ */
+export type BigIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BigInt'>
+
+
+
+/**
+ * Reference to a field of type 'BigInt[]'
+ */
+export type ListBigIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BigInt[]'>
+
+
+
+/**
+ * Reference to a field of type 'Json'
+ */
+export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
+
+
+
+/**
+ * Reference to a field of type 'QueryMode'
+ */
+export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
     
 
 
@@ -3402,6 +3555,7 @@ export type GlobalOmitConfig = {
   tb_servicios?: Prisma.tb_serviciosOmit
   tb_signos_vitales_medidas?: Prisma.tb_signos_vitales_medidasOmit
   tb_usuarios?: Prisma.tb_usuariosOmit
+  tb_auditoria?: Prisma.tb_auditoriaOmit
 }
 
 /* Types for Logging */
@@ -3464,4 +3618,3 @@ export type PrismaAction =
  * `PrismaClient` proxy available in interactive transactions.
  */
 export type TransactionClient = Omit<DefaultPrismaClient, runtime.ITXClientDenyList>
-

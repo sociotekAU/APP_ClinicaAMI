@@ -16,6 +16,11 @@ describe("error catalog", () => {
       .toMatchObject({ code: "VALIDATION_ERROR", status: 400 });
   });
 
+  it("convierte desbordamientos numéricos en errores de validación", () => {
+    expect(classifyDatabaseError({ code: "P2020" }))
+      .toMatchObject({ code: "VALIDATION_ERROR", status: 400 });
+  });
+
   it("identifica el campo en mensajes de validación", () => {
     expect(validationDetail("page must not be less than 1")).toEqual({
       field: "page",

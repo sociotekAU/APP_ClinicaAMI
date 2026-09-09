@@ -43,6 +43,8 @@ export type Tb_consulta_serviciosMinAggregateOutputType = {
   id_consulta: number | null
   id_servicio: number | null
   observaciones_procedimiento: string | null
+  estado: boolean | null
+  fecha_registro: Date | null
 }
 
 export type Tb_consulta_serviciosMaxAggregateOutputType = {
@@ -50,6 +52,8 @@ export type Tb_consulta_serviciosMaxAggregateOutputType = {
   id_consulta: number | null
   id_servicio: number | null
   observaciones_procedimiento: string | null
+  estado: boolean | null
+  fecha_registro: Date | null
 }
 
 export type Tb_consulta_serviciosCountAggregateOutputType = {
@@ -57,6 +61,8 @@ export type Tb_consulta_serviciosCountAggregateOutputType = {
   id_consulta: number
   id_servicio: number
   observaciones_procedimiento: number
+  estado: number
+  fecha_registro: number
   _all: number
 }
 
@@ -78,6 +84,8 @@ export type Tb_consulta_serviciosMinAggregateInputType = {
   id_consulta?: true
   id_servicio?: true
   observaciones_procedimiento?: true
+  estado?: true
+  fecha_registro?: true
 }
 
 export type Tb_consulta_serviciosMaxAggregateInputType = {
@@ -85,6 +93,8 @@ export type Tb_consulta_serviciosMaxAggregateInputType = {
   id_consulta?: true
   id_servicio?: true
   observaciones_procedimiento?: true
+  estado?: true
+  fecha_registro?: true
 }
 
 export type Tb_consulta_serviciosCountAggregateInputType = {
@@ -92,6 +102,8 @@ export type Tb_consulta_serviciosCountAggregateInputType = {
   id_consulta?: true
   id_servicio?: true
   observaciones_procedimiento?: true
+  estado?: true
+  fecha_registro?: true
   _all?: true
 }
 
@@ -186,6 +198,8 @@ export type Tb_consulta_serviciosGroupByOutputType = {
   id_consulta: number
   id_servicio: number
   observaciones_procedimiento: string | null
+  estado: boolean
+  fecha_registro: Date
   _count: Tb_consulta_serviciosCountAggregateOutputType | null
   _avg: Tb_consulta_serviciosAvgAggregateOutputType | null
   _sum: Tb_consulta_serviciosSumAggregateOutputType | null
@@ -216,6 +230,8 @@ export type tb_consulta_serviciosWhereInput = {
   id_consulta?: Prisma.IntFilter<"tb_consulta_servicios"> | number
   id_servicio?: Prisma.IntFilter<"tb_consulta_servicios"> | number
   observaciones_procedimiento?: Prisma.StringNullableFilter<"tb_consulta_servicios"> | string | null
+  estado?: Prisma.BoolFilter<"tb_consulta_servicios"> | boolean
+  fecha_registro?: Prisma.DateTimeFilter<"tb_consulta_servicios"> | Date | string
   tb_consultas?: Prisma.XOR<Prisma.Tb_consultasScalarRelationFilter, Prisma.tb_consultasWhereInput>
   tb_servicios?: Prisma.XOR<Prisma.Tb_serviciosScalarRelationFilter, Prisma.tb_serviciosWhereInput>
 }
@@ -225,27 +241,34 @@ export type tb_consulta_serviciosOrderByWithRelationInput = {
   id_consulta?: Prisma.SortOrder
   id_servicio?: Prisma.SortOrder
   observaciones_procedimiento?: Prisma.SortOrderInput | Prisma.SortOrder
+  estado?: Prisma.SortOrder
+  fecha_registro?: Prisma.SortOrder
   tb_consultas?: Prisma.tb_consultasOrderByWithRelationInput
   tb_servicios?: Prisma.tb_serviciosOrderByWithRelationInput
 }
 
 export type tb_consulta_serviciosWhereUniqueInput = Prisma.AtLeast<{
   id_detalle?: number
+  id_consulta_id_servicio?: Prisma.tb_consulta_serviciosId_consultaId_servicioCompoundUniqueInput
   AND?: Prisma.tb_consulta_serviciosWhereInput | Prisma.tb_consulta_serviciosWhereInput[]
   OR?: Prisma.tb_consulta_serviciosWhereInput[]
   NOT?: Prisma.tb_consulta_serviciosWhereInput | Prisma.tb_consulta_serviciosWhereInput[]
   id_consulta?: Prisma.IntFilter<"tb_consulta_servicios"> | number
   id_servicio?: Prisma.IntFilter<"tb_consulta_servicios"> | number
   observaciones_procedimiento?: Prisma.StringNullableFilter<"tb_consulta_servicios"> | string | null
+  estado?: Prisma.BoolFilter<"tb_consulta_servicios"> | boolean
+  fecha_registro?: Prisma.DateTimeFilter<"tb_consulta_servicios"> | Date | string
   tb_consultas?: Prisma.XOR<Prisma.Tb_consultasScalarRelationFilter, Prisma.tb_consultasWhereInput>
   tb_servicios?: Prisma.XOR<Prisma.Tb_serviciosScalarRelationFilter, Prisma.tb_serviciosWhereInput>
-}, "id_detalle">
+}, "id_detalle" | "id_consulta_id_servicio">
 
 export type tb_consulta_serviciosOrderByWithAggregationInput = {
   id_detalle?: Prisma.SortOrder
   id_consulta?: Prisma.SortOrder
   id_servicio?: Prisma.SortOrder
   observaciones_procedimiento?: Prisma.SortOrderInput | Prisma.SortOrder
+  estado?: Prisma.SortOrder
+  fecha_registro?: Prisma.SortOrder
   _count?: Prisma.tb_consulta_serviciosCountOrderByAggregateInput
   _avg?: Prisma.tb_consulta_serviciosAvgOrderByAggregateInput
   _max?: Prisma.tb_consulta_serviciosMaxOrderByAggregateInput
@@ -261,10 +284,14 @@ export type tb_consulta_serviciosScalarWhereWithAggregatesInput = {
   id_consulta?: Prisma.IntWithAggregatesFilter<"tb_consulta_servicios"> | number
   id_servicio?: Prisma.IntWithAggregatesFilter<"tb_consulta_servicios"> | number
   observaciones_procedimiento?: Prisma.StringNullableWithAggregatesFilter<"tb_consulta_servicios"> | string | null
+  estado?: Prisma.BoolWithAggregatesFilter<"tb_consulta_servicios"> | boolean
+  fecha_registro?: Prisma.DateTimeWithAggregatesFilter<"tb_consulta_servicios"> | Date | string
 }
 
 export type tb_consulta_serviciosCreateInput = {
   observaciones_procedimiento?: string | null
+  estado?: boolean
+  fecha_registro?: Date | string
   tb_consultas: Prisma.tb_consultasCreateNestedOneWithoutTb_consulta_serviciosInput
   tb_servicios: Prisma.tb_serviciosCreateNestedOneWithoutTb_consulta_serviciosInput
 }
@@ -274,10 +301,14 @@ export type tb_consulta_serviciosUncheckedCreateInput = {
   id_consulta: number
   id_servicio: number
   observaciones_procedimiento?: string | null
+  estado?: boolean
+  fecha_registro?: Date | string
 }
 
 export type tb_consulta_serviciosUpdateInput = {
   observaciones_procedimiento?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  estado?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fecha_registro?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tb_consultas?: Prisma.tb_consultasUpdateOneRequiredWithoutTb_consulta_serviciosNestedInput
   tb_servicios?: Prisma.tb_serviciosUpdateOneRequiredWithoutTb_consulta_serviciosNestedInput
 }
@@ -287,6 +318,8 @@ export type tb_consulta_serviciosUncheckedUpdateInput = {
   id_consulta?: Prisma.IntFieldUpdateOperationsInput | number
   id_servicio?: Prisma.IntFieldUpdateOperationsInput | number
   observaciones_procedimiento?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  estado?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fecha_registro?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type tb_consulta_serviciosCreateManyInput = {
@@ -294,10 +327,14 @@ export type tb_consulta_serviciosCreateManyInput = {
   id_consulta: number
   id_servicio: number
   observaciones_procedimiento?: string | null
+  estado?: boolean
+  fecha_registro?: Date | string
 }
 
 export type tb_consulta_serviciosUpdateManyMutationInput = {
   observaciones_procedimiento?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  estado?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fecha_registro?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type tb_consulta_serviciosUncheckedUpdateManyInput = {
@@ -305,6 +342,13 @@ export type tb_consulta_serviciosUncheckedUpdateManyInput = {
   id_consulta?: Prisma.IntFieldUpdateOperationsInput | number
   id_servicio?: Prisma.IntFieldUpdateOperationsInput | number
   observaciones_procedimiento?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  estado?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fecha_registro?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type tb_consulta_serviciosId_consultaId_servicioCompoundUniqueInput = {
+  id_consulta: number
+  id_servicio: number
 }
 
 export type tb_consulta_serviciosCountOrderByAggregateInput = {
@@ -312,6 +356,8 @@ export type tb_consulta_serviciosCountOrderByAggregateInput = {
   id_consulta?: Prisma.SortOrder
   id_servicio?: Prisma.SortOrder
   observaciones_procedimiento?: Prisma.SortOrder
+  estado?: Prisma.SortOrder
+  fecha_registro?: Prisma.SortOrder
 }
 
 export type tb_consulta_serviciosAvgOrderByAggregateInput = {
@@ -325,6 +371,8 @@ export type tb_consulta_serviciosMaxOrderByAggregateInput = {
   id_consulta?: Prisma.SortOrder
   id_servicio?: Prisma.SortOrder
   observaciones_procedimiento?: Prisma.SortOrder
+  estado?: Prisma.SortOrder
+  fecha_registro?: Prisma.SortOrder
 }
 
 export type tb_consulta_serviciosMinOrderByAggregateInput = {
@@ -332,6 +380,8 @@ export type tb_consulta_serviciosMinOrderByAggregateInput = {
   id_consulta?: Prisma.SortOrder
   id_servicio?: Prisma.SortOrder
   observaciones_procedimiento?: Prisma.SortOrder
+  estado?: Prisma.SortOrder
+  fecha_registro?: Prisma.SortOrder
 }
 
 export type tb_consulta_serviciosSumOrderByAggregateInput = {
@@ -436,6 +486,8 @@ export type tb_consulta_serviciosUncheckedUpdateManyWithoutTb_serviciosNestedInp
 
 export type tb_consulta_serviciosCreateWithoutTb_consultasInput = {
   observaciones_procedimiento?: string | null
+  estado?: boolean
+  fecha_registro?: Date | string
   tb_servicios: Prisma.tb_serviciosCreateNestedOneWithoutTb_consulta_serviciosInput
 }
 
@@ -443,6 +495,8 @@ export type tb_consulta_serviciosUncheckedCreateWithoutTb_consultasInput = {
   id_detalle?: number
   id_servicio: number
   observaciones_procedimiento?: string | null
+  estado?: boolean
+  fecha_registro?: Date | string
 }
 
 export type tb_consulta_serviciosCreateOrConnectWithoutTb_consultasInput = {
@@ -479,10 +533,14 @@ export type tb_consulta_serviciosScalarWhereInput = {
   id_consulta?: Prisma.IntFilter<"tb_consulta_servicios"> | number
   id_servicio?: Prisma.IntFilter<"tb_consulta_servicios"> | number
   observaciones_procedimiento?: Prisma.StringNullableFilter<"tb_consulta_servicios"> | string | null
+  estado?: Prisma.BoolFilter<"tb_consulta_servicios"> | boolean
+  fecha_registro?: Prisma.DateTimeFilter<"tb_consulta_servicios"> | Date | string
 }
 
 export type tb_consulta_serviciosCreateWithoutTb_serviciosInput = {
   observaciones_procedimiento?: string | null
+  estado?: boolean
+  fecha_registro?: Date | string
   tb_consultas: Prisma.tb_consultasCreateNestedOneWithoutTb_consulta_serviciosInput
 }
 
@@ -490,6 +548,8 @@ export type tb_consulta_serviciosUncheckedCreateWithoutTb_serviciosInput = {
   id_detalle?: number
   id_consulta: number
   observaciones_procedimiento?: string | null
+  estado?: boolean
+  fecha_registro?: Date | string
 }
 
 export type tb_consulta_serviciosCreateOrConnectWithoutTb_serviciosInput = {
@@ -522,10 +582,14 @@ export type tb_consulta_serviciosCreateManyTb_consultasInput = {
   id_detalle?: number
   id_servicio: number
   observaciones_procedimiento?: string | null
+  estado?: boolean
+  fecha_registro?: Date | string
 }
 
 export type tb_consulta_serviciosUpdateWithoutTb_consultasInput = {
   observaciones_procedimiento?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  estado?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fecha_registro?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tb_servicios?: Prisma.tb_serviciosUpdateOneRequiredWithoutTb_consulta_serviciosNestedInput
 }
 
@@ -533,22 +597,30 @@ export type tb_consulta_serviciosUncheckedUpdateWithoutTb_consultasInput = {
   id_detalle?: Prisma.IntFieldUpdateOperationsInput | number
   id_servicio?: Prisma.IntFieldUpdateOperationsInput | number
   observaciones_procedimiento?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  estado?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fecha_registro?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type tb_consulta_serviciosUncheckedUpdateManyWithoutTb_consultasInput = {
   id_detalle?: Prisma.IntFieldUpdateOperationsInput | number
   id_servicio?: Prisma.IntFieldUpdateOperationsInput | number
   observaciones_procedimiento?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  estado?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fecha_registro?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type tb_consulta_serviciosCreateManyTb_serviciosInput = {
   id_detalle?: number
   id_consulta: number
   observaciones_procedimiento?: string | null
+  estado?: boolean
+  fecha_registro?: Date | string
 }
 
 export type tb_consulta_serviciosUpdateWithoutTb_serviciosInput = {
   observaciones_procedimiento?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  estado?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fecha_registro?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tb_consultas?: Prisma.tb_consultasUpdateOneRequiredWithoutTb_consulta_serviciosNestedInput
 }
 
@@ -556,12 +628,16 @@ export type tb_consulta_serviciosUncheckedUpdateWithoutTb_serviciosInput = {
   id_detalle?: Prisma.IntFieldUpdateOperationsInput | number
   id_consulta?: Prisma.IntFieldUpdateOperationsInput | number
   observaciones_procedimiento?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  estado?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fecha_registro?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type tb_consulta_serviciosUncheckedUpdateManyWithoutTb_serviciosInput = {
   id_detalle?: Prisma.IntFieldUpdateOperationsInput | number
   id_consulta?: Prisma.IntFieldUpdateOperationsInput | number
   observaciones_procedimiento?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  estado?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fecha_registro?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -571,6 +647,8 @@ export type tb_consulta_serviciosSelect<ExtArgs extends runtime.Types.Extensions
   id_consulta?: boolean
   id_servicio?: boolean
   observaciones_procedimiento?: boolean
+  estado?: boolean
+  fecha_registro?: boolean
   tb_consultas?: boolean | Prisma.tb_consultasDefaultArgs<ExtArgs>
   tb_servicios?: boolean | Prisma.tb_serviciosDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["tb_consulta_servicios"]>
@@ -580,6 +658,8 @@ export type tb_consulta_serviciosSelectCreateManyAndReturn<ExtArgs extends runti
   id_consulta?: boolean
   id_servicio?: boolean
   observaciones_procedimiento?: boolean
+  estado?: boolean
+  fecha_registro?: boolean
   tb_consultas?: boolean | Prisma.tb_consultasDefaultArgs<ExtArgs>
   tb_servicios?: boolean | Prisma.tb_serviciosDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["tb_consulta_servicios"]>
@@ -589,6 +669,8 @@ export type tb_consulta_serviciosSelectUpdateManyAndReturn<ExtArgs extends runti
   id_consulta?: boolean
   id_servicio?: boolean
   observaciones_procedimiento?: boolean
+  estado?: boolean
+  fecha_registro?: boolean
   tb_consultas?: boolean | Prisma.tb_consultasDefaultArgs<ExtArgs>
   tb_servicios?: boolean | Prisma.tb_serviciosDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["tb_consulta_servicios"]>
@@ -598,9 +680,11 @@ export type tb_consulta_serviciosSelectScalar = {
   id_consulta?: boolean
   id_servicio?: boolean
   observaciones_procedimiento?: boolean
+  estado?: boolean
+  fecha_registro?: boolean
 }
 
-export type tb_consulta_serviciosOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id_detalle" | "id_consulta" | "id_servicio" | "observaciones_procedimiento", ExtArgs["result"]["tb_consulta_servicios"]>
+export type tb_consulta_serviciosOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id_detalle" | "id_consulta" | "id_servicio" | "observaciones_procedimiento" | "estado" | "fecha_registro", ExtArgs["result"]["tb_consulta_servicios"]>
 export type tb_consulta_serviciosInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tb_consultas?: boolean | Prisma.tb_consultasDefaultArgs<ExtArgs>
   tb_servicios?: boolean | Prisma.tb_serviciosDefaultArgs<ExtArgs>
@@ -625,6 +709,8 @@ export type $tb_consulta_serviciosPayload<ExtArgs extends runtime.Types.Extensio
     id_consulta: number
     id_servicio: number
     observaciones_procedimiento: string | null
+    estado: boolean
+    fecha_registro: Date
   }, ExtArgs["result"]["tb_consulta_servicios"]>
   composites: {}
 }
@@ -1054,6 +1140,8 @@ export interface tb_consulta_serviciosFieldRefs {
   readonly id_consulta: Prisma.FieldRef<"tb_consulta_servicios", 'Int'>
   readonly id_servicio: Prisma.FieldRef<"tb_consulta_servicios", 'Int'>
   readonly observaciones_procedimiento: Prisma.FieldRef<"tb_consulta_servicios", 'String'>
+  readonly estado: Prisma.FieldRef<"tb_consulta_servicios", 'Boolean'>
+  readonly fecha_registro: Prisma.FieldRef<"tb_consulta_servicios", 'DateTime'>
 }
     
 

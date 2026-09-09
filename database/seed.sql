@@ -27,20 +27,22 @@ SET descripcion = EXCLUDED.descripcion,
 
 -- Especialidades -------------------------------------------------------------
 
-INSERT INTO tb_especialidades (nombre, descripcion, estado)
-SELECT v.nombre, v.descripcion, TRUE
+INSERT INTO tb_especialidades (
+    nombre, descripcion, estado, admite_expediente_psicologico
+)
+SELECT v.nombre, v.descripcion, TRUE, v.admite_expediente_psicologico
 FROM (VALUES
-    ('Ginecología y Obstetricia', 'Atención integral de la salud femenina, embarazo y parto.'),
-    ('Psiquiatría', 'Evaluación, diagnóstico y seguimiento de la salud mental.'),
-    ('Radiología y Terapia Neural', 'Diagnóstico por imagen y procedimientos de terapia neural.'),
-    ('Quiropraxia', 'Evaluación y tratamiento manual del sistema musculoesquelético.'),
-    ('Medicina Biológica Integrativa', 'Medicina integrativa, terapia neural y homeopatía.'),
-    ('Psicología y Terapia de Lenguaje', 'Atención psicológica y terapia del lenguaje.'),
-    ('Nutrición', 'Evaluación y acompañamiento nutricional.'),
-    ('Acupuntura', 'Terapia de acupuntura.'),
-    ('Fisioterapia', 'Rehabilitación y recuperación funcional.'),
-    ('Laboratorio Clínico', 'Procesamiento y análisis de pruebas clínicas.')
-) AS v(nombre, descripcion)
+    ('Ginecología y Obstetricia', 'Atención integral de la salud femenina, embarazo y parto.', FALSE),
+    ('Psiquiatría', 'Evaluación, diagnóstico y seguimiento de la salud mental.', TRUE),
+    ('Radiología y Terapia Neural', 'Diagnóstico por imagen y procedimientos de terapia neural.', FALSE),
+    ('Quiropraxia', 'Evaluación y tratamiento manual del sistema musculoesquelético.', FALSE),
+    ('Medicina Biológica Integrativa', 'Medicina integrativa, terapia neural y homeopatía.', FALSE),
+    ('Psicología y Terapia de Lenguaje', 'Atención psicológica y terapia del lenguaje.', TRUE),
+    ('Nutrición', 'Evaluación y acompañamiento nutricional.', FALSE),
+    ('Acupuntura', 'Terapia de acupuntura.', FALSE),
+    ('Fisioterapia', 'Rehabilitación y recuperación funcional.', FALSE),
+    ('Laboratorio Clínico', 'Procesamiento y análisis de pruebas clínicas.', FALSE)
+) AS v(nombre, descripcion, admite_expediente_psicologico)
 WHERE NOT EXISTS (
     SELECT 1
       FROM tb_especialidades e
@@ -103,6 +105,7 @@ WITH permisos(nombre_rol, modulo, puede_leer, puede_escribir, puede_borrar) AS (
         ('Administrador', 'inventario', TRUE, TRUE, FALSE),
         ('Administrador', 'archivos_estudios', TRUE, TRUE, FALSE),
         ('Administrador', 'consentimientos', TRUE, TRUE, FALSE),
+        ('Administrador', 'auditoria', TRUE, FALSE, FALSE),
         ('Médico', 'pacientes', TRUE, TRUE, FALSE),
         ('Médico', 'agenda', TRUE, TRUE, FALSE),
         ('Médico', 'expediente_general', TRUE, TRUE, FALSE),
@@ -470,7 +473,7 @@ WHERE c.motivo_cita = 'Consulta clínica de demostración'
 INSERT INTO tb_ordenes_laboratorio (
     id_paciente, id_doctor, fecha_orden, estado
 )
-SELECT p.id_paciente, m.id, CURRENT_TIMESTAMP, 'finalizado'
+SELECT p.id_paciente, m.id, CURRENT_TIMESTAMP, 'pendiente'
 FROM tb_pacientes p
 JOIN tb_medicos m ON LOWER(m.nombre) = LOWER('Dr. Moisés Valdez')
 WHERE LOWER(p.email) = LOWER('paciente.demo@example.invalid')
@@ -498,6 +501,19 @@ WHERE LOWER(p.email) = LOWER('paciente.demo@example.invalid')
         FROM tb_resultados_laboratorio r
        WHERE r.id_orden = o.id_orden AND r.id_examen = e.id_examen
   );
+
+UPDATE tb_ordenes_laboratorio o
+   SET estado = 'finalizado'
+ WHERE o.estado <> 'finalizado'
+   AND EXISTS (
+       SELECT 1 FROM tb_resultados_laboratorio r
+        WHERE r.id_orden = o.id_orden
+   )
+   AND NOT EXISTS (
+       SELECT 1 FROM tb_resultados_laboratorio r
+        WHERE r.id_orden = o.id_orden
+          AND (NULLIF(BTRIM(r.valor_obtenido), '') IS NULL OR r.fecha_resultado IS NULL)
+   );
 
 -- Facturación e inventario de demostración ----------------------------------
 
@@ -629,6 +645,34 @@ WHERE LOWER(p.email) = LOWER('paciente.demo@example.invalid')
       WHERE c.id_paciente = p.id_paciente
         AND c.id_servicio = s.id
         AND c.observaciones = 'Consentimiento de demostración pendiente de firma.'
+  );
+
+-- Bitácora inicial -----------------------------------------------------------
+
+INSERT INTO tb_auditoria (
+    id_usuario, usuario, rol, modulo, entidad, id_registro, accion,
+    datos_nuevos, campos_modificados, motivo, origen
+)
+SELECT
+    u.id_usuario,
+    u.username,
+    r.nombre_rol,
+    'auditoria',
+    'sistema',
+    'bootstrap',
+    'sistema',
+    jsonb_build_object('evento', 'datos_iniciales_verificados'),
+    ARRAY['evento'],
+    'Registro inicial idempotente de la bitácora.',
+    'sistema'
+FROM tb_usuarios u
+JOIN tb_roles r ON r.id_rol = u.id_rol
+WHERE u.username = 'admin_ami'
+  AND NOT EXISTS (
+      SELECT 1 FROM tb_auditoria
+       WHERE entidad = 'sistema'
+         AND id_registro = 'bootstrap'
+         AND origen = 'sistema'
   );
 
 COMMIT;

@@ -25,12 +25,12 @@ export class DatabaseService implements OnApplicationShutdown {
 
     const tableCount = Number(result?.table_count ?? 0n);
 
-    if (tableCount !== 30) {
-      throw new Error(`Se esperaban 30 tablas y PostgreSQL reportó ${tableCount}.`);
+    if (tableCount !== 31) {
+      throw new Error(`Se esperaban 31 tablas y PostgreSQL reportó ${tableCount}.`);
     }
 
     return {
-      expectedTableCount: 30,
+      expectedTableCount: 31,
       status: "ok",
       tableCount,
     };

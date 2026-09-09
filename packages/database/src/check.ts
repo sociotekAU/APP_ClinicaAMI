@@ -24,7 +24,7 @@ async function main() {
       throw new Error("PostgreSQL no devolvió el resumen esperado.");
     }
 
-    const expectedTables = 30n;
+    const expectedTables = 31n;
     const status = summary.table_count === expectedTables ? "ok" : "unexpected_table_count";
 
     process.stdout.write(

@@ -44,6 +44,9 @@ export type Tb_recetasMinAggregateOutputType = {
   id_paciente: number | null
   fecha_emision: Date | null
   diagnostico: string | null
+  estado: string | null
+  fecha_anulacion: Date | null
+  motivo_anulacion: string | null
 }
 
 export type Tb_recetasMaxAggregateOutputType = {
@@ -52,6 +55,9 @@ export type Tb_recetasMaxAggregateOutputType = {
   id_paciente: number | null
   fecha_emision: Date | null
   diagnostico: string | null
+  estado: string | null
+  fecha_anulacion: Date | null
+  motivo_anulacion: string | null
 }
 
 export type Tb_recetasCountAggregateOutputType = {
@@ -60,6 +66,9 @@ export type Tb_recetasCountAggregateOutputType = {
   id_paciente: number
   fecha_emision: number
   diagnostico: number
+  estado: number
+  fecha_anulacion: number
+  motivo_anulacion: number
   _all: number
 }
 
@@ -82,6 +91,9 @@ export type Tb_recetasMinAggregateInputType = {
   id_paciente?: true
   fecha_emision?: true
   diagnostico?: true
+  estado?: true
+  fecha_anulacion?: true
+  motivo_anulacion?: true
 }
 
 export type Tb_recetasMaxAggregateInputType = {
@@ -90,6 +102,9 @@ export type Tb_recetasMaxAggregateInputType = {
   id_paciente?: true
   fecha_emision?: true
   diagnostico?: true
+  estado?: true
+  fecha_anulacion?: true
+  motivo_anulacion?: true
 }
 
 export type Tb_recetasCountAggregateInputType = {
@@ -98,6 +113,9 @@ export type Tb_recetasCountAggregateInputType = {
   id_paciente?: true
   fecha_emision?: true
   diagnostico?: true
+  estado?: true
+  fecha_anulacion?: true
+  motivo_anulacion?: true
   _all?: true
 }
 
@@ -193,6 +211,9 @@ export type Tb_recetasGroupByOutputType = {
   id_paciente: number
   fecha_emision: Date
   diagnostico: string
+  estado: string
+  fecha_anulacion: Date | null
+  motivo_anulacion: string | null
   _count: Tb_recetasCountAggregateOutputType | null
   _avg: Tb_recetasAvgAggregateOutputType | null
   _sum: Tb_recetasSumAggregateOutputType | null
@@ -224,6 +245,9 @@ export type tb_recetasWhereInput = {
   id_paciente?: Prisma.IntFilter<"tb_recetas"> | number
   fecha_emision?: Prisma.DateTimeFilter<"tb_recetas"> | Date | string
   diagnostico?: Prisma.StringFilter<"tb_recetas"> | string
+  estado?: Prisma.StringFilter<"tb_recetas"> | string
+  fecha_anulacion?: Prisma.DateTimeNullableFilter<"tb_recetas"> | Date | string | null
+  motivo_anulacion?: Prisma.StringNullableFilter<"tb_recetas"> | string | null
   tb_detalle_receta?: Prisma.Tb_detalle_recetaListRelationFilter
   tb_medicos?: Prisma.XOR<Prisma.Tb_medicosScalarRelationFilter, Prisma.tb_medicosWhereInput>
   tb_pacientes?: Prisma.XOR<Prisma.Tb_pacientesScalarRelationFilter, Prisma.tb_pacientesWhereInput>
@@ -235,6 +259,9 @@ export type tb_recetasOrderByWithRelationInput = {
   id_paciente?: Prisma.SortOrder
   fecha_emision?: Prisma.SortOrder
   diagnostico?: Prisma.SortOrder
+  estado?: Prisma.SortOrder
+  fecha_anulacion?: Prisma.SortOrderInput | Prisma.SortOrder
+  motivo_anulacion?: Prisma.SortOrderInput | Prisma.SortOrder
   tb_detalle_receta?: Prisma.tb_detalle_recetaOrderByRelationAggregateInput
   tb_medicos?: Prisma.tb_medicosOrderByWithRelationInput
   tb_pacientes?: Prisma.tb_pacientesOrderByWithRelationInput
@@ -249,6 +276,9 @@ export type tb_recetasWhereUniqueInput = Prisma.AtLeast<{
   id_paciente?: Prisma.IntFilter<"tb_recetas"> | number
   fecha_emision?: Prisma.DateTimeFilter<"tb_recetas"> | Date | string
   diagnostico?: Prisma.StringFilter<"tb_recetas"> | string
+  estado?: Prisma.StringFilter<"tb_recetas"> | string
+  fecha_anulacion?: Prisma.DateTimeNullableFilter<"tb_recetas"> | Date | string | null
+  motivo_anulacion?: Prisma.StringNullableFilter<"tb_recetas"> | string | null
   tb_detalle_receta?: Prisma.Tb_detalle_recetaListRelationFilter
   tb_medicos?: Prisma.XOR<Prisma.Tb_medicosScalarRelationFilter, Prisma.tb_medicosWhereInput>
   tb_pacientes?: Prisma.XOR<Prisma.Tb_pacientesScalarRelationFilter, Prisma.tb_pacientesWhereInput>
@@ -260,6 +290,9 @@ export type tb_recetasOrderByWithAggregationInput = {
   id_paciente?: Prisma.SortOrder
   fecha_emision?: Prisma.SortOrder
   diagnostico?: Prisma.SortOrder
+  estado?: Prisma.SortOrder
+  fecha_anulacion?: Prisma.SortOrderInput | Prisma.SortOrder
+  motivo_anulacion?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.tb_recetasCountOrderByAggregateInput
   _avg?: Prisma.tb_recetasAvgOrderByAggregateInput
   _max?: Prisma.tb_recetasMaxOrderByAggregateInput
@@ -276,11 +309,17 @@ export type tb_recetasScalarWhereWithAggregatesInput = {
   id_paciente?: Prisma.IntWithAggregatesFilter<"tb_recetas"> | number
   fecha_emision?: Prisma.DateTimeWithAggregatesFilter<"tb_recetas"> | Date | string
   diagnostico?: Prisma.StringWithAggregatesFilter<"tb_recetas"> | string
+  estado?: Prisma.StringWithAggregatesFilter<"tb_recetas"> | string
+  fecha_anulacion?: Prisma.DateTimeNullableWithAggregatesFilter<"tb_recetas"> | Date | string | null
+  motivo_anulacion?: Prisma.StringNullableWithAggregatesFilter<"tb_recetas"> | string | null
 }
 
 export type tb_recetasCreateInput = {
   fecha_emision?: Date | string
   diagnostico: string
+  estado?: string
+  fecha_anulacion?: Date | string | null
+  motivo_anulacion?: string | null
   tb_detalle_receta?: Prisma.tb_detalle_recetaCreateNestedManyWithoutTb_recetasInput
   tb_medicos: Prisma.tb_medicosCreateNestedOneWithoutTb_recetasInput
   tb_pacientes: Prisma.tb_pacientesCreateNestedOneWithoutTb_recetasInput
@@ -292,12 +331,18 @@ export type tb_recetasUncheckedCreateInput = {
   id_paciente: number
   fecha_emision?: Date | string
   diagnostico: string
+  estado?: string
+  fecha_anulacion?: Date | string | null
+  motivo_anulacion?: string | null
   tb_detalle_receta?: Prisma.tb_detalle_recetaUncheckedCreateNestedManyWithoutTb_recetasInput
 }
 
 export type tb_recetasUpdateInput = {
   fecha_emision?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   diagnostico?: Prisma.StringFieldUpdateOperationsInput | string
+  estado?: Prisma.StringFieldUpdateOperationsInput | string
+  fecha_anulacion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  motivo_anulacion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tb_detalle_receta?: Prisma.tb_detalle_recetaUpdateManyWithoutTb_recetasNestedInput
   tb_medicos?: Prisma.tb_medicosUpdateOneRequiredWithoutTb_recetasNestedInput
   tb_pacientes?: Prisma.tb_pacientesUpdateOneRequiredWithoutTb_recetasNestedInput
@@ -309,6 +354,9 @@ export type tb_recetasUncheckedUpdateInput = {
   id_paciente?: Prisma.IntFieldUpdateOperationsInput | number
   fecha_emision?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   diagnostico?: Prisma.StringFieldUpdateOperationsInput | string
+  estado?: Prisma.StringFieldUpdateOperationsInput | string
+  fecha_anulacion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  motivo_anulacion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tb_detalle_receta?: Prisma.tb_detalle_recetaUncheckedUpdateManyWithoutTb_recetasNestedInput
 }
 
@@ -318,11 +366,17 @@ export type tb_recetasCreateManyInput = {
   id_paciente: number
   fecha_emision?: Date | string
   diagnostico: string
+  estado?: string
+  fecha_anulacion?: Date | string | null
+  motivo_anulacion?: string | null
 }
 
 export type tb_recetasUpdateManyMutationInput = {
   fecha_emision?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   diagnostico?: Prisma.StringFieldUpdateOperationsInput | string
+  estado?: Prisma.StringFieldUpdateOperationsInput | string
+  fecha_anulacion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  motivo_anulacion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type tb_recetasUncheckedUpdateManyInput = {
@@ -331,6 +385,9 @@ export type tb_recetasUncheckedUpdateManyInput = {
   id_paciente?: Prisma.IntFieldUpdateOperationsInput | number
   fecha_emision?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   diagnostico?: Prisma.StringFieldUpdateOperationsInput | string
+  estado?: Prisma.StringFieldUpdateOperationsInput | string
+  fecha_anulacion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  motivo_anulacion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type Tb_recetasScalarRelationFilter = {
@@ -354,6 +411,9 @@ export type tb_recetasCountOrderByAggregateInput = {
   id_paciente?: Prisma.SortOrder
   fecha_emision?: Prisma.SortOrder
   diagnostico?: Prisma.SortOrder
+  estado?: Prisma.SortOrder
+  fecha_anulacion?: Prisma.SortOrder
+  motivo_anulacion?: Prisma.SortOrder
 }
 
 export type tb_recetasAvgOrderByAggregateInput = {
@@ -368,6 +428,9 @@ export type tb_recetasMaxOrderByAggregateInput = {
   id_paciente?: Prisma.SortOrder
   fecha_emision?: Prisma.SortOrder
   diagnostico?: Prisma.SortOrder
+  estado?: Prisma.SortOrder
+  fecha_anulacion?: Prisma.SortOrder
+  motivo_anulacion?: Prisma.SortOrder
 }
 
 export type tb_recetasMinOrderByAggregateInput = {
@@ -376,6 +439,9 @@ export type tb_recetasMinOrderByAggregateInput = {
   id_paciente?: Prisma.SortOrder
   fecha_emision?: Prisma.SortOrder
   diagnostico?: Prisma.SortOrder
+  estado?: Prisma.SortOrder
+  fecha_anulacion?: Prisma.SortOrder
+  motivo_anulacion?: Prisma.SortOrder
 }
 
 export type tb_recetasSumOrderByAggregateInput = {
@@ -485,6 +551,9 @@ export type tb_recetasUncheckedUpdateManyWithoutTb_pacientesNestedInput = {
 export type tb_recetasCreateWithoutTb_detalle_recetaInput = {
   fecha_emision?: Date | string
   diagnostico: string
+  estado?: string
+  fecha_anulacion?: Date | string | null
+  motivo_anulacion?: string | null
   tb_medicos: Prisma.tb_medicosCreateNestedOneWithoutTb_recetasInput
   tb_pacientes: Prisma.tb_pacientesCreateNestedOneWithoutTb_recetasInput
 }
@@ -495,6 +564,9 @@ export type tb_recetasUncheckedCreateWithoutTb_detalle_recetaInput = {
   id_paciente: number
   fecha_emision?: Date | string
   diagnostico: string
+  estado?: string
+  fecha_anulacion?: Date | string | null
+  motivo_anulacion?: string | null
 }
 
 export type tb_recetasCreateOrConnectWithoutTb_detalle_recetaInput = {
@@ -516,6 +588,9 @@ export type tb_recetasUpdateToOneWithWhereWithoutTb_detalle_recetaInput = {
 export type tb_recetasUpdateWithoutTb_detalle_recetaInput = {
   fecha_emision?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   diagnostico?: Prisma.StringFieldUpdateOperationsInput | string
+  estado?: Prisma.StringFieldUpdateOperationsInput | string
+  fecha_anulacion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  motivo_anulacion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tb_medicos?: Prisma.tb_medicosUpdateOneRequiredWithoutTb_recetasNestedInput
   tb_pacientes?: Prisma.tb_pacientesUpdateOneRequiredWithoutTb_recetasNestedInput
 }
@@ -526,11 +601,17 @@ export type tb_recetasUncheckedUpdateWithoutTb_detalle_recetaInput = {
   id_paciente?: Prisma.IntFieldUpdateOperationsInput | number
   fecha_emision?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   diagnostico?: Prisma.StringFieldUpdateOperationsInput | string
+  estado?: Prisma.StringFieldUpdateOperationsInput | string
+  fecha_anulacion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  motivo_anulacion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type tb_recetasCreateWithoutTb_medicosInput = {
   fecha_emision?: Date | string
   diagnostico: string
+  estado?: string
+  fecha_anulacion?: Date | string | null
+  motivo_anulacion?: string | null
   tb_detalle_receta?: Prisma.tb_detalle_recetaCreateNestedManyWithoutTb_recetasInput
   tb_pacientes: Prisma.tb_pacientesCreateNestedOneWithoutTb_recetasInput
 }
@@ -540,6 +621,9 @@ export type tb_recetasUncheckedCreateWithoutTb_medicosInput = {
   id_paciente: number
   fecha_emision?: Date | string
   diagnostico: string
+  estado?: string
+  fecha_anulacion?: Date | string | null
+  motivo_anulacion?: string | null
   tb_detalle_receta?: Prisma.tb_detalle_recetaUncheckedCreateNestedManyWithoutTb_recetasInput
 }
 
@@ -578,11 +662,17 @@ export type tb_recetasScalarWhereInput = {
   id_paciente?: Prisma.IntFilter<"tb_recetas"> | number
   fecha_emision?: Prisma.DateTimeFilter<"tb_recetas"> | Date | string
   diagnostico?: Prisma.StringFilter<"tb_recetas"> | string
+  estado?: Prisma.StringFilter<"tb_recetas"> | string
+  fecha_anulacion?: Prisma.DateTimeNullableFilter<"tb_recetas"> | Date | string | null
+  motivo_anulacion?: Prisma.StringNullableFilter<"tb_recetas"> | string | null
 }
 
 export type tb_recetasCreateWithoutTb_pacientesInput = {
   fecha_emision?: Date | string
   diagnostico: string
+  estado?: string
+  fecha_anulacion?: Date | string | null
+  motivo_anulacion?: string | null
   tb_detalle_receta?: Prisma.tb_detalle_recetaCreateNestedManyWithoutTb_recetasInput
   tb_medicos: Prisma.tb_medicosCreateNestedOneWithoutTb_recetasInput
 }
@@ -592,6 +682,9 @@ export type tb_recetasUncheckedCreateWithoutTb_pacientesInput = {
   id_doctor: number
   fecha_emision?: Date | string
   diagnostico: string
+  estado?: string
+  fecha_anulacion?: Date | string | null
+  motivo_anulacion?: string | null
   tb_detalle_receta?: Prisma.tb_detalle_recetaUncheckedCreateNestedManyWithoutTb_recetasInput
 }
 
@@ -626,11 +719,17 @@ export type tb_recetasCreateManyTb_medicosInput = {
   id_paciente: number
   fecha_emision?: Date | string
   diagnostico: string
+  estado?: string
+  fecha_anulacion?: Date | string | null
+  motivo_anulacion?: string | null
 }
 
 export type tb_recetasUpdateWithoutTb_medicosInput = {
   fecha_emision?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   diagnostico?: Prisma.StringFieldUpdateOperationsInput | string
+  estado?: Prisma.StringFieldUpdateOperationsInput | string
+  fecha_anulacion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  motivo_anulacion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tb_detalle_receta?: Prisma.tb_detalle_recetaUpdateManyWithoutTb_recetasNestedInput
   tb_pacientes?: Prisma.tb_pacientesUpdateOneRequiredWithoutTb_recetasNestedInput
 }
@@ -640,6 +739,9 @@ export type tb_recetasUncheckedUpdateWithoutTb_medicosInput = {
   id_paciente?: Prisma.IntFieldUpdateOperationsInput | number
   fecha_emision?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   diagnostico?: Prisma.StringFieldUpdateOperationsInput | string
+  estado?: Prisma.StringFieldUpdateOperationsInput | string
+  fecha_anulacion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  motivo_anulacion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tb_detalle_receta?: Prisma.tb_detalle_recetaUncheckedUpdateManyWithoutTb_recetasNestedInput
 }
 
@@ -648,6 +750,9 @@ export type tb_recetasUncheckedUpdateManyWithoutTb_medicosInput = {
   id_paciente?: Prisma.IntFieldUpdateOperationsInput | number
   fecha_emision?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   diagnostico?: Prisma.StringFieldUpdateOperationsInput | string
+  estado?: Prisma.StringFieldUpdateOperationsInput | string
+  fecha_anulacion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  motivo_anulacion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type tb_recetasCreateManyTb_pacientesInput = {
@@ -655,11 +760,17 @@ export type tb_recetasCreateManyTb_pacientesInput = {
   id_doctor: number
   fecha_emision?: Date | string
   diagnostico: string
+  estado?: string
+  fecha_anulacion?: Date | string | null
+  motivo_anulacion?: string | null
 }
 
 export type tb_recetasUpdateWithoutTb_pacientesInput = {
   fecha_emision?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   diagnostico?: Prisma.StringFieldUpdateOperationsInput | string
+  estado?: Prisma.StringFieldUpdateOperationsInput | string
+  fecha_anulacion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  motivo_anulacion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tb_detalle_receta?: Prisma.tb_detalle_recetaUpdateManyWithoutTb_recetasNestedInput
   tb_medicos?: Prisma.tb_medicosUpdateOneRequiredWithoutTb_recetasNestedInput
 }
@@ -669,6 +780,9 @@ export type tb_recetasUncheckedUpdateWithoutTb_pacientesInput = {
   id_doctor?: Prisma.IntFieldUpdateOperationsInput | number
   fecha_emision?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   diagnostico?: Prisma.StringFieldUpdateOperationsInput | string
+  estado?: Prisma.StringFieldUpdateOperationsInput | string
+  fecha_anulacion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  motivo_anulacion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tb_detalle_receta?: Prisma.tb_detalle_recetaUncheckedUpdateManyWithoutTb_recetasNestedInput
 }
 
@@ -677,6 +791,9 @@ export type tb_recetasUncheckedUpdateManyWithoutTb_pacientesInput = {
   id_doctor?: Prisma.IntFieldUpdateOperationsInput | number
   fecha_emision?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   diagnostico?: Prisma.StringFieldUpdateOperationsInput | string
+  estado?: Prisma.StringFieldUpdateOperationsInput | string
+  fecha_anulacion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  motivo_anulacion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 
@@ -716,6 +833,9 @@ export type tb_recetasSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   id_paciente?: boolean
   fecha_emision?: boolean
   diagnostico?: boolean
+  estado?: boolean
+  fecha_anulacion?: boolean
+  motivo_anulacion?: boolean
   tb_detalle_receta?: boolean | Prisma.tb_recetas$tb_detalle_recetaArgs<ExtArgs>
   tb_medicos?: boolean | Prisma.tb_medicosDefaultArgs<ExtArgs>
   tb_pacientes?: boolean | Prisma.tb_pacientesDefaultArgs<ExtArgs>
@@ -728,6 +848,9 @@ export type tb_recetasSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ex
   id_paciente?: boolean
   fecha_emision?: boolean
   diagnostico?: boolean
+  estado?: boolean
+  fecha_anulacion?: boolean
+  motivo_anulacion?: boolean
   tb_medicos?: boolean | Prisma.tb_medicosDefaultArgs<ExtArgs>
   tb_pacientes?: boolean | Prisma.tb_pacientesDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["tb_recetas"]>
@@ -738,6 +861,9 @@ export type tb_recetasSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
   id_paciente?: boolean
   fecha_emision?: boolean
   diagnostico?: boolean
+  estado?: boolean
+  fecha_anulacion?: boolean
+  motivo_anulacion?: boolean
   tb_medicos?: boolean | Prisma.tb_medicosDefaultArgs<ExtArgs>
   tb_pacientes?: boolean | Prisma.tb_pacientesDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["tb_recetas"]>
@@ -748,9 +874,12 @@ export type tb_recetasSelectScalar = {
   id_paciente?: boolean
   fecha_emision?: boolean
   diagnostico?: boolean
+  estado?: boolean
+  fecha_anulacion?: boolean
+  motivo_anulacion?: boolean
 }
 
-export type tb_recetasOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id_receta" | "id_doctor" | "id_paciente" | "fecha_emision" | "diagnostico", ExtArgs["result"]["tb_recetas"]>
+export type tb_recetasOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id_receta" | "id_doctor" | "id_paciente" | "fecha_emision" | "diagnostico" | "estado" | "fecha_anulacion" | "motivo_anulacion", ExtArgs["result"]["tb_recetas"]>
 export type tb_recetasInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tb_detalle_receta?: boolean | Prisma.tb_recetas$tb_detalle_recetaArgs<ExtArgs>
   tb_medicos?: boolean | Prisma.tb_medicosDefaultArgs<ExtArgs>
@@ -779,6 +908,9 @@ export type $tb_recetasPayload<ExtArgs extends runtime.Types.Extensions.Internal
     id_paciente: number
     fecha_emision: Date
     diagnostico: string
+    estado: string
+    fecha_anulacion: Date | null
+    motivo_anulacion: string | null
   }, ExtArgs["result"]["tb_recetas"]>
   composites: {}
 }
@@ -1210,6 +1342,9 @@ export interface tb_recetasFieldRefs {
   readonly id_paciente: Prisma.FieldRef<"tb_recetas", 'Int'>
   readonly fecha_emision: Prisma.FieldRef<"tb_recetas", 'DateTime'>
   readonly diagnostico: Prisma.FieldRef<"tb_recetas", 'String'>
+  readonly estado: Prisma.FieldRef<"tb_recetas", 'String'>
+  readonly fecha_anulacion: Prisma.FieldRef<"tb_recetas", 'DateTime'>
+  readonly motivo_anulacion: Prisma.FieldRef<"tb_recetas", 'String'>
 }
     
 

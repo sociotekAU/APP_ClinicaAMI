@@ -20,6 +20,29 @@ const APPOINTMENT_INCLUDE = {
   tb_consultas: { select: { id_consulta: true } },
 } as const;
 
+function searchVariants(value: string): string[] {
+  const plain = value.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+  const accents: Record<string, string> = { a: "á", e: "é", i: "í", n: "ñ", o: "ó", u: "ú" };
+  const variants = new Set([value.toLowerCase(), plain]);
+  for (let index = 0; index < plain.length; index += 1) {
+    const accented = accents[plain[index] ?? ""];
+    if (accented) variants.add(`${plain.slice(0, index)}${accented}${plain.slice(index + 1)}`);
+  }
+  return [...variants];
+}
+
+function appointmentSearch(search: string) {
+  const terms = search.split(/\s+/).map((term) => term.trim()).filter(Boolean).slice(0, 10);
+  return terms.map((term) => ({
+    OR: searchVariants(term).flatMap((variant) => [
+      { motivo_cita: { contains: variant, mode: "insensitive" as const } },
+      { tb_pacientes: { nombres: { contains: variant, mode: "insensitive" as const } } },
+      { tb_pacientes: { apellidos: { contains: variant, mode: "insensitive" as const } } },
+      { tb_medicos: { nombre: { contains: variant, mode: "insensitive" as const } } },
+    ]),
+  }));
+}
+
 @Injectable()
 export class AgendaService {
   constructor(
@@ -71,14 +94,7 @@ export class AgendaService {
           ...(query.dateTo ? { lte: this.endOfDate(query.dateTo) } : {}),
         },
       } : {}),
-      ...(search ? {
-        OR: [
-          { motivo_cita: { contains: search, mode: "insensitive" as const } },
-          { tb_pacientes: { nombres: { contains: search, mode: "insensitive" as const } } },
-          { tb_pacientes: { apellidos: { contains: search, mode: "insensitive" as const } } },
-          { tb_medicos: { nombre: { contains: search, mode: "insensitive" as const } } },
-        ],
-      } : {}),
+      ...(search ? { AND: appointmentSearch(search) } : {}),
     };
     const primaryOrder = query.sortBy === "patient"
       ? { tb_pacientes: { apellidos: query.sortDirection } }

@@ -45,6 +45,8 @@ export type Tb_ordenes_laboratorioMinAggregateOutputType = {
   id_doctor: number | null
   fecha_orden: Date | null
   estado: string | null
+  observaciones: string | null
+  fecha_finalizacion: Date | null
 }
 
 export type Tb_ordenes_laboratorioMaxAggregateOutputType = {
@@ -53,6 +55,8 @@ export type Tb_ordenes_laboratorioMaxAggregateOutputType = {
   id_doctor: number | null
   fecha_orden: Date | null
   estado: string | null
+  observaciones: string | null
+  fecha_finalizacion: Date | null
 }
 
 export type Tb_ordenes_laboratorioCountAggregateOutputType = {
@@ -61,6 +65,8 @@ export type Tb_ordenes_laboratorioCountAggregateOutputType = {
   id_doctor: number
   fecha_orden: number
   estado: number
+  observaciones: number
+  fecha_finalizacion: number
   _all: number
 }
 
@@ -83,6 +89,8 @@ export type Tb_ordenes_laboratorioMinAggregateInputType = {
   id_doctor?: true
   fecha_orden?: true
   estado?: true
+  observaciones?: true
+  fecha_finalizacion?: true
 }
 
 export type Tb_ordenes_laboratorioMaxAggregateInputType = {
@@ -91,6 +99,8 @@ export type Tb_ordenes_laboratorioMaxAggregateInputType = {
   id_doctor?: true
   fecha_orden?: true
   estado?: true
+  observaciones?: true
+  fecha_finalizacion?: true
 }
 
 export type Tb_ordenes_laboratorioCountAggregateInputType = {
@@ -99,6 +109,8 @@ export type Tb_ordenes_laboratorioCountAggregateInputType = {
   id_doctor?: true
   fecha_orden?: true
   estado?: true
+  observaciones?: true
+  fecha_finalizacion?: true
   _all?: true
 }
 
@@ -194,6 +206,8 @@ export type Tb_ordenes_laboratorioGroupByOutputType = {
   id_doctor: number | null
   fecha_orden: Date
   estado: string
+  observaciones: string | null
+  fecha_finalizacion: Date | null
   _count: Tb_ordenes_laboratorioCountAggregateOutputType | null
   _avg: Tb_ordenes_laboratorioAvgAggregateOutputType | null
   _sum: Tb_ordenes_laboratorioSumAggregateOutputType | null
@@ -225,6 +239,8 @@ export type tb_ordenes_laboratorioWhereInput = {
   id_doctor?: Prisma.IntNullableFilter<"tb_ordenes_laboratorio"> | number | null
   fecha_orden?: Prisma.DateTimeFilter<"tb_ordenes_laboratorio"> | Date | string
   estado?: Prisma.StringFilter<"tb_ordenes_laboratorio"> | string
+  observaciones?: Prisma.StringNullableFilter<"tb_ordenes_laboratorio"> | string | null
+  fecha_finalizacion?: Prisma.DateTimeNullableFilter<"tb_ordenes_laboratorio"> | Date | string | null
   tb_medicos?: Prisma.XOR<Prisma.Tb_medicosNullableScalarRelationFilter, Prisma.tb_medicosWhereInput> | null
   tb_pacientes?: Prisma.XOR<Prisma.Tb_pacientesScalarRelationFilter, Prisma.tb_pacientesWhereInput>
   tb_resultados_laboratorio?: Prisma.Tb_resultados_laboratorioListRelationFilter
@@ -236,6 +252,8 @@ export type tb_ordenes_laboratorioOrderByWithRelationInput = {
   id_doctor?: Prisma.SortOrderInput | Prisma.SortOrder
   fecha_orden?: Prisma.SortOrder
   estado?: Prisma.SortOrder
+  observaciones?: Prisma.SortOrderInput | Prisma.SortOrder
+  fecha_finalizacion?: Prisma.SortOrderInput | Prisma.SortOrder
   tb_medicos?: Prisma.tb_medicosOrderByWithRelationInput
   tb_pacientes?: Prisma.tb_pacientesOrderByWithRelationInput
   tb_resultados_laboratorio?: Prisma.tb_resultados_laboratorioOrderByRelationAggregateInput
@@ -250,6 +268,8 @@ export type tb_ordenes_laboratorioWhereUniqueInput = Prisma.AtLeast<{
   id_doctor?: Prisma.IntNullableFilter<"tb_ordenes_laboratorio"> | number | null
   fecha_orden?: Prisma.DateTimeFilter<"tb_ordenes_laboratorio"> | Date | string
   estado?: Prisma.StringFilter<"tb_ordenes_laboratorio"> | string
+  observaciones?: Prisma.StringNullableFilter<"tb_ordenes_laboratorio"> | string | null
+  fecha_finalizacion?: Prisma.DateTimeNullableFilter<"tb_ordenes_laboratorio"> | Date | string | null
   tb_medicos?: Prisma.XOR<Prisma.Tb_medicosNullableScalarRelationFilter, Prisma.tb_medicosWhereInput> | null
   tb_pacientes?: Prisma.XOR<Prisma.Tb_pacientesScalarRelationFilter, Prisma.tb_pacientesWhereInput>
   tb_resultados_laboratorio?: Prisma.Tb_resultados_laboratorioListRelationFilter
@@ -261,6 +281,8 @@ export type tb_ordenes_laboratorioOrderByWithAggregationInput = {
   id_doctor?: Prisma.SortOrderInput | Prisma.SortOrder
   fecha_orden?: Prisma.SortOrder
   estado?: Prisma.SortOrder
+  observaciones?: Prisma.SortOrderInput | Prisma.SortOrder
+  fecha_finalizacion?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.tb_ordenes_laboratorioCountOrderByAggregateInput
   _avg?: Prisma.tb_ordenes_laboratorioAvgOrderByAggregateInput
   _max?: Prisma.tb_ordenes_laboratorioMaxOrderByAggregateInput
@@ -277,11 +299,15 @@ export type tb_ordenes_laboratorioScalarWhereWithAggregatesInput = {
   id_doctor?: Prisma.IntNullableWithAggregatesFilter<"tb_ordenes_laboratorio"> | number | null
   fecha_orden?: Prisma.DateTimeWithAggregatesFilter<"tb_ordenes_laboratorio"> | Date | string
   estado?: Prisma.StringWithAggregatesFilter<"tb_ordenes_laboratorio"> | string
+  observaciones?: Prisma.StringNullableWithAggregatesFilter<"tb_ordenes_laboratorio"> | string | null
+  fecha_finalizacion?: Prisma.DateTimeNullableWithAggregatesFilter<"tb_ordenes_laboratorio"> | Date | string | null
 }
 
 export type tb_ordenes_laboratorioCreateInput = {
   fecha_orden?: Date | string
   estado?: string
+  observaciones?: string | null
+  fecha_finalizacion?: Date | string | null
   tb_medicos?: Prisma.tb_medicosCreateNestedOneWithoutTb_ordenes_laboratorioInput
   tb_pacientes: Prisma.tb_pacientesCreateNestedOneWithoutTb_ordenes_laboratorioInput
   tb_resultados_laboratorio?: Prisma.tb_resultados_laboratorioCreateNestedManyWithoutTb_ordenes_laboratorioInput
@@ -293,12 +319,16 @@ export type tb_ordenes_laboratorioUncheckedCreateInput = {
   id_doctor?: number | null
   fecha_orden?: Date | string
   estado?: string
+  observaciones?: string | null
+  fecha_finalizacion?: Date | string | null
   tb_resultados_laboratorio?: Prisma.tb_resultados_laboratorioUncheckedCreateNestedManyWithoutTb_ordenes_laboratorioInput
 }
 
 export type tb_ordenes_laboratorioUpdateInput = {
   fecha_orden?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   estado?: Prisma.StringFieldUpdateOperationsInput | string
+  observaciones?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fecha_finalizacion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   tb_medicos?: Prisma.tb_medicosUpdateOneWithoutTb_ordenes_laboratorioNestedInput
   tb_pacientes?: Prisma.tb_pacientesUpdateOneRequiredWithoutTb_ordenes_laboratorioNestedInput
   tb_resultados_laboratorio?: Prisma.tb_resultados_laboratorioUpdateManyWithoutTb_ordenes_laboratorioNestedInput
@@ -310,6 +340,8 @@ export type tb_ordenes_laboratorioUncheckedUpdateInput = {
   id_doctor?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   fecha_orden?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   estado?: Prisma.StringFieldUpdateOperationsInput | string
+  observaciones?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fecha_finalizacion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   tb_resultados_laboratorio?: Prisma.tb_resultados_laboratorioUncheckedUpdateManyWithoutTb_ordenes_laboratorioNestedInput
 }
 
@@ -319,11 +351,15 @@ export type tb_ordenes_laboratorioCreateManyInput = {
   id_doctor?: number | null
   fecha_orden?: Date | string
   estado?: string
+  observaciones?: string | null
+  fecha_finalizacion?: Date | string | null
 }
 
 export type tb_ordenes_laboratorioUpdateManyMutationInput = {
   fecha_orden?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   estado?: Prisma.StringFieldUpdateOperationsInput | string
+  observaciones?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fecha_finalizacion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type tb_ordenes_laboratorioUncheckedUpdateManyInput = {
@@ -332,6 +368,8 @@ export type tb_ordenes_laboratorioUncheckedUpdateManyInput = {
   id_doctor?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   fecha_orden?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   estado?: Prisma.StringFieldUpdateOperationsInput | string
+  observaciones?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fecha_finalizacion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type Tb_ordenes_laboratorioListRelationFilter = {
@@ -350,6 +388,8 @@ export type tb_ordenes_laboratorioCountOrderByAggregateInput = {
   id_doctor?: Prisma.SortOrder
   fecha_orden?: Prisma.SortOrder
   estado?: Prisma.SortOrder
+  observaciones?: Prisma.SortOrder
+  fecha_finalizacion?: Prisma.SortOrder
 }
 
 export type tb_ordenes_laboratorioAvgOrderByAggregateInput = {
@@ -364,6 +404,8 @@ export type tb_ordenes_laboratorioMaxOrderByAggregateInput = {
   id_doctor?: Prisma.SortOrder
   fecha_orden?: Prisma.SortOrder
   estado?: Prisma.SortOrder
+  observaciones?: Prisma.SortOrder
+  fecha_finalizacion?: Prisma.SortOrder
 }
 
 export type tb_ordenes_laboratorioMinOrderByAggregateInput = {
@@ -372,6 +414,8 @@ export type tb_ordenes_laboratorioMinOrderByAggregateInput = {
   id_doctor?: Prisma.SortOrder
   fecha_orden?: Prisma.SortOrder
   estado?: Prisma.SortOrder
+  observaciones?: Prisma.SortOrder
+  fecha_finalizacion?: Prisma.SortOrder
 }
 
 export type tb_ordenes_laboratorioSumOrderByAggregateInput = {
@@ -486,6 +530,8 @@ export type tb_ordenes_laboratorioUpdateOneRequiredWithoutTb_resultados_laborato
 export type tb_ordenes_laboratorioCreateWithoutTb_medicosInput = {
   fecha_orden?: Date | string
   estado?: string
+  observaciones?: string | null
+  fecha_finalizacion?: Date | string | null
   tb_pacientes: Prisma.tb_pacientesCreateNestedOneWithoutTb_ordenes_laboratorioInput
   tb_resultados_laboratorio?: Prisma.tb_resultados_laboratorioCreateNestedManyWithoutTb_ordenes_laboratorioInput
 }
@@ -495,6 +541,8 @@ export type tb_ordenes_laboratorioUncheckedCreateWithoutTb_medicosInput = {
   id_paciente: number
   fecha_orden?: Date | string
   estado?: string
+  observaciones?: string | null
+  fecha_finalizacion?: Date | string | null
   tb_resultados_laboratorio?: Prisma.tb_resultados_laboratorioUncheckedCreateNestedManyWithoutTb_ordenes_laboratorioInput
 }
 
@@ -533,11 +581,15 @@ export type tb_ordenes_laboratorioScalarWhereInput = {
   id_doctor?: Prisma.IntNullableFilter<"tb_ordenes_laboratorio"> | number | null
   fecha_orden?: Prisma.DateTimeFilter<"tb_ordenes_laboratorio"> | Date | string
   estado?: Prisma.StringFilter<"tb_ordenes_laboratorio"> | string
+  observaciones?: Prisma.StringNullableFilter<"tb_ordenes_laboratorio"> | string | null
+  fecha_finalizacion?: Prisma.DateTimeNullableFilter<"tb_ordenes_laboratorio"> | Date | string | null
 }
 
 export type tb_ordenes_laboratorioCreateWithoutTb_pacientesInput = {
   fecha_orden?: Date | string
   estado?: string
+  observaciones?: string | null
+  fecha_finalizacion?: Date | string | null
   tb_medicos?: Prisma.tb_medicosCreateNestedOneWithoutTb_ordenes_laboratorioInput
   tb_resultados_laboratorio?: Prisma.tb_resultados_laboratorioCreateNestedManyWithoutTb_ordenes_laboratorioInput
 }
@@ -547,6 +599,8 @@ export type tb_ordenes_laboratorioUncheckedCreateWithoutTb_pacientesInput = {
   id_doctor?: number | null
   fecha_orden?: Date | string
   estado?: string
+  observaciones?: string | null
+  fecha_finalizacion?: Date | string | null
   tb_resultados_laboratorio?: Prisma.tb_resultados_laboratorioUncheckedCreateNestedManyWithoutTb_ordenes_laboratorioInput
 }
 
@@ -579,6 +633,8 @@ export type tb_ordenes_laboratorioUpdateManyWithWhereWithoutTb_pacientesInput = 
 export type tb_ordenes_laboratorioCreateWithoutTb_resultados_laboratorioInput = {
   fecha_orden?: Date | string
   estado?: string
+  observaciones?: string | null
+  fecha_finalizacion?: Date | string | null
   tb_medicos?: Prisma.tb_medicosCreateNestedOneWithoutTb_ordenes_laboratorioInput
   tb_pacientes: Prisma.tb_pacientesCreateNestedOneWithoutTb_ordenes_laboratorioInput
 }
@@ -589,6 +645,8 @@ export type tb_ordenes_laboratorioUncheckedCreateWithoutTb_resultados_laboratori
   id_doctor?: number | null
   fecha_orden?: Date | string
   estado?: string
+  observaciones?: string | null
+  fecha_finalizacion?: Date | string | null
 }
 
 export type tb_ordenes_laboratorioCreateOrConnectWithoutTb_resultados_laboratorioInput = {
@@ -610,6 +668,8 @@ export type tb_ordenes_laboratorioUpdateToOneWithWhereWithoutTb_resultados_labor
 export type tb_ordenes_laboratorioUpdateWithoutTb_resultados_laboratorioInput = {
   fecha_orden?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   estado?: Prisma.StringFieldUpdateOperationsInput | string
+  observaciones?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fecha_finalizacion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   tb_medicos?: Prisma.tb_medicosUpdateOneWithoutTb_ordenes_laboratorioNestedInput
   tb_pacientes?: Prisma.tb_pacientesUpdateOneRequiredWithoutTb_ordenes_laboratorioNestedInput
 }
@@ -620,6 +680,8 @@ export type tb_ordenes_laboratorioUncheckedUpdateWithoutTb_resultados_laboratori
   id_doctor?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   fecha_orden?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   estado?: Prisma.StringFieldUpdateOperationsInput | string
+  observaciones?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fecha_finalizacion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type tb_ordenes_laboratorioCreateManyTb_medicosInput = {
@@ -627,11 +689,15 @@ export type tb_ordenes_laboratorioCreateManyTb_medicosInput = {
   id_paciente: number
   fecha_orden?: Date | string
   estado?: string
+  observaciones?: string | null
+  fecha_finalizacion?: Date | string | null
 }
 
 export type tb_ordenes_laboratorioUpdateWithoutTb_medicosInput = {
   fecha_orden?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   estado?: Prisma.StringFieldUpdateOperationsInput | string
+  observaciones?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fecha_finalizacion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   tb_pacientes?: Prisma.tb_pacientesUpdateOneRequiredWithoutTb_ordenes_laboratorioNestedInput
   tb_resultados_laboratorio?: Prisma.tb_resultados_laboratorioUpdateManyWithoutTb_ordenes_laboratorioNestedInput
 }
@@ -641,6 +707,8 @@ export type tb_ordenes_laboratorioUncheckedUpdateWithoutTb_medicosInput = {
   id_paciente?: Prisma.IntFieldUpdateOperationsInput | number
   fecha_orden?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   estado?: Prisma.StringFieldUpdateOperationsInput | string
+  observaciones?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fecha_finalizacion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   tb_resultados_laboratorio?: Prisma.tb_resultados_laboratorioUncheckedUpdateManyWithoutTb_ordenes_laboratorioNestedInput
 }
 
@@ -649,6 +717,8 @@ export type tb_ordenes_laboratorioUncheckedUpdateManyWithoutTb_medicosInput = {
   id_paciente?: Prisma.IntFieldUpdateOperationsInput | number
   fecha_orden?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   estado?: Prisma.StringFieldUpdateOperationsInput | string
+  observaciones?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fecha_finalizacion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type tb_ordenes_laboratorioCreateManyTb_pacientesInput = {
@@ -656,11 +726,15 @@ export type tb_ordenes_laboratorioCreateManyTb_pacientesInput = {
   id_doctor?: number | null
   fecha_orden?: Date | string
   estado?: string
+  observaciones?: string | null
+  fecha_finalizacion?: Date | string | null
 }
 
 export type tb_ordenes_laboratorioUpdateWithoutTb_pacientesInput = {
   fecha_orden?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   estado?: Prisma.StringFieldUpdateOperationsInput | string
+  observaciones?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fecha_finalizacion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   tb_medicos?: Prisma.tb_medicosUpdateOneWithoutTb_ordenes_laboratorioNestedInput
   tb_resultados_laboratorio?: Prisma.tb_resultados_laboratorioUpdateManyWithoutTb_ordenes_laboratorioNestedInput
 }
@@ -670,6 +744,8 @@ export type tb_ordenes_laboratorioUncheckedUpdateWithoutTb_pacientesInput = {
   id_doctor?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   fecha_orden?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   estado?: Prisma.StringFieldUpdateOperationsInput | string
+  observaciones?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fecha_finalizacion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   tb_resultados_laboratorio?: Prisma.tb_resultados_laboratorioUncheckedUpdateManyWithoutTb_ordenes_laboratorioNestedInput
 }
 
@@ -678,6 +754,8 @@ export type tb_ordenes_laboratorioUncheckedUpdateManyWithoutTb_pacientesInput = 
   id_doctor?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   fecha_orden?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   estado?: Prisma.StringFieldUpdateOperationsInput | string
+  observaciones?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fecha_finalizacion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 
@@ -717,6 +795,8 @@ export type tb_ordenes_laboratorioSelect<ExtArgs extends runtime.Types.Extension
   id_doctor?: boolean
   fecha_orden?: boolean
   estado?: boolean
+  observaciones?: boolean
+  fecha_finalizacion?: boolean
   tb_medicos?: boolean | Prisma.tb_ordenes_laboratorio$tb_medicosArgs<ExtArgs>
   tb_pacientes?: boolean | Prisma.tb_pacientesDefaultArgs<ExtArgs>
   tb_resultados_laboratorio?: boolean | Prisma.tb_ordenes_laboratorio$tb_resultados_laboratorioArgs<ExtArgs>
@@ -729,6 +809,8 @@ export type tb_ordenes_laboratorioSelectCreateManyAndReturn<ExtArgs extends runt
   id_doctor?: boolean
   fecha_orden?: boolean
   estado?: boolean
+  observaciones?: boolean
+  fecha_finalizacion?: boolean
   tb_medicos?: boolean | Prisma.tb_ordenes_laboratorio$tb_medicosArgs<ExtArgs>
   tb_pacientes?: boolean | Prisma.tb_pacientesDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["tb_ordenes_laboratorio"]>
@@ -739,6 +821,8 @@ export type tb_ordenes_laboratorioSelectUpdateManyAndReturn<ExtArgs extends runt
   id_doctor?: boolean
   fecha_orden?: boolean
   estado?: boolean
+  observaciones?: boolean
+  fecha_finalizacion?: boolean
   tb_medicos?: boolean | Prisma.tb_ordenes_laboratorio$tb_medicosArgs<ExtArgs>
   tb_pacientes?: boolean | Prisma.tb_pacientesDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["tb_ordenes_laboratorio"]>
@@ -749,9 +833,11 @@ export type tb_ordenes_laboratorioSelectScalar = {
   id_doctor?: boolean
   fecha_orden?: boolean
   estado?: boolean
+  observaciones?: boolean
+  fecha_finalizacion?: boolean
 }
 
-export type tb_ordenes_laboratorioOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id_orden" | "id_paciente" | "id_doctor" | "fecha_orden" | "estado", ExtArgs["result"]["tb_ordenes_laboratorio"]>
+export type tb_ordenes_laboratorioOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id_orden" | "id_paciente" | "id_doctor" | "fecha_orden" | "estado" | "observaciones" | "fecha_finalizacion", ExtArgs["result"]["tb_ordenes_laboratorio"]>
 export type tb_ordenes_laboratorioInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tb_medicos?: boolean | Prisma.tb_ordenes_laboratorio$tb_medicosArgs<ExtArgs>
   tb_pacientes?: boolean | Prisma.tb_pacientesDefaultArgs<ExtArgs>
@@ -780,6 +866,8 @@ export type $tb_ordenes_laboratorioPayload<ExtArgs extends runtime.Types.Extensi
     id_doctor: number | null
     fecha_orden: Date
     estado: string
+    observaciones: string | null
+    fecha_finalizacion: Date | null
   }, ExtArgs["result"]["tb_ordenes_laboratorio"]>
   composites: {}
 }
@@ -1211,6 +1299,8 @@ export interface tb_ordenes_laboratorioFieldRefs {
   readonly id_doctor: Prisma.FieldRef<"tb_ordenes_laboratorio", 'Int'>
   readonly fecha_orden: Prisma.FieldRef<"tb_ordenes_laboratorio", 'DateTime'>
   readonly estado: Prisma.FieldRef<"tb_ordenes_laboratorio", 'String'>
+  readonly observaciones: Prisma.FieldRef<"tb_ordenes_laboratorio", 'String'>
+  readonly fecha_finalizacion: Prisma.FieldRef<"tb_ordenes_laboratorio", 'DateTime'>
 }
     
 

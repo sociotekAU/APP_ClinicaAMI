@@ -3,7 +3,7 @@ import { plainToInstance } from "class-transformer";
 import { validate } from "class-validator";
 import { describe, expect, it } from "vitest";
 import { ListProfessionalsDto, ListUsersDto } from "./list-resources.dto";
-import { ProfessionalInputDto, ServiceInputDto, UserCreateInputDto } from "./resource-input.dto";
+import { ProfessionalInputDto, ServiceInputDto, SpecialtyInputDto, UserCreateInputDto } from "./resource-input.dto";
 
 describe("administration DTOs", () => {
   it("transforma paginación y filtros numéricos", async () => {
@@ -58,5 +58,15 @@ describe("administration DTOs", () => {
       temporaryPassword: "debil",
     });
     expect((await validate(user)).map((error) => error.property)).toContain("temporaryPassword");
+  });
+
+  it("valida la elegibilidad psicológica como un valor booleano", async () => {
+    const specialty = plainToInstance(SpecialtyInputDto, {
+      name: "Neuropsicología clínica",
+      psychologicalRecordEligible: "sí",
+    });
+    expect((await validate(specialty)).map((error) => error.property)).toContain(
+      "psychologicalRecordEligible",
+    );
   });
 });

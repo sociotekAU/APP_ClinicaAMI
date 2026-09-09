@@ -39,6 +39,7 @@ export type Tb_especialidadesMinAggregateOutputType = {
   id: number | null
   nombre: string | null
   descripcion: string | null
+  admite_expediente_psicologico: boolean | null
   estado: boolean | null
   fecha_creacion: Date | null
 }
@@ -47,6 +48,7 @@ export type Tb_especialidadesMaxAggregateOutputType = {
   id: number | null
   nombre: string | null
   descripcion: string | null
+  admite_expediente_psicologico: boolean | null
   estado: boolean | null
   fecha_creacion: Date | null
 }
@@ -55,6 +57,7 @@ export type Tb_especialidadesCountAggregateOutputType = {
   id: number
   nombre: number
   descripcion: number
+  admite_expediente_psicologico: number
   estado: number
   fecha_creacion: number
   _all: number
@@ -73,6 +76,7 @@ export type Tb_especialidadesMinAggregateInputType = {
   id?: true
   nombre?: true
   descripcion?: true
+  admite_expediente_psicologico?: true
   estado?: true
   fecha_creacion?: true
 }
@@ -81,6 +85,7 @@ export type Tb_especialidadesMaxAggregateInputType = {
   id?: true
   nombre?: true
   descripcion?: true
+  admite_expediente_psicologico?: true
   estado?: true
   fecha_creacion?: true
 }
@@ -89,6 +94,7 @@ export type Tb_especialidadesCountAggregateInputType = {
   id?: true
   nombre?: true
   descripcion?: true
+  admite_expediente_psicologico?: true
   estado?: true
   fecha_creacion?: true
   _all?: true
@@ -184,6 +190,7 @@ export type Tb_especialidadesGroupByOutputType = {
   id: number
   nombre: string
   descripcion: string | null
+  admite_expediente_psicologico: boolean
   estado: boolean
   fecha_creacion: Date
   _count: Tb_especialidadesCountAggregateOutputType | null
@@ -215,6 +222,7 @@ export type tb_especialidadesWhereInput = {
   id?: Prisma.IntFilter<"tb_especialidades"> | number
   nombre?: Prisma.StringFilter<"tb_especialidades"> | string
   descripcion?: Prisma.StringNullableFilter<"tb_especialidades"> | string | null
+  admite_expediente_psicologico?: Prisma.BoolFilter<"tb_especialidades"> | boolean
   estado?: Prisma.BoolFilter<"tb_especialidades"> | boolean
   fecha_creacion?: Prisma.DateTimeFilter<"tb_especialidades"> | Date | string
   tb_medicos?: Prisma.Tb_medicosListRelationFilter
@@ -224,6 +232,7 @@ export type tb_especialidadesOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   nombre?: Prisma.SortOrder
   descripcion?: Prisma.SortOrderInput | Prisma.SortOrder
+  admite_expediente_psicologico?: Prisma.SortOrder
   estado?: Prisma.SortOrder
   fecha_creacion?: Prisma.SortOrder
   tb_medicos?: Prisma.tb_medicosOrderByRelationAggregateInput
@@ -236,6 +245,7 @@ export type tb_especialidadesWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.tb_especialidadesWhereInput | Prisma.tb_especialidadesWhereInput[]
   nombre?: Prisma.StringFilter<"tb_especialidades"> | string
   descripcion?: Prisma.StringNullableFilter<"tb_especialidades"> | string | null
+  admite_expediente_psicologico?: Prisma.BoolFilter<"tb_especialidades"> | boolean
   estado?: Prisma.BoolFilter<"tb_especialidades"> | boolean
   fecha_creacion?: Prisma.DateTimeFilter<"tb_especialidades"> | Date | string
   tb_medicos?: Prisma.Tb_medicosListRelationFilter
@@ -245,6 +255,7 @@ export type tb_especialidadesOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   nombre?: Prisma.SortOrder
   descripcion?: Prisma.SortOrderInput | Prisma.SortOrder
+  admite_expediente_psicologico?: Prisma.SortOrder
   estado?: Prisma.SortOrder
   fecha_creacion?: Prisma.SortOrder
   _count?: Prisma.tb_especialidadesCountOrderByAggregateInput
@@ -261,6 +272,7 @@ export type tb_especialidadesScalarWhereWithAggregatesInput = {
   id?: Prisma.IntWithAggregatesFilter<"tb_especialidades"> | number
   nombre?: Prisma.StringWithAggregatesFilter<"tb_especialidades"> | string
   descripcion?: Prisma.StringNullableWithAggregatesFilter<"tb_especialidades"> | string | null
+  admite_expediente_psicologico?: Prisma.BoolWithAggregatesFilter<"tb_especialidades"> | boolean
   estado?: Prisma.BoolWithAggregatesFilter<"tb_especialidades"> | boolean
   fecha_creacion?: Prisma.DateTimeWithAggregatesFilter<"tb_especialidades"> | Date | string
 }
@@ -268,6 +280,7 @@ export type tb_especialidadesScalarWhereWithAggregatesInput = {
 export type tb_especialidadesCreateInput = {
   nombre: string
   descripcion?: string | null
+  admite_expediente_psicologico?: boolean
   estado?: boolean
   fecha_creacion?: Date | string
   tb_medicos?: Prisma.tb_medicosCreateNestedManyWithoutTb_especialidadesInput
@@ -277,6 +290,7 @@ export type tb_especialidadesUncheckedCreateInput = {
   id?: number
   nombre: string
   descripcion?: string | null
+  admite_expediente_psicologico?: boolean
   estado?: boolean
   fecha_creacion?: Date | string
   tb_medicos?: Prisma.tb_medicosUncheckedCreateNestedManyWithoutTb_especialidadesInput
@@ -285,6 +299,7 @@ export type tb_especialidadesUncheckedCreateInput = {
 export type tb_especialidadesUpdateInput = {
   nombre?: Prisma.StringFieldUpdateOperationsInput | string
   descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  admite_expediente_psicologico?: Prisma.BoolFieldUpdateOperationsInput | boolean
   estado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tb_medicos?: Prisma.tb_medicosUpdateManyWithoutTb_especialidadesNestedInput
@@ -294,6 +309,7 @@ export type tb_especialidadesUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   nombre?: Prisma.StringFieldUpdateOperationsInput | string
   descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  admite_expediente_psicologico?: Prisma.BoolFieldUpdateOperationsInput | boolean
   estado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tb_medicos?: Prisma.tb_medicosUncheckedUpdateManyWithoutTb_especialidadesNestedInput
@@ -303,6 +319,7 @@ export type tb_especialidadesCreateManyInput = {
   id?: number
   nombre: string
   descripcion?: string | null
+  admite_expediente_psicologico?: boolean
   estado?: boolean
   fecha_creacion?: Date | string
 }
@@ -310,6 +327,7 @@ export type tb_especialidadesCreateManyInput = {
 export type tb_especialidadesUpdateManyMutationInput = {
   nombre?: Prisma.StringFieldUpdateOperationsInput | string
   descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  admite_expediente_psicologico?: Prisma.BoolFieldUpdateOperationsInput | boolean
   estado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -318,6 +336,7 @@ export type tb_especialidadesUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   nombre?: Prisma.StringFieldUpdateOperationsInput | string
   descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  admite_expediente_psicologico?: Prisma.BoolFieldUpdateOperationsInput | boolean
   estado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -326,6 +345,7 @@ export type tb_especialidadesCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   nombre?: Prisma.SortOrder
   descripcion?: Prisma.SortOrder
+  admite_expediente_psicologico?: Prisma.SortOrder
   estado?: Prisma.SortOrder
   fecha_creacion?: Prisma.SortOrder
 }
@@ -338,6 +358,7 @@ export type tb_especialidadesMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   nombre?: Prisma.SortOrder
   descripcion?: Prisma.SortOrder
+  admite_expediente_psicologico?: Prisma.SortOrder
   estado?: Prisma.SortOrder
   fecha_creacion?: Prisma.SortOrder
 }
@@ -346,6 +367,7 @@ export type tb_especialidadesMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   nombre?: Prisma.SortOrder
   descripcion?: Prisma.SortOrder
+  admite_expediente_psicologico?: Prisma.SortOrder
   estado?: Prisma.SortOrder
   fecha_creacion?: Prisma.SortOrder
 }
@@ -376,6 +398,7 @@ export type tb_especialidadesUpdateOneRequiredWithoutTb_medicosNestedInput = {
 export type tb_especialidadesCreateWithoutTb_medicosInput = {
   nombre: string
   descripcion?: string | null
+  admite_expediente_psicologico?: boolean
   estado?: boolean
   fecha_creacion?: Date | string
 }
@@ -384,6 +407,7 @@ export type tb_especialidadesUncheckedCreateWithoutTb_medicosInput = {
   id?: number
   nombre: string
   descripcion?: string | null
+  admite_expediente_psicologico?: boolean
   estado?: boolean
   fecha_creacion?: Date | string
 }
@@ -407,6 +431,7 @@ export type tb_especialidadesUpdateToOneWithWhereWithoutTb_medicosInput = {
 export type tb_especialidadesUpdateWithoutTb_medicosInput = {
   nombre?: Prisma.StringFieldUpdateOperationsInput | string
   descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  admite_expediente_psicologico?: Prisma.BoolFieldUpdateOperationsInput | boolean
   estado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -415,6 +440,7 @@ export type tb_especialidadesUncheckedUpdateWithoutTb_medicosInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   nombre?: Prisma.StringFieldUpdateOperationsInput | string
   descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  admite_expediente_psicologico?: Prisma.BoolFieldUpdateOperationsInput | boolean
   estado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -454,6 +480,7 @@ export type tb_especialidadesSelect<ExtArgs extends runtime.Types.Extensions.Int
   id?: boolean
   nombre?: boolean
   descripcion?: boolean
+  admite_expediente_psicologico?: boolean
   estado?: boolean
   fecha_creacion?: boolean
   tb_medicos?: boolean | Prisma.tb_especialidades$tb_medicosArgs<ExtArgs>
@@ -464,6 +491,7 @@ export type tb_especialidadesSelectCreateManyAndReturn<ExtArgs extends runtime.T
   id?: boolean
   nombre?: boolean
   descripcion?: boolean
+  admite_expediente_psicologico?: boolean
   estado?: boolean
   fecha_creacion?: boolean
 }, ExtArgs["result"]["tb_especialidades"]>
@@ -472,6 +500,7 @@ export type tb_especialidadesSelectUpdateManyAndReturn<ExtArgs extends runtime.T
   id?: boolean
   nombre?: boolean
   descripcion?: boolean
+  admite_expediente_psicologico?: boolean
   estado?: boolean
   fecha_creacion?: boolean
 }, ExtArgs["result"]["tb_especialidades"]>
@@ -480,11 +509,12 @@ export type tb_especialidadesSelectScalar = {
   id?: boolean
   nombre?: boolean
   descripcion?: boolean
+  admite_expediente_psicologico?: boolean
   estado?: boolean
   fecha_creacion?: boolean
 }
 
-export type tb_especialidadesOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nombre" | "descripcion" | "estado" | "fecha_creacion", ExtArgs["result"]["tb_especialidades"]>
+export type tb_especialidadesOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nombre" | "descripcion" | "admite_expediente_psicologico" | "estado" | "fecha_creacion", ExtArgs["result"]["tb_especialidades"]>
 export type tb_especialidadesInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tb_medicos?: boolean | Prisma.tb_especialidades$tb_medicosArgs<ExtArgs>
   _count?: boolean | Prisma.Tb_especialidadesCountOutputTypeDefaultArgs<ExtArgs>
@@ -501,6 +531,7 @@ export type $tb_especialidadesPayload<ExtArgs extends runtime.Types.Extensions.I
     id: number
     nombre: string
     descripcion: string | null
+    admite_expediente_psicologico: boolean
     estado: boolean
     fecha_creacion: Date
   }, ExtArgs["result"]["tb_especialidades"]>
@@ -930,6 +961,7 @@ export interface tb_especialidadesFieldRefs {
   readonly id: Prisma.FieldRef<"tb_especialidades", 'Int'>
   readonly nombre: Prisma.FieldRef<"tb_especialidades", 'String'>
   readonly descripcion: Prisma.FieldRef<"tb_especialidades", 'String'>
+  readonly admite_expediente_psicologico: Prisma.FieldRef<"tb_especialidades", 'Boolean'>
   readonly estado: Prisma.FieldRef<"tb_especialidades", 'Boolean'>
   readonly fecha_creacion: Prisma.FieldRef<"tb_especialidades", 'DateTime'>
 }

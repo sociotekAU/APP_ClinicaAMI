@@ -14,8 +14,8 @@ BEGIN
      WHERE table_schema = 'public'
        AND table_type = 'BASE TABLE';
 
-    IF total_tablas < 30 THEN
-        RAISE EXCEPTION 'Se esperaban al menos 30 tablas y se encontraron %.', total_tablas;
+    IF total_tablas < 31 THEN
+        RAISE EXCEPTION 'Se esperaban al menos 31 tablas y se encontraron %.', total_tablas;
     END IF;
 
     FOR tabla IN
@@ -37,12 +37,115 @@ DO $$
 BEGIN
     IF NOT EXISTS (
         SELECT 1
+          FROM tb_especialidades
+         WHERE nombre = 'Psiquiatría'
+           AND admite_expediente_psicologico = TRUE
+    ) OR NOT EXISTS (
+        SELECT 1
+          FROM tb_especialidades
+         WHERE nombre = 'Psicología y Terapia de Lenguaje'
+           AND admite_expediente_psicologico = TRUE
+    ) THEN
+        RAISE EXCEPTION 'Las especialidades psicológicas iniciales no están habilitadas.';
+    END IF;
+END;
+$$;
+
+DO $$
+BEGIN
+    IF NOT EXISTS (
+        SELECT 1
+          FROM tb_permisos_rol p
+          JOIN tb_roles r ON r.id_rol = p.id_rol
+         WHERE p.modulo = 'auditoria'
+           AND r.nombre_rol = 'Administrador'
+           AND p.puede_leer = TRUE
+           AND p.puede_escribir = FALSE
+    ) OR EXISTS (
+        SELECT 1
+          FROM tb_permisos_rol p
+          JOIN tb_roles r ON r.id_rol = p.id_rol
+         WHERE p.modulo = 'auditoria'
+           AND r.nombre_rol <> 'Administrador'
+           AND p.puede_leer = TRUE
+    ) THEN
+        RAISE EXCEPTION 'El visor de auditoría no está restringido al administrador.';
+    END IF;
+END;
+$$;
+
+DO $$
+DECLARE
+    rechazo_correcto BOOLEAN := FALSE;
+BEGIN
+    BEGIN
+        UPDATE tb_auditoria
+           SET motivo = 'alteración no permitida'
+         WHERE id_auditoria = (SELECT MIN(id_auditoria) FROM tb_auditoria);
+    EXCEPTION
+        WHEN OTHERS THEN
+            rechazo_correcto := POSITION('bitácora de auditoría es inmutable' IN SQLERRM) > 0;
+    END;
+    IF NOT rechazo_correcto THEN
+        RAISE EXCEPTION 'Fue posible modificar la bitácora de auditoría.';
+    END IF;
+END;
+$$;
+
+DO $$
+DECLARE
+    receta_id INTEGER;
+    rechazo_correcto BOOLEAN := FALSE;
+BEGIN
+    SELECT id_receta INTO receta_id FROM tb_recetas WHERE estado = 'emitida' LIMIT 1;
+    BEGIN
+        UPDATE tb_recetas SET diagnostico = diagnostico || ' alterado' WHERE id_receta = receta_id;
+    EXCEPTION
+        WHEN OTHERS THEN
+            rechazo_correcto := POSITION('solo puede pasar a anulada' IN SQLERRM) > 0;
+    END;
+    IF NOT rechazo_correcto THEN
+        RAISE EXCEPTION 'Fue posible editar silenciosamente una receta emitida.';
+    END IF;
+
+    UPDATE tb_recetas
+       SET estado = 'anulada',
+           fecha_anulacion = CURRENT_TIMESTAMP,
+           motivo_anulacion = 'Prueba reversible de trazabilidad'
+     WHERE id_receta = receta_id;
+END;
+$$;
+
+DO $$
+DECLARE
+    rechazo_correcto BOOLEAN := FALSE;
+BEGIN
+    BEGIN
+        UPDATE tb_resultados_laboratorio r
+           SET valor_obtenido = 'alterado'
+          FROM tb_ordenes_laboratorio o
+         WHERE o.id_orden = r.id_orden
+           AND o.estado = 'finalizado';
+    EXCEPTION
+        WHEN OTHERS THEN
+            rechazo_correcto := POSITION('orden finalizada son inmutables' IN SQLERRM) > 0;
+    END;
+    IF NOT rechazo_correcto THEN
+        RAISE EXCEPTION 'Fue posible modificar un resultado de laboratorio finalizado.';
+    END IF;
+END;
+$$;
+
+DO $$
+BEGIN
+    IF NOT EXISTS (
+        SELECT 1
           FROM tb_usuarios
          WHERE username = 'admin_ami'
-           AND crypt('AmiAzul#27', password_hash) = password_hash
-           AND debe_cambiar_password = TRUE
+           AND password_hash LIKE '$2%'
+           AND estado = TRUE
     ) THEN
-        RAISE EXCEPTION 'La cuenta administrativa o su contraseña no son válidas.';
+        RAISE EXCEPTION 'La cuenta administrativa no existe, está inactiva o no conserva un hash bcrypt.';
     END IF;
 
     IF NOT EXISTS (
@@ -51,10 +154,10 @@ BEGIN
           JOIN tb_medicos m ON m.id = u.id_doctor
          WHERE u.username = 'moises'
            AND m.nombre = 'Dr. Moisés Valdez'
-           AND crypt('MoisesSalud#27', u.password_hash) = u.password_hash
-           AND u.debe_cambiar_password = TRUE
+           AND u.password_hash LIKE '$2%'
+           AND u.estado = TRUE
     ) THEN
-        RAISE EXCEPTION 'La cuenta del Dr. Moisés no es válida o no está vinculada.';
+        RAISE EXCEPTION 'La cuenta del Dr. Moisés no es válida, no está activa o no está vinculada.';
     END IF;
 END;
 $$;

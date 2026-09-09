@@ -29,6 +29,11 @@ const RECORD_LIST_INCLUDE = {
   _count: { select: { tb_signos_vitales_medidas: true } },
 };
 
+export function normalizeHeightCm(value: number | null | undefined): number | null {
+  if (value === null || value === undefined) return null;
+  return value <= 3 ? Math.round(value * 10_000) / 100 : value;
+}
+
 @Injectable()
 export class ClinicalRecordsService {
   constructor(
@@ -45,6 +50,11 @@ export class ClinicalRecordsService {
         ...(scope === null ? {} : { id_doctor: scope }),
         estado: { in: ["programada", "completada"] },
         tb_consultas: { is: null },
+        tb_medicos: {
+          tb_especialidades: {
+            admite_expediente_psicologico: type === "psychology",
+          },
+        },
       },
       include: {
         tb_pacientes: true,
@@ -54,13 +64,21 @@ export class ClinicalRecordsService {
       take: 500,
     });
     return {
-      appointments: rows
-        .filter((row) => this.professionalRecordType(row.tb_medicos.tb_especialidades.nombre) === type)
-        .map((row) => ({
+      appointments: rows.map((row) => ({
           id: row.id_cita,
           label: `${row.tb_pacientes.apellidos}, ${row.tb_pacientes.nombres} · ${row.fecha_hora.toLocaleString("es-GT")}`,
           patientId: row.id_paciente,
           professionalId: row.id_doctor,
+          scheduledAt: row.fecha_hora.toISOString(),
+          patient: {
+            id: row.id_paciente,
+            name: `${row.tb_pacientes.nombres} ${row.tb_pacientes.apellidos}`,
+          },
+          professional: {
+            id: row.id_doctor,
+            name: row.tb_medicos.nombre,
+            specialty: row.tb_medicos.tb_especialidades.nombre,
+          },
         })),
     };
   }
@@ -126,7 +144,7 @@ export class ClinicalRecordsService {
     if (appointment.estado === "cancelada" || appointment.estado === "no_asistio") {
       this.conflict("appointmentId", "No se puede abrir un expediente para una cita cancelada o marcada como inasistencia.");
     }
-    if (this.professionalRecordType(appointment.tb_medicos.tb_especialidades.nombre) !== type) {
+    if (this.professionalRecordType(appointment.tb_medicos.tb_especialidades.admite_expediente_psicologico) !== type) {
       this.conflict("appointmentId", "La especialidad de la cita no corresponde al tipo de expediente.");
     }
 
@@ -207,9 +225,8 @@ export class ClinicalRecordsService {
     return type === "general" ? "general" : "psicologia";
   }
 
-  private professionalRecordType(specialtyName: string): ClinicalRecordType {
-    const normalized = specialtyName.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
-    return normalized.includes("psicolog") ? "psychology" : "general";
+  private professionalRecordType(psychologicalRecordEligible: boolean): ClinicalRecordType {
+    return psychologicalRecordEligible ? "psychology" : "general";
   }
 
   private async requireScopedRecord(id: number, type: ClinicalRecordType, user: AuthUser, withVitals: boolean) {
@@ -252,12 +269,20 @@ export class ClinicalRecordsService {
         [{ field: "weightKg", message: "Ingrese al menos una medición." }],
       );
     }
+    if (input.heightCm !== undefined && input.heightCm !== null && input.heightCm > 3 && input.heightCm < 50) {
+      throw new AppException(
+        "VALIDATION_ERROR",
+        "La estatura debe escribirse en metros (por ejemplo, 1.70) o centímetros (por ejemplo, 170).",
+        HttpStatus.BAD_REQUEST,
+        [{ field: "heightCm", message: "Use un valor entre 0.50 y 3.00 m, o entre 50 y 300 cm." }],
+      );
+    }
   }
 
   private vitalData(input: VitalSignsInputDto) {
     return {
       peso_kg: input.weightKg ?? null,
-      estatura_cm: input.heightCm ?? null,
+      estatura_cm: normalizeHeightCm(input.heightCm),
       presion_arterial: this.optionalText(input.bloodPressure),
       frecuencia_cardiaca: input.heartRate ?? null,
       temperatura: input.temperature ?? null,

@@ -13,5 +13,6 @@ import { PatientsService } from "./patients.service";
   imports: [AuthModule, AuthorizationModule],
   controllers: [PatientsController, AgendaController, ClinicalRecordsController],
   providers: [CareAccessService, PatientsService, AgendaService, ClinicalRecordsService],
+  exports: [CareAccessService],
 })
 export class CareModule {}

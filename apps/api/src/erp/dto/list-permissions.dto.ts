@@ -1,4 +1,5 @@
-import { IsIn, IsOptional, IsString, MaxLength } from "class-validator";
+import { Type } from "class-transformer";
+import { IsIn, IsInt, IsOptional, IsString, MaxLength, Min } from "class-validator";
 import type {
   ErpModuleCode,
   PermissionAction,
@@ -21,6 +22,20 @@ export class ListPermissionsDto extends PaginationQueryDto {
   @IsOptional()
   @IsIn(["read", "write", "delete"], { message: "capability debe ser read, write o delete." })
   capability?: PermissionAction;
+
+  @IsOptional()
+  @IsIn(["with", "without"], { message: "capabilityAccess debe ser with o without." })
+  capabilityAccess?: "with" | "without";
+
+  @IsOptional()
+  @IsIn(["with", "without"], { message: "writeAccess debe ser with o without." })
+  writeAccess?: "with" | "without";
+
+  @IsOptional()
+  @Type(() => Number)
+  @IsInt({ message: "roleId debe ser un número entero." })
+  @Min(1, { message: "roleId debe ser mayor que cero." })
+  roleId?: number;
 
   @IsOptional()
   @IsIn(["role", "module"], { message: "sortBy debe ser role o module." })

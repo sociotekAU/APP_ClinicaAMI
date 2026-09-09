@@ -4,7 +4,7 @@ import type { AgendaOptions, ClinicInput, ClinicListItem, StatusInput } from "@a
 import { zodResolver } from "@hookform/resolvers/zod";
 import type { ColumnDef } from "@tanstack/react-table";
 import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { z } from "zod";
 import { ApiClientError, apiRequest } from "../../lib/api-client";
 import { confirmDiscardChanges, showError, showSuccess } from "../../lib/alerts";
@@ -14,6 +14,7 @@ import { ResourcePanel } from "../administration/resource-panel";
 import { useResourceList } from "../administration/use-resource-list";
 import { FormField, FormSection } from "../crud/form-field";
 import { DetailModal, FormModal } from "../crud/modal";
+import { Select2Field } from "../crud/select2-field";
 import { StatusBadge } from "../crud/status-badge";
 
 const schema = z.object({
@@ -23,7 +24,12 @@ const schema = z.object({
   professionalId: z.number().int().positive("Seleccione un profesional."),
 });
 type ClinicForm = z.infer<typeof schema>;
-const DEFAULTS: ClinicForm = { number: "", room: "", schedule: "", professionalId: 0 };
+const DEFAULTS: ClinicForm = {
+  number: "CONSULTORIO-01",
+  room: "SALA 0#",
+  schedule: "Lunes a viernes, 8:00–17:00",
+  professionalId: 0,
+};
 
 export function ClinicsManager({ canWrite }: Readonly<{ canWrite: boolean }>) {
   const list = useResourceList<ClinicListItem>({ endpoint: "/agenda/clinics", defaultSort: "number" });
@@ -82,11 +88,11 @@ export function ClinicsManager({ canWrite }: Readonly<{ canWrite: boolean }>) {
     <ResourcePanel canWrite={canWrite} columns={columns} description="Consultorios disponibles y profesional responsable." emptyTitle="No hay consultorios" emptyDescription="Cambie los filtros o cree el primer consultorio." getRowId={(row) => String(row.id)} list={list} onCreate={openCreate} searchPlaceholder="Código, sala o profesional" title="Consultorios" />
     <FormModal open={formOpen} onClose={() => { void closeForm(); }} onSubmit={save} isSubmitting={form.formState.isSubmitting} submitLabel={editing ? "Guardar cambios" : "Crear consultorio"} title={editing ? "Editar consultorio" : "Nuevo consultorio"} description="Cada código de consultorio debe ser único.">
       <FormSection title="Ubicación y responsable"><div className="crud-form-grid">
-        <FormField htmlFor="clinic-number" label="Número o código" required error={form.formState.errors.number?.message}><input {...form.register("number")} autoComplete="off" /></FormField>
-        <FormField htmlFor="clinic-room" label="Sala" required error={form.formState.errors.room?.message}><input {...form.register("room")} autoComplete="off" /></FormField>
-        <FormField htmlFor="clinic-professional" label="Profesional" required error={form.formState.errors.professionalId?.message}><select {...form.register("professionalId", { valueAsNumber: true })}><option value={0}>Seleccione un profesional</option>{options?.professionals.map((option) => <option key={option.id} value={option.id} disabled={!option.active}>{option.label}{option.active ? "" : " (inactivo)"}</option>)}</select></FormField>
+        <FormField htmlFor="clinic-number" label="Número o código" required error={form.formState.errors.number?.message}><input {...form.register("number")} autoComplete="off" placeholder="CONSULTORIO-01" /></FormField>
+        <FormField htmlFor="clinic-room" label="Ubicación" required error={form.formState.errors.room?.message}><input {...form.register("room")} autoComplete="off" placeholder="SALA 0#" /></FormField>
+        <FormField htmlFor="clinic-professional" label="Profesional" required error={form.formState.errors.professionalId?.message}><Controller control={form.control} name="professionalId" render={({ field }) => <Select2Field id="clinic-professional" value={field.value} onBlur={field.onBlur} onChange={field.onChange} options={options?.professionals ?? []} placeholder="Busque por nombre o especialidad" />} /></FormField>
       </div></FormSection>
-      <FormSection title="Disponibilidad"><FormField htmlFor="clinic-schedule" label="Horario" required error={form.formState.errors.schedule?.message}><textarea {...form.register("schedule")} rows={4} placeholder="Lunes a viernes, 08:00–17:00" /></FormField></FormSection>
+      <FormSection title="Disponibilidad"><FormField htmlFor="clinic-schedule" label="Horario" required error={form.formState.errors.schedule?.message}><textarea {...form.register("schedule")} rows={4} placeholder="Lunes a viernes, 8:00–17:00" /></FormField></FormSection>
     </FormModal>
     <DetailModal open={detail !== null} onClose={() => setDetail(null)} title="Detalle de consultorio" footer={<button className="button button-primary" type="button" onClick={() => setDetail(null)}>Cerrar</button>}>
       {detail && <dl className="permission-detail-list"><div><dt>Consultorio</dt><dd>{detail.number}</dd></div><div><dt>Sala</dt><dd>{detail.room}</dd></div><div><dt>Profesional</dt><dd>{detail.professional.name}</dd></div><div><dt>Horario</dt><dd>{detail.schedule}</dd></div><div><dt>Citas históricas</dt><dd>{detail.appointmentCount}</dd></div><div><dt>Estado</dt><dd><StatusBadge active={detail.active} activeLabel="Activo" inactiveLabel="Inactivo" /></dd></div></dl>}

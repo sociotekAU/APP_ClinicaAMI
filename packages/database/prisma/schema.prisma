@@ -60,6 +60,8 @@ model tb_catalogo_examenes {
   estado                    Boolean                     @default(true)
   fecha_creacion            DateTime                    @default(now()) @db.Timestamp(6)
   tb_resultados_laboratorio tb_resultados_laboratorio[]
+
+  @@index([estado, categoria, nombre, id_examen], map: "ix_tb_catalogo_examenes_estado_categoria_nombre_id")
 }
 
 /// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
@@ -130,11 +132,15 @@ model tb_consulta_servicios {
   id_consulta                 Int
   id_servicio                 Int
   observaciones_procedimiento String?
+  estado                      Boolean      @default(true)
+  fecha_registro              DateTime     @default(now()) @db.Timestamp(6)
   tb_consultas                tb_consultas @relation(fields: [id_consulta], references: [id_consulta], map: "fk_tb_consulta_servicios_consulta")
   tb_servicios                tb_servicios @relation(fields: [id_servicio], references: [id], map: "fk_tb_consulta_servicios_servicio")
 
+  @@unique([id_consulta, id_servicio], map: "ux_tb_consulta_servicios_consulta_servicio")
   @@index([id_consulta], map: "ix_tb_consulta_servicios_consulta")
   @@index([id_servicio], map: "ix_tb_consulta_servicios_servicio")
+  @@index([id_consulta, estado, id_detalle], map: "ix_tb_consulta_servicios_consulta_estado_id")
 }
 
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
@@ -208,12 +214,13 @@ model tb_detalle_receta {
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
 /// This model contains an expression index which requires additional setup for migrations. Visit https://pris.ly/d/expression-indexes for more info.
 model tb_especialidades {
-  id             Int          @id @default(autoincrement())
-  nombre         String       @db.VarChar(150)
-  descripcion    String?
-  estado         Boolean      @default(true)
-  fecha_creacion DateTime     @default(now()) @db.Timestamp(6)
-  tb_medicos     tb_medicos[]
+  id                                Int          @id @default(autoincrement())
+  nombre                            String       @db.VarChar(150)
+  descripcion                       String?
+  admite_expediente_psicologico     Boolean      @default(false)
+  estado                            Boolean      @default(true)
+  fecha_creacion                    DateTime     @default(now()) @db.Timestamp(6)
+  tb_medicos                        tb_medicos[]
 
   @@index([estado, id], map: "ix_tb_especialidades_estado_id")
 }
@@ -296,6 +303,8 @@ model tb_medicamentos {
   fecha_creacion        DateTime                @default(now()) @db.Timestamp(6)
   tb_detalle_receta     tb_detalle_receta[]
   tb_insumos_inventario tb_insumos_inventario[]
+
+  @@index([estado, nombre_comercial, id_medicamento], map: "ix_tb_medicamentos_estado_nombre_id")
 }
 
 /// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
@@ -350,6 +359,8 @@ model tb_ordenes_laboratorio {
   id_doctor                 Int?
   fecha_orden               DateTime                    @default(now()) @db.Timestamp(6)
   estado                    String                      @default("pendiente") @db.VarChar(20)
+  observaciones             String?
+  fecha_finalizacion        DateTime?                   @db.Timestamp(6)
   tb_medicos                tb_medicos?                 @relation(fields: [id_doctor], references: [id], onDelete: Restrict, map: "fk_tb_ordenes_doctor")
   tb_pacientes              tb_pacientes                @relation(fields: [id_paciente], references: [id_paciente], map: "fk_tb_ordenes_paciente")
   tb_resultados_laboratorio tb_resultados_laboratorio[]
@@ -357,6 +368,9 @@ model tb_ordenes_laboratorio {
   @@index([id_doctor], map: "ix_tb_ordenes_doctor")
   @@index([estado], map: "ix_tb_ordenes_estado")
   @@index([id_paciente], map: "ix_tb_ordenes_paciente")
+  @@index([id_doctor, fecha_orden(sort: Desc), id_orden], map: "ix_tb_ordenes_doctor_fecha_id", where: raw("(id_doctor IS NOT NULL)"))
+  @@index([estado, fecha_orden(sort: Desc), id_orden], map: "ix_tb_ordenes_estado_fecha_id")
+  @@index([id_paciente, fecha_orden(sort: Desc), id_orden], map: "ix_tb_ordenes_paciente_fecha_id")
 }
 
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
@@ -432,12 +446,18 @@ model tb_recetas {
   id_paciente       Int
   fecha_emision     DateTime            @default(now()) @db.Timestamp(6)
   diagnostico       String
+  estado            String              @default("emitida") @db.VarChar(20)
+  fecha_anulacion   DateTime?           @db.Timestamp(6)
+  motivo_anulacion  String?
   tb_detalle_receta tb_detalle_receta[]
   tb_medicos        tb_medicos          @relation(fields: [id_doctor], references: [id], map: "fk_tb_recetas_doctor")
   tb_pacientes      tb_pacientes        @relation(fields: [id_paciente], references: [id_paciente], map: "fk_tb_recetas_paciente")
 
   @@index([id_doctor], map: "ix_tb_recetas_doctor")
   @@index([id_paciente], map: "ix_tb_recetas_paciente")
+  @@index([id_doctor, fecha_emision(sort: Desc), id_receta], map: "ix_tb_recetas_doctor_fecha_id")
+  @@index([estado, fecha_emision(sort: Desc), id_receta], map: "ix_tb_recetas_estado_fecha_id")
+  @@index([id_paciente, fecha_emision(sort: Desc), id_receta], map: "ix_tb_recetas_paciente_fecha_id")
 }
 
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
@@ -454,6 +474,7 @@ model tb_resultados_laboratorio {
   @@unique([id_orden, id_examen], map: "uq_tb_resultados_orden_examen")
   @@index([id_examen], map: "ix_tb_resultados_examen")
   @@index([id_orden], map: "ix_tb_resultados_orden")
+  @@index([id_orden, fecha_resultado(sort: Desc), id_resultado], map: "ix_tb_resultados_orden_fecha_id")
 }
 
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
@@ -517,6 +538,7 @@ model tb_usuarios {
   ultimo_acceso                 DateTime?                       @db.Timestamp(6)
   fecha_creacion                DateTime                        @default(now()) @db.Timestamp(6)
   tb_archivos_estudios          tb_archivos_estudios[]
+  tb_auditoria                  tb_auditoria[]
   tb_consentimientos_informados tb_consentimientos_informados[]
   tb_facturas                   tb_facturas[]
   tb_movimientos_inventario     tb_movimientos_inventario[]
@@ -525,4 +547,35 @@ model tb_usuarios {
 
   @@index([id_rol], map: "ix_tb_usuarios_rol")
   @@index([id_rol, estado, id_usuario], map: "ix_tb_usuarios_rol_estado_id")
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model tb_auditoria {
+  id_auditoria       BigInt       @id @default(autoincrement())
+  fecha_evento       DateTime     @default(now()) @db.Timestamptz(6)
+  id_usuario         Int?
+  usuario            String       @db.VarChar(80)
+  rol                String?      @db.VarChar(80)
+  modulo             String       @db.VarChar(100)
+  entidad            String       @db.VarChar(100)
+  id_registro        String?      @db.VarChar(100)
+  accion             String       @db.VarChar(30)
+  datos_anteriores   Json?
+  datos_nuevos       Json?
+  campos_modificados String[]     @default([])
+  motivo             String?
+  request_id         String?      @db.VarChar(100)
+  direccion_ip       String?      @db.VarChar(64)
+  agente_usuario     String?      @db.VarChar(500)
+  ruta               String?      @db.VarChar(500)
+  metodo             String?      @db.VarChar(10)
+  origen             String       @default("api") @db.VarChar(20)
+  tb_usuarios        tb_usuarios? @relation(fields: [id_usuario], references: [id_usuario], map: "fk_tb_auditoria_usuario")
+
+  @@index([campos_modificados], map: "ix_tb_auditoria_campos", type: Gin)
+  @@index([entidad, id_registro, fecha_evento(sort: Desc), id_auditoria(sort: Desc)], map: "ix_tb_auditoria_entidad_registro_fecha")
+  @@index([fecha_evento(sort: Desc), id_auditoria(sort: Desc)], map: "ix_tb_auditoria_fecha_id")
+  @@index([modulo, accion, fecha_evento(sort: Desc), id_auditoria(sort: Desc)], map: "ix_tb_auditoria_modulo_accion_fecha")
+  @@index([id_usuario, fecha_evento(sort: Desc), id_auditoria(sort: Desc)], map: "ix_tb_auditoria_usuario_fecha", where: raw("(id_usuario IS NOT NULL)"))
 }

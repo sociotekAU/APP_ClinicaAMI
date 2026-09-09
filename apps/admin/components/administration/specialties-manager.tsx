@@ -20,9 +20,10 @@ import { useResourceList } from "./use-resource-list";
 const schema = z.object({
   name: z.string().trim().min(2, "Escriba al menos 2 caracteres.").max(150),
   description: z.string().trim().max(2000, "La descripción no puede superar 2000 caracteres."),
+  psychologicalRecordEligible: z.boolean(),
 });
 type SpecialtyForm = z.infer<typeof schema>;
-const DEFAULTS: SpecialtyForm = { name: "", description: "" };
+const DEFAULTS: SpecialtyForm = { name: "", description: "", psychologicalRecordEligible: false };
 
 export function SpecialtiesManager({ canWrite }: Readonly<{ canWrite: boolean }>) {
   const list = useResourceList<SpecialtyListItem>({
@@ -43,7 +44,11 @@ export function SpecialtiesManager({ canWrite }: Readonly<{ canWrite: boolean }>
 
   function openEdit(row: SpecialtyListItem) {
     setEditing(row);
-    form.reset({ name: row.name, description: row.description ?? "" });
+    form.reset({
+      name: row.name,
+      description: row.description ?? "",
+      psychologicalRecordEligible: row.psychologicalRecordEligible,
+    });
     setFormOpen(true);
   }
 
@@ -55,6 +60,7 @@ export function SpecialtiesManager({ canWrite }: Readonly<{ canWrite: boolean }>
   const save = form.handleSubmit(async (values) => {
     const payload: SpecialtyInput = {
       name: values.name,
+      psychologicalRecordEligible: values.psychologicalRecordEligible,
       ...(values.description ? { description: values.description } : {}),
     };
     try {
@@ -108,6 +114,18 @@ export function SpecialtiesManager({ canWrite }: Readonly<{ canWrite: boolean }>
       header: "Profesionales",
       enableSorting: false,
       cell: ({ row }) => row.original.professionalCount,
+    },
+    {
+      id: "psychologicalRecordEligible",
+      header: "Expediente psicológico",
+      enableSorting: false,
+      cell: ({ row }) => (
+        <StatusBadge
+          active={row.original.psychologicalRecordEligible}
+          activeLabel="Admitido"
+          inactiveLabel="No admitido"
+        />
+      ),
     },
     {
       id: "status",
@@ -170,6 +188,17 @@ export function SpecialtiesManager({ canWrite }: Readonly<{ canWrite: boolean }>
           <FormField htmlFor="specialty-description" label="Descripción" error={form.formState.errors.description?.message}>
             <textarea {...form.register("description")} rows={4} />
           </FormField>
+          <label className="specialty-eligibility-option" htmlFor="specialty-psychological-record">
+            <input
+              id="specialty-psychological-record"
+              type="checkbox"
+              {...form.register("psychologicalRecordEligible")}
+            />
+            <span>
+              <strong>Admite expediente psicológico</strong>
+              <small>Los profesionales de esta especialidad podrán generar expedientes psicológicos.</small>
+            </span>
+          </label>
         </FormSection>
       </FormModal>
 
@@ -183,6 +212,7 @@ export function SpecialtiesManager({ canWrite }: Readonly<{ canWrite: boolean }>
           <dl className="permission-detail-list">
             <div><dt>Nombre</dt><dd>{detail.name}</dd></div>
             <div><dt>Descripción</dt><dd>{detail.description || "Sin descripción"}</dd></div>
+            <div><dt>Expediente psicológico</dt><dd><StatusBadge active={detail.psychologicalRecordEligible} activeLabel="Admitido" inactiveLabel="No admitido" /></dd></div>
             <div><dt>Profesionales</dt><dd>{detail.professionalCount}</dd></div>
             <div><dt>Estado</dt><dd><StatusBadge active={detail.active} activeLabel="Activa" inactiveLabel="Inactiva" /></dd></div>
             <div><dt>Creación</dt><dd>{formatDate(detail.createdAt)}</dd></div>
