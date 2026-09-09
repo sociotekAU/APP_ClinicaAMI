@@ -47,6 +47,13 @@ export interface AuditHttpRequest {
 }
 
 const TARGETS: Array<{ pattern: RegExp; target: AuditTarget }> = [
+  { pattern: /^\/web-content\/contact(?:\/|$)/, target: { module: "contenido_web", entity: "contacto_web", table: "tb_contacto", primaryKey: "id", paramName: "id" } },
+  { pattern: /^\/web-content\/services(?:\/|$)/, target: { module: "contenido_web", entity: "servicio_web", table: "tb_servicios", primaryKey: "id", paramName: "id" } },
+  { pattern: /^\/web-content\/professionals(?:\/|$)/, target: { module: "contenido_web", entity: "profesional_web", table: "tb_medicos", primaryKey: "id", paramName: "id" } },
+  { pattern: /^\/web-content\/gallery(?:\/|$)/, target: { module: "contenido_web", entity: "galeria_web", table: "tb_galeria", primaryKey: "id", paramName: "id" } },
+  { pattern: /^\/web-content\/promotions(?:\/|$)/, target: { module: "contenido_web", entity: "promocion_web", table: "tb_promociones", primaryKey: "id", paramName: "id" } },
+  { pattern: /^\/web-content\/styles(?:\/|$)/, target: { module: "contenido_web", entity: "estilo_anuncio", table: "tb_estilos", primaryKey: "id", paramName: "id" } },
+  { pattern: /^\/web-content\/announcements(?:\/|$)/, target: { module: "contenido_web", entity: "anuncio_web", table: "tb_anuncios", primaryKey: "id", paramName: "id" } },
   { pattern: /^\/erp\/permissions\/roles\/\d+$/, target: { module: "seguridad", entity: "permisos_rol", table: "tb_permisos_rol", primaryKey: "id_rol", paramName: "roleId", collection: true } },
   { pattern: /^\/administration\/specialties(?:\/|$)/, target: { module: "seguridad", entity: "especialidad", table: "tb_especialidades", primaryKey: "id", paramName: "id" } },
   { pattern: /^\/administration\/services(?:\/|$)/, target: { module: "seguridad", entity: "servicio", table: "tb_servicios", primaryKey: "id", paramName: "id" } },

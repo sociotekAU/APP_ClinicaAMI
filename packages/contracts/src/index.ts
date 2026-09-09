@@ -89,7 +89,8 @@ export type ErpModuleCode =
   | "inventario"
   | "archivos_estudios"
   | "consentimientos"
-  | "auditoria";
+  | "auditoria"
+  | "contenido_web";
 
 export interface RolePermission {
   module: ErpModuleCode;
@@ -579,6 +580,180 @@ export interface LabOrderOptions {
   patients: CareOption[];
   professionals: CareOption[];
   tests: CareOption[];
+}
+
+export type WebPublicationState = "draft" | "scheduled" | "active" | "expired";
+export type AnnouncementPosition =
+  | "inferior_derecha"
+  | "inferior_izquierda"
+  | "superior_derecha"
+  | "superior_izquierda"
+  | "centro";
+
+export interface WebContact {
+  id: number;
+  companyName: string;
+  shortName: string | null;
+  phone: string;
+  email: string | null;
+  facebook: string | null;
+  instagram: string | null;
+  logoUrl: string | null;
+  location: string;
+  googleMapsUrl: string | null;
+  homeVideoUrl: string | null;
+  slogan: string | null;
+  weekdayHours: string | null;
+  saturdayHours: string | null;
+  active: boolean;
+  createdAt: string;
+}
+
+export interface WebContactInput {
+  companyName: string;
+  shortName?: string;
+  phone: string;
+  email?: string;
+  facebook?: string;
+  instagram?: string;
+  logoUrl?: string;
+  location: string;
+  googleMapsUrl?: string;
+  homeVideoUrl?: string;
+  slogan?: string;
+  weekdayHours?: string;
+  saturdayHours?: string;
+  active: boolean;
+}
+
+export interface WebServiceListItem {
+  id: number;
+  name: string;
+  description: string | null;
+  imageUrl: string | null;
+  clinicalActive: boolean;
+  visibleOnWeb: boolean;
+  webOrder: number;
+}
+
+export interface WebServiceInput {
+  description?: string;
+  imageUrl?: string;
+  visibleOnWeb: boolean;
+  webOrder: number;
+}
+
+export interface WebProfessionalListItem {
+  id: number;
+  name: string;
+  specialty: string;
+  publicProfile: string | null;
+  photoUrl: string | null;
+  clinicalActive: boolean;
+  visibleOnWeb: boolean;
+  webOrder: number;
+}
+
+export interface WebProfessionalInput {
+  publicProfile?: string;
+  photoUrl?: string;
+  visibleOnWeb: boolean;
+  webOrder: number;
+}
+
+export interface WebGalleryItem {
+  id: number;
+  title: string;
+  description: string | null;
+  imageUrl: string;
+  active: boolean;
+  webOrder: number;
+  createdAt: string;
+}
+
+export interface WebGalleryInput {
+  title: string;
+  description?: string;
+  imageUrl: string;
+  webOrder: number;
+}
+
+export interface WebPromotionItem {
+  id: number;
+  title: string;
+  description: string | null;
+  startDate: string;
+  endDate: string;
+  imageUrl: string | null;
+  active: boolean;
+  publicationState: WebPublicationState;
+  createdAt: string;
+}
+
+export interface WebPromotionInput {
+  title: string;
+  description?: string;
+  startDate: string;
+  endDate: string;
+  imageUrl?: string;
+}
+
+export interface WebAnnouncementStyleItem {
+  id: number;
+  name: string;
+  backgroundColor: string;
+  textColor: string;
+  icon: string | null;
+  position: AnnouncementPosition;
+  active: boolean;
+  createdAt: string;
+}
+
+export interface WebAnnouncementStyleInput {
+  name: string;
+  backgroundColor: string;
+  textColor: string;
+  icon?: string;
+  position: AnnouncementPosition;
+}
+
+export interface WebAnnouncementItem {
+  id: number;
+  title: string;
+  description: string | null;
+  style: { id: number; name: string; active: boolean };
+  promotion: { id: number; title: string; active: boolean } | null;
+  startDate: string;
+  endDate: string;
+  imageUrl: string | null;
+  active: boolean;
+  publicationState: WebPublicationState;
+  createdAt: string;
+}
+
+export interface WebAnnouncementInput {
+  title: string;
+  description?: string;
+  styleId: number;
+  promotionId?: number | null;
+  startDate: string;
+  endDate: string;
+  imageUrl?: string;
+}
+
+export interface WebContentOptions {
+  promotions: AdministrationOption[];
+  styles: AdministrationOption[];
+}
+
+export interface WebContentPreview {
+  generatedAt: string;
+  contact: WebContact | null;
+  services: WebServiceListItem[];
+  professionals: WebProfessionalListItem[];
+  gallery: WebGalleryItem[];
+  promotions: WebPromotionItem[];
+  announcements: WebAnnouncementItem[];
 }
 
 export type AuditAction =

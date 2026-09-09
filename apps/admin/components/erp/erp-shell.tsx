@@ -22,6 +22,7 @@ import {
   Menu,
   PanelLeftClose,
   PanelLeftOpen,
+  PanelsTopLeft,
   Pill,
   ReceiptText,
   ShieldCheck,
@@ -66,6 +67,7 @@ const MODULE_ICONS: Record<ErpModuleCode, LucideIcon> = {
   archivos_estudios: Files,
   consentimientos: FileCheck2,
   auditoria: ScrollText,
+  contenido_web: PanelsTopLeft,
 };
 
 const ErpContextState = createContext<ErpContext | null>(null);

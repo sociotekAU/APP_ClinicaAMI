@@ -102,6 +102,71 @@ estos archivos cuando el volumen ya contiene una base inicializada.
 La instancia local preparada usa el puerto `5432`. Los valores concretos de
 usuario, base y contraseña se mantienen en `.env`, archivo excluido de Git.
 
+## Iniciar los servicios localmente
+
+Ejecutar los comandos desde la raíz de `APP_ClinicaAMI`.
+
+### Primera instalación
+
+```powershell
+Copy-Item .env.example .env
+pnpm install
+pnpm db:generate
+docker compose up -d postgres
+docker compose ps
+```
+
+Antes de iniciar la aplicación, completar en `.env` la contraseña de PostgreSQL
+y los secretos JWT indicados en `.env.example`.
+
+### Desarrollo
+
+Para iniciar PostgreSQL, el API y el panel con un solo comando de aplicación:
+
+```powershell
+docker compose up -d postgres
+pnpm dev
+```
+
+También pueden iniciarse por separado, usando una terminal para cada proceso:
+
+```powershell
+# Terminal 1 — Base de datos
+docker compose up -d postgres
+
+# Terminal 2 — API
+pnpm dev:api
+
+# Terminal 3 — Panel administrativo
+pnpm dev:admin
+```
+
+Servicios disponibles:
+
+- Panel y login: <http://127.0.0.1:3000/login>
+- API: <http://127.0.0.1:4000/api/v1>
+- Comprobación de salud: <http://127.0.0.1:4000/api/v1/health>
+- PostgreSQL: `127.0.0.1:5432`
+
+### Ejecución compilada
+
+```powershell
+pnpm build
+pnpm --filter @ami/api start
+pnpm --filter @ami/admin start
+```
+
+Los dos comandos `start` deben ejecutarse en terminales independientes.
+
+### Detener los servicios
+
+Detener el API y el panel con `Ctrl+C` en sus terminales. Para detener
+PostgreSQL sin eliminar sus datos:
+
+```powershell
+docker compose stop postgres
+```
+
 ## Estructura actual
 
 ```text
@@ -211,3 +276,17 @@ separados.
 
 No se debe ejecutar el seed de demostración automáticamente sobre una base de
 datos que ya contenga información de producción.
+
+
+Estado comprobado:
+- PostgreSQL está activo en 5432.
+- La API está activa en 4000 y responde correctamente.
+- El panel Next.js está apagado; por eso Firefox recibe “conexión denegada”.
+El docker-compose.yml actual solo inicia PostgreSQL. El panel debe ejecutarse por separado desde PowerShell:
+cd D:\APLICACIONES\PROYECTOS\LANDING_PAGES\AMI\APP_ClinicaAMI
+pnpm dev:admin
+
+***********************************************************
+
+
+

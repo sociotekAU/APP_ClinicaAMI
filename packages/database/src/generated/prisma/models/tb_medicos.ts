@@ -31,11 +31,13 @@ export type AggregateTb_medicos = {
 export type Tb_medicosAvgAggregateOutputType = {
   id: number | null
   especialidad_id: number | null
+  orden_web: number | null
 }
 
 export type Tb_medicosSumAggregateOutputType = {
   id: number | null
   especialidad_id: number | null
+  orden_web: number | null
 }
 
 export type Tb_medicosMinAggregateOutputType = {
@@ -49,6 +51,10 @@ export type Tb_medicosMinAggregateOutputType = {
   fecha_inicio: Date | null
   especialidad_id: number | null
   fecha_creacion: Date | null
+  visible_web: boolean | null
+  foto_url: string | null
+  perfil_publico: string | null
+  orden_web: number | null
 }
 
 export type Tb_medicosMaxAggregateOutputType = {
@@ -62,6 +68,10 @@ export type Tb_medicosMaxAggregateOutputType = {
   fecha_inicio: Date | null
   especialidad_id: number | null
   fecha_creacion: Date | null
+  visible_web: boolean | null
+  foto_url: string | null
+  perfil_publico: string | null
+  orden_web: number | null
 }
 
 export type Tb_medicosCountAggregateOutputType = {
@@ -75,6 +85,10 @@ export type Tb_medicosCountAggregateOutputType = {
   fecha_inicio: number
   especialidad_id: number
   fecha_creacion: number
+  visible_web: number
+  foto_url: number
+  perfil_publico: number
+  orden_web: number
   _all: number
 }
 
@@ -82,11 +96,13 @@ export type Tb_medicosCountAggregateOutputType = {
 export type Tb_medicosAvgAggregateInputType = {
   id?: true
   especialidad_id?: true
+  orden_web?: true
 }
 
 export type Tb_medicosSumAggregateInputType = {
   id?: true
   especialidad_id?: true
+  orden_web?: true
 }
 
 export type Tb_medicosMinAggregateInputType = {
@@ -100,6 +116,10 @@ export type Tb_medicosMinAggregateInputType = {
   fecha_inicio?: true
   especialidad_id?: true
   fecha_creacion?: true
+  visible_web?: true
+  foto_url?: true
+  perfil_publico?: true
+  orden_web?: true
 }
 
 export type Tb_medicosMaxAggregateInputType = {
@@ -113,6 +133,10 @@ export type Tb_medicosMaxAggregateInputType = {
   fecha_inicio?: true
   especialidad_id?: true
   fecha_creacion?: true
+  visible_web?: true
+  foto_url?: true
+  perfil_publico?: true
+  orden_web?: true
 }
 
 export type Tb_medicosCountAggregateInputType = {
@@ -126,6 +150,10 @@ export type Tb_medicosCountAggregateInputType = {
   fecha_inicio?: true
   especialidad_id?: true
   fecha_creacion?: true
+  visible_web?: true
+  foto_url?: true
+  perfil_publico?: true
+  orden_web?: true
   _all?: true
 }
 
@@ -226,6 +254,10 @@ export type Tb_medicosGroupByOutputType = {
   fecha_inicio: Date | null
   especialidad_id: number
   fecha_creacion: Date
+  visible_web: boolean
+  foto_url: string | null
+  perfil_publico: string | null
+  orden_web: number
   _count: Tb_medicosCountAggregateOutputType | null
   _avg: Tb_medicosAvgAggregateOutputType | null
   _sum: Tb_medicosSumAggregateOutputType | null
@@ -262,6 +294,10 @@ export type tb_medicosWhereInput = {
   fecha_inicio?: Prisma.DateTimeNullableFilter<"tb_medicos"> | Date | string | null
   especialidad_id?: Prisma.IntFilter<"tb_medicos"> | number
   fecha_creacion?: Prisma.DateTimeFilter<"tb_medicos"> | Date | string
+  visible_web?: Prisma.BoolFilter<"tb_medicos"> | boolean
+  foto_url?: Prisma.StringNullableFilter<"tb_medicos"> | string | null
+  perfil_publico?: Prisma.StringNullableFilter<"tb_medicos"> | string | null
+  orden_web?: Prisma.IntFilter<"tb_medicos"> | number
   tb_citas?: Prisma.Tb_citasListRelationFilter
   tb_clinicas?: Prisma.Tb_clinicasListRelationFilter
   tb_especialidades?: Prisma.XOR<Prisma.Tb_especialidadesScalarRelationFilter, Prisma.tb_especialidadesWhereInput>
@@ -281,6 +317,10 @@ export type tb_medicosOrderByWithRelationInput = {
   fecha_inicio?: Prisma.SortOrderInput | Prisma.SortOrder
   especialidad_id?: Prisma.SortOrder
   fecha_creacion?: Prisma.SortOrder
+  visible_web?: Prisma.SortOrder
+  foto_url?: Prisma.SortOrderInput | Prisma.SortOrder
+  perfil_publico?: Prisma.SortOrderInput | Prisma.SortOrder
+  orden_web?: Prisma.SortOrder
   tb_citas?: Prisma.tb_citasOrderByRelationAggregateInput
   tb_clinicas?: Prisma.tb_clinicasOrderByRelationAggregateInput
   tb_especialidades?: Prisma.tb_especialidadesOrderByWithRelationInput
@@ -303,6 +343,10 @@ export type tb_medicosWhereUniqueInput = Prisma.AtLeast<{
   fecha_inicio?: Prisma.DateTimeNullableFilter<"tb_medicos"> | Date | string | null
   especialidad_id?: Prisma.IntFilter<"tb_medicos"> | number
   fecha_creacion?: Prisma.DateTimeFilter<"tb_medicos"> | Date | string
+  visible_web?: Prisma.BoolFilter<"tb_medicos"> | boolean
+  foto_url?: Prisma.StringNullableFilter<"tb_medicos"> | string | null
+  perfil_publico?: Prisma.StringNullableFilter<"tb_medicos"> | string | null
+  orden_web?: Prisma.IntFilter<"tb_medicos"> | number
   tb_citas?: Prisma.Tb_citasListRelationFilter
   tb_clinicas?: Prisma.Tb_clinicasListRelationFilter
   tb_especialidades?: Prisma.XOR<Prisma.Tb_especialidadesScalarRelationFilter, Prisma.tb_especialidadesWhereInput>
@@ -322,6 +366,10 @@ export type tb_medicosOrderByWithAggregationInput = {
   fecha_inicio?: Prisma.SortOrderInput | Prisma.SortOrder
   especialidad_id?: Prisma.SortOrder
   fecha_creacion?: Prisma.SortOrder
+  visible_web?: Prisma.SortOrder
+  foto_url?: Prisma.SortOrderInput | Prisma.SortOrder
+  perfil_publico?: Prisma.SortOrderInput | Prisma.SortOrder
+  orden_web?: Prisma.SortOrder
   _count?: Prisma.tb_medicosCountOrderByAggregateInput
   _avg?: Prisma.tb_medicosAvgOrderByAggregateInput
   _max?: Prisma.tb_medicosMaxOrderByAggregateInput
@@ -343,6 +391,10 @@ export type tb_medicosScalarWhereWithAggregatesInput = {
   fecha_inicio?: Prisma.DateTimeNullableWithAggregatesFilter<"tb_medicos"> | Date | string | null
   especialidad_id?: Prisma.IntWithAggregatesFilter<"tb_medicos"> | number
   fecha_creacion?: Prisma.DateTimeWithAggregatesFilter<"tb_medicos"> | Date | string
+  visible_web?: Prisma.BoolWithAggregatesFilter<"tb_medicos"> | boolean
+  foto_url?: Prisma.StringNullableWithAggregatesFilter<"tb_medicos"> | string | null
+  perfil_publico?: Prisma.StringNullableWithAggregatesFilter<"tb_medicos"> | string | null
+  orden_web?: Prisma.IntWithAggregatesFilter<"tb_medicos"> | number
 }
 
 export type tb_medicosCreateInput = {
@@ -354,6 +406,10 @@ export type tb_medicosCreateInput = {
   estado?: boolean
   fecha_inicio?: Date | string | null
   fecha_creacion?: Date | string
+  visible_web?: boolean
+  foto_url?: string | null
+  perfil_publico?: string | null
+  orden_web?: number
   tb_citas?: Prisma.tb_citasCreateNestedManyWithoutTb_medicosInput
   tb_clinicas?: Prisma.tb_clinicasCreateNestedManyWithoutTb_medicosInput
   tb_especialidades: Prisma.tb_especialidadesCreateNestedOneWithoutTb_medicosInput
@@ -373,6 +429,10 @@ export type tb_medicosUncheckedCreateInput = {
   fecha_inicio?: Date | string | null
   especialidad_id: number
   fecha_creacion?: Date | string
+  visible_web?: boolean
+  foto_url?: string | null
+  perfil_publico?: string | null
+  orden_web?: number
   tb_citas?: Prisma.tb_citasUncheckedCreateNestedManyWithoutTb_medicosInput
   tb_clinicas?: Prisma.tb_clinicasUncheckedCreateNestedManyWithoutTb_medicosInput
   tb_ordenes_laboratorio?: Prisma.tb_ordenes_laboratorioUncheckedCreateNestedManyWithoutTb_medicosInput
@@ -389,6 +449,10 @@ export type tb_medicosUpdateInput = {
   estado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   fecha_inicio?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  visible_web?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  foto_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  perfil_publico?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orden_web?: Prisma.IntFieldUpdateOperationsInput | number
   tb_citas?: Prisma.tb_citasUpdateManyWithoutTb_medicosNestedInput
   tb_clinicas?: Prisma.tb_clinicasUpdateManyWithoutTb_medicosNestedInput
   tb_especialidades?: Prisma.tb_especialidadesUpdateOneRequiredWithoutTb_medicosNestedInput
@@ -408,6 +472,10 @@ export type tb_medicosUncheckedUpdateInput = {
   fecha_inicio?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   especialidad_id?: Prisma.IntFieldUpdateOperationsInput | number
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  visible_web?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  foto_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  perfil_publico?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orden_web?: Prisma.IntFieldUpdateOperationsInput | number
   tb_citas?: Prisma.tb_citasUncheckedUpdateManyWithoutTb_medicosNestedInput
   tb_clinicas?: Prisma.tb_clinicasUncheckedUpdateManyWithoutTb_medicosNestedInput
   tb_ordenes_laboratorio?: Prisma.tb_ordenes_laboratorioUncheckedUpdateManyWithoutTb_medicosNestedInput
@@ -426,6 +494,10 @@ export type tb_medicosCreateManyInput = {
   fecha_inicio?: Date | string | null
   especialidad_id: number
   fecha_creacion?: Date | string
+  visible_web?: boolean
+  foto_url?: string | null
+  perfil_publico?: string | null
+  orden_web?: number
 }
 
 export type tb_medicosUpdateManyMutationInput = {
@@ -437,6 +509,10 @@ export type tb_medicosUpdateManyMutationInput = {
   estado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   fecha_inicio?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  visible_web?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  foto_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  perfil_publico?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orden_web?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type tb_medicosUncheckedUpdateManyInput = {
@@ -450,6 +526,10 @@ export type tb_medicosUncheckedUpdateManyInput = {
   fecha_inicio?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   especialidad_id?: Prisma.IntFieldUpdateOperationsInput | number
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  visible_web?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  foto_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  perfil_publico?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orden_web?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type Tb_medicosScalarRelationFilter = {
@@ -478,11 +558,16 @@ export type tb_medicosCountOrderByAggregateInput = {
   fecha_inicio?: Prisma.SortOrder
   especialidad_id?: Prisma.SortOrder
   fecha_creacion?: Prisma.SortOrder
+  visible_web?: Prisma.SortOrder
+  foto_url?: Prisma.SortOrder
+  perfil_publico?: Prisma.SortOrder
+  orden_web?: Prisma.SortOrder
 }
 
 export type tb_medicosAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   especialidad_id?: Prisma.SortOrder
+  orden_web?: Prisma.SortOrder
 }
 
 export type tb_medicosMaxOrderByAggregateInput = {
@@ -496,6 +581,10 @@ export type tb_medicosMaxOrderByAggregateInput = {
   fecha_inicio?: Prisma.SortOrder
   especialidad_id?: Prisma.SortOrder
   fecha_creacion?: Prisma.SortOrder
+  visible_web?: Prisma.SortOrder
+  foto_url?: Prisma.SortOrder
+  perfil_publico?: Prisma.SortOrder
+  orden_web?: Prisma.SortOrder
 }
 
 export type tb_medicosMinOrderByAggregateInput = {
@@ -509,11 +598,16 @@ export type tb_medicosMinOrderByAggregateInput = {
   fecha_inicio?: Prisma.SortOrder
   especialidad_id?: Prisma.SortOrder
   fecha_creacion?: Prisma.SortOrder
+  visible_web?: Prisma.SortOrder
+  foto_url?: Prisma.SortOrder
+  perfil_publico?: Prisma.SortOrder
+  orden_web?: Prisma.SortOrder
 }
 
 export type tb_medicosSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   especialidad_id?: Prisma.SortOrder
+  orden_web?: Prisma.SortOrder
 }
 
 export type Tb_medicosNullableScalarRelationFilter = {
@@ -646,6 +740,10 @@ export type tb_medicosCreateWithoutTb_citasInput = {
   estado?: boolean
   fecha_inicio?: Date | string | null
   fecha_creacion?: Date | string
+  visible_web?: boolean
+  foto_url?: string | null
+  perfil_publico?: string | null
+  orden_web?: number
   tb_clinicas?: Prisma.tb_clinicasCreateNestedManyWithoutTb_medicosInput
   tb_especialidades: Prisma.tb_especialidadesCreateNestedOneWithoutTb_medicosInput
   tb_ordenes_laboratorio?: Prisma.tb_ordenes_laboratorioCreateNestedManyWithoutTb_medicosInput
@@ -664,6 +762,10 @@ export type tb_medicosUncheckedCreateWithoutTb_citasInput = {
   fecha_inicio?: Date | string | null
   especialidad_id: number
   fecha_creacion?: Date | string
+  visible_web?: boolean
+  foto_url?: string | null
+  perfil_publico?: string | null
+  orden_web?: number
   tb_clinicas?: Prisma.tb_clinicasUncheckedCreateNestedManyWithoutTb_medicosInput
   tb_ordenes_laboratorio?: Prisma.tb_ordenes_laboratorioUncheckedCreateNestedManyWithoutTb_medicosInput
   tb_recetas?: Prisma.tb_recetasUncheckedCreateNestedManyWithoutTb_medicosInput
@@ -695,6 +797,10 @@ export type tb_medicosUpdateWithoutTb_citasInput = {
   estado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   fecha_inicio?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  visible_web?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  foto_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  perfil_publico?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orden_web?: Prisma.IntFieldUpdateOperationsInput | number
   tb_clinicas?: Prisma.tb_clinicasUpdateManyWithoutTb_medicosNestedInput
   tb_especialidades?: Prisma.tb_especialidadesUpdateOneRequiredWithoutTb_medicosNestedInput
   tb_ordenes_laboratorio?: Prisma.tb_ordenes_laboratorioUpdateManyWithoutTb_medicosNestedInput
@@ -713,6 +819,10 @@ export type tb_medicosUncheckedUpdateWithoutTb_citasInput = {
   fecha_inicio?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   especialidad_id?: Prisma.IntFieldUpdateOperationsInput | number
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  visible_web?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  foto_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  perfil_publico?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orden_web?: Prisma.IntFieldUpdateOperationsInput | number
   tb_clinicas?: Prisma.tb_clinicasUncheckedUpdateManyWithoutTb_medicosNestedInput
   tb_ordenes_laboratorio?: Prisma.tb_ordenes_laboratorioUncheckedUpdateManyWithoutTb_medicosNestedInput
   tb_recetas?: Prisma.tb_recetasUncheckedUpdateManyWithoutTb_medicosNestedInput
@@ -728,6 +838,10 @@ export type tb_medicosCreateWithoutTb_clinicasInput = {
   estado?: boolean
   fecha_inicio?: Date | string | null
   fecha_creacion?: Date | string
+  visible_web?: boolean
+  foto_url?: string | null
+  perfil_publico?: string | null
+  orden_web?: number
   tb_citas?: Prisma.tb_citasCreateNestedManyWithoutTb_medicosInput
   tb_especialidades: Prisma.tb_especialidadesCreateNestedOneWithoutTb_medicosInput
   tb_ordenes_laboratorio?: Prisma.tb_ordenes_laboratorioCreateNestedManyWithoutTb_medicosInput
@@ -746,6 +860,10 @@ export type tb_medicosUncheckedCreateWithoutTb_clinicasInput = {
   fecha_inicio?: Date | string | null
   especialidad_id: number
   fecha_creacion?: Date | string
+  visible_web?: boolean
+  foto_url?: string | null
+  perfil_publico?: string | null
+  orden_web?: number
   tb_citas?: Prisma.tb_citasUncheckedCreateNestedManyWithoutTb_medicosInput
   tb_ordenes_laboratorio?: Prisma.tb_ordenes_laboratorioUncheckedCreateNestedManyWithoutTb_medicosInput
   tb_recetas?: Prisma.tb_recetasUncheckedCreateNestedManyWithoutTb_medicosInput
@@ -777,6 +895,10 @@ export type tb_medicosUpdateWithoutTb_clinicasInput = {
   estado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   fecha_inicio?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  visible_web?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  foto_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  perfil_publico?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orden_web?: Prisma.IntFieldUpdateOperationsInput | number
   tb_citas?: Prisma.tb_citasUpdateManyWithoutTb_medicosNestedInput
   tb_especialidades?: Prisma.tb_especialidadesUpdateOneRequiredWithoutTb_medicosNestedInput
   tb_ordenes_laboratorio?: Prisma.tb_ordenes_laboratorioUpdateManyWithoutTb_medicosNestedInput
@@ -795,6 +917,10 @@ export type tb_medicosUncheckedUpdateWithoutTb_clinicasInput = {
   fecha_inicio?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   especialidad_id?: Prisma.IntFieldUpdateOperationsInput | number
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  visible_web?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  foto_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  perfil_publico?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orden_web?: Prisma.IntFieldUpdateOperationsInput | number
   tb_citas?: Prisma.tb_citasUncheckedUpdateManyWithoutTb_medicosNestedInput
   tb_ordenes_laboratorio?: Prisma.tb_ordenes_laboratorioUncheckedUpdateManyWithoutTb_medicosNestedInput
   tb_recetas?: Prisma.tb_recetasUncheckedUpdateManyWithoutTb_medicosNestedInput
@@ -810,6 +936,10 @@ export type tb_medicosCreateWithoutTb_especialidadesInput = {
   estado?: boolean
   fecha_inicio?: Date | string | null
   fecha_creacion?: Date | string
+  visible_web?: boolean
+  foto_url?: string | null
+  perfil_publico?: string | null
+  orden_web?: number
   tb_citas?: Prisma.tb_citasCreateNestedManyWithoutTb_medicosInput
   tb_clinicas?: Prisma.tb_clinicasCreateNestedManyWithoutTb_medicosInput
   tb_ordenes_laboratorio?: Prisma.tb_ordenes_laboratorioCreateNestedManyWithoutTb_medicosInput
@@ -827,6 +957,10 @@ export type tb_medicosUncheckedCreateWithoutTb_especialidadesInput = {
   estado?: boolean
   fecha_inicio?: Date | string | null
   fecha_creacion?: Date | string
+  visible_web?: boolean
+  foto_url?: string | null
+  perfil_publico?: string | null
+  orden_web?: number
   tb_citas?: Prisma.tb_citasUncheckedCreateNestedManyWithoutTb_medicosInput
   tb_clinicas?: Prisma.tb_clinicasUncheckedCreateNestedManyWithoutTb_medicosInput
   tb_ordenes_laboratorio?: Prisma.tb_ordenes_laboratorioUncheckedCreateNestedManyWithoutTb_medicosInput
@@ -874,6 +1008,10 @@ export type tb_medicosScalarWhereInput = {
   fecha_inicio?: Prisma.DateTimeNullableFilter<"tb_medicos"> | Date | string | null
   especialidad_id?: Prisma.IntFilter<"tb_medicos"> | number
   fecha_creacion?: Prisma.DateTimeFilter<"tb_medicos"> | Date | string
+  visible_web?: Prisma.BoolFilter<"tb_medicos"> | boolean
+  foto_url?: Prisma.StringNullableFilter<"tb_medicos"> | string | null
+  perfil_publico?: Prisma.StringNullableFilter<"tb_medicos"> | string | null
+  orden_web?: Prisma.IntFilter<"tb_medicos"> | number
 }
 
 export type tb_medicosCreateWithoutTb_ordenes_laboratorioInput = {
@@ -885,6 +1023,10 @@ export type tb_medicosCreateWithoutTb_ordenes_laboratorioInput = {
   estado?: boolean
   fecha_inicio?: Date | string | null
   fecha_creacion?: Date | string
+  visible_web?: boolean
+  foto_url?: string | null
+  perfil_publico?: string | null
+  orden_web?: number
   tb_citas?: Prisma.tb_citasCreateNestedManyWithoutTb_medicosInput
   tb_clinicas?: Prisma.tb_clinicasCreateNestedManyWithoutTb_medicosInput
   tb_especialidades: Prisma.tb_especialidadesCreateNestedOneWithoutTb_medicosInput
@@ -903,6 +1045,10 @@ export type tb_medicosUncheckedCreateWithoutTb_ordenes_laboratorioInput = {
   fecha_inicio?: Date | string | null
   especialidad_id: number
   fecha_creacion?: Date | string
+  visible_web?: boolean
+  foto_url?: string | null
+  perfil_publico?: string | null
+  orden_web?: number
   tb_citas?: Prisma.tb_citasUncheckedCreateNestedManyWithoutTb_medicosInput
   tb_clinicas?: Prisma.tb_clinicasUncheckedCreateNestedManyWithoutTb_medicosInput
   tb_recetas?: Prisma.tb_recetasUncheckedCreateNestedManyWithoutTb_medicosInput
@@ -934,6 +1080,10 @@ export type tb_medicosUpdateWithoutTb_ordenes_laboratorioInput = {
   estado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   fecha_inicio?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  visible_web?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  foto_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  perfil_publico?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orden_web?: Prisma.IntFieldUpdateOperationsInput | number
   tb_citas?: Prisma.tb_citasUpdateManyWithoutTb_medicosNestedInput
   tb_clinicas?: Prisma.tb_clinicasUpdateManyWithoutTb_medicosNestedInput
   tb_especialidades?: Prisma.tb_especialidadesUpdateOneRequiredWithoutTb_medicosNestedInput
@@ -952,6 +1102,10 @@ export type tb_medicosUncheckedUpdateWithoutTb_ordenes_laboratorioInput = {
   fecha_inicio?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   especialidad_id?: Prisma.IntFieldUpdateOperationsInput | number
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  visible_web?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  foto_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  perfil_publico?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orden_web?: Prisma.IntFieldUpdateOperationsInput | number
   tb_citas?: Prisma.tb_citasUncheckedUpdateManyWithoutTb_medicosNestedInput
   tb_clinicas?: Prisma.tb_clinicasUncheckedUpdateManyWithoutTb_medicosNestedInput
   tb_recetas?: Prisma.tb_recetasUncheckedUpdateManyWithoutTb_medicosNestedInput
@@ -967,6 +1121,10 @@ export type tb_medicosCreateWithoutTb_recetasInput = {
   estado?: boolean
   fecha_inicio?: Date | string | null
   fecha_creacion?: Date | string
+  visible_web?: boolean
+  foto_url?: string | null
+  perfil_publico?: string | null
+  orden_web?: number
   tb_citas?: Prisma.tb_citasCreateNestedManyWithoutTb_medicosInput
   tb_clinicas?: Prisma.tb_clinicasCreateNestedManyWithoutTb_medicosInput
   tb_especialidades: Prisma.tb_especialidadesCreateNestedOneWithoutTb_medicosInput
@@ -985,6 +1143,10 @@ export type tb_medicosUncheckedCreateWithoutTb_recetasInput = {
   fecha_inicio?: Date | string | null
   especialidad_id: number
   fecha_creacion?: Date | string
+  visible_web?: boolean
+  foto_url?: string | null
+  perfil_publico?: string | null
+  orden_web?: number
   tb_citas?: Prisma.tb_citasUncheckedCreateNestedManyWithoutTb_medicosInput
   tb_clinicas?: Prisma.tb_clinicasUncheckedCreateNestedManyWithoutTb_medicosInput
   tb_ordenes_laboratorio?: Prisma.tb_ordenes_laboratorioUncheckedCreateNestedManyWithoutTb_medicosInput
@@ -1016,6 +1178,10 @@ export type tb_medicosUpdateWithoutTb_recetasInput = {
   estado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   fecha_inicio?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  visible_web?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  foto_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  perfil_publico?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orden_web?: Prisma.IntFieldUpdateOperationsInput | number
   tb_citas?: Prisma.tb_citasUpdateManyWithoutTb_medicosNestedInput
   tb_clinicas?: Prisma.tb_clinicasUpdateManyWithoutTb_medicosNestedInput
   tb_especialidades?: Prisma.tb_especialidadesUpdateOneRequiredWithoutTb_medicosNestedInput
@@ -1034,6 +1200,10 @@ export type tb_medicosUncheckedUpdateWithoutTb_recetasInput = {
   fecha_inicio?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   especialidad_id?: Prisma.IntFieldUpdateOperationsInput | number
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  visible_web?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  foto_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  perfil_publico?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orden_web?: Prisma.IntFieldUpdateOperationsInput | number
   tb_citas?: Prisma.tb_citasUncheckedUpdateManyWithoutTb_medicosNestedInput
   tb_clinicas?: Prisma.tb_clinicasUncheckedUpdateManyWithoutTb_medicosNestedInput
   tb_ordenes_laboratorio?: Prisma.tb_ordenes_laboratorioUncheckedUpdateManyWithoutTb_medicosNestedInput
@@ -1049,6 +1219,10 @@ export type tb_medicosCreateWithoutTb_usuariosInput = {
   estado?: boolean
   fecha_inicio?: Date | string | null
   fecha_creacion?: Date | string
+  visible_web?: boolean
+  foto_url?: string | null
+  perfil_publico?: string | null
+  orden_web?: number
   tb_citas?: Prisma.tb_citasCreateNestedManyWithoutTb_medicosInput
   tb_clinicas?: Prisma.tb_clinicasCreateNestedManyWithoutTb_medicosInput
   tb_especialidades: Prisma.tb_especialidadesCreateNestedOneWithoutTb_medicosInput
@@ -1067,6 +1241,10 @@ export type tb_medicosUncheckedCreateWithoutTb_usuariosInput = {
   fecha_inicio?: Date | string | null
   especialidad_id: number
   fecha_creacion?: Date | string
+  visible_web?: boolean
+  foto_url?: string | null
+  perfil_publico?: string | null
+  orden_web?: number
   tb_citas?: Prisma.tb_citasUncheckedCreateNestedManyWithoutTb_medicosInput
   tb_clinicas?: Prisma.tb_clinicasUncheckedCreateNestedManyWithoutTb_medicosInput
   tb_ordenes_laboratorio?: Prisma.tb_ordenes_laboratorioUncheckedCreateNestedManyWithoutTb_medicosInput
@@ -1098,6 +1276,10 @@ export type tb_medicosUpdateWithoutTb_usuariosInput = {
   estado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   fecha_inicio?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  visible_web?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  foto_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  perfil_publico?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orden_web?: Prisma.IntFieldUpdateOperationsInput | number
   tb_citas?: Prisma.tb_citasUpdateManyWithoutTb_medicosNestedInput
   tb_clinicas?: Prisma.tb_clinicasUpdateManyWithoutTb_medicosNestedInput
   tb_especialidades?: Prisma.tb_especialidadesUpdateOneRequiredWithoutTb_medicosNestedInput
@@ -1116,6 +1298,10 @@ export type tb_medicosUncheckedUpdateWithoutTb_usuariosInput = {
   fecha_inicio?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   especialidad_id?: Prisma.IntFieldUpdateOperationsInput | number
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  visible_web?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  foto_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  perfil_publico?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orden_web?: Prisma.IntFieldUpdateOperationsInput | number
   tb_citas?: Prisma.tb_citasUncheckedUpdateManyWithoutTb_medicosNestedInput
   tb_clinicas?: Prisma.tb_clinicasUncheckedUpdateManyWithoutTb_medicosNestedInput
   tb_ordenes_laboratorio?: Prisma.tb_ordenes_laboratorioUncheckedUpdateManyWithoutTb_medicosNestedInput
@@ -1132,6 +1318,10 @@ export type tb_medicosCreateManyTb_especialidadesInput = {
   estado?: boolean
   fecha_inicio?: Date | string | null
   fecha_creacion?: Date | string
+  visible_web?: boolean
+  foto_url?: string | null
+  perfil_publico?: string | null
+  orden_web?: number
 }
 
 export type tb_medicosUpdateWithoutTb_especialidadesInput = {
@@ -1143,6 +1333,10 @@ export type tb_medicosUpdateWithoutTb_especialidadesInput = {
   estado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   fecha_inicio?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  visible_web?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  foto_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  perfil_publico?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orden_web?: Prisma.IntFieldUpdateOperationsInput | number
   tb_citas?: Prisma.tb_citasUpdateManyWithoutTb_medicosNestedInput
   tb_clinicas?: Prisma.tb_clinicasUpdateManyWithoutTb_medicosNestedInput
   tb_ordenes_laboratorio?: Prisma.tb_ordenes_laboratorioUpdateManyWithoutTb_medicosNestedInput
@@ -1160,6 +1354,10 @@ export type tb_medicosUncheckedUpdateWithoutTb_especialidadesInput = {
   estado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   fecha_inicio?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  visible_web?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  foto_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  perfil_publico?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orden_web?: Prisma.IntFieldUpdateOperationsInput | number
   tb_citas?: Prisma.tb_citasUncheckedUpdateManyWithoutTb_medicosNestedInput
   tb_clinicas?: Prisma.tb_clinicasUncheckedUpdateManyWithoutTb_medicosNestedInput
   tb_ordenes_laboratorio?: Prisma.tb_ordenes_laboratorioUncheckedUpdateManyWithoutTb_medicosNestedInput
@@ -1177,6 +1375,10 @@ export type tb_medicosUncheckedUpdateManyWithoutTb_especialidadesInput = {
   estado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   fecha_inicio?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  visible_web?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  foto_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  perfil_publico?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orden_web?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 
@@ -1248,6 +1450,10 @@ export type tb_medicosSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   fecha_inicio?: boolean
   especialidad_id?: boolean
   fecha_creacion?: boolean
+  visible_web?: boolean
+  foto_url?: boolean
+  perfil_publico?: boolean
+  orden_web?: boolean
   tb_citas?: boolean | Prisma.tb_medicos$tb_citasArgs<ExtArgs>
   tb_clinicas?: boolean | Prisma.tb_medicos$tb_clinicasArgs<ExtArgs>
   tb_especialidades?: boolean | Prisma.tb_especialidadesDefaultArgs<ExtArgs>
@@ -1268,6 +1474,10 @@ export type tb_medicosSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ex
   fecha_inicio?: boolean
   especialidad_id?: boolean
   fecha_creacion?: boolean
+  visible_web?: boolean
+  foto_url?: boolean
+  perfil_publico?: boolean
+  orden_web?: boolean
   tb_especialidades?: boolean | Prisma.tb_especialidadesDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["tb_medicos"]>
 
@@ -1282,6 +1492,10 @@ export type tb_medicosSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
   fecha_inicio?: boolean
   especialidad_id?: boolean
   fecha_creacion?: boolean
+  visible_web?: boolean
+  foto_url?: boolean
+  perfil_publico?: boolean
+  orden_web?: boolean
   tb_especialidades?: boolean | Prisma.tb_especialidadesDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["tb_medicos"]>
 
@@ -1296,9 +1510,13 @@ export type tb_medicosSelectScalar = {
   fecha_inicio?: boolean
   especialidad_id?: boolean
   fecha_creacion?: boolean
+  visible_web?: boolean
+  foto_url?: boolean
+  perfil_publico?: boolean
+  orden_web?: boolean
 }
 
-export type tb_medicosOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nombre" | "dpi" | "colegiado" | "numero_telefono" | "correo" | "estado" | "fecha_inicio" | "especialidad_id" | "fecha_creacion", ExtArgs["result"]["tb_medicos"]>
+export type tb_medicosOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nombre" | "dpi" | "colegiado" | "numero_telefono" | "correo" | "estado" | "fecha_inicio" | "especialidad_id" | "fecha_creacion" | "visible_web" | "foto_url" | "perfil_publico" | "orden_web", ExtArgs["result"]["tb_medicos"]>
 export type tb_medicosInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tb_citas?: boolean | Prisma.tb_medicos$tb_citasArgs<ExtArgs>
   tb_clinicas?: boolean | Prisma.tb_medicos$tb_clinicasArgs<ExtArgs>
@@ -1336,6 +1554,10 @@ export type $tb_medicosPayload<ExtArgs extends runtime.Types.Extensions.Internal
     fecha_inicio: Date | null
     especialidad_id: number
     fecha_creacion: Date
+    visible_web: boolean
+    foto_url: string | null
+    perfil_publico: string | null
+    orden_web: number
   }, ExtArgs["result"]["tb_medicos"]>
   composites: {}
 }
@@ -1775,6 +1997,10 @@ export interface tb_medicosFieldRefs {
   readonly fecha_inicio: Prisma.FieldRef<"tb_medicos", 'DateTime'>
   readonly especialidad_id: Prisma.FieldRef<"tb_medicos", 'Int'>
   readonly fecha_creacion: Prisma.FieldRef<"tb_medicos", 'DateTime'>
+  readonly visible_web: Prisma.FieldRef<"tb_medicos", 'Boolean'>
+  readonly foto_url: Prisma.FieldRef<"tb_medicos", 'String'>
+  readonly perfil_publico: Prisma.FieldRef<"tb_medicos", 'String'>
+  readonly orden_web: Prisma.FieldRef<"tb_medicos", 'Int'>
 }
     
 

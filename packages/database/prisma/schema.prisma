@@ -235,7 +235,10 @@ model tb_estilos {
   icono       String?       @db.VarChar(100)
   posicion    String        @default("inferior_derecha") @db.VarChar(30)
   estado      Boolean       @default(true)
+  fecha_creacion DateTime    @default(now()) @db.Timestamp(6)
   tb_anuncios tb_anuncios[]
+
+  @@index([estado, nombre, id], map: "ix_tb_estilos_estado_nombre")
 }
 
 /// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
@@ -265,7 +268,10 @@ model tb_galeria {
   definicion     String?
   imagen_url     String   @db.VarChar(500)
   estado         Boolean  @default(true)
+  orden_web      Int      @default(0)
   fecha_creacion DateTime @default(now()) @db.Timestamp(6)
+
+  @@index([estado, orden_web, id], map: "ix_tb_galeria_publicacion")
 }
 
 /// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
@@ -321,6 +327,10 @@ model tb_medicos {
   fecha_inicio           DateTime?                @db.Date
   especialidad_id        Int
   fecha_creacion         DateTime                 @default(now()) @db.Timestamp(6)
+  visible_web           Boolean                  @default(false)
+  foto_url              String?                  @db.VarChar(500)
+  perfil_publico        String?
+  orden_web             Int                      @default(0)
   tb_citas               tb_citas[]
   tb_clinicas            tb_clinicas[]
   tb_especialidades      tb_especialidades        @relation(fields: [especialidad_id], references: [id], map: "fk_tb_medicos_especialidad")
@@ -331,6 +341,7 @@ model tb_medicos {
   @@index([especialidad_id], map: "ix_tb_medicos_especialidad_id")
   @@index([estado], map: "ix_tb_medicos_estado")
   @@index([especialidad_id, estado, id], map: "ix_tb_medicos_especialidad_estado_id")
+  @@index([visible_web, estado, orden_web, id], map: "ix_tb_medicos_publicacion")
 }
 
 /// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
@@ -423,6 +434,8 @@ model tb_promociones {
   estado         Boolean       @default(true)
   fecha_creacion DateTime      @default(now()) @db.Timestamp(6)
   tb_anuncios    tb_anuncios[]
+
+  @@index([estado, fecha_inicio, fecha_fin, id], map: "ix_tb_promociones_publicacion")
 }
 
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
@@ -499,10 +512,13 @@ model tb_servicios {
   imagen_url                    String?                         @db.VarChar(255)
   estado                        Boolean                         @default(true)
   fecha_creacion                DateTime                        @default(now()) @db.Timestamp(6)
+  visible_web                  Boolean                         @default(false)
+  orden_web                    Int                             @default(0)
   tb_consentimientos_informados tb_consentimientos_informados[]
   tb_consulta_servicios         tb_consulta_servicios[]
 
   @@index([estado, id], map: "ix_tb_servicios_estado_id")
+  @@index([visible_web, estado, orden_web, id], map: "ix_tb_servicios_publicacion")
 }
 
 /// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.

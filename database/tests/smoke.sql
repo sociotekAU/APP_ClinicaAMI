@@ -37,6 +37,38 @@ DO $$
 BEGIN
     IF NOT EXISTS (
         SELECT 1
+          FROM tb_permisos_rol p
+          JOIN tb_roles r ON r.id_rol = p.id_rol
+         WHERE p.modulo = 'contenido_web'
+           AND r.nombre_rol = 'Administrador'
+           AND p.puede_leer = TRUE
+           AND p.puede_escribir = TRUE
+           AND p.puede_borrar = FALSE
+    ) OR EXISTS (
+        SELECT 1
+          FROM tb_permisos_rol p
+          JOIN tb_roles r ON r.id_rol = p.id_rol
+         WHERE p.modulo = 'contenido_web'
+           AND r.nombre_rol <> 'Administrador'
+           AND (p.puede_leer OR p.puede_escribir OR p.puede_borrar)
+    ) THEN
+        RAISE EXCEPTION 'La administración web no está restringida inicialmente al administrador.';
+    END IF;
+
+    IF EXISTS (SELECT 1 FROM tb_servicios WHERE orden_web < 0)
+       OR EXISTS (SELECT 1 FROM tb_medicos WHERE orden_web < 0)
+       OR EXISTS (SELECT 1 FROM tb_galeria WHERE orden_web < 0) THEN
+        RAISE EXCEPTION 'Se encontraron órdenes web negativos.';
+    END IF;
+
+    IF NOT EXISTS (SELECT 1 FROM tb_servicios WHERE visible_web)
+       OR NOT EXISTS (SELECT 1 FROM tb_medicos WHERE visible_web)
+       OR NOT EXISTS (SELECT 1 FROM tb_galeria WHERE estado) THEN
+        RAISE EXCEPTION 'El seed no contiene contenido visible para la vista previa web.';
+    END IF;
+
+    IF NOT EXISTS (
+        SELECT 1
           FROM tb_especialidades
          WHERE nombre = 'Psiquiatría'
            AND admite_expediente_psicologico = TRUE

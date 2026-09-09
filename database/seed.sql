@@ -106,6 +106,7 @@ WITH permisos(nombre_rol, modulo, puede_leer, puede_escribir, puede_borrar) AS (
         ('Administrador', 'archivos_estudios', TRUE, TRUE, FALSE),
         ('Administrador', 'consentimientos', TRUE, TRUE, FALSE),
         ('Administrador', 'auditoria', TRUE, FALSE, FALSE),
+        ('Administrador', 'contenido_web', TRUE, TRUE, FALSE),
         ('Médico', 'pacientes', TRUE, TRUE, FALSE),
         ('Médico', 'agenda', TRUE, TRUE, FALSE),
         ('Médico', 'expediente_general', TRUE, TRUE, FALSE),
@@ -212,13 +213,17 @@ SELECT
     TRUE
 WHERE NOT EXISTS (SELECT 1 FROM tb_contacto WHERE estado = TRUE);
 
-INSERT INTO tb_servicios (nombre, descripcion, precio, imagen_url, estado)
+INSERT INTO tb_servicios (
+    nombre, descripcion, precio, imagen_url, estado, visible_web, orden_web
+)
 SELECT
     'Consulta de Medicina Biológica Integrativa',
     'Consulta integral; registro inicial de demostración.',
     0,
     NULL,
-    TRUE
+    TRUE,
+    TRUE,
+    1
 WHERE NOT EXISTS (
     SELECT 1 FROM tb_servicios
     WHERE LOWER(nombre) = LOWER('Consulta de Medicina Biológica Integrativa')
@@ -278,12 +283,13 @@ SET color_fondo = EXCLUDED.color_fondo,
     icono = EXCLUDED.icono,
     estado = EXCLUDED.estado;
 
-INSERT INTO tb_galeria (titulo, definicion, imagen_url, estado)
+INSERT INTO tb_galeria (titulo, definicion, imagen_url, estado, orden_web)
 SELECT
     'Identidad de Clínica A.M.I.',
     'Imagen institucional inicial.',
     '/MEDIA/LOGO.jpg',
-    TRUE
+    TRUE,
+    1
 WHERE NOT EXISTS (
     SELECT 1 FROM tb_galeria
     WHERE titulo = 'Identidad de Clínica A.M.I.'
@@ -323,6 +329,24 @@ WHERE e.nombre = 'Institucional A.M.I.'
   AND NOT EXISTS (
       SELECT 1 FROM tb_anuncios WHERE titulo = 'Anuncio de demostración'
   );
+
+-- La visibilidad pública no altera el estado clínico de los profesionales.
+UPDATE tb_medicos AS m
+   SET visible_web = TRUE,
+       orden_web = v.orden
+  FROM (VALUES
+    ('Dra. Brenda Montufar', 1),
+    ('Dra. Mónica Mónzon', 2),
+    ('Dra. Olga Calvillo', 3),
+    ('Tec. Enrique Mes', 4),
+    ('Dr. Moisés Valdez', 5),
+    ('Licda. Castañeda', 6),
+    ('Licda. Carla Martínez', 7),
+    ('Tec. Seong Nam Kim', 8),
+    ('Tec. Ovidio Pelaez', 9),
+    ('Licda. Ligia Juárez', 10)
+  ) AS v(nombre, orden)
+ WHERE LOWER(m.nombre) = LOWER(v.nombre);
 
 -- Datos clínicos de demostración --------------------------------------------
 

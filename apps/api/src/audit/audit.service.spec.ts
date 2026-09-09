@@ -111,4 +111,11 @@ describe("AuditService", () => {
     expect(service.shouldAudit(request({ method: "GET" }))).toBe(false);
     expect(service.shouldAudit(request({ authUser: undefined, method: "POST", url: "/api/v1/auth/login" }))).toBe(false);
   });
+
+  it("incluye los cambios del contenido web en la trazabilidad", async () => {
+    const snapshot = vi.fn().mockResolvedValue([{ snapshot: { id: 4, estado: false } }]);
+    const service = new AuditService({ client: { $queryRawUnsafe: snapshot } } as unknown as DatabaseService);
+    const prepared = await service.prepare(request({ url: "/api/v1/web-content/gallery/4/status", params: { id: "4" } }));
+    expect(prepared).toMatchObject({ recordId: "4", target: { module: "contenido_web", entity: "galeria_web", table: "tb_galeria" } });
+  });
 });

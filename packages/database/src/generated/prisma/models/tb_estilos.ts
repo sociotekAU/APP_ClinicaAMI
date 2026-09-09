@@ -43,6 +43,7 @@ export type Tb_estilosMinAggregateOutputType = {
   icono: string | null
   posicion: string | null
   estado: boolean | null
+  fecha_creacion: Date | null
 }
 
 export type Tb_estilosMaxAggregateOutputType = {
@@ -53,6 +54,7 @@ export type Tb_estilosMaxAggregateOutputType = {
   icono: string | null
   posicion: string | null
   estado: boolean | null
+  fecha_creacion: Date | null
 }
 
 export type Tb_estilosCountAggregateOutputType = {
@@ -63,6 +65,7 @@ export type Tb_estilosCountAggregateOutputType = {
   icono: number
   posicion: number
   estado: number
+  fecha_creacion: number
   _all: number
 }
 
@@ -83,6 +86,7 @@ export type Tb_estilosMinAggregateInputType = {
   icono?: true
   posicion?: true
   estado?: true
+  fecha_creacion?: true
 }
 
 export type Tb_estilosMaxAggregateInputType = {
@@ -93,6 +97,7 @@ export type Tb_estilosMaxAggregateInputType = {
   icono?: true
   posicion?: true
   estado?: true
+  fecha_creacion?: true
 }
 
 export type Tb_estilosCountAggregateInputType = {
@@ -103,6 +108,7 @@ export type Tb_estilosCountAggregateInputType = {
   icono?: true
   posicion?: true
   estado?: true
+  fecha_creacion?: true
   _all?: true
 }
 
@@ -200,6 +206,7 @@ export type Tb_estilosGroupByOutputType = {
   icono: string | null
   posicion: string
   estado: boolean
+  fecha_creacion: Date
   _count: Tb_estilosCountAggregateOutputType | null
   _avg: Tb_estilosAvgAggregateOutputType | null
   _sum: Tb_estilosSumAggregateOutputType | null
@@ -233,6 +240,7 @@ export type tb_estilosWhereInput = {
   icono?: Prisma.StringNullableFilter<"tb_estilos"> | string | null
   posicion?: Prisma.StringFilter<"tb_estilos"> | string
   estado?: Prisma.BoolFilter<"tb_estilos"> | boolean
+  fecha_creacion?: Prisma.DateTimeFilter<"tb_estilos"> | Date | string
   tb_anuncios?: Prisma.Tb_anunciosListRelationFilter
 }
 
@@ -244,6 +252,7 @@ export type tb_estilosOrderByWithRelationInput = {
   icono?: Prisma.SortOrderInput | Prisma.SortOrder
   posicion?: Prisma.SortOrder
   estado?: Prisma.SortOrder
+  fecha_creacion?: Prisma.SortOrder
   tb_anuncios?: Prisma.tb_anunciosOrderByRelationAggregateInput
 }
 
@@ -258,6 +267,7 @@ export type tb_estilosWhereUniqueInput = Prisma.AtLeast<{
   icono?: Prisma.StringNullableFilter<"tb_estilos"> | string | null
   posicion?: Prisma.StringFilter<"tb_estilos"> | string
   estado?: Prisma.BoolFilter<"tb_estilos"> | boolean
+  fecha_creacion?: Prisma.DateTimeFilter<"tb_estilos"> | Date | string
   tb_anuncios?: Prisma.Tb_anunciosListRelationFilter
 }, "id" | "nombre">
 
@@ -269,6 +279,7 @@ export type tb_estilosOrderByWithAggregationInput = {
   icono?: Prisma.SortOrderInput | Prisma.SortOrder
   posicion?: Prisma.SortOrder
   estado?: Prisma.SortOrder
+  fecha_creacion?: Prisma.SortOrder
   _count?: Prisma.tb_estilosCountOrderByAggregateInput
   _avg?: Prisma.tb_estilosAvgOrderByAggregateInput
   _max?: Prisma.tb_estilosMaxOrderByAggregateInput
@@ -287,6 +298,7 @@ export type tb_estilosScalarWhereWithAggregatesInput = {
   icono?: Prisma.StringNullableWithAggregatesFilter<"tb_estilos"> | string | null
   posicion?: Prisma.StringWithAggregatesFilter<"tb_estilos"> | string
   estado?: Prisma.BoolWithAggregatesFilter<"tb_estilos"> | boolean
+  fecha_creacion?: Prisma.DateTimeWithAggregatesFilter<"tb_estilos"> | Date | string
 }
 
 export type tb_estilosCreateInput = {
@@ -296,6 +308,7 @@ export type tb_estilosCreateInput = {
   icono?: string | null
   posicion?: string
   estado?: boolean
+  fecha_creacion?: Date | string
   tb_anuncios?: Prisma.tb_anunciosCreateNestedManyWithoutTb_estilosInput
 }
 
@@ -307,6 +320,7 @@ export type tb_estilosUncheckedCreateInput = {
   icono?: string | null
   posicion?: string
   estado?: boolean
+  fecha_creacion?: Date | string
   tb_anuncios?: Prisma.tb_anunciosUncheckedCreateNestedManyWithoutTb_estilosInput
 }
 
@@ -317,6 +331,7 @@ export type tb_estilosUpdateInput = {
   icono?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   posicion?: Prisma.StringFieldUpdateOperationsInput | string
   estado?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tb_anuncios?: Prisma.tb_anunciosUpdateManyWithoutTb_estilosNestedInput
 }
 
@@ -328,6 +343,7 @@ export type tb_estilosUncheckedUpdateInput = {
   icono?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   posicion?: Prisma.StringFieldUpdateOperationsInput | string
   estado?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tb_anuncios?: Prisma.tb_anunciosUncheckedUpdateManyWithoutTb_estilosNestedInput
 }
 
@@ -339,6 +355,7 @@ export type tb_estilosCreateManyInput = {
   icono?: string | null
   posicion?: string
   estado?: boolean
+  fecha_creacion?: Date | string
 }
 
 export type tb_estilosUpdateManyMutationInput = {
@@ -348,6 +365,7 @@ export type tb_estilosUpdateManyMutationInput = {
   icono?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   posicion?: Prisma.StringFieldUpdateOperationsInput | string
   estado?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type tb_estilosUncheckedUpdateManyInput = {
@@ -358,6 +376,7 @@ export type tb_estilosUncheckedUpdateManyInput = {
   icono?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   posicion?: Prisma.StringFieldUpdateOperationsInput | string
   estado?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type Tb_estilosScalarRelationFilter = {
@@ -373,6 +392,7 @@ export type tb_estilosCountOrderByAggregateInput = {
   icono?: Prisma.SortOrder
   posicion?: Prisma.SortOrder
   estado?: Prisma.SortOrder
+  fecha_creacion?: Prisma.SortOrder
 }
 
 export type tb_estilosAvgOrderByAggregateInput = {
@@ -387,6 +407,7 @@ export type tb_estilosMaxOrderByAggregateInput = {
   icono?: Prisma.SortOrder
   posicion?: Prisma.SortOrder
   estado?: Prisma.SortOrder
+  fecha_creacion?: Prisma.SortOrder
 }
 
 export type tb_estilosMinOrderByAggregateInput = {
@@ -397,6 +418,7 @@ export type tb_estilosMinOrderByAggregateInput = {
   icono?: Prisma.SortOrder
   posicion?: Prisma.SortOrder
   estado?: Prisma.SortOrder
+  fecha_creacion?: Prisma.SortOrder
 }
 
 export type tb_estilosSumOrderByAggregateInput = {
@@ -424,6 +446,7 @@ export type tb_estilosCreateWithoutTb_anunciosInput = {
   icono?: string | null
   posicion?: string
   estado?: boolean
+  fecha_creacion?: Date | string
 }
 
 export type tb_estilosUncheckedCreateWithoutTb_anunciosInput = {
@@ -434,6 +457,7 @@ export type tb_estilosUncheckedCreateWithoutTb_anunciosInput = {
   icono?: string | null
   posicion?: string
   estado?: boolean
+  fecha_creacion?: Date | string
 }
 
 export type tb_estilosCreateOrConnectWithoutTb_anunciosInput = {
@@ -459,6 +483,7 @@ export type tb_estilosUpdateWithoutTb_anunciosInput = {
   icono?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   posicion?: Prisma.StringFieldUpdateOperationsInput | string
   estado?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type tb_estilosUncheckedUpdateWithoutTb_anunciosInput = {
@@ -469,6 +494,7 @@ export type tb_estilosUncheckedUpdateWithoutTb_anunciosInput = {
   icono?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   posicion?: Prisma.StringFieldUpdateOperationsInput | string
   estado?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -510,6 +536,7 @@ export type tb_estilosSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   icono?: boolean
   posicion?: boolean
   estado?: boolean
+  fecha_creacion?: boolean
   tb_anuncios?: boolean | Prisma.tb_estilos$tb_anunciosArgs<ExtArgs>
   _count?: boolean | Prisma.Tb_estilosCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["tb_estilos"]>
@@ -522,6 +549,7 @@ export type tb_estilosSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ex
   icono?: boolean
   posicion?: boolean
   estado?: boolean
+  fecha_creacion?: boolean
 }, ExtArgs["result"]["tb_estilos"]>
 
 export type tb_estilosSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -532,6 +560,7 @@ export type tb_estilosSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
   icono?: boolean
   posicion?: boolean
   estado?: boolean
+  fecha_creacion?: boolean
 }, ExtArgs["result"]["tb_estilos"]>
 
 export type tb_estilosSelectScalar = {
@@ -542,9 +571,10 @@ export type tb_estilosSelectScalar = {
   icono?: boolean
   posicion?: boolean
   estado?: boolean
+  fecha_creacion?: boolean
 }
 
-export type tb_estilosOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nombre" | "color_fondo" | "color_texto" | "icono" | "posicion" | "estado", ExtArgs["result"]["tb_estilos"]>
+export type tb_estilosOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nombre" | "color_fondo" | "color_texto" | "icono" | "posicion" | "estado" | "fecha_creacion", ExtArgs["result"]["tb_estilos"]>
 export type tb_estilosInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tb_anuncios?: boolean | Prisma.tb_estilos$tb_anunciosArgs<ExtArgs>
   _count?: boolean | Prisma.Tb_estilosCountOutputTypeDefaultArgs<ExtArgs>
@@ -565,6 +595,7 @@ export type $tb_estilosPayload<ExtArgs extends runtime.Types.Extensions.Internal
     icono: string | null
     posicion: string
     estado: boolean
+    fecha_creacion: Date
   }, ExtArgs["result"]["tb_estilos"]>
   composites: {}
 }
@@ -996,6 +1027,7 @@ export interface tb_estilosFieldRefs {
   readonly icono: Prisma.FieldRef<"tb_estilos", 'String'>
   readonly posicion: Prisma.FieldRef<"tb_estilos", 'String'>
   readonly estado: Prisma.FieldRef<"tb_estilos", 'Boolean'>
+  readonly fecha_creacion: Prisma.FieldRef<"tb_estilos", 'DateTime'>
 }
     
 

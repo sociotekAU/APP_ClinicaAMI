@@ -11,6 +11,7 @@ import { ErpModule } from "./erp/erp.module";
 import { HealthController } from "./health/health.controller";
 import { HealthService } from "./health/health.service";
 import { LaboratoryModule } from "./laboratory/laboratory.module";
+import { WebContentModule } from "./web-content/web-content.module";
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { LaboratoryModule } from "./laboratory/laboratory.module";
     ClinicalOperationsModule,
     LaboratoryModule,
     AdministrationModule,
+    WebContentModule,
     ErpModule,
     ThrottlerModule.forRoot([
       {

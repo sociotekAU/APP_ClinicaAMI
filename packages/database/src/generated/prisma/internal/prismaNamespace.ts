@@ -2956,7 +2956,8 @@ export const Tb_estilosScalarFieldEnum = {
   color_texto: 'color_texto',
   icono: 'icono',
   posicion: 'posicion',
-  estado: 'estado'
+  estado: 'estado',
+  fecha_creacion: 'fecha_creacion'
 } as const
 
 export type Tb_estilosScalarFieldEnum = (typeof Tb_estilosScalarFieldEnum)[keyof typeof Tb_estilosScalarFieldEnum]
@@ -2982,6 +2983,7 @@ export const Tb_galeriaScalarFieldEnum = {
   definicion: 'definicion',
   imagen_url: 'imagen_url',
   estado: 'estado',
+  orden_web: 'orden_web',
   fecha_creacion: 'fecha_creacion'
 } as const
 
@@ -3028,7 +3030,11 @@ export const Tb_medicosScalarFieldEnum = {
   estado: 'estado',
   fecha_inicio: 'fecha_inicio',
   especialidad_id: 'especialidad_id',
-  fecha_creacion: 'fecha_creacion'
+  fecha_creacion: 'fecha_creacion',
+  visible_web: 'visible_web',
+  foto_url: 'foto_url',
+  perfil_publico: 'perfil_publico',
+  orden_web: 'orden_web'
 } as const
 
 export type Tb_medicosScalarFieldEnum = (typeof Tb_medicosScalarFieldEnum)[keyof typeof Tb_medicosScalarFieldEnum]
@@ -3160,7 +3166,9 @@ export const Tb_serviciosScalarFieldEnum = {
   precio: 'precio',
   imagen_url: 'imagen_url',
   estado: 'estado',
-  fecha_creacion: 'fecha_creacion'
+  fecha_creacion: 'fecha_creacion',
+  visible_web: 'visible_web',
+  orden_web: 'orden_web'
 } as const
 
 export type Tb_serviciosScalarFieldEnum = (typeof Tb_serviciosScalarFieldEnum)[keyof typeof Tb_serviciosScalarFieldEnum]
@@ -3330,28 +3338,28 @@ export type DecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel,
  * Reference to a field of type 'Decimal[]'
  */
 export type ListDecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal[]'>
-
+    
 
 
 /**
  * Reference to a field of type 'BigInt'
  */
 export type BigIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BigInt'>
-
+    
 
 
 /**
  * Reference to a field of type 'BigInt[]'
  */
 export type ListBigIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BigInt[]'>
-
+    
 
 
 /**
  * Reference to a field of type 'Json'
  */
 export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
-
+    
 
 
 /**
@@ -3618,3 +3626,4 @@ export type PrismaAction =
  * `PrismaClient` proxy available in interactive transactions.
  */
 export type TransactionClient = Omit<DefaultPrismaClient, runtime.ITXClientDenyList>
+

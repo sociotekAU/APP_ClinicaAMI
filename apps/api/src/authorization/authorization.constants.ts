@@ -30,6 +30,7 @@ export const ERP_MODULE_CODES: readonly ErpModuleCode[] = [
   "archivos_estudios",
   "consentimientos",
   "auditoria",
+  "contenido_web",
 ];
 
 export const ERP_MODULES = new Set<ErpModuleCode>(ERP_MODULE_CODES);
@@ -110,6 +111,13 @@ export const ERP_NAVIGATION: readonly ErpNavigationItem[] = [
     label: "Auditoría",
     description: "Trazabilidad de cambios y operaciones sensibles.",
     href: "/panel/modulos/auditoria",
+    section: "Administración",
+  },
+  {
+    module: "contenido_web",
+    label: "Contenido web",
+    description: "Contacto, publicaciones y contenido de la futura landing.",
+    href: "/panel/modulos/contenido_web",
     section: "Administración",
   },
   {

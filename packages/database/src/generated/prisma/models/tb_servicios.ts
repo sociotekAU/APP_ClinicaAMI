@@ -30,11 +30,13 @@ export type AggregateTb_servicios = {
 export type Tb_serviciosAvgAggregateOutputType = {
   id: number | null
   precio: runtime.Decimal | null
+  orden_web: number | null
 }
 
 export type Tb_serviciosSumAggregateOutputType = {
   id: number | null
   precio: runtime.Decimal | null
+  orden_web: number | null
 }
 
 export type Tb_serviciosMinAggregateOutputType = {
@@ -45,6 +47,8 @@ export type Tb_serviciosMinAggregateOutputType = {
   imagen_url: string | null
   estado: boolean | null
   fecha_creacion: Date | null
+  visible_web: boolean | null
+  orden_web: number | null
 }
 
 export type Tb_serviciosMaxAggregateOutputType = {
@@ -55,6 +59,8 @@ export type Tb_serviciosMaxAggregateOutputType = {
   imagen_url: string | null
   estado: boolean | null
   fecha_creacion: Date | null
+  visible_web: boolean | null
+  orden_web: number | null
 }
 
 export type Tb_serviciosCountAggregateOutputType = {
@@ -65,6 +71,8 @@ export type Tb_serviciosCountAggregateOutputType = {
   imagen_url: number
   estado: number
   fecha_creacion: number
+  visible_web: number
+  orden_web: number
   _all: number
 }
 
@@ -72,11 +80,13 @@ export type Tb_serviciosCountAggregateOutputType = {
 export type Tb_serviciosAvgAggregateInputType = {
   id?: true
   precio?: true
+  orden_web?: true
 }
 
 export type Tb_serviciosSumAggregateInputType = {
   id?: true
   precio?: true
+  orden_web?: true
 }
 
 export type Tb_serviciosMinAggregateInputType = {
@@ -87,6 +97,8 @@ export type Tb_serviciosMinAggregateInputType = {
   imagen_url?: true
   estado?: true
   fecha_creacion?: true
+  visible_web?: true
+  orden_web?: true
 }
 
 export type Tb_serviciosMaxAggregateInputType = {
@@ -97,6 +109,8 @@ export type Tb_serviciosMaxAggregateInputType = {
   imagen_url?: true
   estado?: true
   fecha_creacion?: true
+  visible_web?: true
+  orden_web?: true
 }
 
 export type Tb_serviciosCountAggregateInputType = {
@@ -107,6 +121,8 @@ export type Tb_serviciosCountAggregateInputType = {
   imagen_url?: true
   estado?: true
   fecha_creacion?: true
+  visible_web?: true
+  orden_web?: true
   _all?: true
 }
 
@@ -204,6 +220,8 @@ export type Tb_serviciosGroupByOutputType = {
   imagen_url: string | null
   estado: boolean
   fecha_creacion: Date
+  visible_web: boolean
+  orden_web: number
   _count: Tb_serviciosCountAggregateOutputType | null
   _avg: Tb_serviciosAvgAggregateOutputType | null
   _sum: Tb_serviciosSumAggregateOutputType | null
@@ -237,6 +255,8 @@ export type tb_serviciosWhereInput = {
   imagen_url?: Prisma.StringNullableFilter<"tb_servicios"> | string | null
   estado?: Prisma.BoolFilter<"tb_servicios"> | boolean
   fecha_creacion?: Prisma.DateTimeFilter<"tb_servicios"> | Date | string
+  visible_web?: Prisma.BoolFilter<"tb_servicios"> | boolean
+  orden_web?: Prisma.IntFilter<"tb_servicios"> | number
   tb_consentimientos_informados?: Prisma.Tb_consentimientos_informadosListRelationFilter
   tb_consulta_servicios?: Prisma.Tb_consulta_serviciosListRelationFilter
 }
@@ -249,6 +269,8 @@ export type tb_serviciosOrderByWithRelationInput = {
   imagen_url?: Prisma.SortOrderInput | Prisma.SortOrder
   estado?: Prisma.SortOrder
   fecha_creacion?: Prisma.SortOrder
+  visible_web?: Prisma.SortOrder
+  orden_web?: Prisma.SortOrder
   tb_consentimientos_informados?: Prisma.tb_consentimientos_informadosOrderByRelationAggregateInput
   tb_consulta_servicios?: Prisma.tb_consulta_serviciosOrderByRelationAggregateInput
 }
@@ -264,6 +286,8 @@ export type tb_serviciosWhereUniqueInput = Prisma.AtLeast<{
   imagen_url?: Prisma.StringNullableFilter<"tb_servicios"> | string | null
   estado?: Prisma.BoolFilter<"tb_servicios"> | boolean
   fecha_creacion?: Prisma.DateTimeFilter<"tb_servicios"> | Date | string
+  visible_web?: Prisma.BoolFilter<"tb_servicios"> | boolean
+  orden_web?: Prisma.IntFilter<"tb_servicios"> | number
   tb_consentimientos_informados?: Prisma.Tb_consentimientos_informadosListRelationFilter
   tb_consulta_servicios?: Prisma.Tb_consulta_serviciosListRelationFilter
 }, "id">
@@ -276,6 +300,8 @@ export type tb_serviciosOrderByWithAggregationInput = {
   imagen_url?: Prisma.SortOrderInput | Prisma.SortOrder
   estado?: Prisma.SortOrder
   fecha_creacion?: Prisma.SortOrder
+  visible_web?: Prisma.SortOrder
+  orden_web?: Prisma.SortOrder
   _count?: Prisma.tb_serviciosCountOrderByAggregateInput
   _avg?: Prisma.tb_serviciosAvgOrderByAggregateInput
   _max?: Prisma.tb_serviciosMaxOrderByAggregateInput
@@ -294,6 +320,8 @@ export type tb_serviciosScalarWhereWithAggregatesInput = {
   imagen_url?: Prisma.StringNullableWithAggregatesFilter<"tb_servicios"> | string | null
   estado?: Prisma.BoolWithAggregatesFilter<"tb_servicios"> | boolean
   fecha_creacion?: Prisma.DateTimeWithAggregatesFilter<"tb_servicios"> | Date | string
+  visible_web?: Prisma.BoolWithAggregatesFilter<"tb_servicios"> | boolean
+  orden_web?: Prisma.IntWithAggregatesFilter<"tb_servicios"> | number
 }
 
 export type tb_serviciosCreateInput = {
@@ -303,6 +331,8 @@ export type tb_serviciosCreateInput = {
   imagen_url?: string | null
   estado?: boolean
   fecha_creacion?: Date | string
+  visible_web?: boolean
+  orden_web?: number
   tb_consentimientos_informados?: Prisma.tb_consentimientos_informadosCreateNestedManyWithoutTb_serviciosInput
   tb_consulta_servicios?: Prisma.tb_consulta_serviciosCreateNestedManyWithoutTb_serviciosInput
 }
@@ -315,6 +345,8 @@ export type tb_serviciosUncheckedCreateInput = {
   imagen_url?: string | null
   estado?: boolean
   fecha_creacion?: Date | string
+  visible_web?: boolean
+  orden_web?: number
   tb_consentimientos_informados?: Prisma.tb_consentimientos_informadosUncheckedCreateNestedManyWithoutTb_serviciosInput
   tb_consulta_servicios?: Prisma.tb_consulta_serviciosUncheckedCreateNestedManyWithoutTb_serviciosInput
 }
@@ -326,6 +358,8 @@ export type tb_serviciosUpdateInput = {
   imagen_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   estado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  visible_web?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  orden_web?: Prisma.IntFieldUpdateOperationsInput | number
   tb_consentimientos_informados?: Prisma.tb_consentimientos_informadosUpdateManyWithoutTb_serviciosNestedInput
   tb_consulta_servicios?: Prisma.tb_consulta_serviciosUpdateManyWithoutTb_serviciosNestedInput
 }
@@ -338,6 +372,8 @@ export type tb_serviciosUncheckedUpdateInput = {
   imagen_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   estado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  visible_web?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  orden_web?: Prisma.IntFieldUpdateOperationsInput | number
   tb_consentimientos_informados?: Prisma.tb_consentimientos_informadosUncheckedUpdateManyWithoutTb_serviciosNestedInput
   tb_consulta_servicios?: Prisma.tb_consulta_serviciosUncheckedUpdateManyWithoutTb_serviciosNestedInput
 }
@@ -350,6 +386,8 @@ export type tb_serviciosCreateManyInput = {
   imagen_url?: string | null
   estado?: boolean
   fecha_creacion?: Date | string
+  visible_web?: boolean
+  orden_web?: number
 }
 
 export type tb_serviciosUpdateManyMutationInput = {
@@ -359,6 +397,8 @@ export type tb_serviciosUpdateManyMutationInput = {
   imagen_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   estado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  visible_web?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  orden_web?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type tb_serviciosUncheckedUpdateManyInput = {
@@ -369,6 +409,8 @@ export type tb_serviciosUncheckedUpdateManyInput = {
   imagen_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   estado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  visible_web?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  orden_web?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type Tb_serviciosScalarRelationFilter = {
@@ -384,11 +426,14 @@ export type tb_serviciosCountOrderByAggregateInput = {
   imagen_url?: Prisma.SortOrder
   estado?: Prisma.SortOrder
   fecha_creacion?: Prisma.SortOrder
+  visible_web?: Prisma.SortOrder
+  orden_web?: Prisma.SortOrder
 }
 
 export type tb_serviciosAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   precio?: Prisma.SortOrder
+  orden_web?: Prisma.SortOrder
 }
 
 export type tb_serviciosMaxOrderByAggregateInput = {
@@ -399,6 +444,8 @@ export type tb_serviciosMaxOrderByAggregateInput = {
   imagen_url?: Prisma.SortOrder
   estado?: Prisma.SortOrder
   fecha_creacion?: Prisma.SortOrder
+  visible_web?: Prisma.SortOrder
+  orden_web?: Prisma.SortOrder
 }
 
 export type tb_serviciosMinOrderByAggregateInput = {
@@ -409,11 +456,14 @@ export type tb_serviciosMinOrderByAggregateInput = {
   imagen_url?: Prisma.SortOrder
   estado?: Prisma.SortOrder
   fecha_creacion?: Prisma.SortOrder
+  visible_web?: Prisma.SortOrder
+  orden_web?: Prisma.SortOrder
 }
 
 export type tb_serviciosSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   precio?: Prisma.SortOrder
+  orden_web?: Prisma.SortOrder
 }
 
 export type tb_serviciosCreateNestedOneWithoutTb_consentimientos_informadosInput = {
@@ -451,6 +501,8 @@ export type tb_serviciosCreateWithoutTb_consentimientos_informadosInput = {
   imagen_url?: string | null
   estado?: boolean
   fecha_creacion?: Date | string
+  visible_web?: boolean
+  orden_web?: number
   tb_consulta_servicios?: Prisma.tb_consulta_serviciosCreateNestedManyWithoutTb_serviciosInput
 }
 
@@ -462,6 +514,8 @@ export type tb_serviciosUncheckedCreateWithoutTb_consentimientos_informadosInput
   imagen_url?: string | null
   estado?: boolean
   fecha_creacion?: Date | string
+  visible_web?: boolean
+  orden_web?: number
   tb_consulta_servicios?: Prisma.tb_consulta_serviciosUncheckedCreateNestedManyWithoutTb_serviciosInput
 }
 
@@ -488,6 +542,8 @@ export type tb_serviciosUpdateWithoutTb_consentimientos_informadosInput = {
   imagen_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   estado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  visible_web?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  orden_web?: Prisma.IntFieldUpdateOperationsInput | number
   tb_consulta_servicios?: Prisma.tb_consulta_serviciosUpdateManyWithoutTb_serviciosNestedInput
 }
 
@@ -499,6 +555,8 @@ export type tb_serviciosUncheckedUpdateWithoutTb_consentimientos_informadosInput
   imagen_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   estado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  visible_web?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  orden_web?: Prisma.IntFieldUpdateOperationsInput | number
   tb_consulta_servicios?: Prisma.tb_consulta_serviciosUncheckedUpdateManyWithoutTb_serviciosNestedInput
 }
 
@@ -509,6 +567,8 @@ export type tb_serviciosCreateWithoutTb_consulta_serviciosInput = {
   imagen_url?: string | null
   estado?: boolean
   fecha_creacion?: Date | string
+  visible_web?: boolean
+  orden_web?: number
   tb_consentimientos_informados?: Prisma.tb_consentimientos_informadosCreateNestedManyWithoutTb_serviciosInput
 }
 
@@ -520,6 +580,8 @@ export type tb_serviciosUncheckedCreateWithoutTb_consulta_serviciosInput = {
   imagen_url?: string | null
   estado?: boolean
   fecha_creacion?: Date | string
+  visible_web?: boolean
+  orden_web?: number
   tb_consentimientos_informados?: Prisma.tb_consentimientos_informadosUncheckedCreateNestedManyWithoutTb_serviciosInput
 }
 
@@ -546,6 +608,8 @@ export type tb_serviciosUpdateWithoutTb_consulta_serviciosInput = {
   imagen_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   estado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  visible_web?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  orden_web?: Prisma.IntFieldUpdateOperationsInput | number
   tb_consentimientos_informados?: Prisma.tb_consentimientos_informadosUpdateManyWithoutTb_serviciosNestedInput
 }
 
@@ -557,6 +621,8 @@ export type tb_serviciosUncheckedUpdateWithoutTb_consulta_serviciosInput = {
   imagen_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   estado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  visible_web?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  orden_web?: Prisma.IntFieldUpdateOperationsInput | number
   tb_consentimientos_informados?: Prisma.tb_consentimientos_informadosUncheckedUpdateManyWithoutTb_serviciosNestedInput
 }
 
@@ -608,6 +674,8 @@ export type tb_serviciosSelect<ExtArgs extends runtime.Types.Extensions.Internal
   imagen_url?: boolean
   estado?: boolean
   fecha_creacion?: boolean
+  visible_web?: boolean
+  orden_web?: boolean
   tb_consentimientos_informados?: boolean | Prisma.tb_servicios$tb_consentimientos_informadosArgs<ExtArgs>
   tb_consulta_servicios?: boolean | Prisma.tb_servicios$tb_consulta_serviciosArgs<ExtArgs>
   _count?: boolean | Prisma.Tb_serviciosCountOutputTypeDefaultArgs<ExtArgs>
@@ -621,6 +689,8 @@ export type tb_serviciosSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   imagen_url?: boolean
   estado?: boolean
   fecha_creacion?: boolean
+  visible_web?: boolean
+  orden_web?: boolean
 }, ExtArgs["result"]["tb_servicios"]>
 
 export type tb_serviciosSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -631,6 +701,8 @@ export type tb_serviciosSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   imagen_url?: boolean
   estado?: boolean
   fecha_creacion?: boolean
+  visible_web?: boolean
+  orden_web?: boolean
 }, ExtArgs["result"]["tb_servicios"]>
 
 export type tb_serviciosSelectScalar = {
@@ -641,9 +713,11 @@ export type tb_serviciosSelectScalar = {
   imagen_url?: boolean
   estado?: boolean
   fecha_creacion?: boolean
+  visible_web?: boolean
+  orden_web?: boolean
 }
 
-export type tb_serviciosOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nombre" | "descripcion" | "precio" | "imagen_url" | "estado" | "fecha_creacion", ExtArgs["result"]["tb_servicios"]>
+export type tb_serviciosOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nombre" | "descripcion" | "precio" | "imagen_url" | "estado" | "fecha_creacion" | "visible_web" | "orden_web", ExtArgs["result"]["tb_servicios"]>
 export type tb_serviciosInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tb_consentimientos_informados?: boolean | Prisma.tb_servicios$tb_consentimientos_informadosArgs<ExtArgs>
   tb_consulta_servicios?: boolean | Prisma.tb_servicios$tb_consulta_serviciosArgs<ExtArgs>
@@ -666,6 +740,8 @@ export type $tb_serviciosPayload<ExtArgs extends runtime.Types.Extensions.Intern
     imagen_url: string | null
     estado: boolean
     fecha_creacion: Date
+    visible_web: boolean
+    orden_web: number
   }, ExtArgs["result"]["tb_servicios"]>
   composites: {}
 }
@@ -1098,6 +1174,8 @@ export interface tb_serviciosFieldRefs {
   readonly imagen_url: Prisma.FieldRef<"tb_servicios", 'String'>
   readonly estado: Prisma.FieldRef<"tb_servicios", 'Boolean'>
   readonly fecha_creacion: Prisma.FieldRef<"tb_servicios", 'DateTime'>
+  readonly visible_web: Prisma.FieldRef<"tb_servicios", 'Boolean'>
+  readonly orden_web: Prisma.FieldRef<"tb_servicios", 'Int'>
 }
     
 

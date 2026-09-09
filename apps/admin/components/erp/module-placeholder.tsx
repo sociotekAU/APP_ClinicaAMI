@@ -9,6 +9,7 @@ import { ClinicalRecordsWorkspace } from "../care/clinical-records-workspace";
 import { PatientsManager } from "../care/patients-manager";
 import { ClinicalOperationsWorkspace } from "../clinical-operations/clinical-operations-workspace";
 import { LaboratoryWorkspace } from "../laboratory/laboratory-workspace";
+import { WebContentWorkspace } from "../web-content/web-content-workspace";
 import { PermissionManagement } from "./permission-management";
 import { getModuleIcon, useErpContext } from "./erp-shell";
 
@@ -32,7 +33,7 @@ export function ModulePlaceholder({ moduleCode }: Readonly<{ moduleCode: string 
   }
 
   const Icon = getModuleIcon(item.module);
-  const isImplemented = ["seguridad", "pacientes", "agenda", "expediente_general", "expediente_psicologia", "recetas", "laboratorio", "auditoria"].includes(item.module);
+  const isImplemented = ["seguridad", "pacientes", "agenda", "expediente_general", "expediente_psicologia", "recetas", "laboratorio", "auditoria", "contenido_web"].includes(item.module);
   return (
     <div className="module-page-stack">
       <div className={`module-page${isImplemented ? " module-page-administration" : ""}`}>
@@ -75,6 +76,7 @@ export function ModulePlaceholder({ moduleCode }: Readonly<{ moduleCode: string 
       {item.module === "recetas" && <ClinicalOperationsWorkspace canWrite={permission.canWrite} />}
       {item.module === "laboratorio" && <LaboratoryWorkspace canWrite={permission.canWrite} />}
       {item.module === "auditoria" && <AuditViewer />}
+      {item.module === "contenido_web" && <WebContentWorkspace canWrite={permission.canWrite} />}
     </div>
   );
 }
