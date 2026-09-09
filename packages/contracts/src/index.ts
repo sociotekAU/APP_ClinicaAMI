@@ -582,6 +582,134 @@ export interface LabOrderOptions {
   tests: CareOption[];
 }
 
+export type InvoicePaymentMethod = "efectivo" | "tarjeta" | "transferencia";
+export type InvoiceStatus = "pagada" | "anulada";
+
+export interface InvoiceLineItem {
+  id: number;
+  concept: string;
+  quantity: number;
+  unitPrice: number;
+  subtotal: number;
+}
+
+export interface InvoiceListItem {
+  id: number;
+  issuedAt: string;
+  total: number;
+  paymentMethod: InvoicePaymentMethod;
+  status: InvoiceStatus;
+  observations: string | null;
+  annulledAt: string | null;
+  annulmentReason: string | null;
+  patient: { id: number; name: string };
+  cashier: { id: number; name: string; username: string };
+  lineCount: number;
+}
+
+export interface InvoiceDetail extends InvoiceListItem {
+  lines: InvoiceLineItem[];
+}
+
+export interface InvoiceInput {
+  patientId: number;
+  paymentMethod: InvoicePaymentMethod;
+  observations?: string;
+  lines: Array<{ concept: string; quantity: number; unitPrice: number }>;
+}
+
+export interface BillingOptions {
+  patients: CareOption[];
+  services: Array<{ id: number; label: string; active: boolean; price: number }>;
+}
+
+export interface CashSummary {
+  date: string;
+  paidInvoiceCount: number;
+  annulledInvoiceCount: number;
+  paidTotal: number;
+  byPaymentMethod: Array<{
+    method: InvoicePaymentMethod;
+    invoiceCount: number;
+    total: number;
+  }>;
+}
+
+export interface SupplierListItem {
+  id: number;
+  companyName: string;
+  contact: string | null;
+  phone: string;
+  email: string | null;
+  address: string | null;
+  active: boolean;
+  itemCount: number;
+  createdAt: string;
+}
+
+export interface SupplierInput {
+  companyName: string;
+  contact?: string;
+  phone: string;
+  email?: string;
+  address?: string;
+}
+
+export type InventoryItemType = "medicamento" | "reactivo_laboratorio" | "material_clinico";
+
+export interface InventoryItemListItem {
+  id: number;
+  name: string;
+  type: InventoryItemType;
+  currentStock: number;
+  minimumStock: number;
+  lowStock: boolean;
+  costPrice: number;
+  unit: string;
+  active: boolean;
+  supplier: { id: number; name: string } | null;
+  medication: { id: number; name: string } | null;
+  movementCount: number;
+  createdAt: string;
+}
+
+export interface InventoryItemInput {
+  name: string;
+  type: InventoryItemType;
+  supplierId?: number | null;
+  medicationId?: number | null;
+  minimumStock: number;
+  costPrice: number;
+  unit: string;
+}
+
+export type InventoryMovementType = "entrada" | "salida" | "merma";
+
+export interface InventoryMovementListItem {
+  id: number;
+  type: InventoryMovementType;
+  quantity: number;
+  recordedAt: string;
+  observations: string | null;
+  previousStock: number | null;
+  resultingStock: number | null;
+  item: { id: number; name: string; unit: string };
+  user: { id: number; name: string; username: string };
+}
+
+export interface InventoryMovementInput {
+  itemId: number;
+  type: InventoryMovementType;
+  quantity: number;
+  observations?: string;
+}
+
+export interface InventoryOptions {
+  suppliers: CareOption[];
+  medications: CareOption[];
+  items: Array<{ id: number; label: string; active: boolean; currentStock: number; unit: string }>;
+}
+
 export type WebPublicationState = "draft" | "scheduled" | "active" | "expired";
 export type AnnouncementPosition =
   | "inferior_derecha"

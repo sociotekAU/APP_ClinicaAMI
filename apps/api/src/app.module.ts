@@ -4,12 +4,14 @@ import { ThrottlerGuard, ThrottlerModule } from "@nestjs/throttler";
 import { AdministrationModule } from "./administration/administration.module";
 import { AuditModule } from "./audit/audit.module";
 import { AuthModule } from "./auth/auth.module";
+import { BillingModule } from "./billing/billing.module";
 import { CareModule } from "./care/care.module";
 import { ClinicalOperationsModule } from "./clinical-operations/clinical-operations.module";
 import { DatabaseModule } from "./database/database.module";
 import { ErpModule } from "./erp/erp.module";
 import { HealthController } from "./health/health.controller";
 import { HealthService } from "./health/health.service";
+import { InventoryModule } from "./inventory/inventory.module";
 import { LaboratoryModule } from "./laboratory/laboratory.module";
 import { WebContentModule } from "./web-content/web-content.module";
 
@@ -18,8 +20,10 @@ import { WebContentModule } from "./web-content/web-content.module";
     DatabaseModule,
     AuditModule,
     AuthModule,
+    BillingModule,
     CareModule,
     ClinicalOperationsModule,
+    InventoryModule,
     LaboratoryModule,
     AdministrationModule,
     WebContentModule,

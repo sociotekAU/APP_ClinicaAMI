@@ -131,4 +131,17 @@ describe("AuditService", () => {
     expect(snapshot.mock.calls[1]?.[0]).toContain("tb_resultados_laboratorio");
     expect(snapshot.mock.calls[1]?.[0]).toContain("resultados");
   });
+
+  it("incluye conceptos de factura y movimientos de inventario en auditoría", async () => {
+    const snapshot = vi.fn().mockResolvedValue([{ snapshot: { id: 9 } }]);
+    const service = new AuditService({ client: { $queryRawUnsafe: snapshot } } as unknown as DatabaseService);
+
+    const invoice = await service.prepare(request({ url: "/api/v1/billing/invoices/9/annul", params: { id: "9" } }));
+    const movement = await service.prepare(request({ url: "/api/v1/inventory/movements", method: "POST", params: {} }));
+
+    expect(invoice).toMatchObject({ target: { module: "facturacion", entity: "factura", table: "tb_facturas" } });
+    expect(snapshot.mock.calls[0]?.[0]).toContain("tb_detalle_factura");
+    expect(snapshot.mock.calls[0]?.[0]).toContain("conceptos");
+    expect(movement).toMatchObject({ target: { module: "inventario", entity: "movimiento_inventario", table: "tb_movimientos_inventario" } });
+  });
 });

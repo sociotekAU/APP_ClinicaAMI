@@ -91,6 +91,24 @@ export async function requestAnnulmentReason(): Promise<string | null> {
   return result.isConfirmed ? String(result.value).trim() : null;
 }
 
+export async function requestInvoiceAnnulmentReason(): Promise<string | null> {
+  const result = await alert.fire({
+    icon: "warning",
+    title: "¿Anular esta factura?",
+    text: "El comprobante se conservará en caja y no podrá reactivarse.",
+    input: "textarea",
+    inputLabel: "Motivo de anulación",
+    inputPlaceholder: "Explique brevemente el motivo…",
+    inputAttributes: { maxlength: "2000" },
+    inputValidator: (value) => value.trim().length < 5 ? "Escriba al menos 5 caracteres." : undefined,
+    showCancelButton: true,
+    confirmButtonText: "Sí, anular factura",
+    cancelButtonText: "Cancelar",
+    reverseButtons: true,
+  });
+  return result.isConfirmed ? String(result.value).trim() : null;
+}
+
 export async function confirmLabCompletion(): Promise<boolean> {
   const result = await alert.fire({
     icon: "warning",

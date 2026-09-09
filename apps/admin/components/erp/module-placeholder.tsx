@@ -4,10 +4,12 @@ import { ArrowLeft, Check, LockKeyhole } from "lucide-react";
 import Link from "next/link";
 import { AdministrationWorkspace } from "../administration/administration-workspace";
 import { AuditViewer } from "../audit/audit-viewer";
+import { BillingWorkspace } from "../billing/billing-workspace";
 import { AgendaWorkspace } from "../care/agenda-workspace";
 import { ClinicalRecordsWorkspace } from "../care/clinical-records-workspace";
 import { PatientsManager } from "../care/patients-manager";
 import { ClinicalOperationsWorkspace } from "../clinical-operations/clinical-operations-workspace";
+import { InventoryWorkspace } from "../inventory/inventory-workspace";
 import { LaboratoryWorkspace } from "../laboratory/laboratory-workspace";
 import { WebContentWorkspace } from "../web-content/web-content-workspace";
 import { PermissionManagement } from "./permission-management";
@@ -33,7 +35,7 @@ export function ModulePlaceholder({ moduleCode }: Readonly<{ moduleCode: string 
   }
 
   const Icon = getModuleIcon(item.module);
-  const isImplemented = ["seguridad", "pacientes", "agenda", "expediente_general", "expediente_psicologia", "recetas", "laboratorio", "auditoria", "contenido_web"].includes(item.module);
+  const isImplemented = ["seguridad", "pacientes", "agenda", "expediente_general", "expediente_psicologia", "recetas", "laboratorio", "facturacion", "inventario", "auditoria", "contenido_web"].includes(item.module);
   return (
     <div className="module-page-stack">
       <div className={`module-page${isImplemented ? " module-page-administration" : ""}`}>
@@ -75,6 +77,8 @@ export function ModulePlaceholder({ moduleCode }: Readonly<{ moduleCode: string 
       {item.module === "expediente_psicologia" && <ClinicalRecordsWorkspace canWrite={permission.canWrite} type="psychology" />}
       {item.module === "recetas" && <ClinicalOperationsWorkspace canWrite={permission.canWrite} />}
       {item.module === "laboratorio" && <LaboratoryWorkspace canWrite={permission.canWrite} />}
+      {item.module === "facturacion" && <BillingWorkspace canWrite={permission.canWrite} />}
+      {item.module === "inventario" && <InventoryWorkspace canWrite={permission.canWrite} />}
       {item.module === "auditoria" && <AuditViewer />}
       {item.module === "contenido_web" && <WebContentWorkspace canWrite={permission.canWrite} />}
     </div>

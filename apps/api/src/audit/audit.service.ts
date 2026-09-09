@@ -72,6 +72,10 @@ const TARGETS: Array<{ pattern: RegExp; target: AuditTarget }> = [
   { pattern: /^\/laboratory\/tests(?:\/|$)/, target: { module: "laboratorio", entity: "examen_laboratorio", table: "tb_catalogo_examenes", primaryKey: "id_examen", paramName: "id" } },
   { pattern: /^\/laboratory\/orders\/\d+\/results/, target: { module: "laboratorio", entity: "resultado_laboratorio", table: "tb_resultados_laboratorio", primaryKey: "id_resultado", paramName: "resultId" } },
   { pattern: /^\/laboratory\/orders(?:\/|$)/, target: { module: "laboratorio", entity: "orden_laboratorio", table: "tb_ordenes_laboratorio", primaryKey: "id_orden", paramName: "id" } },
+  { pattern: /^\/billing\/invoices(?:\/|$)/, target: { module: "facturacion", entity: "factura", table: "tb_facturas", primaryKey: "id_factura", paramName: "id" } },
+  { pattern: /^\/inventory\/suppliers(?:\/|$)/, target: { module: "inventario", entity: "proveedor", table: "tb_proveedores", primaryKey: "id_proveedor", paramName: "id" } },
+  { pattern: /^\/inventory\/items(?:\/|$)/, target: { module: "inventario", entity: "insumo", table: "tb_insumos_inventario", primaryKey: "id_insumo", paramName: "id" } },
+  { pattern: /^\/inventory\/movements(?:\/|$)/, target: { module: "inventario", entity: "movimiento_inventario", table: "tb_movimientos_inventario", primaryKey: "id_movimiento", paramName: "id" } },
   { pattern: /^\/auth\/change-password$/, target: { module: "seguridad", entity: "credencial_usuario", table: "tb_usuarios", primaryKey: "id_usuario" } },
 ];
 
@@ -220,6 +224,8 @@ export class AuditService {
     if (!Number.isSafeInteger(numericId) || numericId < 1) return null;
     const childCollection = target.entity === "receta"
       ? "jsonb_build_object('medicamentos', COALESCE((SELECT jsonb_agg(to_jsonb(detail_row) ORDER BY detail_row.id_detalle) FROM tb_detalle_receta detail_row WHERE detail_row.id_receta = source_row.id_receta), '[]'::jsonb))"
+      : target.entity === "factura"
+        ? "jsonb_build_object('conceptos', COALESCE((SELECT jsonb_agg(to_jsonb(detail_row) ORDER BY detail_row.id_detalle) FROM tb_detalle_factura detail_row WHERE detail_row.id_factura = source_row.id_factura), '[]'::jsonb))"
       : target.entity === "orden_laboratorio"
         ? "jsonb_build_object('resultados', COALESCE((SELECT jsonb_agg(to_jsonb(result_row) ORDER BY result_row.id_resultado) FROM tb_resultados_laboratorio result_row WHERE result_row.id_orden = source_row.id_orden), '[]'::jsonb))"
         : null;

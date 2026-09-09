@@ -58,6 +58,7 @@ export type Tb_insumos_inventarioMinAggregateOutputType = {
   unidad_medida: string | null
   estado: boolean | null
   fecha_creacion: Date | null
+  stock_bajo: boolean | null
 }
 
 export type Tb_insumos_inventarioMaxAggregateOutputType = {
@@ -72,6 +73,7 @@ export type Tb_insumos_inventarioMaxAggregateOutputType = {
   unidad_medida: string | null
   estado: boolean | null
   fecha_creacion: Date | null
+  stock_bajo: boolean | null
 }
 
 export type Tb_insumos_inventarioCountAggregateOutputType = {
@@ -86,6 +88,7 @@ export type Tb_insumos_inventarioCountAggregateOutputType = {
   unidad_medida: number
   estado: number
   fecha_creacion: number
+  stock_bajo: number
   _all: number
 }
 
@@ -120,6 +123,7 @@ export type Tb_insumos_inventarioMinAggregateInputType = {
   unidad_medida?: true
   estado?: true
   fecha_creacion?: true
+  stock_bajo?: true
 }
 
 export type Tb_insumos_inventarioMaxAggregateInputType = {
@@ -134,6 +138,7 @@ export type Tb_insumos_inventarioMaxAggregateInputType = {
   unidad_medida?: true
   estado?: true
   fecha_creacion?: true
+  stock_bajo?: true
 }
 
 export type Tb_insumos_inventarioCountAggregateInputType = {
@@ -148,6 +153,7 @@ export type Tb_insumos_inventarioCountAggregateInputType = {
   unidad_medida?: true
   estado?: true
   fecha_creacion?: true
+  stock_bajo?: true
   _all?: true
 }
 
@@ -249,6 +255,7 @@ export type Tb_insumos_inventarioGroupByOutputType = {
   unidad_medida: string
   estado: boolean
   fecha_creacion: Date
+  stock_bajo: boolean | null
   _count: Tb_insumos_inventarioCountAggregateOutputType | null
   _avg: Tb_insumos_inventarioAvgAggregateOutputType | null
   _sum: Tb_insumos_inventarioSumAggregateOutputType | null
@@ -286,6 +293,7 @@ export type tb_insumos_inventarioWhereInput = {
   unidad_medida?: Prisma.StringFilter<"tb_insumos_inventario"> | string
   estado?: Prisma.BoolFilter<"tb_insumos_inventario"> | boolean
   fecha_creacion?: Prisma.DateTimeFilter<"tb_insumos_inventario"> | Date | string
+  stock_bajo?: Prisma.BoolNullableFilter<"tb_insumos_inventario"> | boolean | null
   tb_medicamentos?: Prisma.XOR<Prisma.Tb_medicamentosNullableScalarRelationFilter, Prisma.tb_medicamentosWhereInput> | null
   tb_proveedores?: Prisma.XOR<Prisma.Tb_proveedoresNullableScalarRelationFilter, Prisma.tb_proveedoresWhereInput> | null
   tb_movimientos_inventario?: Prisma.Tb_movimientos_inventarioListRelationFilter
@@ -303,6 +311,7 @@ export type tb_insumos_inventarioOrderByWithRelationInput = {
   unidad_medida?: Prisma.SortOrder
   estado?: Prisma.SortOrder
   fecha_creacion?: Prisma.SortOrder
+  stock_bajo?: Prisma.SortOrderInput | Prisma.SortOrder
   tb_medicamentos?: Prisma.tb_medicamentosOrderByWithRelationInput
   tb_proveedores?: Prisma.tb_proveedoresOrderByWithRelationInput
   tb_movimientos_inventario?: Prisma.tb_movimientos_inventarioOrderByRelationAggregateInput
@@ -323,6 +332,7 @@ export type tb_insumos_inventarioWhereUniqueInput = Prisma.AtLeast<{
   unidad_medida?: Prisma.StringFilter<"tb_insumos_inventario"> | string
   estado?: Prisma.BoolFilter<"tb_insumos_inventario"> | boolean
   fecha_creacion?: Prisma.DateTimeFilter<"tb_insumos_inventario"> | Date | string
+  stock_bajo?: Prisma.BoolNullableFilter<"tb_insumos_inventario"> | boolean | null
   tb_medicamentos?: Prisma.XOR<Prisma.Tb_medicamentosNullableScalarRelationFilter, Prisma.tb_medicamentosWhereInput> | null
   tb_proveedores?: Prisma.XOR<Prisma.Tb_proveedoresNullableScalarRelationFilter, Prisma.tb_proveedoresWhereInput> | null
   tb_movimientos_inventario?: Prisma.Tb_movimientos_inventarioListRelationFilter
@@ -340,6 +350,7 @@ export type tb_insumos_inventarioOrderByWithAggregationInput = {
   unidad_medida?: Prisma.SortOrder
   estado?: Prisma.SortOrder
   fecha_creacion?: Prisma.SortOrder
+  stock_bajo?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.tb_insumos_inventarioCountOrderByAggregateInput
   _avg?: Prisma.tb_insumos_inventarioAvgOrderByAggregateInput
   _max?: Prisma.tb_insumos_inventarioMaxOrderByAggregateInput
@@ -362,6 +373,7 @@ export type tb_insumos_inventarioScalarWhereWithAggregatesInput = {
   unidad_medida?: Prisma.StringWithAggregatesFilter<"tb_insumos_inventario"> | string
   estado?: Prisma.BoolWithAggregatesFilter<"tb_insumos_inventario"> | boolean
   fecha_creacion?: Prisma.DateTimeWithAggregatesFilter<"tb_insumos_inventario"> | Date | string
+  stock_bajo?: Prisma.BoolNullableWithAggregatesFilter<"tb_insumos_inventario"> | boolean | null
 }
 
 export type tb_insumos_inventarioCreateInput = {
@@ -373,6 +385,7 @@ export type tb_insumos_inventarioCreateInput = {
   unidad_medida?: string
   estado?: boolean
   fecha_creacion?: Date | string
+  stock_bajo?: boolean | null
   tb_medicamentos?: Prisma.tb_medicamentosCreateNestedOneWithoutTb_insumos_inventarioInput
   tb_proveedores?: Prisma.tb_proveedoresCreateNestedOneWithoutTb_insumos_inventarioInput
   tb_movimientos_inventario?: Prisma.tb_movimientos_inventarioCreateNestedManyWithoutTb_insumos_inventarioInput
@@ -390,6 +403,7 @@ export type tb_insumos_inventarioUncheckedCreateInput = {
   unidad_medida?: string
   estado?: boolean
   fecha_creacion?: Date | string
+  stock_bajo?: boolean | null
   tb_movimientos_inventario?: Prisma.tb_movimientos_inventarioUncheckedCreateNestedManyWithoutTb_insumos_inventarioInput
 }
 
@@ -402,6 +416,7 @@ export type tb_insumos_inventarioUpdateInput = {
   unidad_medida?: Prisma.StringFieldUpdateOperationsInput | string
   estado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  stock_bajo?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   tb_medicamentos?: Prisma.tb_medicamentosUpdateOneWithoutTb_insumos_inventarioNestedInput
   tb_proveedores?: Prisma.tb_proveedoresUpdateOneWithoutTb_insumos_inventarioNestedInput
   tb_movimientos_inventario?: Prisma.tb_movimientos_inventarioUpdateManyWithoutTb_insumos_inventarioNestedInput
@@ -419,6 +434,7 @@ export type tb_insumos_inventarioUncheckedUpdateInput = {
   unidad_medida?: Prisma.StringFieldUpdateOperationsInput | string
   estado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  stock_bajo?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   tb_movimientos_inventario?: Prisma.tb_movimientos_inventarioUncheckedUpdateManyWithoutTb_insumos_inventarioNestedInput
 }
 
@@ -434,6 +450,7 @@ export type tb_insumos_inventarioCreateManyInput = {
   unidad_medida?: string
   estado?: boolean
   fecha_creacion?: Date | string
+  stock_bajo?: boolean | null
 }
 
 export type tb_insumos_inventarioUpdateManyMutationInput = {
@@ -445,6 +462,7 @@ export type tb_insumos_inventarioUpdateManyMutationInput = {
   unidad_medida?: Prisma.StringFieldUpdateOperationsInput | string
   estado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  stock_bajo?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
 }
 
 export type tb_insumos_inventarioUncheckedUpdateManyInput = {
@@ -459,6 +477,7 @@ export type tb_insumos_inventarioUncheckedUpdateManyInput = {
   unidad_medida?: Prisma.StringFieldUpdateOperationsInput | string
   estado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  stock_bajo?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
 }
 
 export type tb_insumos_inventarioCountOrderByAggregateInput = {
@@ -473,6 +492,7 @@ export type tb_insumos_inventarioCountOrderByAggregateInput = {
   unidad_medida?: Prisma.SortOrder
   estado?: Prisma.SortOrder
   fecha_creacion?: Prisma.SortOrder
+  stock_bajo?: Prisma.SortOrder
 }
 
 export type tb_insumos_inventarioAvgOrderByAggregateInput = {
@@ -496,6 +516,7 @@ export type tb_insumos_inventarioMaxOrderByAggregateInput = {
   unidad_medida?: Prisma.SortOrder
   estado?: Prisma.SortOrder
   fecha_creacion?: Prisma.SortOrder
+  stock_bajo?: Prisma.SortOrder
 }
 
 export type tb_insumos_inventarioMinOrderByAggregateInput = {
@@ -510,6 +531,7 @@ export type tb_insumos_inventarioMinOrderByAggregateInput = {
   unidad_medida?: Prisma.SortOrder
   estado?: Prisma.SortOrder
   fecha_creacion?: Prisma.SortOrder
+  stock_bajo?: Prisma.SortOrder
 }
 
 export type tb_insumos_inventarioSumOrderByAggregateInput = {
@@ -534,6 +556,10 @@ export type tb_insumos_inventarioOrderByRelationAggregateInput = {
 export type Tb_insumos_inventarioScalarRelationFilter = {
   is?: Prisma.tb_insumos_inventarioWhereInput
   isNot?: Prisma.tb_insumos_inventarioWhereInput
+}
+
+export type NullableBoolFieldUpdateOperationsInput = {
+  set?: boolean | null
 }
 
 export type tb_insumos_inventarioCreateNestedManyWithoutTb_medicamentosInput = {
@@ -643,6 +669,7 @@ export type tb_insumos_inventarioCreateWithoutTb_medicamentosInput = {
   unidad_medida?: string
   estado?: boolean
   fecha_creacion?: Date | string
+  stock_bajo?: boolean | null
   tb_proveedores?: Prisma.tb_proveedoresCreateNestedOneWithoutTb_insumos_inventarioInput
   tb_movimientos_inventario?: Prisma.tb_movimientos_inventarioCreateNestedManyWithoutTb_insumos_inventarioInput
 }
@@ -658,6 +685,7 @@ export type tb_insumos_inventarioUncheckedCreateWithoutTb_medicamentosInput = {
   unidad_medida?: string
   estado?: boolean
   fecha_creacion?: Date | string
+  stock_bajo?: boolean | null
   tb_movimientos_inventario?: Prisma.tb_movimientos_inventarioUncheckedCreateNestedManyWithoutTb_insumos_inventarioInput
 }
 
@@ -702,6 +730,7 @@ export type tb_insumos_inventarioScalarWhereInput = {
   unidad_medida?: Prisma.StringFilter<"tb_insumos_inventario"> | string
   estado?: Prisma.BoolFilter<"tb_insumos_inventario"> | boolean
   fecha_creacion?: Prisma.DateTimeFilter<"tb_insumos_inventario"> | Date | string
+  stock_bajo?: Prisma.BoolNullableFilter<"tb_insumos_inventario"> | boolean | null
 }
 
 export type tb_insumos_inventarioCreateWithoutTb_movimientos_inventarioInput = {
@@ -713,6 +742,7 @@ export type tb_insumos_inventarioCreateWithoutTb_movimientos_inventarioInput = {
   unidad_medida?: string
   estado?: boolean
   fecha_creacion?: Date | string
+  stock_bajo?: boolean | null
   tb_medicamentos?: Prisma.tb_medicamentosCreateNestedOneWithoutTb_insumos_inventarioInput
   tb_proveedores?: Prisma.tb_proveedoresCreateNestedOneWithoutTb_insumos_inventarioInput
 }
@@ -729,6 +759,7 @@ export type tb_insumos_inventarioUncheckedCreateWithoutTb_movimientos_inventario
   unidad_medida?: string
   estado?: boolean
   fecha_creacion?: Date | string
+  stock_bajo?: boolean | null
 }
 
 export type tb_insumos_inventarioCreateOrConnectWithoutTb_movimientos_inventarioInput = {
@@ -756,6 +787,7 @@ export type tb_insumos_inventarioUpdateWithoutTb_movimientos_inventarioInput = {
   unidad_medida?: Prisma.StringFieldUpdateOperationsInput | string
   estado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  stock_bajo?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   tb_medicamentos?: Prisma.tb_medicamentosUpdateOneWithoutTb_insumos_inventarioNestedInput
   tb_proveedores?: Prisma.tb_proveedoresUpdateOneWithoutTb_insumos_inventarioNestedInput
 }
@@ -772,6 +804,7 @@ export type tb_insumos_inventarioUncheckedUpdateWithoutTb_movimientos_inventario
   unidad_medida?: Prisma.StringFieldUpdateOperationsInput | string
   estado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  stock_bajo?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
 }
 
 export type tb_insumos_inventarioCreateWithoutTb_proveedoresInput = {
@@ -783,6 +816,7 @@ export type tb_insumos_inventarioCreateWithoutTb_proveedoresInput = {
   unidad_medida?: string
   estado?: boolean
   fecha_creacion?: Date | string
+  stock_bajo?: boolean | null
   tb_medicamentos?: Prisma.tb_medicamentosCreateNestedOneWithoutTb_insumos_inventarioInput
   tb_movimientos_inventario?: Prisma.tb_movimientos_inventarioCreateNestedManyWithoutTb_insumos_inventarioInput
 }
@@ -798,6 +832,7 @@ export type tb_insumos_inventarioUncheckedCreateWithoutTb_proveedoresInput = {
   unidad_medida?: string
   estado?: boolean
   fecha_creacion?: Date | string
+  stock_bajo?: boolean | null
   tb_movimientos_inventario?: Prisma.tb_movimientos_inventarioUncheckedCreateNestedManyWithoutTb_insumos_inventarioInput
 }
 
@@ -838,6 +873,7 @@ export type tb_insumos_inventarioCreateManyTb_medicamentosInput = {
   unidad_medida?: string
   estado?: boolean
   fecha_creacion?: Date | string
+  stock_bajo?: boolean | null
 }
 
 export type tb_insumos_inventarioUpdateWithoutTb_medicamentosInput = {
@@ -849,6 +885,7 @@ export type tb_insumos_inventarioUpdateWithoutTb_medicamentosInput = {
   unidad_medida?: Prisma.StringFieldUpdateOperationsInput | string
   estado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  stock_bajo?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   tb_proveedores?: Prisma.tb_proveedoresUpdateOneWithoutTb_insumos_inventarioNestedInput
   tb_movimientos_inventario?: Prisma.tb_movimientos_inventarioUpdateManyWithoutTb_insumos_inventarioNestedInput
 }
@@ -864,6 +901,7 @@ export type tb_insumos_inventarioUncheckedUpdateWithoutTb_medicamentosInput = {
   unidad_medida?: Prisma.StringFieldUpdateOperationsInput | string
   estado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  stock_bajo?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   tb_movimientos_inventario?: Prisma.tb_movimientos_inventarioUncheckedUpdateManyWithoutTb_insumos_inventarioNestedInput
 }
 
@@ -878,6 +916,7 @@ export type tb_insumos_inventarioUncheckedUpdateManyWithoutTb_medicamentosInput 
   unidad_medida?: Prisma.StringFieldUpdateOperationsInput | string
   estado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  stock_bajo?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
 }
 
 export type tb_insumos_inventarioCreateManyTb_proveedoresInput = {
@@ -891,6 +930,7 @@ export type tb_insumos_inventarioCreateManyTb_proveedoresInput = {
   unidad_medida?: string
   estado?: boolean
   fecha_creacion?: Date | string
+  stock_bajo?: boolean | null
 }
 
 export type tb_insumos_inventarioUpdateWithoutTb_proveedoresInput = {
@@ -902,6 +942,7 @@ export type tb_insumos_inventarioUpdateWithoutTb_proveedoresInput = {
   unidad_medida?: Prisma.StringFieldUpdateOperationsInput | string
   estado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  stock_bajo?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   tb_medicamentos?: Prisma.tb_medicamentosUpdateOneWithoutTb_insumos_inventarioNestedInput
   tb_movimientos_inventario?: Prisma.tb_movimientos_inventarioUpdateManyWithoutTb_insumos_inventarioNestedInput
 }
@@ -917,6 +958,7 @@ export type tb_insumos_inventarioUncheckedUpdateWithoutTb_proveedoresInput = {
   unidad_medida?: Prisma.StringFieldUpdateOperationsInput | string
   estado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  stock_bajo?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   tb_movimientos_inventario?: Prisma.tb_movimientos_inventarioUncheckedUpdateManyWithoutTb_insumos_inventarioNestedInput
 }
 
@@ -931,6 +973,7 @@ export type tb_insumos_inventarioUncheckedUpdateManyWithoutTb_proveedoresInput =
   unidad_medida?: Prisma.StringFieldUpdateOperationsInput | string
   estado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  stock_bajo?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
 }
 
 
@@ -976,6 +1019,7 @@ export type tb_insumos_inventarioSelect<ExtArgs extends runtime.Types.Extensions
   unidad_medida?: boolean
   estado?: boolean
   fecha_creacion?: boolean
+  stock_bajo?: boolean
   tb_medicamentos?: boolean | Prisma.tb_insumos_inventario$tb_medicamentosArgs<ExtArgs>
   tb_proveedores?: boolean | Prisma.tb_insumos_inventario$tb_proveedoresArgs<ExtArgs>
   tb_movimientos_inventario?: boolean | Prisma.tb_insumos_inventario$tb_movimientos_inventarioArgs<ExtArgs>
@@ -994,6 +1038,7 @@ export type tb_insumos_inventarioSelectCreateManyAndReturn<ExtArgs extends runti
   unidad_medida?: boolean
   estado?: boolean
   fecha_creacion?: boolean
+  stock_bajo?: boolean
   tb_medicamentos?: boolean | Prisma.tb_insumos_inventario$tb_medicamentosArgs<ExtArgs>
   tb_proveedores?: boolean | Prisma.tb_insumos_inventario$tb_proveedoresArgs<ExtArgs>
 }, ExtArgs["result"]["tb_insumos_inventario"]>
@@ -1010,6 +1055,7 @@ export type tb_insumos_inventarioSelectUpdateManyAndReturn<ExtArgs extends runti
   unidad_medida?: boolean
   estado?: boolean
   fecha_creacion?: boolean
+  stock_bajo?: boolean
   tb_medicamentos?: boolean | Prisma.tb_insumos_inventario$tb_medicamentosArgs<ExtArgs>
   tb_proveedores?: boolean | Prisma.tb_insumos_inventario$tb_proveedoresArgs<ExtArgs>
 }, ExtArgs["result"]["tb_insumos_inventario"]>
@@ -1026,9 +1072,10 @@ export type tb_insumos_inventarioSelectScalar = {
   unidad_medida?: boolean
   estado?: boolean
   fecha_creacion?: boolean
+  stock_bajo?: boolean
 }
 
-export type tb_insumos_inventarioOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id_insumo" | "nombre" | "tipo" | "id_proveedor" | "id_medicamento" | "stock_actual" | "stock_minimo" | "precio_costo" | "unidad_medida" | "estado" | "fecha_creacion", ExtArgs["result"]["tb_insumos_inventario"]>
+export type tb_insumos_inventarioOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id_insumo" | "nombre" | "tipo" | "id_proveedor" | "id_medicamento" | "stock_actual" | "stock_minimo" | "precio_costo" | "unidad_medida" | "estado" | "fecha_creacion" | "stock_bajo", ExtArgs["result"]["tb_insumos_inventario"]>
 export type tb_insumos_inventarioInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tb_medicamentos?: boolean | Prisma.tb_insumos_inventario$tb_medicamentosArgs<ExtArgs>
   tb_proveedores?: boolean | Prisma.tb_insumos_inventario$tb_proveedoresArgs<ExtArgs>
@@ -1063,6 +1110,7 @@ export type $tb_insumos_inventarioPayload<ExtArgs extends runtime.Types.Extensio
     unidad_medida: string
     estado: boolean
     fecha_creacion: Date
+    stock_bajo: boolean | null
   }, ExtArgs["result"]["tb_insumos_inventario"]>
   composites: {}
 }
@@ -1500,6 +1548,7 @@ export interface tb_insumos_inventarioFieldRefs {
   readonly unidad_medida: Prisma.FieldRef<"tb_insumos_inventario", 'String'>
   readonly estado: Prisma.FieldRef<"tb_insumos_inventario", 'Boolean'>
   readonly fecha_creacion: Prisma.FieldRef<"tb_insumos_inventario", 'DateTime'>
+  readonly stock_bajo: Prisma.FieldRef<"tb_insumos_inventario", 'Boolean'>
 }
     
 

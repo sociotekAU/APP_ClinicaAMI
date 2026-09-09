@@ -194,20 +194,26 @@ BEGIN
 END;
 $$;
 
-UPDATE tb_detalle_factura
-   SET cantidad = 2,
-       precio_unitario = 125.50
- WHERE concepto = 'Consulta de Medicina Biológica Integrativa';
-
 DO $$
+DECLARE
+    paciente_id INTEGER;
+    usuario_id INTEGER;
+    factura_id INTEGER;
+    total_calculado NUMERIC(12,2);
 BEGIN
-    IF NOT EXISTS (
-        SELECT 1
-          FROM tb_facturas
-         WHERE observaciones = 'Factura de demostración inicial.'
-           AND total = 251.00
-    ) THEN
-        RAISE EXCEPTION 'El total de factura no fue recalculado correctamente.';
+    SELECT id_paciente INTO paciente_id FROM tb_pacientes WHERE estado = TRUE ORDER BY id_paciente LIMIT 1;
+    SELECT id_usuario INTO usuario_id FROM tb_usuarios WHERE estado = TRUE ORDER BY id_usuario LIMIT 1;
+
+    INSERT INTO tb_facturas (id_paciente, id_usuario, metodo_pago, observaciones)
+    VALUES (paciente_id, usuario_id, 'efectivo', 'Cálculo reversible de prueba de humo')
+    RETURNING id_factura INTO factura_id;
+
+    INSERT INTO tb_detalle_factura (id_factura, concepto, cantidad, precio_unitario)
+    VALUES (factura_id, 'Concepto reversible', 2, 125.50);
+
+    SELECT total INTO total_calculado FROM tb_facturas WHERE id_factura = factura_id;
+    IF total_calculado <> 251.00 THEN
+        RAISE EXCEPTION 'El total de factura no fue recalculado correctamente; se obtuvo %.', total_calculado;
     END IF;
 END;
 $$;

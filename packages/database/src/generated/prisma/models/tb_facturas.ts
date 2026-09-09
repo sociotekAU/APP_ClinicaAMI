@@ -50,6 +50,8 @@ export type Tb_facturasMinAggregateOutputType = {
   metodo_pago: string | null
   estado: string | null
   observaciones: string | null
+  fecha_anulacion: Date | null
+  motivo_anulacion: string | null
 }
 
 export type Tb_facturasMaxAggregateOutputType = {
@@ -61,6 +63,8 @@ export type Tb_facturasMaxAggregateOutputType = {
   metodo_pago: string | null
   estado: string | null
   observaciones: string | null
+  fecha_anulacion: Date | null
+  motivo_anulacion: string | null
 }
 
 export type Tb_facturasCountAggregateOutputType = {
@@ -72,6 +76,8 @@ export type Tb_facturasCountAggregateOutputType = {
   metodo_pago: number
   estado: number
   observaciones: number
+  fecha_anulacion: number
+  motivo_anulacion: number
   _all: number
 }
 
@@ -99,6 +105,8 @@ export type Tb_facturasMinAggregateInputType = {
   metodo_pago?: true
   estado?: true
   observaciones?: true
+  fecha_anulacion?: true
+  motivo_anulacion?: true
 }
 
 export type Tb_facturasMaxAggregateInputType = {
@@ -110,6 +118,8 @@ export type Tb_facturasMaxAggregateInputType = {
   metodo_pago?: true
   estado?: true
   observaciones?: true
+  fecha_anulacion?: true
+  motivo_anulacion?: true
 }
 
 export type Tb_facturasCountAggregateInputType = {
@@ -121,6 +131,8 @@ export type Tb_facturasCountAggregateInputType = {
   metodo_pago?: true
   estado?: true
   observaciones?: true
+  fecha_anulacion?: true
+  motivo_anulacion?: true
   _all?: true
 }
 
@@ -219,6 +231,8 @@ export type Tb_facturasGroupByOutputType = {
   metodo_pago: string
   estado: string
   observaciones: string | null
+  fecha_anulacion: Date | null
+  motivo_anulacion: string | null
   _count: Tb_facturasCountAggregateOutputType | null
   _avg: Tb_facturasAvgAggregateOutputType | null
   _sum: Tb_facturasSumAggregateOutputType | null
@@ -253,6 +267,8 @@ export type tb_facturasWhereInput = {
   metodo_pago?: Prisma.StringFilter<"tb_facturas"> | string
   estado?: Prisma.StringFilter<"tb_facturas"> | string
   observaciones?: Prisma.StringNullableFilter<"tb_facturas"> | string | null
+  fecha_anulacion?: Prisma.DateTimeNullableFilter<"tb_facturas"> | Date | string | null
+  motivo_anulacion?: Prisma.StringNullableFilter<"tb_facturas"> | string | null
   tb_detalle_factura?: Prisma.Tb_detalle_facturaListRelationFilter
   tb_pacientes?: Prisma.XOR<Prisma.Tb_pacientesScalarRelationFilter, Prisma.tb_pacientesWhereInput>
   tb_usuarios?: Prisma.XOR<Prisma.Tb_usuariosScalarRelationFilter, Prisma.tb_usuariosWhereInput>
@@ -267,6 +283,8 @@ export type tb_facturasOrderByWithRelationInput = {
   metodo_pago?: Prisma.SortOrder
   estado?: Prisma.SortOrder
   observaciones?: Prisma.SortOrderInput | Prisma.SortOrder
+  fecha_anulacion?: Prisma.SortOrderInput | Prisma.SortOrder
+  motivo_anulacion?: Prisma.SortOrderInput | Prisma.SortOrder
   tb_detalle_factura?: Prisma.tb_detalle_facturaOrderByRelationAggregateInput
   tb_pacientes?: Prisma.tb_pacientesOrderByWithRelationInput
   tb_usuarios?: Prisma.tb_usuariosOrderByWithRelationInput
@@ -284,6 +302,8 @@ export type tb_facturasWhereUniqueInput = Prisma.AtLeast<{
   metodo_pago?: Prisma.StringFilter<"tb_facturas"> | string
   estado?: Prisma.StringFilter<"tb_facturas"> | string
   observaciones?: Prisma.StringNullableFilter<"tb_facturas"> | string | null
+  fecha_anulacion?: Prisma.DateTimeNullableFilter<"tb_facturas"> | Date | string | null
+  motivo_anulacion?: Prisma.StringNullableFilter<"tb_facturas"> | string | null
   tb_detalle_factura?: Prisma.Tb_detalle_facturaListRelationFilter
   tb_pacientes?: Prisma.XOR<Prisma.Tb_pacientesScalarRelationFilter, Prisma.tb_pacientesWhereInput>
   tb_usuarios?: Prisma.XOR<Prisma.Tb_usuariosScalarRelationFilter, Prisma.tb_usuariosWhereInput>
@@ -298,6 +318,8 @@ export type tb_facturasOrderByWithAggregationInput = {
   metodo_pago?: Prisma.SortOrder
   estado?: Prisma.SortOrder
   observaciones?: Prisma.SortOrderInput | Prisma.SortOrder
+  fecha_anulacion?: Prisma.SortOrderInput | Prisma.SortOrder
+  motivo_anulacion?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.tb_facturasCountOrderByAggregateInput
   _avg?: Prisma.tb_facturasAvgOrderByAggregateInput
   _max?: Prisma.tb_facturasMaxOrderByAggregateInput
@@ -317,6 +339,8 @@ export type tb_facturasScalarWhereWithAggregatesInput = {
   metodo_pago?: Prisma.StringWithAggregatesFilter<"tb_facturas"> | string
   estado?: Prisma.StringWithAggregatesFilter<"tb_facturas"> | string
   observaciones?: Prisma.StringNullableWithAggregatesFilter<"tb_facturas"> | string | null
+  fecha_anulacion?: Prisma.DateTimeNullableWithAggregatesFilter<"tb_facturas"> | Date | string | null
+  motivo_anulacion?: Prisma.StringNullableWithAggregatesFilter<"tb_facturas"> | string | null
 }
 
 export type tb_facturasCreateInput = {
@@ -325,6 +349,8 @@ export type tb_facturasCreateInput = {
   metodo_pago: string
   estado?: string
   observaciones?: string | null
+  fecha_anulacion?: Date | string | null
+  motivo_anulacion?: string | null
   tb_detalle_factura?: Prisma.tb_detalle_facturaCreateNestedManyWithoutTb_facturasInput
   tb_pacientes: Prisma.tb_pacientesCreateNestedOneWithoutTb_facturasInput
   tb_usuarios: Prisma.tb_usuariosCreateNestedOneWithoutTb_facturasInput
@@ -339,6 +365,8 @@ export type tb_facturasUncheckedCreateInput = {
   metodo_pago: string
   estado?: string
   observaciones?: string | null
+  fecha_anulacion?: Date | string | null
+  motivo_anulacion?: string | null
   tb_detalle_factura?: Prisma.tb_detalle_facturaUncheckedCreateNestedManyWithoutTb_facturasInput
 }
 
@@ -348,6 +376,8 @@ export type tb_facturasUpdateInput = {
   metodo_pago?: Prisma.StringFieldUpdateOperationsInput | string
   estado?: Prisma.StringFieldUpdateOperationsInput | string
   observaciones?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fecha_anulacion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  motivo_anulacion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tb_detalle_factura?: Prisma.tb_detalle_facturaUpdateManyWithoutTb_facturasNestedInput
   tb_pacientes?: Prisma.tb_pacientesUpdateOneRequiredWithoutTb_facturasNestedInput
   tb_usuarios?: Prisma.tb_usuariosUpdateOneRequiredWithoutTb_facturasNestedInput
@@ -362,6 +392,8 @@ export type tb_facturasUncheckedUpdateInput = {
   metodo_pago?: Prisma.StringFieldUpdateOperationsInput | string
   estado?: Prisma.StringFieldUpdateOperationsInput | string
   observaciones?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fecha_anulacion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  motivo_anulacion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tb_detalle_factura?: Prisma.tb_detalle_facturaUncheckedUpdateManyWithoutTb_facturasNestedInput
 }
 
@@ -374,6 +406,8 @@ export type tb_facturasCreateManyInput = {
   metodo_pago: string
   estado?: string
   observaciones?: string | null
+  fecha_anulacion?: Date | string | null
+  motivo_anulacion?: string | null
 }
 
 export type tb_facturasUpdateManyMutationInput = {
@@ -382,6 +416,8 @@ export type tb_facturasUpdateManyMutationInput = {
   metodo_pago?: Prisma.StringFieldUpdateOperationsInput | string
   estado?: Prisma.StringFieldUpdateOperationsInput | string
   observaciones?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fecha_anulacion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  motivo_anulacion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type tb_facturasUncheckedUpdateManyInput = {
@@ -393,6 +429,8 @@ export type tb_facturasUncheckedUpdateManyInput = {
   metodo_pago?: Prisma.StringFieldUpdateOperationsInput | string
   estado?: Prisma.StringFieldUpdateOperationsInput | string
   observaciones?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fecha_anulacion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  motivo_anulacion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type Tb_facturasScalarRelationFilter = {
@@ -409,6 +447,8 @@ export type tb_facturasCountOrderByAggregateInput = {
   metodo_pago?: Prisma.SortOrder
   estado?: Prisma.SortOrder
   observaciones?: Prisma.SortOrder
+  fecha_anulacion?: Prisma.SortOrder
+  motivo_anulacion?: Prisma.SortOrder
 }
 
 export type tb_facturasAvgOrderByAggregateInput = {
@@ -427,6 +467,8 @@ export type tb_facturasMaxOrderByAggregateInput = {
   metodo_pago?: Prisma.SortOrder
   estado?: Prisma.SortOrder
   observaciones?: Prisma.SortOrder
+  fecha_anulacion?: Prisma.SortOrder
+  motivo_anulacion?: Prisma.SortOrder
 }
 
 export type tb_facturasMinOrderByAggregateInput = {
@@ -438,6 +480,8 @@ export type tb_facturasMinOrderByAggregateInput = {
   metodo_pago?: Prisma.SortOrder
   estado?: Prisma.SortOrder
   observaciones?: Prisma.SortOrder
+  fecha_anulacion?: Prisma.SortOrder
+  motivo_anulacion?: Prisma.SortOrder
 }
 
 export type tb_facturasSumOrderByAggregateInput = {
@@ -561,6 +605,8 @@ export type tb_facturasCreateWithoutTb_detalle_facturaInput = {
   metodo_pago: string
   estado?: string
   observaciones?: string | null
+  fecha_anulacion?: Date | string | null
+  motivo_anulacion?: string | null
   tb_pacientes: Prisma.tb_pacientesCreateNestedOneWithoutTb_facturasInput
   tb_usuarios: Prisma.tb_usuariosCreateNestedOneWithoutTb_facturasInput
 }
@@ -574,6 +620,8 @@ export type tb_facturasUncheckedCreateWithoutTb_detalle_facturaInput = {
   metodo_pago: string
   estado?: string
   observaciones?: string | null
+  fecha_anulacion?: Date | string | null
+  motivo_anulacion?: string | null
 }
 
 export type tb_facturasCreateOrConnectWithoutTb_detalle_facturaInput = {
@@ -598,6 +646,8 @@ export type tb_facturasUpdateWithoutTb_detalle_facturaInput = {
   metodo_pago?: Prisma.StringFieldUpdateOperationsInput | string
   estado?: Prisma.StringFieldUpdateOperationsInput | string
   observaciones?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fecha_anulacion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  motivo_anulacion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tb_pacientes?: Prisma.tb_pacientesUpdateOneRequiredWithoutTb_facturasNestedInput
   tb_usuarios?: Prisma.tb_usuariosUpdateOneRequiredWithoutTb_facturasNestedInput
 }
@@ -611,6 +661,8 @@ export type tb_facturasUncheckedUpdateWithoutTb_detalle_facturaInput = {
   metodo_pago?: Prisma.StringFieldUpdateOperationsInput | string
   estado?: Prisma.StringFieldUpdateOperationsInput | string
   observaciones?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fecha_anulacion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  motivo_anulacion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type tb_facturasCreateWithoutTb_pacientesInput = {
@@ -619,6 +671,8 @@ export type tb_facturasCreateWithoutTb_pacientesInput = {
   metodo_pago: string
   estado?: string
   observaciones?: string | null
+  fecha_anulacion?: Date | string | null
+  motivo_anulacion?: string | null
   tb_detalle_factura?: Prisma.tb_detalle_facturaCreateNestedManyWithoutTb_facturasInput
   tb_usuarios: Prisma.tb_usuariosCreateNestedOneWithoutTb_facturasInput
 }
@@ -631,6 +685,8 @@ export type tb_facturasUncheckedCreateWithoutTb_pacientesInput = {
   metodo_pago: string
   estado?: string
   observaciones?: string | null
+  fecha_anulacion?: Date | string | null
+  motivo_anulacion?: string | null
   tb_detalle_factura?: Prisma.tb_detalle_facturaUncheckedCreateNestedManyWithoutTb_facturasInput
 }
 
@@ -672,6 +728,8 @@ export type tb_facturasScalarWhereInput = {
   metodo_pago?: Prisma.StringFilter<"tb_facturas"> | string
   estado?: Prisma.StringFilter<"tb_facturas"> | string
   observaciones?: Prisma.StringNullableFilter<"tb_facturas"> | string | null
+  fecha_anulacion?: Prisma.DateTimeNullableFilter<"tb_facturas"> | Date | string | null
+  motivo_anulacion?: Prisma.StringNullableFilter<"tb_facturas"> | string | null
 }
 
 export type tb_facturasCreateWithoutTb_usuariosInput = {
@@ -680,6 +738,8 @@ export type tb_facturasCreateWithoutTb_usuariosInput = {
   metodo_pago: string
   estado?: string
   observaciones?: string | null
+  fecha_anulacion?: Date | string | null
+  motivo_anulacion?: string | null
   tb_detalle_factura?: Prisma.tb_detalle_facturaCreateNestedManyWithoutTb_facturasInput
   tb_pacientes: Prisma.tb_pacientesCreateNestedOneWithoutTb_facturasInput
 }
@@ -692,6 +752,8 @@ export type tb_facturasUncheckedCreateWithoutTb_usuariosInput = {
   metodo_pago: string
   estado?: string
   observaciones?: string | null
+  fecha_anulacion?: Date | string | null
+  motivo_anulacion?: string | null
   tb_detalle_factura?: Prisma.tb_detalle_facturaUncheckedCreateNestedManyWithoutTb_facturasInput
 }
 
@@ -729,6 +791,8 @@ export type tb_facturasCreateManyTb_pacientesInput = {
   metodo_pago: string
   estado?: string
   observaciones?: string | null
+  fecha_anulacion?: Date | string | null
+  motivo_anulacion?: string | null
 }
 
 export type tb_facturasUpdateWithoutTb_pacientesInput = {
@@ -737,6 +801,8 @@ export type tb_facturasUpdateWithoutTb_pacientesInput = {
   metodo_pago?: Prisma.StringFieldUpdateOperationsInput | string
   estado?: Prisma.StringFieldUpdateOperationsInput | string
   observaciones?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fecha_anulacion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  motivo_anulacion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tb_detalle_factura?: Prisma.tb_detalle_facturaUpdateManyWithoutTb_facturasNestedInput
   tb_usuarios?: Prisma.tb_usuariosUpdateOneRequiredWithoutTb_facturasNestedInput
 }
@@ -749,6 +815,8 @@ export type tb_facturasUncheckedUpdateWithoutTb_pacientesInput = {
   metodo_pago?: Prisma.StringFieldUpdateOperationsInput | string
   estado?: Prisma.StringFieldUpdateOperationsInput | string
   observaciones?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fecha_anulacion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  motivo_anulacion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tb_detalle_factura?: Prisma.tb_detalle_facturaUncheckedUpdateManyWithoutTb_facturasNestedInput
 }
 
@@ -760,6 +828,8 @@ export type tb_facturasUncheckedUpdateManyWithoutTb_pacientesInput = {
   metodo_pago?: Prisma.StringFieldUpdateOperationsInput | string
   estado?: Prisma.StringFieldUpdateOperationsInput | string
   observaciones?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fecha_anulacion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  motivo_anulacion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type tb_facturasCreateManyTb_usuariosInput = {
@@ -770,6 +840,8 @@ export type tb_facturasCreateManyTb_usuariosInput = {
   metodo_pago: string
   estado?: string
   observaciones?: string | null
+  fecha_anulacion?: Date | string | null
+  motivo_anulacion?: string | null
 }
 
 export type tb_facturasUpdateWithoutTb_usuariosInput = {
@@ -778,6 +850,8 @@ export type tb_facturasUpdateWithoutTb_usuariosInput = {
   metodo_pago?: Prisma.StringFieldUpdateOperationsInput | string
   estado?: Prisma.StringFieldUpdateOperationsInput | string
   observaciones?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fecha_anulacion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  motivo_anulacion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tb_detalle_factura?: Prisma.tb_detalle_facturaUpdateManyWithoutTb_facturasNestedInput
   tb_pacientes?: Prisma.tb_pacientesUpdateOneRequiredWithoutTb_facturasNestedInput
 }
@@ -790,6 +864,8 @@ export type tb_facturasUncheckedUpdateWithoutTb_usuariosInput = {
   metodo_pago?: Prisma.StringFieldUpdateOperationsInput | string
   estado?: Prisma.StringFieldUpdateOperationsInput | string
   observaciones?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fecha_anulacion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  motivo_anulacion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tb_detalle_factura?: Prisma.tb_detalle_facturaUncheckedUpdateManyWithoutTb_facturasNestedInput
 }
 
@@ -801,6 +877,8 @@ export type tb_facturasUncheckedUpdateManyWithoutTb_usuariosInput = {
   metodo_pago?: Prisma.StringFieldUpdateOperationsInput | string
   estado?: Prisma.StringFieldUpdateOperationsInput | string
   observaciones?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fecha_anulacion?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  motivo_anulacion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 
@@ -843,6 +921,8 @@ export type tb_facturasSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   metodo_pago?: boolean
   estado?: boolean
   observaciones?: boolean
+  fecha_anulacion?: boolean
+  motivo_anulacion?: boolean
   tb_detalle_factura?: boolean | Prisma.tb_facturas$tb_detalle_facturaArgs<ExtArgs>
   tb_pacientes?: boolean | Prisma.tb_pacientesDefaultArgs<ExtArgs>
   tb_usuarios?: boolean | Prisma.tb_usuariosDefaultArgs<ExtArgs>
@@ -858,6 +938,8 @@ export type tb_facturasSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
   metodo_pago?: boolean
   estado?: boolean
   observaciones?: boolean
+  fecha_anulacion?: boolean
+  motivo_anulacion?: boolean
   tb_pacientes?: boolean | Prisma.tb_pacientesDefaultArgs<ExtArgs>
   tb_usuarios?: boolean | Prisma.tb_usuariosDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["tb_facturas"]>
@@ -871,6 +953,8 @@ export type tb_facturasSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   metodo_pago?: boolean
   estado?: boolean
   observaciones?: boolean
+  fecha_anulacion?: boolean
+  motivo_anulacion?: boolean
   tb_pacientes?: boolean | Prisma.tb_pacientesDefaultArgs<ExtArgs>
   tb_usuarios?: boolean | Prisma.tb_usuariosDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["tb_facturas"]>
@@ -884,9 +968,11 @@ export type tb_facturasSelectScalar = {
   metodo_pago?: boolean
   estado?: boolean
   observaciones?: boolean
+  fecha_anulacion?: boolean
+  motivo_anulacion?: boolean
 }
 
-export type tb_facturasOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id_factura" | "id_paciente" | "id_usuario" | "fecha_emision" | "total" | "metodo_pago" | "estado" | "observaciones", ExtArgs["result"]["tb_facturas"]>
+export type tb_facturasOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id_factura" | "id_paciente" | "id_usuario" | "fecha_emision" | "total" | "metodo_pago" | "estado" | "observaciones" | "fecha_anulacion" | "motivo_anulacion", ExtArgs["result"]["tb_facturas"]>
 export type tb_facturasInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tb_detalle_factura?: boolean | Prisma.tb_facturas$tb_detalle_facturaArgs<ExtArgs>
   tb_pacientes?: boolean | Prisma.tb_pacientesDefaultArgs<ExtArgs>
@@ -918,6 +1004,8 @@ export type $tb_facturasPayload<ExtArgs extends runtime.Types.Extensions.Interna
     metodo_pago: string
     estado: string
     observaciones: string | null
+    fecha_anulacion: Date | null
+    motivo_anulacion: string | null
   }, ExtArgs["result"]["tb_facturas"]>
   composites: {}
 }
@@ -1352,6 +1440,8 @@ export interface tb_facturasFieldRefs {
   readonly metodo_pago: Prisma.FieldRef<"tb_facturas", 'String'>
   readonly estado: Prisma.FieldRef<"tb_facturas", 'String'>
   readonly observaciones: Prisma.FieldRef<"tb_facturas", 'String'>
+  readonly fecha_anulacion: Prisma.FieldRef<"tb_facturas", 'DateTime'>
+  readonly motivo_anulacion: Prisma.FieldRef<"tb_facturas", 'String'>
 }
     
 

@@ -42,8 +42,8 @@ export type Tb_galeriaMinAggregateOutputType = {
   definicion: string | null
   imagen_url: string | null
   estado: boolean | null
-  orden_web: number | null
   fecha_creacion: Date | null
+  orden_web: number | null
 }
 
 export type Tb_galeriaMaxAggregateOutputType = {
@@ -52,8 +52,8 @@ export type Tb_galeriaMaxAggregateOutputType = {
   definicion: string | null
   imagen_url: string | null
   estado: boolean | null
-  orden_web: number | null
   fecha_creacion: Date | null
+  orden_web: number | null
 }
 
 export type Tb_galeriaCountAggregateOutputType = {
@@ -62,8 +62,8 @@ export type Tb_galeriaCountAggregateOutputType = {
   definicion: number
   imagen_url: number
   estado: number
-  orden_web: number
   fecha_creacion: number
+  orden_web: number
   _all: number
 }
 
@@ -84,8 +84,8 @@ export type Tb_galeriaMinAggregateInputType = {
   definicion?: true
   imagen_url?: true
   estado?: true
-  orden_web?: true
   fecha_creacion?: true
+  orden_web?: true
 }
 
 export type Tb_galeriaMaxAggregateInputType = {
@@ -94,8 +94,8 @@ export type Tb_galeriaMaxAggregateInputType = {
   definicion?: true
   imagen_url?: true
   estado?: true
-  orden_web?: true
   fecha_creacion?: true
+  orden_web?: true
 }
 
 export type Tb_galeriaCountAggregateInputType = {
@@ -104,8 +104,8 @@ export type Tb_galeriaCountAggregateInputType = {
   definicion?: true
   imagen_url?: true
   estado?: true
-  orden_web?: true
   fecha_creacion?: true
+  orden_web?: true
   _all?: true
 }
 
@@ -201,8 +201,8 @@ export type Tb_galeriaGroupByOutputType = {
   definicion: string | null
   imagen_url: string
   estado: boolean
-  orden_web: number
   fecha_creacion: Date
+  orden_web: number
   _count: Tb_galeriaCountAggregateOutputType | null
   _avg: Tb_galeriaAvgAggregateOutputType | null
   _sum: Tb_galeriaSumAggregateOutputType | null
@@ -234,8 +234,8 @@ export type tb_galeriaWhereInput = {
   definicion?: Prisma.StringNullableFilter<"tb_galeria"> | string | null
   imagen_url?: Prisma.StringFilter<"tb_galeria"> | string
   estado?: Prisma.BoolFilter<"tb_galeria"> | boolean
-  orden_web?: Prisma.IntFilter<"tb_galeria"> | number
   fecha_creacion?: Prisma.DateTimeFilter<"tb_galeria"> | Date | string
+  orden_web?: Prisma.IntFilter<"tb_galeria"> | number
 }
 
 export type tb_galeriaOrderByWithRelationInput = {
@@ -244,8 +244,8 @@ export type tb_galeriaOrderByWithRelationInput = {
   definicion?: Prisma.SortOrderInput | Prisma.SortOrder
   imagen_url?: Prisma.SortOrder
   estado?: Prisma.SortOrder
-  orden_web?: Prisma.SortOrder
   fecha_creacion?: Prisma.SortOrder
+  orden_web?: Prisma.SortOrder
 }
 
 export type tb_galeriaWhereUniqueInput = Prisma.AtLeast<{
@@ -257,8 +257,8 @@ export type tb_galeriaWhereUniqueInput = Prisma.AtLeast<{
   definicion?: Prisma.StringNullableFilter<"tb_galeria"> | string | null
   imagen_url?: Prisma.StringFilter<"tb_galeria"> | string
   estado?: Prisma.BoolFilter<"tb_galeria"> | boolean
-  orden_web?: Prisma.IntFilter<"tb_galeria"> | number
   fecha_creacion?: Prisma.DateTimeFilter<"tb_galeria"> | Date | string
+  orden_web?: Prisma.IntFilter<"tb_galeria"> | number
 }, "id">
 
 export type tb_galeriaOrderByWithAggregationInput = {
@@ -267,8 +267,8 @@ export type tb_galeriaOrderByWithAggregationInput = {
   definicion?: Prisma.SortOrderInput | Prisma.SortOrder
   imagen_url?: Prisma.SortOrder
   estado?: Prisma.SortOrder
-  orden_web?: Prisma.SortOrder
   fecha_creacion?: Prisma.SortOrder
+  orden_web?: Prisma.SortOrder
   _count?: Prisma.tb_galeriaCountOrderByAggregateInput
   _avg?: Prisma.tb_galeriaAvgOrderByAggregateInput
   _max?: Prisma.tb_galeriaMaxOrderByAggregateInput
@@ -285,8 +285,8 @@ export type tb_galeriaScalarWhereWithAggregatesInput = {
   definicion?: Prisma.StringNullableWithAggregatesFilter<"tb_galeria"> | string | null
   imagen_url?: Prisma.StringWithAggregatesFilter<"tb_galeria"> | string
   estado?: Prisma.BoolWithAggregatesFilter<"tb_galeria"> | boolean
-  orden_web?: Prisma.IntWithAggregatesFilter<"tb_galeria"> | number
   fecha_creacion?: Prisma.DateTimeWithAggregatesFilter<"tb_galeria"> | Date | string
+  orden_web?: Prisma.IntWithAggregatesFilter<"tb_galeria"> | number
 }
 
 export type tb_galeriaCreateInput = {
@@ -294,8 +294,8 @@ export type tb_galeriaCreateInput = {
   definicion?: string | null
   imagen_url: string
   estado?: boolean
-  orden_web?: number
   fecha_creacion?: Date | string
+  orden_web?: number
 }
 
 export type tb_galeriaUncheckedCreateInput = {
@@ -304,8 +304,8 @@ export type tb_galeriaUncheckedCreateInput = {
   definicion?: string | null
   imagen_url: string
   estado?: boolean
-  orden_web?: number
   fecha_creacion?: Date | string
+  orden_web?: number
 }
 
 export type tb_galeriaUpdateInput = {
@@ -313,8 +313,8 @@ export type tb_galeriaUpdateInput = {
   definicion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imagen_url?: Prisma.StringFieldUpdateOperationsInput | string
   estado?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  orden_web?: Prisma.IntFieldUpdateOperationsInput | number
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  orden_web?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type tb_galeriaUncheckedUpdateInput = {
@@ -323,8 +323,8 @@ export type tb_galeriaUncheckedUpdateInput = {
   definicion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imagen_url?: Prisma.StringFieldUpdateOperationsInput | string
   estado?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  orden_web?: Prisma.IntFieldUpdateOperationsInput | number
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  orden_web?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type tb_galeriaCreateManyInput = {
@@ -333,8 +333,8 @@ export type tb_galeriaCreateManyInput = {
   definicion?: string | null
   imagen_url: string
   estado?: boolean
-  orden_web?: number
   fecha_creacion?: Date | string
+  orden_web?: number
 }
 
 export type tb_galeriaUpdateManyMutationInput = {
@@ -342,8 +342,8 @@ export type tb_galeriaUpdateManyMutationInput = {
   definicion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imagen_url?: Prisma.StringFieldUpdateOperationsInput | string
   estado?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  orden_web?: Prisma.IntFieldUpdateOperationsInput | number
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  orden_web?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type tb_galeriaUncheckedUpdateManyInput = {
@@ -352,8 +352,8 @@ export type tb_galeriaUncheckedUpdateManyInput = {
   definicion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   imagen_url?: Prisma.StringFieldUpdateOperationsInput | string
   estado?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  orden_web?: Prisma.IntFieldUpdateOperationsInput | number
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  orden_web?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type tb_galeriaCountOrderByAggregateInput = {
@@ -362,8 +362,8 @@ export type tb_galeriaCountOrderByAggregateInput = {
   definicion?: Prisma.SortOrder
   imagen_url?: Prisma.SortOrder
   estado?: Prisma.SortOrder
-  orden_web?: Prisma.SortOrder
   fecha_creacion?: Prisma.SortOrder
+  orden_web?: Prisma.SortOrder
 }
 
 export type tb_galeriaAvgOrderByAggregateInput = {
@@ -377,8 +377,8 @@ export type tb_galeriaMaxOrderByAggregateInput = {
   definicion?: Prisma.SortOrder
   imagen_url?: Prisma.SortOrder
   estado?: Prisma.SortOrder
-  orden_web?: Prisma.SortOrder
   fecha_creacion?: Prisma.SortOrder
+  orden_web?: Prisma.SortOrder
 }
 
 export type tb_galeriaMinOrderByAggregateInput = {
@@ -387,8 +387,8 @@ export type tb_galeriaMinOrderByAggregateInput = {
   definicion?: Prisma.SortOrder
   imagen_url?: Prisma.SortOrder
   estado?: Prisma.SortOrder
-  orden_web?: Prisma.SortOrder
   fecha_creacion?: Prisma.SortOrder
+  orden_web?: Prisma.SortOrder
 }
 
 export type tb_galeriaSumOrderByAggregateInput = {
@@ -404,8 +404,8 @@ export type tb_galeriaSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   definicion?: boolean
   imagen_url?: boolean
   estado?: boolean
-  orden_web?: boolean
   fecha_creacion?: boolean
+  orden_web?: boolean
 }, ExtArgs["result"]["tb_galeria"]>
 
 export type tb_galeriaSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -414,8 +414,8 @@ export type tb_galeriaSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ex
   definicion?: boolean
   imagen_url?: boolean
   estado?: boolean
-  orden_web?: boolean
   fecha_creacion?: boolean
+  orden_web?: boolean
 }, ExtArgs["result"]["tb_galeria"]>
 
 export type tb_galeriaSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -424,8 +424,8 @@ export type tb_galeriaSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
   definicion?: boolean
   imagen_url?: boolean
   estado?: boolean
-  orden_web?: boolean
   fecha_creacion?: boolean
+  orden_web?: boolean
 }, ExtArgs["result"]["tb_galeria"]>
 
 export type tb_galeriaSelectScalar = {
@@ -434,11 +434,11 @@ export type tb_galeriaSelectScalar = {
   definicion?: boolean
   imagen_url?: boolean
   estado?: boolean
-  orden_web?: boolean
   fecha_creacion?: boolean
+  orden_web?: boolean
 }
 
-export type tb_galeriaOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "titulo" | "definicion" | "imagen_url" | "estado" | "orden_web" | "fecha_creacion", ExtArgs["result"]["tb_galeria"]>
+export type tb_galeriaOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "titulo" | "definicion" | "imagen_url" | "estado" | "fecha_creacion" | "orden_web", ExtArgs["result"]["tb_galeria"]>
 
 export type $tb_galeriaPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "tb_galeria"
@@ -449,8 +449,8 @@ export type $tb_galeriaPayload<ExtArgs extends runtime.Types.Extensions.Internal
     definicion: string | null
     imagen_url: string
     estado: boolean
-    orden_web: number
     fecha_creacion: Date
+    orden_web: number
   }, ExtArgs["result"]["tb_galeria"]>
   composites: {}
 }
@@ -879,8 +879,8 @@ export interface tb_galeriaFieldRefs {
   readonly definicion: Prisma.FieldRef<"tb_galeria", 'String'>
   readonly imagen_url: Prisma.FieldRef<"tb_galeria", 'String'>
   readonly estado: Prisma.FieldRef<"tb_galeria", 'Boolean'>
-  readonly orden_web: Prisma.FieldRef<"tb_galeria", 'Int'>
   readonly fecha_creacion: Prisma.FieldRef<"tb_galeria", 'DateTime'>
+  readonly orden_web: Prisma.FieldRef<"tb_galeria", 'Int'>
 }
     
 

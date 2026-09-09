@@ -912,3 +912,32 @@ button, a { -webkit-tap-highlight-color: transparent; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
 }
+
+.cash-date-filter { display: grid; gap: 0.35rem; color: var(--ami-slate-700); font-size: 0.82rem; font-weight: 750; }
+.cash-date-filter input { min-height: 2.65rem; padding: 0.55rem 0.75rem; border: 1px solid var(--ami-slate-200); border-radius: 0.65rem; background: #fff; color: var(--ami-blue-950); }
+.billing-metrics { margin-top: 1.25rem; }
+.cash-method-breakdown { margin-top: 1.5rem; }
+.cash-method-breakdown h4 { margin: 0 0 0.75rem; color: var(--ami-blue-950); }
+.resource-loading { padding: 2rem 0; color: var(--ami-slate-600); }
+.invoice-service-shortcuts { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-bottom: 1rem; }
+.invoice-service-shortcuts > span { width: 100%; color: var(--ami-slate-600); font-size: 0.78rem; font-weight: 800; text-transform: uppercase; }
+.invoice-service-shortcuts button { padding: 0.45rem 0.65rem; border: 1px solid var(--ami-blue-200); border-radius: 0.55rem; background: var(--ami-blue-50); color: var(--ami-blue-800); cursor: pointer; }
+.invoice-lines { display: grid; gap: 0.75rem; margin-bottom: 0.8rem; }
+.invoice-line { display: grid; grid-template-columns: minmax(12rem, 2fr) minmax(6rem, 0.65fr) minmax(8rem, 0.8fr) auto; gap: 0.65rem; align-items: end; padding: 0.8rem; border: 1px solid var(--ami-slate-200); border-radius: 0.75rem; }
+.invoice-remove-line { min-height: 2.75rem; }
+.invoice-total-preview { display: flex; justify-content: flex-end; gap: 1rem; margin: 1rem 0 0; color: var(--ami-blue-950); }
+.invoice-total-preview strong { font-size: 1.2rem; }
+.stock-level { display: grid; gap: 0.15rem; }
+.stock-level span { display: inline-flex; align-items: center; gap: 0.25rem; color: var(--ami-slate-600); font-size: 0.78rem; }
+.stock-level span svg { width: 0.9rem; }
+.stock-level.is-low strong, .stock-level.is-low span { color: #a13b24; }
+.immutable-record-notice { display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem; border: 1px solid var(--ami-blue-200); border-radius: 0.65rem; background: var(--ami-blue-50); color: var(--ami-blue-900); font-weight: 700; }
+.immutable-record-notice svg { width: 1rem; }
+
+@media (max-width: 48rem) {
+  .invoice-line { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 35rem) {
+  .invoice-line { grid-template-columns: 1fr; }
+}

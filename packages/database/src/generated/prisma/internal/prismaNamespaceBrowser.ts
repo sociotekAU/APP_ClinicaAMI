@@ -261,9 +261,9 @@ export const Tb_especialidadesScalarFieldEnum = {
   id: 'id',
   nombre: 'nombre',
   descripcion: 'descripcion',
-  admite_expediente_psicologico: 'admite_expediente_psicologico',
   estado: 'estado',
-  fecha_creacion: 'fecha_creacion'
+  fecha_creacion: 'fecha_creacion',
+  admite_expediente_psicologico: 'admite_expediente_psicologico'
 } as const
 
 export type Tb_especialidadesScalarFieldEnum = (typeof Tb_especialidadesScalarFieldEnum)[keyof typeof Tb_especialidadesScalarFieldEnum]
@@ -291,7 +291,9 @@ export const Tb_facturasScalarFieldEnum = {
   total: 'total',
   metodo_pago: 'metodo_pago',
   estado: 'estado',
-  observaciones: 'observaciones'
+  observaciones: 'observaciones',
+  fecha_anulacion: 'fecha_anulacion',
+  motivo_anulacion: 'motivo_anulacion'
 } as const
 
 export type Tb_facturasScalarFieldEnum = (typeof Tb_facturasScalarFieldEnum)[keyof typeof Tb_facturasScalarFieldEnum]
@@ -303,8 +305,8 @@ export const Tb_galeriaScalarFieldEnum = {
   definicion: 'definicion',
   imagen_url: 'imagen_url',
   estado: 'estado',
-  orden_web: 'orden_web',
-  fecha_creacion: 'fecha_creacion'
+  fecha_creacion: 'fecha_creacion',
+  orden_web: 'orden_web'
 } as const
 
 export type Tb_galeriaScalarFieldEnum = (typeof Tb_galeriaScalarFieldEnum)[keyof typeof Tb_galeriaScalarFieldEnum]
@@ -321,7 +323,8 @@ export const Tb_insumos_inventarioScalarFieldEnum = {
   precio_costo: 'precio_costo',
   unidad_medida: 'unidad_medida',
   estado: 'estado',
-  fecha_creacion: 'fecha_creacion'
+  fecha_creacion: 'fecha_creacion',
+  stock_bajo: 'stock_bajo'
 } as const
 
 export type Tb_insumos_inventarioScalarFieldEnum = (typeof Tb_insumos_inventarioScalarFieldEnum)[keyof typeof Tb_insumos_inventarioScalarFieldEnum]
@@ -367,7 +370,9 @@ export const Tb_movimientos_inventarioScalarFieldEnum = {
   cantidad: 'cantidad',
   fecha: 'fecha',
   id_usuario: 'id_usuario',
-  observaciones: 'observaciones'
+  observaciones: 'observaciones',
+  stock_anterior: 'stock_anterior',
+  stock_resultante: 'stock_resultante'
 } as const
 
 export type Tb_movimientos_inventarioScalarFieldEnum = (typeof Tb_movimientos_inventarioScalarFieldEnum)[keyof typeof Tb_movimientos_inventarioScalarFieldEnum]

@@ -32,6 +32,8 @@ export type Tb_movimientos_inventarioAvgAggregateOutputType = {
   id_insumo: number | null
   cantidad: runtime.Decimal | null
   id_usuario: number | null
+  stock_anterior: runtime.Decimal | null
+  stock_resultante: runtime.Decimal | null
 }
 
 export type Tb_movimientos_inventarioSumAggregateOutputType = {
@@ -39,6 +41,8 @@ export type Tb_movimientos_inventarioSumAggregateOutputType = {
   id_insumo: number | null
   cantidad: runtime.Decimal | null
   id_usuario: number | null
+  stock_anterior: runtime.Decimal | null
+  stock_resultante: runtime.Decimal | null
 }
 
 export type Tb_movimientos_inventarioMinAggregateOutputType = {
@@ -49,6 +53,8 @@ export type Tb_movimientos_inventarioMinAggregateOutputType = {
   fecha: Date | null
   id_usuario: number | null
   observaciones: string | null
+  stock_anterior: runtime.Decimal | null
+  stock_resultante: runtime.Decimal | null
 }
 
 export type Tb_movimientos_inventarioMaxAggregateOutputType = {
@@ -59,6 +65,8 @@ export type Tb_movimientos_inventarioMaxAggregateOutputType = {
   fecha: Date | null
   id_usuario: number | null
   observaciones: string | null
+  stock_anterior: runtime.Decimal | null
+  stock_resultante: runtime.Decimal | null
 }
 
 export type Tb_movimientos_inventarioCountAggregateOutputType = {
@@ -69,6 +77,8 @@ export type Tb_movimientos_inventarioCountAggregateOutputType = {
   fecha: number
   id_usuario: number
   observaciones: number
+  stock_anterior: number
+  stock_resultante: number
   _all: number
 }
 
@@ -78,6 +88,8 @@ export type Tb_movimientos_inventarioAvgAggregateInputType = {
   id_insumo?: true
   cantidad?: true
   id_usuario?: true
+  stock_anterior?: true
+  stock_resultante?: true
 }
 
 export type Tb_movimientos_inventarioSumAggregateInputType = {
@@ -85,6 +97,8 @@ export type Tb_movimientos_inventarioSumAggregateInputType = {
   id_insumo?: true
   cantidad?: true
   id_usuario?: true
+  stock_anterior?: true
+  stock_resultante?: true
 }
 
 export type Tb_movimientos_inventarioMinAggregateInputType = {
@@ -95,6 +109,8 @@ export type Tb_movimientos_inventarioMinAggregateInputType = {
   fecha?: true
   id_usuario?: true
   observaciones?: true
+  stock_anterior?: true
+  stock_resultante?: true
 }
 
 export type Tb_movimientos_inventarioMaxAggregateInputType = {
@@ -105,6 +121,8 @@ export type Tb_movimientos_inventarioMaxAggregateInputType = {
   fecha?: true
   id_usuario?: true
   observaciones?: true
+  stock_anterior?: true
+  stock_resultante?: true
 }
 
 export type Tb_movimientos_inventarioCountAggregateInputType = {
@@ -115,6 +133,8 @@ export type Tb_movimientos_inventarioCountAggregateInputType = {
   fecha?: true
   id_usuario?: true
   observaciones?: true
+  stock_anterior?: true
+  stock_resultante?: true
   _all?: true
 }
 
@@ -212,6 +232,8 @@ export type Tb_movimientos_inventarioGroupByOutputType = {
   fecha: Date
   id_usuario: number
   observaciones: string | null
+  stock_anterior: runtime.Decimal | null
+  stock_resultante: runtime.Decimal | null
   _count: Tb_movimientos_inventarioCountAggregateOutputType | null
   _avg: Tb_movimientos_inventarioAvgAggregateOutputType | null
   _sum: Tb_movimientos_inventarioSumAggregateOutputType | null
@@ -245,6 +267,8 @@ export type tb_movimientos_inventarioWhereInput = {
   fecha?: Prisma.DateTimeFilter<"tb_movimientos_inventario"> | Date | string
   id_usuario?: Prisma.IntFilter<"tb_movimientos_inventario"> | number
   observaciones?: Prisma.StringNullableFilter<"tb_movimientos_inventario"> | string | null
+  stock_anterior?: Prisma.DecimalNullableFilter<"tb_movimientos_inventario"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  stock_resultante?: Prisma.DecimalNullableFilter<"tb_movimientos_inventario"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   tb_insumos_inventario?: Prisma.XOR<Prisma.Tb_insumos_inventarioScalarRelationFilter, Prisma.tb_insumos_inventarioWhereInput>
   tb_usuarios?: Prisma.XOR<Prisma.Tb_usuariosScalarRelationFilter, Prisma.tb_usuariosWhereInput>
 }
@@ -257,6 +281,8 @@ export type tb_movimientos_inventarioOrderByWithRelationInput = {
   fecha?: Prisma.SortOrder
   id_usuario?: Prisma.SortOrder
   observaciones?: Prisma.SortOrderInput | Prisma.SortOrder
+  stock_anterior?: Prisma.SortOrderInput | Prisma.SortOrder
+  stock_resultante?: Prisma.SortOrderInput | Prisma.SortOrder
   tb_insumos_inventario?: Prisma.tb_insumos_inventarioOrderByWithRelationInput
   tb_usuarios?: Prisma.tb_usuariosOrderByWithRelationInput
 }
@@ -272,6 +298,8 @@ export type tb_movimientos_inventarioWhereUniqueInput = Prisma.AtLeast<{
   fecha?: Prisma.DateTimeFilter<"tb_movimientos_inventario"> | Date | string
   id_usuario?: Prisma.IntFilter<"tb_movimientos_inventario"> | number
   observaciones?: Prisma.StringNullableFilter<"tb_movimientos_inventario"> | string | null
+  stock_anterior?: Prisma.DecimalNullableFilter<"tb_movimientos_inventario"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  stock_resultante?: Prisma.DecimalNullableFilter<"tb_movimientos_inventario"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   tb_insumos_inventario?: Prisma.XOR<Prisma.Tb_insumos_inventarioScalarRelationFilter, Prisma.tb_insumos_inventarioWhereInput>
   tb_usuarios?: Prisma.XOR<Prisma.Tb_usuariosScalarRelationFilter, Prisma.tb_usuariosWhereInput>
 }, "id_movimiento">
@@ -284,6 +312,8 @@ export type tb_movimientos_inventarioOrderByWithAggregationInput = {
   fecha?: Prisma.SortOrder
   id_usuario?: Prisma.SortOrder
   observaciones?: Prisma.SortOrderInput | Prisma.SortOrder
+  stock_anterior?: Prisma.SortOrderInput | Prisma.SortOrder
+  stock_resultante?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.tb_movimientos_inventarioCountOrderByAggregateInput
   _avg?: Prisma.tb_movimientos_inventarioAvgOrderByAggregateInput
   _max?: Prisma.tb_movimientos_inventarioMaxOrderByAggregateInput
@@ -302,6 +332,8 @@ export type tb_movimientos_inventarioScalarWhereWithAggregatesInput = {
   fecha?: Prisma.DateTimeWithAggregatesFilter<"tb_movimientos_inventario"> | Date | string
   id_usuario?: Prisma.IntWithAggregatesFilter<"tb_movimientos_inventario"> | number
   observaciones?: Prisma.StringNullableWithAggregatesFilter<"tb_movimientos_inventario"> | string | null
+  stock_anterior?: Prisma.DecimalNullableWithAggregatesFilter<"tb_movimientos_inventario"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  stock_resultante?: Prisma.DecimalNullableWithAggregatesFilter<"tb_movimientos_inventario"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
 }
 
 export type tb_movimientos_inventarioCreateInput = {
@@ -309,6 +341,8 @@ export type tb_movimientos_inventarioCreateInput = {
   cantidad: runtime.Decimal | runtime.DecimalJsLike | number | string
   fecha?: Date | string
   observaciones?: string | null
+  stock_anterior?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  stock_resultante?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   tb_insumos_inventario: Prisma.tb_insumos_inventarioCreateNestedOneWithoutTb_movimientos_inventarioInput
   tb_usuarios: Prisma.tb_usuariosCreateNestedOneWithoutTb_movimientos_inventarioInput
 }
@@ -321,6 +355,8 @@ export type tb_movimientos_inventarioUncheckedCreateInput = {
   fecha?: Date | string
   id_usuario: number
   observaciones?: string | null
+  stock_anterior?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  stock_resultante?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
 }
 
 export type tb_movimientos_inventarioUpdateInput = {
@@ -328,6 +364,8 @@ export type tb_movimientos_inventarioUpdateInput = {
   cantidad?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   fecha?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   observaciones?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stock_anterior?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  stock_resultante?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   tb_insumos_inventario?: Prisma.tb_insumos_inventarioUpdateOneRequiredWithoutTb_movimientos_inventarioNestedInput
   tb_usuarios?: Prisma.tb_usuariosUpdateOneRequiredWithoutTb_movimientos_inventarioNestedInput
 }
@@ -340,6 +378,8 @@ export type tb_movimientos_inventarioUncheckedUpdateInput = {
   fecha?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   id_usuario?: Prisma.IntFieldUpdateOperationsInput | number
   observaciones?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stock_anterior?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  stock_resultante?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
 }
 
 export type tb_movimientos_inventarioCreateManyInput = {
@@ -350,6 +390,8 @@ export type tb_movimientos_inventarioCreateManyInput = {
   fecha?: Date | string
   id_usuario: number
   observaciones?: string | null
+  stock_anterior?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  stock_resultante?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
 }
 
 export type tb_movimientos_inventarioUpdateManyMutationInput = {
@@ -357,6 +399,8 @@ export type tb_movimientos_inventarioUpdateManyMutationInput = {
   cantidad?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   fecha?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   observaciones?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stock_anterior?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  stock_resultante?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
 }
 
 export type tb_movimientos_inventarioUncheckedUpdateManyInput = {
@@ -367,6 +411,8 @@ export type tb_movimientos_inventarioUncheckedUpdateManyInput = {
   fecha?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   id_usuario?: Prisma.IntFieldUpdateOperationsInput | number
   observaciones?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stock_anterior?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  stock_resultante?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
 }
 
 export type Tb_movimientos_inventarioListRelationFilter = {
@@ -387,6 +433,8 @@ export type tb_movimientos_inventarioCountOrderByAggregateInput = {
   fecha?: Prisma.SortOrder
   id_usuario?: Prisma.SortOrder
   observaciones?: Prisma.SortOrder
+  stock_anterior?: Prisma.SortOrder
+  stock_resultante?: Prisma.SortOrder
 }
 
 export type tb_movimientos_inventarioAvgOrderByAggregateInput = {
@@ -394,6 +442,8 @@ export type tb_movimientos_inventarioAvgOrderByAggregateInput = {
   id_insumo?: Prisma.SortOrder
   cantidad?: Prisma.SortOrder
   id_usuario?: Prisma.SortOrder
+  stock_anterior?: Prisma.SortOrder
+  stock_resultante?: Prisma.SortOrder
 }
 
 export type tb_movimientos_inventarioMaxOrderByAggregateInput = {
@@ -404,6 +454,8 @@ export type tb_movimientos_inventarioMaxOrderByAggregateInput = {
   fecha?: Prisma.SortOrder
   id_usuario?: Prisma.SortOrder
   observaciones?: Prisma.SortOrder
+  stock_anterior?: Prisma.SortOrder
+  stock_resultante?: Prisma.SortOrder
 }
 
 export type tb_movimientos_inventarioMinOrderByAggregateInput = {
@@ -414,6 +466,8 @@ export type tb_movimientos_inventarioMinOrderByAggregateInput = {
   fecha?: Prisma.SortOrder
   id_usuario?: Prisma.SortOrder
   observaciones?: Prisma.SortOrder
+  stock_anterior?: Prisma.SortOrder
+  stock_resultante?: Prisma.SortOrder
 }
 
 export type tb_movimientos_inventarioSumOrderByAggregateInput = {
@@ -421,6 +475,8 @@ export type tb_movimientos_inventarioSumOrderByAggregateInput = {
   id_insumo?: Prisma.SortOrder
   cantidad?: Prisma.SortOrder
   id_usuario?: Prisma.SortOrder
+  stock_anterior?: Prisma.SortOrder
+  stock_resultante?: Prisma.SortOrder
 }
 
 export type tb_movimientos_inventarioCreateNestedManyWithoutTb_insumos_inventarioInput = {
@@ -512,6 +568,8 @@ export type tb_movimientos_inventarioCreateWithoutTb_insumos_inventarioInput = {
   cantidad: runtime.Decimal | runtime.DecimalJsLike | number | string
   fecha?: Date | string
   observaciones?: string | null
+  stock_anterior?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  stock_resultante?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   tb_usuarios: Prisma.tb_usuariosCreateNestedOneWithoutTb_movimientos_inventarioInput
 }
 
@@ -522,6 +580,8 @@ export type tb_movimientos_inventarioUncheckedCreateWithoutTb_insumos_inventario
   fecha?: Date | string
   id_usuario: number
   observaciones?: string | null
+  stock_anterior?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  stock_resultante?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
 }
 
 export type tb_movimientos_inventarioCreateOrConnectWithoutTb_insumos_inventarioInput = {
@@ -561,6 +621,8 @@ export type tb_movimientos_inventarioScalarWhereInput = {
   fecha?: Prisma.DateTimeFilter<"tb_movimientos_inventario"> | Date | string
   id_usuario?: Prisma.IntFilter<"tb_movimientos_inventario"> | number
   observaciones?: Prisma.StringNullableFilter<"tb_movimientos_inventario"> | string | null
+  stock_anterior?: Prisma.DecimalNullableFilter<"tb_movimientos_inventario"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  stock_resultante?: Prisma.DecimalNullableFilter<"tb_movimientos_inventario"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
 }
 
 export type tb_movimientos_inventarioCreateWithoutTb_usuariosInput = {
@@ -568,6 +630,8 @@ export type tb_movimientos_inventarioCreateWithoutTb_usuariosInput = {
   cantidad: runtime.Decimal | runtime.DecimalJsLike | number | string
   fecha?: Date | string
   observaciones?: string | null
+  stock_anterior?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  stock_resultante?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   tb_insumos_inventario: Prisma.tb_insumos_inventarioCreateNestedOneWithoutTb_movimientos_inventarioInput
 }
 
@@ -578,6 +642,8 @@ export type tb_movimientos_inventarioUncheckedCreateWithoutTb_usuariosInput = {
   cantidad: runtime.Decimal | runtime.DecimalJsLike | number | string
   fecha?: Date | string
   observaciones?: string | null
+  stock_anterior?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  stock_resultante?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
 }
 
 export type tb_movimientos_inventarioCreateOrConnectWithoutTb_usuariosInput = {
@@ -613,6 +679,8 @@ export type tb_movimientos_inventarioCreateManyTb_insumos_inventarioInput = {
   fecha?: Date | string
   id_usuario: number
   observaciones?: string | null
+  stock_anterior?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  stock_resultante?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
 }
 
 export type tb_movimientos_inventarioUpdateWithoutTb_insumos_inventarioInput = {
@@ -620,6 +688,8 @@ export type tb_movimientos_inventarioUpdateWithoutTb_insumos_inventarioInput = {
   cantidad?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   fecha?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   observaciones?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stock_anterior?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  stock_resultante?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   tb_usuarios?: Prisma.tb_usuariosUpdateOneRequiredWithoutTb_movimientos_inventarioNestedInput
 }
 
@@ -630,6 +700,8 @@ export type tb_movimientos_inventarioUncheckedUpdateWithoutTb_insumos_inventario
   fecha?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   id_usuario?: Prisma.IntFieldUpdateOperationsInput | number
   observaciones?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stock_anterior?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  stock_resultante?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
 }
 
 export type tb_movimientos_inventarioUncheckedUpdateManyWithoutTb_insumos_inventarioInput = {
@@ -639,6 +711,8 @@ export type tb_movimientos_inventarioUncheckedUpdateManyWithoutTb_insumos_invent
   fecha?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   id_usuario?: Prisma.IntFieldUpdateOperationsInput | number
   observaciones?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stock_anterior?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  stock_resultante?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
 }
 
 export type tb_movimientos_inventarioCreateManyTb_usuariosInput = {
@@ -648,6 +722,8 @@ export type tb_movimientos_inventarioCreateManyTb_usuariosInput = {
   cantidad: runtime.Decimal | runtime.DecimalJsLike | number | string
   fecha?: Date | string
   observaciones?: string | null
+  stock_anterior?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  stock_resultante?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
 }
 
 export type tb_movimientos_inventarioUpdateWithoutTb_usuariosInput = {
@@ -655,6 +731,8 @@ export type tb_movimientos_inventarioUpdateWithoutTb_usuariosInput = {
   cantidad?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   fecha?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   observaciones?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stock_anterior?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  stock_resultante?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   tb_insumos_inventario?: Prisma.tb_insumos_inventarioUpdateOneRequiredWithoutTb_movimientos_inventarioNestedInput
 }
 
@@ -665,6 +743,8 @@ export type tb_movimientos_inventarioUncheckedUpdateWithoutTb_usuariosInput = {
   cantidad?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   fecha?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   observaciones?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stock_anterior?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  stock_resultante?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
 }
 
 export type tb_movimientos_inventarioUncheckedUpdateManyWithoutTb_usuariosInput = {
@@ -674,6 +754,8 @@ export type tb_movimientos_inventarioUncheckedUpdateManyWithoutTb_usuariosInput 
   cantidad?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   fecha?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   observaciones?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stock_anterior?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  stock_resultante?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
 }
 
 
@@ -686,6 +768,8 @@ export type tb_movimientos_inventarioSelect<ExtArgs extends runtime.Types.Extens
   fecha?: boolean
   id_usuario?: boolean
   observaciones?: boolean
+  stock_anterior?: boolean
+  stock_resultante?: boolean
   tb_insumos_inventario?: boolean | Prisma.tb_insumos_inventarioDefaultArgs<ExtArgs>
   tb_usuarios?: boolean | Prisma.tb_usuariosDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["tb_movimientos_inventario"]>
@@ -698,6 +782,8 @@ export type tb_movimientos_inventarioSelectCreateManyAndReturn<ExtArgs extends r
   fecha?: boolean
   id_usuario?: boolean
   observaciones?: boolean
+  stock_anterior?: boolean
+  stock_resultante?: boolean
   tb_insumos_inventario?: boolean | Prisma.tb_insumos_inventarioDefaultArgs<ExtArgs>
   tb_usuarios?: boolean | Prisma.tb_usuariosDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["tb_movimientos_inventario"]>
@@ -710,6 +796,8 @@ export type tb_movimientos_inventarioSelectUpdateManyAndReturn<ExtArgs extends r
   fecha?: boolean
   id_usuario?: boolean
   observaciones?: boolean
+  stock_anterior?: boolean
+  stock_resultante?: boolean
   tb_insumos_inventario?: boolean | Prisma.tb_insumos_inventarioDefaultArgs<ExtArgs>
   tb_usuarios?: boolean | Prisma.tb_usuariosDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["tb_movimientos_inventario"]>
@@ -722,9 +810,11 @@ export type tb_movimientos_inventarioSelectScalar = {
   fecha?: boolean
   id_usuario?: boolean
   observaciones?: boolean
+  stock_anterior?: boolean
+  stock_resultante?: boolean
 }
 
-export type tb_movimientos_inventarioOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id_movimiento" | "id_insumo" | "tipo_movimiento" | "cantidad" | "fecha" | "id_usuario" | "observaciones", ExtArgs["result"]["tb_movimientos_inventario"]>
+export type tb_movimientos_inventarioOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id_movimiento" | "id_insumo" | "tipo_movimiento" | "cantidad" | "fecha" | "id_usuario" | "observaciones" | "stock_anterior" | "stock_resultante", ExtArgs["result"]["tb_movimientos_inventario"]>
 export type tb_movimientos_inventarioInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tb_insumos_inventario?: boolean | Prisma.tb_insumos_inventarioDefaultArgs<ExtArgs>
   tb_usuarios?: boolean | Prisma.tb_usuariosDefaultArgs<ExtArgs>
@@ -752,6 +842,8 @@ export type $tb_movimientos_inventarioPayload<ExtArgs extends runtime.Types.Exte
     fecha: Date
     id_usuario: number
     observaciones: string | null
+    stock_anterior: runtime.Decimal | null
+    stock_resultante: runtime.Decimal | null
   }, ExtArgs["result"]["tb_movimientos_inventario"]>
   composites: {}
 }
@@ -1184,6 +1276,8 @@ export interface tb_movimientos_inventarioFieldRefs {
   readonly fecha: Prisma.FieldRef<"tb_movimientos_inventario", 'DateTime'>
   readonly id_usuario: Prisma.FieldRef<"tb_movimientos_inventario", 'Int'>
   readonly observaciones: Prisma.FieldRef<"tb_movimientos_inventario", 'String'>
+  readonly stock_anterior: Prisma.FieldRef<"tb_movimientos_inventario", 'Decimal'>
+  readonly stock_resultante: Prisma.FieldRef<"tb_movimientos_inventario", 'Decimal'>
 }
     
 

@@ -70,7 +70,9 @@ Orden de ejecución preparado:
 8. `008_recetas_procedimientos_laboratorio.sql`
 9. `009_auditoria_trazabilidad.sql`
 10. `010_especialidades_expediente_psicologico.sql`
-11. `seed.sql`
+11. `011_administracion_contenido_web.sql`
+12. `012_facturacion_caja_inventario.sql`
+13. `seed.sql`
 
 En una base y volumen nuevos, Docker ejecuta las migraciones y el seed en ese
 orden mediante `/docker-entrypoint-initdb.d`. PostgreSQL no vuelve a ejecutar
@@ -214,6 +216,8 @@ general del proyecto.
 - Expedientes general y psicológico separados, con notas, diagnóstico CIE-10 e historial de signos vitales.
 - Alcance por profesional vinculado para médicos y psicólogos en agenda y expedientes.
 - Recetas inmutables con anulación justificada, procedimientos y laboratorio con finalización protegida.
+- Facturación con total automático, impresión, anulación justificada y resumen diario de caja.
+- Proveedores, insumos, alertas de mínimo y kardex inmutable de entradas, salidas y mermas.
 - Bitácora append-only de creaciones, modificaciones y cambios sensibles, con snapshots saneados antes/después.
 - Visor de auditoría exclusivo para administradores, con filtros, paginación y detalle en modal.
 - Prueba de aislamiento disponible en `database/tests/authorization.sql`.
@@ -276,17 +280,3 @@ separados.
 
 No se debe ejecutar el seed de demostración automáticamente sobre una base de
 datos que ya contenga información de producción.
-
-
-Estado comprobado:
-- PostgreSQL está activo en 5432.
-- La API está activa en 4000 y responde correctamente.
-- El panel Next.js está apagado; por eso Firefox recibe “conexión denegada”.
-El docker-compose.yml actual solo inicia PostgreSQL. El panel debe ejecutarse por separado desde PowerShell:
-cd D:\APLICACIONES\PROYECTOS\LANDING_PAGES\AMI\APP_ClinicaAMI
-pnpm dev:admin
-
-***********************************************************
-
-
-
