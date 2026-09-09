@@ -180,7 +180,13 @@ export class ClinicalOperationsService {
         { tb_consultas: { tb_citas: { tb_pacientes: { apellidos: { contains: search, mode: "insensitive" as const } } } } },
       ] } : {}),
     };
-    const primaryOrder = query.sortBy === "patient" ? { tb_consultas: { tb_citas: { tb_pacientes: { apellidos: query.sortDirection } } } } : query.sortBy === "service" ? { tb_servicios: { nombre: query.sortDirection } } : { fecha_registro: query.sortDirection };
+    const primaryOrder = query.sortBy === "patient"
+      ? { tb_consultas: { tb_citas: { tb_pacientes: { apellidos: query.sortDirection } } } }
+      : query.sortBy === "professional"
+        ? { tb_consultas: { tb_citas: { tb_medicos: { nombre: query.sortDirection } } } }
+        : query.sortBy === "service"
+          ? { tb_servicios: { nombre: query.sortDirection } }
+          : { fecha_registro: query.sortDirection };
     const [rows, totalItems] = await Promise.all([
       this.database.client.tb_consulta_servicios.findMany({ where, include: PROCEDURE_INCLUDE, orderBy: [primaryOrder, { id_detalle: "desc" }], skip: paginationOffset(query.page, query.pageSize), take: query.pageSize }),
       this.database.client.tb_consulta_servicios.count({ where }),

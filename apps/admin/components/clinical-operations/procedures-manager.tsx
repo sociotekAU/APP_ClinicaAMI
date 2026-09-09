@@ -9,7 +9,7 @@ import { z } from "zod";
 import { ApiClientError, apiRequest } from "../../lib/api-client";
 import { confirmDiscardChanges, showError, showSuccess } from "../../lib/alerts";
 import { applyApiFormErrors } from "../administration/form-api-error";
-import { formatDateTime } from "../administration/formatters";
+import { formatDateTime, formatDateTimeWithWeekday, formatWeekdayName } from "../administration/formatters";
 import { RecordActions } from "../administration/record-actions";
 import { ResourcePanel } from "../administration/resource-panel";
 import { useResourceList } from "../administration/use-resource-list";
@@ -45,8 +45,9 @@ export function ProceduresManager({ canWrite }: Readonly<{ canWrite: boolean }>)
     finally { setStatusPending(null); }
   }
   const columns: ColumnDef<ProcedureListItem>[] = [
-    { id: "recordedAt", accessorKey: "recordedAt", header: "Registro", cell: ({ row }) => <strong className="table-primary-text">{formatDateTime(row.original.recordedAt)}</strong> },
+    { id: "professional", accessorFn: (row) => row.professional.name, header: "Profesional", cell: ({ row }) => <strong className="table-primary-text">{row.original.professional.name}</strong> },
     { id: "patient", accessorFn: (row) => row.patient.name, header: "Paciente" },
+    { id: "recordedAt", accessorKey: "recordedAt", header: "Fecha", cell: ({ row }) => <div className="table-date-stack"><strong>{formatDateTime(row.original.recordedAt)}</strong><span>{formatWeekdayName(row.original.recordedAt)}</span></div> },
     { id: "service", accessorFn: (row) => row.service.name, header: "Procedimiento" },
     { id: "record", header: "Expediente", enableSorting: false, cell: ({ row }) => `#${row.original.clinicalRecordId} · ${row.original.clinicalRecordType === "general" ? "General" : "Psicología"}` },
     { id: "status", header: "Estado", enableSorting: false, cell: ({ row }) => <StatusBadge active={row.original.active} activeLabel="Vigente" inactiveLabel="Retirado" /> },
@@ -57,6 +58,6 @@ export function ProceduresManager({ canWrite }: Readonly<{ canWrite: boolean }>)
     <FormModal open={formOpen} onClose={() => { void closeForm(); }} onSubmit={save} isSubmitting={form.formState.isSubmitting} submitLabel={editing ? "Guardar cambios" : "Registrar procedimiento"} title={editing ? "Editar procedimiento" : "Nuevo procedimiento"} description="Un servicio puede registrarse una sola vez dentro de la misma consulta.">
       <FormSection title="Vínculo clínico"><FormField htmlFor="procedure-record" label="Expediente" required error={form.formState.errors.clinicalRecordId?.message}><select {...form.register("clinicalRecordId", { valueAsNumber: true })}><option value={0}>Seleccione un expediente</option>{options?.clinicalRecords.map((option) => <option key={option.id} value={option.id}>{option.label}</option>)}</select></FormField><FormField htmlFor="procedure-service" label="Servicio o terapia" required error={form.formState.errors.serviceId?.message}><select {...form.register("serviceId", { valueAsNumber: true })}><option value={0}>Seleccione un servicio</option>{options?.services.map((option) => <option key={option.id} value={option.id} disabled={!option.active}>{option.label}</option>)}</select></FormField><FormField htmlFor="procedure-notes" label="Observaciones" error={form.formState.errors.observations?.message}><textarea {...form.register("observations")} rows={4} /></FormField></FormSection>
     </FormModal>
-    <DetailModal open={detail !== null} onClose={() => setDetail(null)} title="Detalle de procedimiento" footer={<button className="button button-primary" type="button" onClick={() => setDetail(null)}>Cerrar</button>}>{detail && <dl className="permission-detail-list"><div><dt>Procedimiento</dt><dd>{detail.service.name}</dd></div><div><dt>Paciente</dt><dd>{detail.patient.name}</dd></div><div><dt>Profesional</dt><dd>{detail.professional.name}</dd></div><div><dt>Expediente</dt><dd>#{detail.clinicalRecordId} · {detail.clinicalRecordType === "general" ? "General" : "Psicología"}</dd></div><div><dt>Observaciones</dt><dd>{detail.observations || "Sin observaciones"}</dd></div><div><dt>Registro</dt><dd>{formatDateTime(detail.recordedAt)}</dd></div><div><dt>Estado</dt><dd><StatusBadge active={detail.active} activeLabel="Vigente" inactiveLabel="Retirado" /></dd></div></dl>}</DetailModal>
+    <DetailModal open={detail !== null} onClose={() => setDetail(null)} title="Detalle de procedimiento" footer={<button className="button button-primary" type="button" onClick={() => setDetail(null)}>Cerrar</button>}>{detail && <dl className="permission-detail-list"><div><dt>Procedimiento</dt><dd>{detail.service.name}</dd></div><div><dt>Paciente</dt><dd>{detail.patient.name}</dd></div><div><dt>Profesional</dt><dd>{detail.professional.name}</dd></div><div><dt>Expediente</dt><dd>#{detail.clinicalRecordId} · {detail.clinicalRecordType === "general" ? "General" : "Psicología"}</dd></div><div><dt>Observaciones</dt><dd>{detail.observations || "Sin observaciones"}</dd></div><div><dt>Registro</dt><dd>{formatDateTimeWithWeekday(detail.recordedAt)}</dd></div><div><dt>Estado</dt><dd><StatusBadge active={detail.active} activeLabel="Vigente" inactiveLabel="Retirado" /></dd></div></dl>}</DetailModal>
   </>;
 }

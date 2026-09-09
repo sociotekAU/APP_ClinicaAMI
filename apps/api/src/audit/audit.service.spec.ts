@@ -118,4 +118,17 @@ describe("AuditService", () => {
     const prepared = await service.prepare(request({ url: "/api/v1/web-content/gallery/4/status", params: { id: "4" } }));
     expect(prepared).toMatchObject({ recordId: "4", target: { module: "contenido_web", entity: "galeria_web", table: "tb_galeria" } });
   });
+
+  it("incluye medicamentos y resultados en los snapshots clínicos compuestos", async () => {
+    const snapshot = vi.fn().mockResolvedValue([{ snapshot: { id: 5 } }]);
+    const service = new AuditService({ client: { $queryRawUnsafe: snapshot } } as unknown as DatabaseService);
+
+    await service.prepare(request({ url: "/api/v1/prescriptions/5/annul", params: { id: "5" } }));
+    await service.prepare(request({ url: "/api/v1/laboratory/orders/8/status", params: { id: "8" } }));
+
+    expect(snapshot.mock.calls[0]?.[0]).toContain("tb_detalle_receta");
+    expect(snapshot.mock.calls[0]?.[0]).toContain("medicamentos");
+    expect(snapshot.mock.calls[1]?.[0]).toContain("tb_resultados_laboratorio");
+    expect(snapshot.mock.calls[1]?.[0]).toContain("resultados");
+  });
 });

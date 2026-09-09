@@ -218,9 +218,16 @@ export class AuditService {
   private async snapshot(target: AuditTarget, recordId: string): Promise<Record<string, unknown> | null> {
     const numericId = Number(recordId);
     if (!Number.isSafeInteger(numericId) || numericId < 1) return null;
+    const childCollection = target.entity === "receta"
+      ? "jsonb_build_object('medicamentos', COALESCE((SELECT jsonb_agg(to_jsonb(detail_row) ORDER BY detail_row.id_detalle) FROM tb_detalle_receta detail_row WHERE detail_row.id_receta = source_row.id_receta), '[]'::jsonb))"
+      : target.entity === "orden_laboratorio"
+        ? "jsonb_build_object('resultados', COALESCE((SELECT jsonb_agg(to_jsonb(result_row) ORDER BY result_row.id_resultado) FROM tb_resultados_laboratorio result_row WHERE result_row.id_orden = source_row.id_orden), '[]'::jsonb))"
+        : null;
     const expression = target.collection
       ? "jsonb_build_object('permissions', COALESCE(jsonb_agg(to_jsonb(source_row) ORDER BY source_row.modulo), '[]'::jsonb))"
-      : "to_jsonb(source_row)";
+      : childCollection
+        ? `to_jsonb(source_row) || ${childCollection}`
+        : "to_jsonb(source_row)";
     const rows = await this.database.client.$queryRawUnsafe<Array<{ snapshot: unknown }>>(
       `SELECT ${expression} AS snapshot FROM ${target.table} source_row WHERE ${target.primaryKey} = $1${target.collection ? "" : " LIMIT 1"}`,
       numericId,

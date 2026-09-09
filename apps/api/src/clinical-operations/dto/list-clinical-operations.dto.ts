@@ -28,6 +28,6 @@ export class ListProceduresDto extends CareListDto {
   status: RecordStatusFilter = "all";
 
   @IsOptional()
-  @IsIn(["recordedAt", "patient", "service"])
-  sortBy: "recordedAt" | "patient" | "service" = "recordedAt";
+  @IsIn(["recordedAt", "patient", "professional", "service"])
+  sortBy: "recordedAt" | "patient" | "professional" | "service" = "recordedAt";
 }
