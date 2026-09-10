@@ -289,3 +289,5 @@ debe exponerse como directorio público del panel o del servidor web.
 
 No se debe ejecutar el seed de demostración automáticamente sobre una base de
 datos que ya contenga información de producción.
+
+*- empezaremos con la landing page 
