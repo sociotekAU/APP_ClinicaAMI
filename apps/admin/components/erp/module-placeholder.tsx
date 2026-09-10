@@ -9,6 +9,8 @@ import { AgendaWorkspace } from "../care/agenda-workspace";
 import { ClinicalRecordsWorkspace } from "../care/clinical-records-workspace";
 import { PatientsManager } from "../care/patients-manager";
 import { ClinicalOperationsWorkspace } from "../clinical-operations/clinical-operations-workspace";
+import { ConsentsManager } from "../clinical-documents/consents-manager";
+import { StudyFilesManager } from "../clinical-documents/study-files-manager";
 import { InventoryWorkspace } from "../inventory/inventory-workspace";
 import { LaboratoryWorkspace } from "../laboratory/laboratory-workspace";
 import { WebContentWorkspace } from "../web-content/web-content-workspace";
@@ -35,7 +37,7 @@ export function ModulePlaceholder({ moduleCode }: Readonly<{ moduleCode: string 
   }
 
   const Icon = getModuleIcon(item.module);
-  const isImplemented = ["seguridad", "pacientes", "agenda", "expediente_general", "expediente_psicologia", "recetas", "laboratorio", "facturacion", "inventario", "auditoria", "contenido_web"].includes(item.module);
+  const isImplemented = ["seguridad", "pacientes", "agenda", "expediente_general", "expediente_psicologia", "recetas", "laboratorio", "facturacion", "inventario", "archivos_estudios", "consentimientos", "auditoria", "contenido_web"].includes(item.module);
   return (
     <div className="module-page-stack">
       <div className={`module-page${isImplemented ? " module-page-administration" : ""}`}>
@@ -79,6 +81,8 @@ export function ModulePlaceholder({ moduleCode }: Readonly<{ moduleCode: string 
       {item.module === "laboratorio" && <LaboratoryWorkspace canWrite={permission.canWrite} />}
       {item.module === "facturacion" && <BillingWorkspace canWrite={permission.canWrite} />}
       {item.module === "inventario" && <InventoryWorkspace canWrite={permission.canWrite} />}
+      {item.module === "archivos_estudios" && <section className="administration-workspace"><StudyFilesManager canWrite={permission.canWrite} /></section>}
+      {item.module === "consentimientos" && <section className="administration-workspace"><ConsentsManager canWrite={permission.canWrite} /></section>}
       {item.module === "auditoria" && <AuditViewer />}
       {item.module === "contenido_web" && <WebContentWorkspace canWrite={permission.canWrite} />}
     </div>

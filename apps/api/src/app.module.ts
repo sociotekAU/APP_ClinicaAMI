@@ -7,6 +7,7 @@ import { AuthModule } from "./auth/auth.module";
 import { BillingModule } from "./billing/billing.module";
 import { CareModule } from "./care/care.module";
 import { ClinicalOperationsModule } from "./clinical-operations/clinical-operations.module";
+import { ClinicalDocumentsModule } from "./clinical-documents/clinical-documents.module";
 import { DatabaseModule } from "./database/database.module";
 import { ErpModule } from "./erp/erp.module";
 import { HealthController } from "./health/health.controller";
@@ -22,6 +23,7 @@ import { WebContentModule } from "./web-content/web-content.module";
     AuthModule,
     BillingModule,
     CareModule,
+    ClinicalDocumentsModule,
     ClinicalOperationsModule,
     InventoryModule,
     LaboratoryModule,

@@ -60,6 +60,7 @@ async function requestResponse(
   retryAfterRefresh: boolean,
 ): Promise<Response> {
   let response: Response;
+  const isFormData = typeof FormData !== "undefined" && init.body instanceof FormData;
 
   try {
     response = await fetch(`${API_URL}${path}`, {
@@ -67,7 +68,7 @@ async function requestResponse(
       cache: "no-store",
       credentials: "include",
       headers: {
-        ...(init.body ? { "content-type": "application/json" } : {}),
+        ...(init.body && !isFormData ? { "content-type": "application/json" } : {}),
         ...init.headers,
       },
     });
@@ -87,6 +88,32 @@ async function requestResponse(
 
   if (!response.ok) throw await parseError(response);
   return response;
+}
+
+function responseFilename(response: Response): string | null {
+  const disposition = response.headers.get("content-disposition");
+  if (!disposition) return null;
+  const encoded = disposition.match(/filename\*=UTF-8''([^;]+)/i)?.[1];
+  if (encoded) {
+    try { return decodeURIComponent(encoded); }
+    catch { return encoded; }
+  }
+  return disposition.match(/filename="([^"]+)"/i)?.[1] ?? null;
+}
+
+export async function apiBinaryRequest(path: string): Promise<{
+  blob: Blob;
+  fileName: string | null;
+  mimeType: string;
+  sha256: string | null;
+}> {
+  const response = await requestResponse(path, {}, true);
+  return {
+    blob: await response.blob(),
+    fileName: responseFilename(response),
+    mimeType: response.headers.get("content-type") ?? "application/octet-stream",
+    sha256: response.headers.get("x-content-sha256"),
+  };
 }
 
 export async function apiRequest<T>(

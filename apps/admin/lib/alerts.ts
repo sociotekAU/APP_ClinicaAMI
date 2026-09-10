@@ -109,6 +109,49 @@ export async function requestInvoiceAnnulmentReason(): Promise<string | null> {
   return result.isConfirmed ? String(result.value).trim() : null;
 }
 
+export async function requestStudyStatusReason(nextActive: boolean): Promise<string | null> {
+  const action = nextActive ? "reactivar" : "desactivar";
+  const result = await alert.fire({
+    icon: "warning",
+    title: `¿${nextActive ? "Reactivar" : "Desactivar"} archivo?`,
+    text: `El archivo se va a ${action}; el documento y su historial se conservarán.`,
+    input: "textarea",
+    inputLabel: "Motivo del cambio",
+    inputPlaceholder: "Explique brevemente el motivo…",
+    inputAttributes: { maxlength: "2000" },
+    inputValidator: (value) => value.trim().length < 5 ? "Escriba al menos 5 caracteres." : undefined,
+    showCancelButton: true,
+    confirmButtonText: `Sí, ${action}`,
+    cancelButtonText: "Cancelar",
+    reverseButtons: true,
+  });
+  return result.isConfirmed ? String(result.value).trim() : null;
+}
+
+export async function requestConsentStatusReason(status: "firmado" | "rechazado" | "revocado"): Promise<string | null> {
+  const labels = { firmado: "Confirmar firma", rechazado: "Registrar rechazo", revocado: "Revocar consentimiento" } as const;
+  const descriptions = {
+    firmado: "El consentimiento quedará firmado e inmutable.",
+    rechazado: "El consentimiento quedará rechazado e inmutable.",
+    revocado: "La revocación quedará registrada y no podrá revertirse.",
+  } as const;
+  const result = await alert.fire({
+    icon: "warning",
+    title: `¿${labels[status]}?`,
+    text: descriptions[status],
+    input: "textarea",
+    inputLabel: "Motivo o constancia",
+    inputPlaceholder: "Escriba la justificación del cambio…",
+    inputAttributes: { maxlength: "2000" },
+    inputValidator: (value) => value.trim().length < 5 ? "Escriba al menos 5 caracteres." : undefined,
+    showCancelButton: true,
+    confirmButtonText: labels[status],
+    cancelButtonText: "Cancelar",
+    reverseButtons: true,
+  });
+  return result.isConfirmed ? String(result.value).trim() : null;
+}
+
 export async function confirmLabCompletion(): Promise<boolean> {
   const result = await alert.fire({
     icon: "warning",

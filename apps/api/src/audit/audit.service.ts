@@ -18,7 +18,7 @@ const AUDIT_ACTIONS: AuditAction[] = [
   "eliminacion", "cambio_password", "sistema",
 ];
 
-const SECRET_KEY = /(password|password_hash|token|secret|cookie|authorization|pin|clave)/i;
+const SECRET_KEY = /(password|password_hash|token|secret|cookie|authorization|pin|clave|ruta_archivo|ruta_documento)/i;
 
 interface AuditTarget {
   collection?: boolean;
@@ -76,6 +76,8 @@ const TARGETS: Array<{ pattern: RegExp; target: AuditTarget }> = [
   { pattern: /^\/inventory\/suppliers(?:\/|$)/, target: { module: "inventario", entity: "proveedor", table: "tb_proveedores", primaryKey: "id_proveedor", paramName: "id" } },
   { pattern: /^\/inventory\/items(?:\/|$)/, target: { module: "inventario", entity: "insumo", table: "tb_insumos_inventario", primaryKey: "id_insumo", paramName: "id" } },
   { pattern: /^\/inventory\/movements(?:\/|$)/, target: { module: "inventario", entity: "movimiento_inventario", table: "tb_movimientos_inventario", primaryKey: "id_movimiento", paramName: "id" } },
+  { pattern: /^\/study-files(?:\/|$)/, target: { module: "archivos_estudios", entity: "archivo_estudio", table: "tb_archivos_estudios", primaryKey: "id_archivo", paramName: "id" } },
+  { pattern: /^\/consents(?:\/|$)/, target: { module: "consentimientos", entity: "consentimiento_informado", table: "tb_consentimientos_informados", primaryKey: "id_consentimiento", paramName: "id" } },
   { pattern: /^\/auth\/change-password$/, target: { module: "seguridad", entity: "credencial_usuario", table: "tb_usuarios", primaryKey: "id_usuario" } },
 ];
 
@@ -260,9 +262,13 @@ export class AuditService {
     const body = objectValue(request.body);
     if (path === "/auth/change-password") return "cambio_password";
     if (/\/annul$/.test(path)) return "anulacion";
+    if (/\/document$/.test(path)) return "modificacion";
     if (/\/status$/.test(path)) {
       if (body?.status === "cancelada") return "cancelacion";
       if (body?.status === "finalizado") return "finalizacion";
+      if (body?.status === "firmado") return "finalizacion";
+      if (body?.status === "rechazado") return "cancelacion";
+      if (body?.status === "revocado") return "anulacion";
       if (body?.active === true) return "reactivacion";
       if (body?.active === false) return "desactivacion";
       return "cambio_estado";

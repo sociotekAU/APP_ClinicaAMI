@@ -31,6 +31,8 @@ export type Tb_archivos_estudiosAvgAggregateOutputType = {
   id_paciente: number | null
   id_consulta: number | null
   id_usuario: number | null
+  tamano_bytes: number | null
+  id_usuario_estado: number | null
 }
 
 export type Tb_archivos_estudiosSumAggregateOutputType = {
@@ -38,6 +40,8 @@ export type Tb_archivos_estudiosSumAggregateOutputType = {
   id_paciente: number | null
   id_consulta: number | null
   id_usuario: number | null
+  tamano_bytes: bigint | null
+  id_usuario_estado: number | null
 }
 
 export type Tb_archivos_estudiosMinAggregateOutputType = {
@@ -50,6 +54,13 @@ export type Tb_archivos_estudiosMinAggregateOutputType = {
   id_usuario: number | null
   descripcion: string | null
   estado: boolean | null
+  nombre_original: string | null
+  tipo_mime: string | null
+  tamano_bytes: bigint | null
+  hash_sha256: string | null
+  fecha_estado: Date | null
+  motivo_estado: string | null
+  id_usuario_estado: number | null
 }
 
 export type Tb_archivos_estudiosMaxAggregateOutputType = {
@@ -62,6 +73,13 @@ export type Tb_archivos_estudiosMaxAggregateOutputType = {
   id_usuario: number | null
   descripcion: string | null
   estado: boolean | null
+  nombre_original: string | null
+  tipo_mime: string | null
+  tamano_bytes: bigint | null
+  hash_sha256: string | null
+  fecha_estado: Date | null
+  motivo_estado: string | null
+  id_usuario_estado: number | null
 }
 
 export type Tb_archivos_estudiosCountAggregateOutputType = {
@@ -74,6 +92,13 @@ export type Tb_archivos_estudiosCountAggregateOutputType = {
   id_usuario: number
   descripcion: number
   estado: number
+  nombre_original: number
+  tipo_mime: number
+  tamano_bytes: number
+  hash_sha256: number
+  fecha_estado: number
+  motivo_estado: number
+  id_usuario_estado: number
   _all: number
 }
 
@@ -83,6 +108,8 @@ export type Tb_archivos_estudiosAvgAggregateInputType = {
   id_paciente?: true
   id_consulta?: true
   id_usuario?: true
+  tamano_bytes?: true
+  id_usuario_estado?: true
 }
 
 export type Tb_archivos_estudiosSumAggregateInputType = {
@@ -90,6 +117,8 @@ export type Tb_archivos_estudiosSumAggregateInputType = {
   id_paciente?: true
   id_consulta?: true
   id_usuario?: true
+  tamano_bytes?: true
+  id_usuario_estado?: true
 }
 
 export type Tb_archivos_estudiosMinAggregateInputType = {
@@ -102,6 +131,13 @@ export type Tb_archivos_estudiosMinAggregateInputType = {
   id_usuario?: true
   descripcion?: true
   estado?: true
+  nombre_original?: true
+  tipo_mime?: true
+  tamano_bytes?: true
+  hash_sha256?: true
+  fecha_estado?: true
+  motivo_estado?: true
+  id_usuario_estado?: true
 }
 
 export type Tb_archivos_estudiosMaxAggregateInputType = {
@@ -114,6 +150,13 @@ export type Tb_archivos_estudiosMaxAggregateInputType = {
   id_usuario?: true
   descripcion?: true
   estado?: true
+  nombre_original?: true
+  tipo_mime?: true
+  tamano_bytes?: true
+  hash_sha256?: true
+  fecha_estado?: true
+  motivo_estado?: true
+  id_usuario_estado?: true
 }
 
 export type Tb_archivos_estudiosCountAggregateInputType = {
@@ -126,6 +169,13 @@ export type Tb_archivos_estudiosCountAggregateInputType = {
   id_usuario?: true
   descripcion?: true
   estado?: true
+  nombre_original?: true
+  tipo_mime?: true
+  tamano_bytes?: true
+  hash_sha256?: true
+  fecha_estado?: true
+  motivo_estado?: true
+  id_usuario_estado?: true
   _all?: true
 }
 
@@ -225,6 +275,13 @@ export type Tb_archivos_estudiosGroupByOutputType = {
   id_usuario: number
   descripcion: string | null
   estado: boolean
+  nombre_original: string | null
+  tipo_mime: string | null
+  tamano_bytes: bigint | null
+  hash_sha256: string | null
+  fecha_estado: Date | null
+  motivo_estado: string | null
+  id_usuario_estado: number | null
   _count: Tb_archivos_estudiosCountAggregateOutputType | null
   _avg: Tb_archivos_estudiosAvgAggregateOutputType | null
   _sum: Tb_archivos_estudiosSumAggregateOutputType | null
@@ -260,9 +317,17 @@ export type tb_archivos_estudiosWhereInput = {
   id_usuario?: Prisma.IntFilter<"tb_archivos_estudios"> | number
   descripcion?: Prisma.StringNullableFilter<"tb_archivos_estudios"> | string | null
   estado?: Prisma.BoolFilter<"tb_archivos_estudios"> | boolean
+  nombre_original?: Prisma.StringNullableFilter<"tb_archivos_estudios"> | string | null
+  tipo_mime?: Prisma.StringNullableFilter<"tb_archivos_estudios"> | string | null
+  tamano_bytes?: Prisma.BigIntNullableFilter<"tb_archivos_estudios"> | bigint | number | null
+  hash_sha256?: Prisma.StringNullableFilter<"tb_archivos_estudios"> | string | null
+  fecha_estado?: Prisma.DateTimeNullableFilter<"tb_archivos_estudios"> | Date | string | null
+  motivo_estado?: Prisma.StringNullableFilter<"tb_archivos_estudios"> | string | null
+  id_usuario_estado?: Prisma.IntNullableFilter<"tb_archivos_estudios"> | number | null
   tb_consultas?: Prisma.XOR<Prisma.Tb_consultasScalarRelationFilter, Prisma.tb_consultasWhereInput>
   tb_pacientes?: Prisma.XOR<Prisma.Tb_pacientesScalarRelationFilter, Prisma.tb_pacientesWhereInput>
   tb_usuarios?: Prisma.XOR<Prisma.Tb_usuariosScalarRelationFilter, Prisma.tb_usuariosWhereInput>
+  tb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuarios?: Prisma.XOR<Prisma.Tb_usuariosNullableScalarRelationFilter, Prisma.tb_usuariosWhereInput> | null
 }
 
 export type tb_archivos_estudiosOrderByWithRelationInput = {
@@ -275,9 +340,17 @@ export type tb_archivos_estudiosOrderByWithRelationInput = {
   id_usuario?: Prisma.SortOrder
   descripcion?: Prisma.SortOrderInput | Prisma.SortOrder
   estado?: Prisma.SortOrder
+  nombre_original?: Prisma.SortOrderInput | Prisma.SortOrder
+  tipo_mime?: Prisma.SortOrderInput | Prisma.SortOrder
+  tamano_bytes?: Prisma.SortOrderInput | Prisma.SortOrder
+  hash_sha256?: Prisma.SortOrderInput | Prisma.SortOrder
+  fecha_estado?: Prisma.SortOrderInput | Prisma.SortOrder
+  motivo_estado?: Prisma.SortOrderInput | Prisma.SortOrder
+  id_usuario_estado?: Prisma.SortOrderInput | Prisma.SortOrder
   tb_consultas?: Prisma.tb_consultasOrderByWithRelationInput
   tb_pacientes?: Prisma.tb_pacientesOrderByWithRelationInput
   tb_usuarios?: Prisma.tb_usuariosOrderByWithRelationInput
+  tb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuarios?: Prisma.tb_usuariosOrderByWithRelationInput
 }
 
 export type tb_archivos_estudiosWhereUniqueInput = Prisma.AtLeast<{
@@ -293,9 +366,17 @@ export type tb_archivos_estudiosWhereUniqueInput = Prisma.AtLeast<{
   id_usuario?: Prisma.IntFilter<"tb_archivos_estudios"> | number
   descripcion?: Prisma.StringNullableFilter<"tb_archivos_estudios"> | string | null
   estado?: Prisma.BoolFilter<"tb_archivos_estudios"> | boolean
+  nombre_original?: Prisma.StringNullableFilter<"tb_archivos_estudios"> | string | null
+  tipo_mime?: Prisma.StringNullableFilter<"tb_archivos_estudios"> | string | null
+  tamano_bytes?: Prisma.BigIntNullableFilter<"tb_archivos_estudios"> | bigint | number | null
+  hash_sha256?: Prisma.StringNullableFilter<"tb_archivos_estudios"> | string | null
+  fecha_estado?: Prisma.DateTimeNullableFilter<"tb_archivos_estudios"> | Date | string | null
+  motivo_estado?: Prisma.StringNullableFilter<"tb_archivos_estudios"> | string | null
+  id_usuario_estado?: Prisma.IntNullableFilter<"tb_archivos_estudios"> | number | null
   tb_consultas?: Prisma.XOR<Prisma.Tb_consultasScalarRelationFilter, Prisma.tb_consultasWhereInput>
   tb_pacientes?: Prisma.XOR<Prisma.Tb_pacientesScalarRelationFilter, Prisma.tb_pacientesWhereInput>
   tb_usuarios?: Prisma.XOR<Prisma.Tb_usuariosScalarRelationFilter, Prisma.tb_usuariosWhereInput>
+  tb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuarios?: Prisma.XOR<Prisma.Tb_usuariosNullableScalarRelationFilter, Prisma.tb_usuariosWhereInput> | null
 }, "id_archivo">
 
 export type tb_archivos_estudiosOrderByWithAggregationInput = {
@@ -308,6 +389,13 @@ export type tb_archivos_estudiosOrderByWithAggregationInput = {
   id_usuario?: Prisma.SortOrder
   descripcion?: Prisma.SortOrderInput | Prisma.SortOrder
   estado?: Prisma.SortOrder
+  nombre_original?: Prisma.SortOrderInput | Prisma.SortOrder
+  tipo_mime?: Prisma.SortOrderInput | Prisma.SortOrder
+  tamano_bytes?: Prisma.SortOrderInput | Prisma.SortOrder
+  hash_sha256?: Prisma.SortOrderInput | Prisma.SortOrder
+  fecha_estado?: Prisma.SortOrderInput | Prisma.SortOrder
+  motivo_estado?: Prisma.SortOrderInput | Prisma.SortOrder
+  id_usuario_estado?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.tb_archivos_estudiosCountOrderByAggregateInput
   _avg?: Prisma.tb_archivos_estudiosAvgOrderByAggregateInput
   _max?: Prisma.tb_archivos_estudiosMaxOrderByAggregateInput
@@ -328,6 +416,13 @@ export type tb_archivos_estudiosScalarWhereWithAggregatesInput = {
   id_usuario?: Prisma.IntWithAggregatesFilter<"tb_archivos_estudios"> | number
   descripcion?: Prisma.StringNullableWithAggregatesFilter<"tb_archivos_estudios"> | string | null
   estado?: Prisma.BoolWithAggregatesFilter<"tb_archivos_estudios"> | boolean
+  nombre_original?: Prisma.StringNullableWithAggregatesFilter<"tb_archivos_estudios"> | string | null
+  tipo_mime?: Prisma.StringNullableWithAggregatesFilter<"tb_archivos_estudios"> | string | null
+  tamano_bytes?: Prisma.BigIntNullableWithAggregatesFilter<"tb_archivos_estudios"> | bigint | number | null
+  hash_sha256?: Prisma.StringNullableWithAggregatesFilter<"tb_archivos_estudios"> | string | null
+  fecha_estado?: Prisma.DateTimeNullableWithAggregatesFilter<"tb_archivos_estudios"> | Date | string | null
+  motivo_estado?: Prisma.StringNullableWithAggregatesFilter<"tb_archivos_estudios"> | string | null
+  id_usuario_estado?: Prisma.IntNullableWithAggregatesFilter<"tb_archivos_estudios"> | number | null
 }
 
 export type tb_archivos_estudiosCreateInput = {
@@ -336,9 +431,16 @@ export type tb_archivos_estudiosCreateInput = {
   fecha_subida?: Date | string
   descripcion?: string | null
   estado?: boolean
+  nombre_original?: string | null
+  tipo_mime?: string | null
+  tamano_bytes?: bigint | number | null
+  hash_sha256?: string | null
+  fecha_estado?: Date | string | null
+  motivo_estado?: string | null
   tb_consultas: Prisma.tb_consultasCreateNestedOneWithoutTb_archivos_estudiosInput
   tb_pacientes: Prisma.tb_pacientesCreateNestedOneWithoutTb_archivos_estudiosInput
   tb_usuarios: Prisma.tb_usuariosCreateNestedOneWithoutTb_archivos_estudiosInput
+  tb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuarios?: Prisma.tb_usuariosCreateNestedOneWithoutTb_archivos_estudios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput
 }
 
 export type tb_archivos_estudiosUncheckedCreateInput = {
@@ -351,6 +453,13 @@ export type tb_archivos_estudiosUncheckedCreateInput = {
   id_usuario: number
   descripcion?: string | null
   estado?: boolean
+  nombre_original?: string | null
+  tipo_mime?: string | null
+  tamano_bytes?: bigint | number | null
+  hash_sha256?: string | null
+  fecha_estado?: Date | string | null
+  motivo_estado?: string | null
+  id_usuario_estado?: number | null
 }
 
 export type tb_archivos_estudiosUpdateInput = {
@@ -359,9 +468,16 @@ export type tb_archivos_estudiosUpdateInput = {
   fecha_subida?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   estado?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  nombre_original?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tipo_mime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tamano_bytes?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  hash_sha256?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fecha_estado?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  motivo_estado?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tb_consultas?: Prisma.tb_consultasUpdateOneRequiredWithoutTb_archivos_estudiosNestedInput
   tb_pacientes?: Prisma.tb_pacientesUpdateOneRequiredWithoutTb_archivos_estudiosNestedInput
   tb_usuarios?: Prisma.tb_usuariosUpdateOneRequiredWithoutTb_archivos_estudiosNestedInput
+  tb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuarios?: Prisma.tb_usuariosUpdateOneWithoutTb_archivos_estudios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosNestedInput
 }
 
 export type tb_archivos_estudiosUncheckedUpdateInput = {
@@ -374,6 +490,13 @@ export type tb_archivos_estudiosUncheckedUpdateInput = {
   id_usuario?: Prisma.IntFieldUpdateOperationsInput | number
   descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   estado?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  nombre_original?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tipo_mime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tamano_bytes?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  hash_sha256?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fecha_estado?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  motivo_estado?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id_usuario_estado?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type tb_archivos_estudiosCreateManyInput = {
@@ -386,6 +509,13 @@ export type tb_archivos_estudiosCreateManyInput = {
   id_usuario: number
   descripcion?: string | null
   estado?: boolean
+  nombre_original?: string | null
+  tipo_mime?: string | null
+  tamano_bytes?: bigint | number | null
+  hash_sha256?: string | null
+  fecha_estado?: Date | string | null
+  motivo_estado?: string | null
+  id_usuario_estado?: number | null
 }
 
 export type tb_archivos_estudiosUpdateManyMutationInput = {
@@ -394,6 +524,12 @@ export type tb_archivos_estudiosUpdateManyMutationInput = {
   fecha_subida?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   estado?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  nombre_original?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tipo_mime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tamano_bytes?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  hash_sha256?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fecha_estado?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  motivo_estado?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type tb_archivos_estudiosUncheckedUpdateManyInput = {
@@ -406,6 +542,13 @@ export type tb_archivos_estudiosUncheckedUpdateManyInput = {
   id_usuario?: Prisma.IntFieldUpdateOperationsInput | number
   descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   estado?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  nombre_original?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tipo_mime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tamano_bytes?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  hash_sha256?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fecha_estado?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  motivo_estado?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id_usuario_estado?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type tb_archivos_estudiosCountOrderByAggregateInput = {
@@ -418,6 +561,13 @@ export type tb_archivos_estudiosCountOrderByAggregateInput = {
   id_usuario?: Prisma.SortOrder
   descripcion?: Prisma.SortOrder
   estado?: Prisma.SortOrder
+  nombre_original?: Prisma.SortOrder
+  tipo_mime?: Prisma.SortOrder
+  tamano_bytes?: Prisma.SortOrder
+  hash_sha256?: Prisma.SortOrder
+  fecha_estado?: Prisma.SortOrder
+  motivo_estado?: Prisma.SortOrder
+  id_usuario_estado?: Prisma.SortOrder
 }
 
 export type tb_archivos_estudiosAvgOrderByAggregateInput = {
@@ -425,6 +575,8 @@ export type tb_archivos_estudiosAvgOrderByAggregateInput = {
   id_paciente?: Prisma.SortOrder
   id_consulta?: Prisma.SortOrder
   id_usuario?: Prisma.SortOrder
+  tamano_bytes?: Prisma.SortOrder
+  id_usuario_estado?: Prisma.SortOrder
 }
 
 export type tb_archivos_estudiosMaxOrderByAggregateInput = {
@@ -437,6 +589,13 @@ export type tb_archivos_estudiosMaxOrderByAggregateInput = {
   id_usuario?: Prisma.SortOrder
   descripcion?: Prisma.SortOrder
   estado?: Prisma.SortOrder
+  nombre_original?: Prisma.SortOrder
+  tipo_mime?: Prisma.SortOrder
+  tamano_bytes?: Prisma.SortOrder
+  hash_sha256?: Prisma.SortOrder
+  fecha_estado?: Prisma.SortOrder
+  motivo_estado?: Prisma.SortOrder
+  id_usuario_estado?: Prisma.SortOrder
 }
 
 export type tb_archivos_estudiosMinOrderByAggregateInput = {
@@ -449,6 +608,13 @@ export type tb_archivos_estudiosMinOrderByAggregateInput = {
   id_usuario?: Prisma.SortOrder
   descripcion?: Prisma.SortOrder
   estado?: Prisma.SortOrder
+  nombre_original?: Prisma.SortOrder
+  tipo_mime?: Prisma.SortOrder
+  tamano_bytes?: Prisma.SortOrder
+  hash_sha256?: Prisma.SortOrder
+  fecha_estado?: Prisma.SortOrder
+  motivo_estado?: Prisma.SortOrder
+  id_usuario_estado?: Prisma.SortOrder
 }
 
 export type tb_archivos_estudiosSumOrderByAggregateInput = {
@@ -456,6 +622,8 @@ export type tb_archivos_estudiosSumOrderByAggregateInput = {
   id_paciente?: Prisma.SortOrder
   id_consulta?: Prisma.SortOrder
   id_usuario?: Prisma.SortOrder
+  tamano_bytes?: Prisma.SortOrder
+  id_usuario_estado?: Prisma.SortOrder
 }
 
 export type Tb_archivos_estudiosListRelationFilter = {
@@ -466,6 +634,18 @@ export type Tb_archivos_estudiosListRelationFilter = {
 
 export type tb_archivos_estudiosOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
+}
+
+export type NullableBigIntFieldUpdateOperationsInput = {
+  set?: bigint | number | null
+  increment?: bigint | number
+  decrement?: bigint | number
+  multiply?: bigint | number
+  divide?: bigint | number
+}
+
+export type NullableDateTimeFieldUpdateOperationsInput = {
+  set?: Date | string | null
 }
 
 export type tb_archivos_estudiosCreateNestedManyWithoutTb_consultasInput = {
@@ -559,10 +739,24 @@ export type tb_archivos_estudiosCreateNestedManyWithoutTb_usuariosInput = {
   connect?: Prisma.tb_archivos_estudiosWhereUniqueInput | Prisma.tb_archivos_estudiosWhereUniqueInput[]
 }
 
+export type tb_archivos_estudiosCreateNestedManyWithoutTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput = {
+  create?: Prisma.XOR<Prisma.tb_archivos_estudiosCreateWithoutTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput, Prisma.tb_archivos_estudiosUncheckedCreateWithoutTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput> | Prisma.tb_archivos_estudiosCreateWithoutTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput[] | Prisma.tb_archivos_estudiosUncheckedCreateWithoutTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput[]
+  connectOrCreate?: Prisma.tb_archivos_estudiosCreateOrConnectWithoutTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput | Prisma.tb_archivos_estudiosCreateOrConnectWithoutTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput[]
+  createMany?: Prisma.tb_archivos_estudiosCreateManyTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInputEnvelope
+  connect?: Prisma.tb_archivos_estudiosWhereUniqueInput | Prisma.tb_archivos_estudiosWhereUniqueInput[]
+}
+
 export type tb_archivos_estudiosUncheckedCreateNestedManyWithoutTb_usuariosInput = {
   create?: Prisma.XOR<Prisma.tb_archivos_estudiosCreateWithoutTb_usuariosInput, Prisma.tb_archivos_estudiosUncheckedCreateWithoutTb_usuariosInput> | Prisma.tb_archivos_estudiosCreateWithoutTb_usuariosInput[] | Prisma.tb_archivos_estudiosUncheckedCreateWithoutTb_usuariosInput[]
   connectOrCreate?: Prisma.tb_archivos_estudiosCreateOrConnectWithoutTb_usuariosInput | Prisma.tb_archivos_estudiosCreateOrConnectWithoutTb_usuariosInput[]
   createMany?: Prisma.tb_archivos_estudiosCreateManyTb_usuariosInputEnvelope
+  connect?: Prisma.tb_archivos_estudiosWhereUniqueInput | Prisma.tb_archivos_estudiosWhereUniqueInput[]
+}
+
+export type tb_archivos_estudiosUncheckedCreateNestedManyWithoutTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput = {
+  create?: Prisma.XOR<Prisma.tb_archivos_estudiosCreateWithoutTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput, Prisma.tb_archivos_estudiosUncheckedCreateWithoutTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput> | Prisma.tb_archivos_estudiosCreateWithoutTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput[] | Prisma.tb_archivos_estudiosUncheckedCreateWithoutTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput[]
+  connectOrCreate?: Prisma.tb_archivos_estudiosCreateOrConnectWithoutTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput | Prisma.tb_archivos_estudiosCreateOrConnectWithoutTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput[]
+  createMany?: Prisma.tb_archivos_estudiosCreateManyTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInputEnvelope
   connect?: Prisma.tb_archivos_estudiosWhereUniqueInput | Prisma.tb_archivos_estudiosWhereUniqueInput[]
 }
 
@@ -580,6 +774,20 @@ export type tb_archivos_estudiosUpdateManyWithoutTb_usuariosNestedInput = {
   deleteMany?: Prisma.tb_archivos_estudiosScalarWhereInput | Prisma.tb_archivos_estudiosScalarWhereInput[]
 }
 
+export type tb_archivos_estudiosUpdateManyWithoutTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosNestedInput = {
+  create?: Prisma.XOR<Prisma.tb_archivos_estudiosCreateWithoutTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput, Prisma.tb_archivos_estudiosUncheckedCreateWithoutTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput> | Prisma.tb_archivos_estudiosCreateWithoutTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput[] | Prisma.tb_archivos_estudiosUncheckedCreateWithoutTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput[]
+  connectOrCreate?: Prisma.tb_archivos_estudiosCreateOrConnectWithoutTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput | Prisma.tb_archivos_estudiosCreateOrConnectWithoutTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput[]
+  upsert?: Prisma.tb_archivos_estudiosUpsertWithWhereUniqueWithoutTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput | Prisma.tb_archivos_estudiosUpsertWithWhereUniqueWithoutTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput[]
+  createMany?: Prisma.tb_archivos_estudiosCreateManyTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInputEnvelope
+  set?: Prisma.tb_archivos_estudiosWhereUniqueInput | Prisma.tb_archivos_estudiosWhereUniqueInput[]
+  disconnect?: Prisma.tb_archivos_estudiosWhereUniqueInput | Prisma.tb_archivos_estudiosWhereUniqueInput[]
+  delete?: Prisma.tb_archivos_estudiosWhereUniqueInput | Prisma.tb_archivos_estudiosWhereUniqueInput[]
+  connect?: Prisma.tb_archivos_estudiosWhereUniqueInput | Prisma.tb_archivos_estudiosWhereUniqueInput[]
+  update?: Prisma.tb_archivos_estudiosUpdateWithWhereUniqueWithoutTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput | Prisma.tb_archivos_estudiosUpdateWithWhereUniqueWithoutTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput[]
+  updateMany?: Prisma.tb_archivos_estudiosUpdateManyWithWhereWithoutTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput | Prisma.tb_archivos_estudiosUpdateManyWithWhereWithoutTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput[]
+  deleteMany?: Prisma.tb_archivos_estudiosScalarWhereInput | Prisma.tb_archivos_estudiosScalarWhereInput[]
+}
+
 export type tb_archivos_estudiosUncheckedUpdateManyWithoutTb_usuariosNestedInput = {
   create?: Prisma.XOR<Prisma.tb_archivos_estudiosCreateWithoutTb_usuariosInput, Prisma.tb_archivos_estudiosUncheckedCreateWithoutTb_usuariosInput> | Prisma.tb_archivos_estudiosCreateWithoutTb_usuariosInput[] | Prisma.tb_archivos_estudiosUncheckedCreateWithoutTb_usuariosInput[]
   connectOrCreate?: Prisma.tb_archivos_estudiosCreateOrConnectWithoutTb_usuariosInput | Prisma.tb_archivos_estudiosCreateOrConnectWithoutTb_usuariosInput[]
@@ -594,14 +802,35 @@ export type tb_archivos_estudiosUncheckedUpdateManyWithoutTb_usuariosNestedInput
   deleteMany?: Prisma.tb_archivos_estudiosScalarWhereInput | Prisma.tb_archivos_estudiosScalarWhereInput[]
 }
 
+export type tb_archivos_estudiosUncheckedUpdateManyWithoutTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosNestedInput = {
+  create?: Prisma.XOR<Prisma.tb_archivos_estudiosCreateWithoutTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput, Prisma.tb_archivos_estudiosUncheckedCreateWithoutTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput> | Prisma.tb_archivos_estudiosCreateWithoutTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput[] | Prisma.tb_archivos_estudiosUncheckedCreateWithoutTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput[]
+  connectOrCreate?: Prisma.tb_archivos_estudiosCreateOrConnectWithoutTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput | Prisma.tb_archivos_estudiosCreateOrConnectWithoutTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput[]
+  upsert?: Prisma.tb_archivos_estudiosUpsertWithWhereUniqueWithoutTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput | Prisma.tb_archivos_estudiosUpsertWithWhereUniqueWithoutTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput[]
+  createMany?: Prisma.tb_archivos_estudiosCreateManyTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInputEnvelope
+  set?: Prisma.tb_archivos_estudiosWhereUniqueInput | Prisma.tb_archivos_estudiosWhereUniqueInput[]
+  disconnect?: Prisma.tb_archivos_estudiosWhereUniqueInput | Prisma.tb_archivos_estudiosWhereUniqueInput[]
+  delete?: Prisma.tb_archivos_estudiosWhereUniqueInput | Prisma.tb_archivos_estudiosWhereUniqueInput[]
+  connect?: Prisma.tb_archivos_estudiosWhereUniqueInput | Prisma.tb_archivos_estudiosWhereUniqueInput[]
+  update?: Prisma.tb_archivos_estudiosUpdateWithWhereUniqueWithoutTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput | Prisma.tb_archivos_estudiosUpdateWithWhereUniqueWithoutTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput[]
+  updateMany?: Prisma.tb_archivos_estudiosUpdateManyWithWhereWithoutTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput | Prisma.tb_archivos_estudiosUpdateManyWithWhereWithoutTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput[]
+  deleteMany?: Prisma.tb_archivos_estudiosScalarWhereInput | Prisma.tb_archivos_estudiosScalarWhereInput[]
+}
+
 export type tb_archivos_estudiosCreateWithoutTb_consultasInput = {
   tipo_estudio: string
   ruta_archivo: string
   fecha_subida?: Date | string
   descripcion?: string | null
   estado?: boolean
+  nombre_original?: string | null
+  tipo_mime?: string | null
+  tamano_bytes?: bigint | number | null
+  hash_sha256?: string | null
+  fecha_estado?: Date | string | null
+  motivo_estado?: string | null
   tb_pacientes: Prisma.tb_pacientesCreateNestedOneWithoutTb_archivos_estudiosInput
   tb_usuarios: Prisma.tb_usuariosCreateNestedOneWithoutTb_archivos_estudiosInput
+  tb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuarios?: Prisma.tb_usuariosCreateNestedOneWithoutTb_archivos_estudios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput
 }
 
 export type tb_archivos_estudiosUncheckedCreateWithoutTb_consultasInput = {
@@ -613,6 +842,13 @@ export type tb_archivos_estudiosUncheckedCreateWithoutTb_consultasInput = {
   id_usuario: number
   descripcion?: string | null
   estado?: boolean
+  nombre_original?: string | null
+  tipo_mime?: string | null
+  tamano_bytes?: bigint | number | null
+  hash_sha256?: string | null
+  fecha_estado?: Date | string | null
+  motivo_estado?: string | null
+  id_usuario_estado?: number | null
 }
 
 export type tb_archivos_estudiosCreateOrConnectWithoutTb_consultasInput = {
@@ -654,6 +890,13 @@ export type tb_archivos_estudiosScalarWhereInput = {
   id_usuario?: Prisma.IntFilter<"tb_archivos_estudios"> | number
   descripcion?: Prisma.StringNullableFilter<"tb_archivos_estudios"> | string | null
   estado?: Prisma.BoolFilter<"tb_archivos_estudios"> | boolean
+  nombre_original?: Prisma.StringNullableFilter<"tb_archivos_estudios"> | string | null
+  tipo_mime?: Prisma.StringNullableFilter<"tb_archivos_estudios"> | string | null
+  tamano_bytes?: Prisma.BigIntNullableFilter<"tb_archivos_estudios"> | bigint | number | null
+  hash_sha256?: Prisma.StringNullableFilter<"tb_archivos_estudios"> | string | null
+  fecha_estado?: Prisma.DateTimeNullableFilter<"tb_archivos_estudios"> | Date | string | null
+  motivo_estado?: Prisma.StringNullableFilter<"tb_archivos_estudios"> | string | null
+  id_usuario_estado?: Prisma.IntNullableFilter<"tb_archivos_estudios"> | number | null
 }
 
 export type tb_archivos_estudiosCreateWithoutTb_pacientesInput = {
@@ -662,8 +905,15 @@ export type tb_archivos_estudiosCreateWithoutTb_pacientesInput = {
   fecha_subida?: Date | string
   descripcion?: string | null
   estado?: boolean
+  nombre_original?: string | null
+  tipo_mime?: string | null
+  tamano_bytes?: bigint | number | null
+  hash_sha256?: string | null
+  fecha_estado?: Date | string | null
+  motivo_estado?: string | null
   tb_consultas: Prisma.tb_consultasCreateNestedOneWithoutTb_archivos_estudiosInput
   tb_usuarios: Prisma.tb_usuariosCreateNestedOneWithoutTb_archivos_estudiosInput
+  tb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuarios?: Prisma.tb_usuariosCreateNestedOneWithoutTb_archivos_estudios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput
 }
 
 export type tb_archivos_estudiosUncheckedCreateWithoutTb_pacientesInput = {
@@ -675,6 +925,13 @@ export type tb_archivos_estudiosUncheckedCreateWithoutTb_pacientesInput = {
   id_usuario: number
   descripcion?: string | null
   estado?: boolean
+  nombre_original?: string | null
+  tipo_mime?: string | null
+  tamano_bytes?: bigint | number | null
+  hash_sha256?: string | null
+  fecha_estado?: Date | string | null
+  motivo_estado?: string | null
+  id_usuario_estado?: number | null
 }
 
 export type tb_archivos_estudiosCreateOrConnectWithoutTb_pacientesInput = {
@@ -709,8 +966,15 @@ export type tb_archivos_estudiosCreateWithoutTb_usuariosInput = {
   fecha_subida?: Date | string
   descripcion?: string | null
   estado?: boolean
+  nombre_original?: string | null
+  tipo_mime?: string | null
+  tamano_bytes?: bigint | number | null
+  hash_sha256?: string | null
+  fecha_estado?: Date | string | null
+  motivo_estado?: string | null
   tb_consultas: Prisma.tb_consultasCreateNestedOneWithoutTb_archivos_estudiosInput
   tb_pacientes: Prisma.tb_pacientesCreateNestedOneWithoutTb_archivos_estudiosInput
+  tb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuarios?: Prisma.tb_usuariosCreateNestedOneWithoutTb_archivos_estudios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput
 }
 
 export type tb_archivos_estudiosUncheckedCreateWithoutTb_usuariosInput = {
@@ -722,6 +986,13 @@ export type tb_archivos_estudiosUncheckedCreateWithoutTb_usuariosInput = {
   fecha_subida?: Date | string
   descripcion?: string | null
   estado?: boolean
+  nombre_original?: string | null
+  tipo_mime?: string | null
+  tamano_bytes?: bigint | number | null
+  hash_sha256?: string | null
+  fecha_estado?: Date | string | null
+  motivo_estado?: string | null
+  id_usuario_estado?: number | null
 }
 
 export type tb_archivos_estudiosCreateOrConnectWithoutTb_usuariosInput = {
@@ -731,6 +1002,51 @@ export type tb_archivos_estudiosCreateOrConnectWithoutTb_usuariosInput = {
 
 export type tb_archivos_estudiosCreateManyTb_usuariosInputEnvelope = {
   data: Prisma.tb_archivos_estudiosCreateManyTb_usuariosInput | Prisma.tb_archivos_estudiosCreateManyTb_usuariosInput[]
+  skipDuplicates?: boolean
+}
+
+export type tb_archivos_estudiosCreateWithoutTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput = {
+  tipo_estudio: string
+  ruta_archivo: string
+  fecha_subida?: Date | string
+  descripcion?: string | null
+  estado?: boolean
+  nombre_original?: string | null
+  tipo_mime?: string | null
+  tamano_bytes?: bigint | number | null
+  hash_sha256?: string | null
+  fecha_estado?: Date | string | null
+  motivo_estado?: string | null
+  tb_consultas: Prisma.tb_consultasCreateNestedOneWithoutTb_archivos_estudiosInput
+  tb_pacientes: Prisma.tb_pacientesCreateNestedOneWithoutTb_archivos_estudiosInput
+  tb_usuarios: Prisma.tb_usuariosCreateNestedOneWithoutTb_archivos_estudiosInput
+}
+
+export type tb_archivos_estudiosUncheckedCreateWithoutTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput = {
+  id_archivo?: number
+  id_paciente: number
+  id_consulta: number
+  tipo_estudio: string
+  ruta_archivo: string
+  fecha_subida?: Date | string
+  id_usuario: number
+  descripcion?: string | null
+  estado?: boolean
+  nombre_original?: string | null
+  tipo_mime?: string | null
+  tamano_bytes?: bigint | number | null
+  hash_sha256?: string | null
+  fecha_estado?: Date | string | null
+  motivo_estado?: string | null
+}
+
+export type tb_archivos_estudiosCreateOrConnectWithoutTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput = {
+  where: Prisma.tb_archivos_estudiosWhereUniqueInput
+  create: Prisma.XOR<Prisma.tb_archivos_estudiosCreateWithoutTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput, Prisma.tb_archivos_estudiosUncheckedCreateWithoutTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput>
+}
+
+export type tb_archivos_estudiosCreateManyTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInputEnvelope = {
+  data: Prisma.tb_archivos_estudiosCreateManyTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput | Prisma.tb_archivos_estudiosCreateManyTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput[]
   skipDuplicates?: boolean
 }
 
@@ -750,6 +1066,22 @@ export type tb_archivos_estudiosUpdateManyWithWhereWithoutTb_usuariosInput = {
   data: Prisma.XOR<Prisma.tb_archivos_estudiosUpdateManyMutationInput, Prisma.tb_archivos_estudiosUncheckedUpdateManyWithoutTb_usuariosInput>
 }
 
+export type tb_archivos_estudiosUpsertWithWhereUniqueWithoutTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput = {
+  where: Prisma.tb_archivos_estudiosWhereUniqueInput
+  update: Prisma.XOR<Prisma.tb_archivos_estudiosUpdateWithoutTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput, Prisma.tb_archivos_estudiosUncheckedUpdateWithoutTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput>
+  create: Prisma.XOR<Prisma.tb_archivos_estudiosCreateWithoutTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput, Prisma.tb_archivos_estudiosUncheckedCreateWithoutTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput>
+}
+
+export type tb_archivos_estudiosUpdateWithWhereUniqueWithoutTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput = {
+  where: Prisma.tb_archivos_estudiosWhereUniqueInput
+  data: Prisma.XOR<Prisma.tb_archivos_estudiosUpdateWithoutTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput, Prisma.tb_archivos_estudiosUncheckedUpdateWithoutTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput>
+}
+
+export type tb_archivos_estudiosUpdateManyWithWhereWithoutTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput = {
+  where: Prisma.tb_archivos_estudiosScalarWhereInput
+  data: Prisma.XOR<Prisma.tb_archivos_estudiosUpdateManyMutationInput, Prisma.tb_archivos_estudiosUncheckedUpdateManyWithoutTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput>
+}
+
 export type tb_archivos_estudiosCreateManyTb_consultasInput = {
   id_archivo?: number
   id_paciente: number
@@ -759,6 +1091,13 @@ export type tb_archivos_estudiosCreateManyTb_consultasInput = {
   id_usuario: number
   descripcion?: string | null
   estado?: boolean
+  nombre_original?: string | null
+  tipo_mime?: string | null
+  tamano_bytes?: bigint | number | null
+  hash_sha256?: string | null
+  fecha_estado?: Date | string | null
+  motivo_estado?: string | null
+  id_usuario_estado?: number | null
 }
 
 export type tb_archivos_estudiosUpdateWithoutTb_consultasInput = {
@@ -767,8 +1106,15 @@ export type tb_archivos_estudiosUpdateWithoutTb_consultasInput = {
   fecha_subida?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   estado?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  nombre_original?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tipo_mime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tamano_bytes?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  hash_sha256?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fecha_estado?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  motivo_estado?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tb_pacientes?: Prisma.tb_pacientesUpdateOneRequiredWithoutTb_archivos_estudiosNestedInput
   tb_usuarios?: Prisma.tb_usuariosUpdateOneRequiredWithoutTb_archivos_estudiosNestedInput
+  tb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuarios?: Prisma.tb_usuariosUpdateOneWithoutTb_archivos_estudios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosNestedInput
 }
 
 export type tb_archivos_estudiosUncheckedUpdateWithoutTb_consultasInput = {
@@ -780,6 +1126,13 @@ export type tb_archivos_estudiosUncheckedUpdateWithoutTb_consultasInput = {
   id_usuario?: Prisma.IntFieldUpdateOperationsInput | number
   descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   estado?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  nombre_original?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tipo_mime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tamano_bytes?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  hash_sha256?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fecha_estado?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  motivo_estado?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id_usuario_estado?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type tb_archivos_estudiosUncheckedUpdateManyWithoutTb_consultasInput = {
@@ -791,6 +1144,13 @@ export type tb_archivos_estudiosUncheckedUpdateManyWithoutTb_consultasInput = {
   id_usuario?: Prisma.IntFieldUpdateOperationsInput | number
   descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   estado?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  nombre_original?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tipo_mime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tamano_bytes?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  hash_sha256?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fecha_estado?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  motivo_estado?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id_usuario_estado?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type tb_archivos_estudiosCreateManyTb_pacientesInput = {
@@ -802,6 +1162,13 @@ export type tb_archivos_estudiosCreateManyTb_pacientesInput = {
   id_usuario: number
   descripcion?: string | null
   estado?: boolean
+  nombre_original?: string | null
+  tipo_mime?: string | null
+  tamano_bytes?: bigint | number | null
+  hash_sha256?: string | null
+  fecha_estado?: Date | string | null
+  motivo_estado?: string | null
+  id_usuario_estado?: number | null
 }
 
 export type tb_archivos_estudiosUpdateWithoutTb_pacientesInput = {
@@ -810,8 +1177,15 @@ export type tb_archivos_estudiosUpdateWithoutTb_pacientesInput = {
   fecha_subida?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   estado?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  nombre_original?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tipo_mime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tamano_bytes?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  hash_sha256?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fecha_estado?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  motivo_estado?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tb_consultas?: Prisma.tb_consultasUpdateOneRequiredWithoutTb_archivos_estudiosNestedInput
   tb_usuarios?: Prisma.tb_usuariosUpdateOneRequiredWithoutTb_archivos_estudiosNestedInput
+  tb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuarios?: Prisma.tb_usuariosUpdateOneWithoutTb_archivos_estudios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosNestedInput
 }
 
 export type tb_archivos_estudiosUncheckedUpdateWithoutTb_pacientesInput = {
@@ -823,6 +1197,13 @@ export type tb_archivos_estudiosUncheckedUpdateWithoutTb_pacientesInput = {
   id_usuario?: Prisma.IntFieldUpdateOperationsInput | number
   descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   estado?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  nombre_original?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tipo_mime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tamano_bytes?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  hash_sha256?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fecha_estado?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  motivo_estado?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id_usuario_estado?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type tb_archivos_estudiosUncheckedUpdateManyWithoutTb_pacientesInput = {
@@ -834,6 +1215,13 @@ export type tb_archivos_estudiosUncheckedUpdateManyWithoutTb_pacientesInput = {
   id_usuario?: Prisma.IntFieldUpdateOperationsInput | number
   descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   estado?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  nombre_original?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tipo_mime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tamano_bytes?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  hash_sha256?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fecha_estado?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  motivo_estado?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id_usuario_estado?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type tb_archivos_estudiosCreateManyTb_usuariosInput = {
@@ -845,6 +1233,31 @@ export type tb_archivos_estudiosCreateManyTb_usuariosInput = {
   fecha_subida?: Date | string
   descripcion?: string | null
   estado?: boolean
+  nombre_original?: string | null
+  tipo_mime?: string | null
+  tamano_bytes?: bigint | number | null
+  hash_sha256?: string | null
+  fecha_estado?: Date | string | null
+  motivo_estado?: string | null
+  id_usuario_estado?: number | null
+}
+
+export type tb_archivos_estudiosCreateManyTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput = {
+  id_archivo?: number
+  id_paciente: number
+  id_consulta: number
+  tipo_estudio: string
+  ruta_archivo: string
+  fecha_subida?: Date | string
+  id_usuario: number
+  descripcion?: string | null
+  estado?: boolean
+  nombre_original?: string | null
+  tipo_mime?: string | null
+  tamano_bytes?: bigint | number | null
+  hash_sha256?: string | null
+  fecha_estado?: Date | string | null
+  motivo_estado?: string | null
 }
 
 export type tb_archivos_estudiosUpdateWithoutTb_usuariosInput = {
@@ -853,8 +1266,15 @@ export type tb_archivos_estudiosUpdateWithoutTb_usuariosInput = {
   fecha_subida?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   estado?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  nombre_original?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tipo_mime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tamano_bytes?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  hash_sha256?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fecha_estado?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  motivo_estado?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tb_consultas?: Prisma.tb_consultasUpdateOneRequiredWithoutTb_archivos_estudiosNestedInput
   tb_pacientes?: Prisma.tb_pacientesUpdateOneRequiredWithoutTb_archivos_estudiosNestedInput
+  tb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuarios?: Prisma.tb_usuariosUpdateOneWithoutTb_archivos_estudios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosNestedInput
 }
 
 export type tb_archivos_estudiosUncheckedUpdateWithoutTb_usuariosInput = {
@@ -866,6 +1286,13 @@ export type tb_archivos_estudiosUncheckedUpdateWithoutTb_usuariosInput = {
   fecha_subida?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   estado?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  nombre_original?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tipo_mime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tamano_bytes?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  hash_sha256?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fecha_estado?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  motivo_estado?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id_usuario_estado?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type tb_archivos_estudiosUncheckedUpdateManyWithoutTb_usuariosInput = {
@@ -877,6 +1304,66 @@ export type tb_archivos_estudiosUncheckedUpdateManyWithoutTb_usuariosInput = {
   fecha_subida?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   estado?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  nombre_original?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tipo_mime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tamano_bytes?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  hash_sha256?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fecha_estado?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  motivo_estado?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id_usuario_estado?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+}
+
+export type tb_archivos_estudiosUpdateWithoutTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput = {
+  tipo_estudio?: Prisma.StringFieldUpdateOperationsInput | string
+  ruta_archivo?: Prisma.StringFieldUpdateOperationsInput | string
+  fecha_subida?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  estado?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  nombre_original?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tipo_mime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tamano_bytes?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  hash_sha256?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fecha_estado?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  motivo_estado?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tb_consultas?: Prisma.tb_consultasUpdateOneRequiredWithoutTb_archivos_estudiosNestedInput
+  tb_pacientes?: Prisma.tb_pacientesUpdateOneRequiredWithoutTb_archivos_estudiosNestedInput
+  tb_usuarios?: Prisma.tb_usuariosUpdateOneRequiredWithoutTb_archivos_estudiosNestedInput
+}
+
+export type tb_archivos_estudiosUncheckedUpdateWithoutTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput = {
+  id_archivo?: Prisma.IntFieldUpdateOperationsInput | number
+  id_paciente?: Prisma.IntFieldUpdateOperationsInput | number
+  id_consulta?: Prisma.IntFieldUpdateOperationsInput | number
+  tipo_estudio?: Prisma.StringFieldUpdateOperationsInput | string
+  ruta_archivo?: Prisma.StringFieldUpdateOperationsInput | string
+  fecha_subida?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  id_usuario?: Prisma.IntFieldUpdateOperationsInput | number
+  descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  estado?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  nombre_original?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tipo_mime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tamano_bytes?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  hash_sha256?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fecha_estado?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  motivo_estado?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+}
+
+export type tb_archivos_estudiosUncheckedUpdateManyWithoutTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput = {
+  id_archivo?: Prisma.IntFieldUpdateOperationsInput | number
+  id_paciente?: Prisma.IntFieldUpdateOperationsInput | number
+  id_consulta?: Prisma.IntFieldUpdateOperationsInput | number
+  tipo_estudio?: Prisma.StringFieldUpdateOperationsInput | string
+  ruta_archivo?: Prisma.StringFieldUpdateOperationsInput | string
+  fecha_subida?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  id_usuario?: Prisma.IntFieldUpdateOperationsInput | number
+  descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  estado?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  nombre_original?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tipo_mime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tamano_bytes?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  hash_sha256?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fecha_estado?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  motivo_estado?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 
@@ -891,9 +1378,17 @@ export type tb_archivos_estudiosSelect<ExtArgs extends runtime.Types.Extensions.
   id_usuario?: boolean
   descripcion?: boolean
   estado?: boolean
+  nombre_original?: boolean
+  tipo_mime?: boolean
+  tamano_bytes?: boolean
+  hash_sha256?: boolean
+  fecha_estado?: boolean
+  motivo_estado?: boolean
+  id_usuario_estado?: boolean
   tb_consultas?: boolean | Prisma.tb_consultasDefaultArgs<ExtArgs>
   tb_pacientes?: boolean | Prisma.tb_pacientesDefaultArgs<ExtArgs>
   tb_usuarios?: boolean | Prisma.tb_usuariosDefaultArgs<ExtArgs>
+  tb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuarios?: boolean | Prisma.tb_archivos_estudios$tb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosArgs<ExtArgs>
 }, ExtArgs["result"]["tb_archivos_estudios"]>
 
 export type tb_archivos_estudiosSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -906,9 +1401,17 @@ export type tb_archivos_estudiosSelectCreateManyAndReturn<ExtArgs extends runtim
   id_usuario?: boolean
   descripcion?: boolean
   estado?: boolean
+  nombre_original?: boolean
+  tipo_mime?: boolean
+  tamano_bytes?: boolean
+  hash_sha256?: boolean
+  fecha_estado?: boolean
+  motivo_estado?: boolean
+  id_usuario_estado?: boolean
   tb_consultas?: boolean | Prisma.tb_consultasDefaultArgs<ExtArgs>
   tb_pacientes?: boolean | Prisma.tb_pacientesDefaultArgs<ExtArgs>
   tb_usuarios?: boolean | Prisma.tb_usuariosDefaultArgs<ExtArgs>
+  tb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuarios?: boolean | Prisma.tb_archivos_estudios$tb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosArgs<ExtArgs>
 }, ExtArgs["result"]["tb_archivos_estudios"]>
 
 export type tb_archivos_estudiosSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -921,9 +1424,17 @@ export type tb_archivos_estudiosSelectUpdateManyAndReturn<ExtArgs extends runtim
   id_usuario?: boolean
   descripcion?: boolean
   estado?: boolean
+  nombre_original?: boolean
+  tipo_mime?: boolean
+  tamano_bytes?: boolean
+  hash_sha256?: boolean
+  fecha_estado?: boolean
+  motivo_estado?: boolean
+  id_usuario_estado?: boolean
   tb_consultas?: boolean | Prisma.tb_consultasDefaultArgs<ExtArgs>
   tb_pacientes?: boolean | Prisma.tb_pacientesDefaultArgs<ExtArgs>
   tb_usuarios?: boolean | Prisma.tb_usuariosDefaultArgs<ExtArgs>
+  tb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuarios?: boolean | Prisma.tb_archivos_estudios$tb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosArgs<ExtArgs>
 }, ExtArgs["result"]["tb_archivos_estudios"]>
 
 export type tb_archivos_estudiosSelectScalar = {
@@ -936,23 +1447,33 @@ export type tb_archivos_estudiosSelectScalar = {
   id_usuario?: boolean
   descripcion?: boolean
   estado?: boolean
+  nombre_original?: boolean
+  tipo_mime?: boolean
+  tamano_bytes?: boolean
+  hash_sha256?: boolean
+  fecha_estado?: boolean
+  motivo_estado?: boolean
+  id_usuario_estado?: boolean
 }
 
-export type tb_archivos_estudiosOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id_archivo" | "id_paciente" | "id_consulta" | "tipo_estudio" | "ruta_archivo" | "fecha_subida" | "id_usuario" | "descripcion" | "estado", ExtArgs["result"]["tb_archivos_estudios"]>
+export type tb_archivos_estudiosOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id_archivo" | "id_paciente" | "id_consulta" | "tipo_estudio" | "ruta_archivo" | "fecha_subida" | "id_usuario" | "descripcion" | "estado" | "nombre_original" | "tipo_mime" | "tamano_bytes" | "hash_sha256" | "fecha_estado" | "motivo_estado" | "id_usuario_estado", ExtArgs["result"]["tb_archivos_estudios"]>
 export type tb_archivos_estudiosInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tb_consultas?: boolean | Prisma.tb_consultasDefaultArgs<ExtArgs>
   tb_pacientes?: boolean | Prisma.tb_pacientesDefaultArgs<ExtArgs>
   tb_usuarios?: boolean | Prisma.tb_usuariosDefaultArgs<ExtArgs>
+  tb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuarios?: boolean | Prisma.tb_archivos_estudios$tb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosArgs<ExtArgs>
 }
 export type tb_archivos_estudiosIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tb_consultas?: boolean | Prisma.tb_consultasDefaultArgs<ExtArgs>
   tb_pacientes?: boolean | Prisma.tb_pacientesDefaultArgs<ExtArgs>
   tb_usuarios?: boolean | Prisma.tb_usuariosDefaultArgs<ExtArgs>
+  tb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuarios?: boolean | Prisma.tb_archivos_estudios$tb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosArgs<ExtArgs>
 }
 export type tb_archivos_estudiosIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tb_consultas?: boolean | Prisma.tb_consultasDefaultArgs<ExtArgs>
   tb_pacientes?: boolean | Prisma.tb_pacientesDefaultArgs<ExtArgs>
   tb_usuarios?: boolean | Prisma.tb_usuariosDefaultArgs<ExtArgs>
+  tb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuarios?: boolean | Prisma.tb_archivos_estudios$tb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosArgs<ExtArgs>
 }
 
 export type $tb_archivos_estudiosPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -961,6 +1482,7 @@ export type $tb_archivos_estudiosPayload<ExtArgs extends runtime.Types.Extension
     tb_consultas: Prisma.$tb_consultasPayload<ExtArgs>
     tb_pacientes: Prisma.$tb_pacientesPayload<ExtArgs>
     tb_usuarios: Prisma.$tb_usuariosPayload<ExtArgs>
+    tb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuarios: Prisma.$tb_usuariosPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id_archivo: number
@@ -972,6 +1494,13 @@ export type $tb_archivos_estudiosPayload<ExtArgs extends runtime.Types.Extension
     id_usuario: number
     descripcion: string | null
     estado: boolean
+    nombre_original: string | null
+    tipo_mime: string | null
+    tamano_bytes: bigint | null
+    hash_sha256: string | null
+    fecha_estado: Date | null
+    motivo_estado: string | null
+    id_usuario_estado: number | null
   }, ExtArgs["result"]["tb_archivos_estudios"]>
   composites: {}
 }
@@ -1369,6 +1898,7 @@ export interface Prisma__tb_archivos_estudiosClient<T, Null = never, ExtArgs ext
   tb_consultas<T extends Prisma.tb_consultasDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.tb_consultasDefaultArgs<ExtArgs>>): Prisma.Prisma__tb_consultasClient<runtime.Types.Result.GetResult<Prisma.$tb_consultasPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   tb_pacientes<T extends Prisma.tb_pacientesDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.tb_pacientesDefaultArgs<ExtArgs>>): Prisma.Prisma__tb_pacientesClient<runtime.Types.Result.GetResult<Prisma.$tb_pacientesPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   tb_usuarios<T extends Prisma.tb_usuariosDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.tb_usuariosDefaultArgs<ExtArgs>>): Prisma.Prisma__tb_usuariosClient<runtime.Types.Result.GetResult<Prisma.$tb_usuariosPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  tb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuarios<T extends Prisma.tb_archivos_estudios$tb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.tb_archivos_estudios$tb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosArgs<ExtArgs>>): Prisma.Prisma__tb_usuariosClient<runtime.Types.Result.GetResult<Prisma.$tb_usuariosPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1407,6 +1937,13 @@ export interface tb_archivos_estudiosFieldRefs {
   readonly id_usuario: Prisma.FieldRef<"tb_archivos_estudios", 'Int'>
   readonly descripcion: Prisma.FieldRef<"tb_archivos_estudios", 'String'>
   readonly estado: Prisma.FieldRef<"tb_archivos_estudios", 'Boolean'>
+  readonly nombre_original: Prisma.FieldRef<"tb_archivos_estudios", 'String'>
+  readonly tipo_mime: Prisma.FieldRef<"tb_archivos_estudios", 'String'>
+  readonly tamano_bytes: Prisma.FieldRef<"tb_archivos_estudios", 'BigInt'>
+  readonly hash_sha256: Prisma.FieldRef<"tb_archivos_estudios", 'String'>
+  readonly fecha_estado: Prisma.FieldRef<"tb_archivos_estudios", 'DateTime'>
+  readonly motivo_estado: Prisma.FieldRef<"tb_archivos_estudios", 'String'>
+  readonly id_usuario_estado: Prisma.FieldRef<"tb_archivos_estudios", 'Int'>
 }
     
 
@@ -1805,6 +2342,25 @@ export type tb_archivos_estudiosDeleteManyArgs<ExtArgs extends runtime.Types.Ext
    * Limit how many tb_archivos_estudios to delete.
    */
   limit?: number
+}
+
+/**
+ * tb_archivos_estudios.tb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuarios
+ */
+export type tb_archivos_estudios$tb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the tb_usuarios
+   */
+  select?: Prisma.tb_usuariosSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the tb_usuarios
+   */
+  omit?: Prisma.tb_usuariosOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.tb_usuariosInclude<ExtArgs> | null
+  where?: Prisma.tb_usuariosWhereInput
 }
 
 /**

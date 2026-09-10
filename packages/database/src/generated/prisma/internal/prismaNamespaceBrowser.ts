@@ -125,7 +125,14 @@ export const Tb_archivos_estudiosScalarFieldEnum = {
   fecha_subida: 'fecha_subida',
   id_usuario: 'id_usuario',
   descripcion: 'descripcion',
-  estado: 'estado'
+  estado: 'estado',
+  nombre_original: 'nombre_original',
+  tipo_mime: 'tipo_mime',
+  tamano_bytes: 'tamano_bytes',
+  hash_sha256: 'hash_sha256',
+  fecha_estado: 'fecha_estado',
+  motivo_estado: 'motivo_estado',
+  id_usuario_estado: 'id_usuario_estado'
 } as const
 
 export type Tb_archivos_estudiosScalarFieldEnum = (typeof Tb_archivos_estudiosScalarFieldEnum)[keyof typeof Tb_archivos_estudiosScalarFieldEnum]
@@ -180,7 +187,14 @@ export const Tb_consentimientos_informadosScalarFieldEnum = {
   ruta_documento: 'ruta_documento',
   id_usuario: 'id_usuario',
   observaciones: 'observaciones',
-  fecha_creacion: 'fecha_creacion'
+  fecha_creacion: 'fecha_creacion',
+  nombre_original: 'nombre_original',
+  tipo_mime: 'tipo_mime',
+  tamano_bytes: 'tamano_bytes',
+  hash_sha256: 'hash_sha256',
+  fecha_estado: 'fecha_estado',
+  motivo_estado: 'motivo_estado',
+  id_usuario_estado: 'id_usuario_estado'
 } as const
 
 export type Tb_consentimientos_informadosScalarFieldEnum = (typeof Tb_consentimientos_informadosScalarFieldEnum)[keyof typeof Tb_consentimientos_informadosScalarFieldEnum]

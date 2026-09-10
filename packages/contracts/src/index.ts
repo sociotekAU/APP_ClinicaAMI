@@ -49,7 +49,11 @@ export type ApiErrorCode =
   | "ADMIN_PIN_NOT_CONFIGURED"
   | "ERP_ACCESS_NOT_CONFIGURED"
   | "NETWORK_RESPONSE_ERROR"
-  | "NETWORK_UNAVAILABLE";
+  | "NETWORK_UNAVAILABLE"
+  | "FILE_TOO_LARGE"
+  | "FILE_TYPE_NOT_ALLOWED"
+  | "FILE_INTEGRITY_ERROR"
+  | "FILE_STORAGE_ERROR";
 
 export interface ApiError {
   error: {
@@ -708,6 +712,88 @@ export interface InventoryOptions {
   suppliers: CareOption[];
   medications: CareOption[];
   items: Array<{ id: number; label: string; active: boolean; currentStock: number; unit: string }>;
+}
+
+export interface PrivateDocumentMetadata {
+  originalName: string | null;
+  mimeType: string | null;
+  sizeBytes: number | null;
+  sha256: string | null;
+  stored: boolean;
+}
+
+export interface StudyFileListItem {
+  id: number;
+  studyType: string;
+  description: string | null;
+  uploadedAt: string;
+  active: boolean;
+  statusChangedAt: string | null;
+  statusReason: string | null;
+  patient: { id: number; name: string };
+  consultation: {
+    id: number;
+    recordedAt: string;
+    recordType: ClinicalRecordType;
+    professional: { id: number; name: string };
+  };
+  uploadedBy: { id: number; name: string; username: string };
+  statusChangedBy: { id: number; name: string; username: string } | null;
+  document: PrivateDocumentMetadata;
+}
+
+export interface StudyFileInput {
+  patientId: number;
+  consultationId: number;
+  studyType: string;
+  description?: string;
+}
+
+export interface StudyFileMetadataInput {
+  studyType: string;
+  description?: string;
+}
+
+export interface StudyFileOptions {
+  consultations: Array<{
+    id: number;
+    label: string;
+    patientId: number;
+    active: boolean;
+  }>;
+}
+
+export type ConsentStatus = "pendiente" | "firmado" | "rechazado" | "revocado";
+
+export interface ConsentListItem {
+  id: number;
+  status: ConsentStatus;
+  signedAt: string | null;
+  createdAt: string;
+  statusChangedAt: string | null;
+  statusReason: string | null;
+  observations: string | null;
+  patient: { id: number; name: string };
+  service: { id: number; name: string };
+  createdBy: { id: number; name: string; username: string } | null;
+  statusChangedBy: { id: number; name: string; username: string } | null;
+  document: PrivateDocumentMetadata;
+}
+
+export interface ConsentInput {
+  patientId: number;
+  serviceId: number;
+  observations?: string;
+}
+
+export interface ConsentStatusInput {
+  status: Exclude<ConsentStatus, "pendiente">;
+  reason: string;
+}
+
+export interface ConsentOptions {
+  patients: CareOption[];
+  services: CareOption[];
 }
 
 export type WebPublicationState = "draft" | "scheduled" | "active" | "expired";

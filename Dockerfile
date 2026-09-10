@@ -63,6 +63,9 @@ RUN apt-get update \
 
 COPY --from=api-package --chown=node:node /output/api ./
 
+RUN mkdir -p /app/storage/private \
+    && chown -R node:node /app/storage
+
 USER node
 EXPOSE 4000
 

@@ -274,8 +274,10 @@ export type tb_usuariosWhereInput = {
   ultimo_acceso?: Prisma.DateTimeNullableFilter<"tb_usuarios"> | Date | string | null
   fecha_creacion?: Prisma.DateTimeFilter<"tb_usuarios"> | Date | string
   tb_archivos_estudios?: Prisma.Tb_archivos_estudiosListRelationFilter
+  tb_archivos_estudios_tb_archivos_estudios_id_usuario_estadoTotb_usuarios?: Prisma.Tb_archivos_estudiosListRelationFilter
   tb_auditoria?: Prisma.Tb_auditoriaListRelationFilter
   tb_consentimientos_informados?: Prisma.Tb_consentimientos_informadosListRelationFilter
+  tb_consentimientos_informados_tb_consentimientos_informados_id_usuario_estadoTotb_usuarios?: Prisma.Tb_consentimientos_informadosListRelationFilter
   tb_facturas?: Prisma.Tb_facturasListRelationFilter
   tb_movimientos_inventario?: Prisma.Tb_movimientos_inventarioListRelationFilter
   tb_medicos?: Prisma.XOR<Prisma.Tb_medicosNullableScalarRelationFilter, Prisma.tb_medicosWhereInput> | null
@@ -295,8 +297,10 @@ export type tb_usuariosOrderByWithRelationInput = {
   ultimo_acceso?: Prisma.SortOrderInput | Prisma.SortOrder
   fecha_creacion?: Prisma.SortOrder
   tb_archivos_estudios?: Prisma.tb_archivos_estudiosOrderByRelationAggregateInput
+  tb_archivos_estudios_tb_archivos_estudios_id_usuario_estadoTotb_usuarios?: Prisma.tb_archivos_estudiosOrderByRelationAggregateInput
   tb_auditoria?: Prisma.tb_auditoriaOrderByRelationAggregateInput
   tb_consentimientos_informados?: Prisma.tb_consentimientos_informadosOrderByRelationAggregateInput
+  tb_consentimientos_informados_tb_consentimientos_informados_id_usuario_estadoTotb_usuarios?: Prisma.tb_consentimientos_informadosOrderByRelationAggregateInput
   tb_facturas?: Prisma.tb_facturasOrderByRelationAggregateInput
   tb_movimientos_inventario?: Prisma.tb_movimientos_inventarioOrderByRelationAggregateInput
   tb_medicos?: Prisma.tb_medicosOrderByWithRelationInput
@@ -319,8 +323,10 @@ export type tb_usuariosWhereUniqueInput = Prisma.AtLeast<{
   ultimo_acceso?: Prisma.DateTimeNullableFilter<"tb_usuarios"> | Date | string | null
   fecha_creacion?: Prisma.DateTimeFilter<"tb_usuarios"> | Date | string
   tb_archivos_estudios?: Prisma.Tb_archivos_estudiosListRelationFilter
+  tb_archivos_estudios_tb_archivos_estudios_id_usuario_estadoTotb_usuarios?: Prisma.Tb_archivos_estudiosListRelationFilter
   tb_auditoria?: Prisma.Tb_auditoriaListRelationFilter
   tb_consentimientos_informados?: Prisma.Tb_consentimientos_informadosListRelationFilter
+  tb_consentimientos_informados_tb_consentimientos_informados_id_usuario_estadoTotb_usuarios?: Prisma.Tb_consentimientos_informadosListRelationFilter
   tb_facturas?: Prisma.Tb_facturasListRelationFilter
   tb_movimientos_inventario?: Prisma.Tb_movimientos_inventarioListRelationFilter
   tb_medicos?: Prisma.XOR<Prisma.Tb_medicosNullableScalarRelationFilter, Prisma.tb_medicosWhereInput> | null
@@ -373,8 +379,10 @@ export type tb_usuariosCreateInput = {
   ultimo_acceso?: Date | string | null
   fecha_creacion?: Date | string
   tb_archivos_estudios?: Prisma.tb_archivos_estudiosCreateNestedManyWithoutTb_usuariosInput
+  tb_archivos_estudios_tb_archivos_estudios_id_usuario_estadoTotb_usuarios?: Prisma.tb_archivos_estudiosCreateNestedManyWithoutTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput
   tb_auditoria?: Prisma.tb_auditoriaCreateNestedManyWithoutTb_usuariosInput
   tb_consentimientos_informados?: Prisma.tb_consentimientos_informadosCreateNestedManyWithoutTb_usuariosInput
+  tb_consentimientos_informados_tb_consentimientos_informados_id_usuario_estadoTotb_usuarios?: Prisma.tb_consentimientos_informadosCreateNestedManyWithoutTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput
   tb_facturas?: Prisma.tb_facturasCreateNestedManyWithoutTb_usuariosInput
   tb_movimientos_inventario?: Prisma.tb_movimientos_inventarioCreateNestedManyWithoutTb_usuariosInput
   tb_medicos?: Prisma.tb_medicosCreateNestedOneWithoutTb_usuariosInput
@@ -394,8 +402,10 @@ export type tb_usuariosUncheckedCreateInput = {
   ultimo_acceso?: Date | string | null
   fecha_creacion?: Date | string
   tb_archivos_estudios?: Prisma.tb_archivos_estudiosUncheckedCreateNestedManyWithoutTb_usuariosInput
+  tb_archivos_estudios_tb_archivos_estudios_id_usuario_estadoTotb_usuarios?: Prisma.tb_archivos_estudiosUncheckedCreateNestedManyWithoutTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput
   tb_auditoria?: Prisma.tb_auditoriaUncheckedCreateNestedManyWithoutTb_usuariosInput
   tb_consentimientos_informados?: Prisma.tb_consentimientos_informadosUncheckedCreateNestedManyWithoutTb_usuariosInput
+  tb_consentimientos_informados_tb_consentimientos_informados_id_usuario_estadoTotb_usuarios?: Prisma.tb_consentimientos_informadosUncheckedCreateNestedManyWithoutTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput
   tb_facturas?: Prisma.tb_facturasUncheckedCreateNestedManyWithoutTb_usuariosInput
   tb_movimientos_inventario?: Prisma.tb_movimientos_inventarioUncheckedCreateNestedManyWithoutTb_usuariosInput
 }
@@ -410,8 +420,10 @@ export type tb_usuariosUpdateInput = {
   ultimo_acceso?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tb_archivos_estudios?: Prisma.tb_archivos_estudiosUpdateManyWithoutTb_usuariosNestedInput
+  tb_archivos_estudios_tb_archivos_estudios_id_usuario_estadoTotb_usuarios?: Prisma.tb_archivos_estudiosUpdateManyWithoutTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosNestedInput
   tb_auditoria?: Prisma.tb_auditoriaUpdateManyWithoutTb_usuariosNestedInput
   tb_consentimientos_informados?: Prisma.tb_consentimientos_informadosUpdateManyWithoutTb_usuariosNestedInput
+  tb_consentimientos_informados_tb_consentimientos_informados_id_usuario_estadoTotb_usuarios?: Prisma.tb_consentimientos_informadosUpdateManyWithoutTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosNestedInput
   tb_facturas?: Prisma.tb_facturasUpdateManyWithoutTb_usuariosNestedInput
   tb_movimientos_inventario?: Prisma.tb_movimientos_inventarioUpdateManyWithoutTb_usuariosNestedInput
   tb_medicos?: Prisma.tb_medicosUpdateOneWithoutTb_usuariosNestedInput
@@ -431,8 +443,10 @@ export type tb_usuariosUncheckedUpdateInput = {
   ultimo_acceso?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tb_archivos_estudios?: Prisma.tb_archivos_estudiosUncheckedUpdateManyWithoutTb_usuariosNestedInput
+  tb_archivos_estudios_tb_archivos_estudios_id_usuario_estadoTotb_usuarios?: Prisma.tb_archivos_estudiosUncheckedUpdateManyWithoutTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosNestedInput
   tb_auditoria?: Prisma.tb_auditoriaUncheckedUpdateManyWithoutTb_usuariosNestedInput
   tb_consentimientos_informados?: Prisma.tb_consentimientos_informadosUncheckedUpdateManyWithoutTb_usuariosNestedInput
+  tb_consentimientos_informados_tb_consentimientos_informados_id_usuario_estadoTotb_usuarios?: Prisma.tb_consentimientos_informadosUncheckedUpdateManyWithoutTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosNestedInput
   tb_facturas?: Prisma.tb_facturasUncheckedUpdateManyWithoutTb_usuariosNestedInput
   tb_movimientos_inventario?: Prisma.tb_movimientos_inventarioUncheckedUpdateManyWithoutTb_usuariosNestedInput
 }
@@ -556,6 +570,12 @@ export type tb_usuariosCreateNestedOneWithoutTb_archivos_estudiosInput = {
   connect?: Prisma.tb_usuariosWhereUniqueInput
 }
 
+export type tb_usuariosCreateNestedOneWithoutTb_archivos_estudios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput = {
+  create?: Prisma.XOR<Prisma.tb_usuariosCreateWithoutTb_archivos_estudios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput, Prisma.tb_usuariosUncheckedCreateWithoutTb_archivos_estudios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput>
+  connectOrCreate?: Prisma.tb_usuariosCreateOrConnectWithoutTb_archivos_estudios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput
+  connect?: Prisma.tb_usuariosWhereUniqueInput
+}
+
 export type tb_usuariosUpdateOneRequiredWithoutTb_archivos_estudiosNestedInput = {
   create?: Prisma.XOR<Prisma.tb_usuariosCreateWithoutTb_archivos_estudiosInput, Prisma.tb_usuariosUncheckedCreateWithoutTb_archivos_estudiosInput>
   connectOrCreate?: Prisma.tb_usuariosCreateOrConnectWithoutTb_archivos_estudiosInput
@@ -564,9 +584,25 @@ export type tb_usuariosUpdateOneRequiredWithoutTb_archivos_estudiosNestedInput =
   update?: Prisma.XOR<Prisma.XOR<Prisma.tb_usuariosUpdateToOneWithWhereWithoutTb_archivos_estudiosInput, Prisma.tb_usuariosUpdateWithoutTb_archivos_estudiosInput>, Prisma.tb_usuariosUncheckedUpdateWithoutTb_archivos_estudiosInput>
 }
 
+export type tb_usuariosUpdateOneWithoutTb_archivos_estudios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosNestedInput = {
+  create?: Prisma.XOR<Prisma.tb_usuariosCreateWithoutTb_archivos_estudios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput, Prisma.tb_usuariosUncheckedCreateWithoutTb_archivos_estudios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput>
+  connectOrCreate?: Prisma.tb_usuariosCreateOrConnectWithoutTb_archivos_estudios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput
+  upsert?: Prisma.tb_usuariosUpsertWithoutTb_archivos_estudios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput
+  disconnect?: Prisma.tb_usuariosWhereInput | boolean
+  delete?: Prisma.tb_usuariosWhereInput | boolean
+  connect?: Prisma.tb_usuariosWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.tb_usuariosUpdateToOneWithWhereWithoutTb_archivos_estudios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput, Prisma.tb_usuariosUpdateWithoutTb_archivos_estudios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput>, Prisma.tb_usuariosUncheckedUpdateWithoutTb_archivos_estudios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput>
+}
+
 export type tb_usuariosCreateNestedOneWithoutTb_consentimientos_informadosInput = {
   create?: Prisma.XOR<Prisma.tb_usuariosCreateWithoutTb_consentimientos_informadosInput, Prisma.tb_usuariosUncheckedCreateWithoutTb_consentimientos_informadosInput>
   connectOrCreate?: Prisma.tb_usuariosCreateOrConnectWithoutTb_consentimientos_informadosInput
+  connect?: Prisma.tb_usuariosWhereUniqueInput
+}
+
+export type tb_usuariosCreateNestedOneWithoutTb_consentimientos_informados_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput = {
+  create?: Prisma.XOR<Prisma.tb_usuariosCreateWithoutTb_consentimientos_informados_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput, Prisma.tb_usuariosUncheckedCreateWithoutTb_consentimientos_informados_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput>
+  connectOrCreate?: Prisma.tb_usuariosCreateOrConnectWithoutTb_consentimientos_informados_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput
   connect?: Prisma.tb_usuariosWhereUniqueInput
 }
 
@@ -578,6 +614,16 @@ export type tb_usuariosUpdateOneWithoutTb_consentimientos_informadosNestedInput 
   delete?: Prisma.tb_usuariosWhereInput | boolean
   connect?: Prisma.tb_usuariosWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.tb_usuariosUpdateToOneWithWhereWithoutTb_consentimientos_informadosInput, Prisma.tb_usuariosUpdateWithoutTb_consentimientos_informadosInput>, Prisma.tb_usuariosUncheckedUpdateWithoutTb_consentimientos_informadosInput>
+}
+
+export type tb_usuariosUpdateOneWithoutTb_consentimientos_informados_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosNestedInput = {
+  create?: Prisma.XOR<Prisma.tb_usuariosCreateWithoutTb_consentimientos_informados_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput, Prisma.tb_usuariosUncheckedCreateWithoutTb_consentimientos_informados_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput>
+  connectOrCreate?: Prisma.tb_usuariosCreateOrConnectWithoutTb_consentimientos_informados_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput
+  upsert?: Prisma.tb_usuariosUpsertWithoutTb_consentimientos_informados_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput
+  disconnect?: Prisma.tb_usuariosWhereInput | boolean
+  delete?: Prisma.tb_usuariosWhereInput | boolean
+  connect?: Prisma.tb_usuariosWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.tb_usuariosUpdateToOneWithWhereWithoutTb_consentimientos_informados_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput, Prisma.tb_usuariosUpdateWithoutTb_consentimientos_informados_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput>, Prisma.tb_usuariosUncheckedUpdateWithoutTb_consentimientos_informados_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput>
 }
 
 export type tb_usuariosCreateNestedOneWithoutTb_facturasInput = {
@@ -707,8 +753,10 @@ export type tb_usuariosCreateWithoutTb_archivos_estudiosInput = {
   debe_cambiar_password?: boolean
   ultimo_acceso?: Date | string | null
   fecha_creacion?: Date | string
+  tb_archivos_estudios_tb_archivos_estudios_id_usuario_estadoTotb_usuarios?: Prisma.tb_archivos_estudiosCreateNestedManyWithoutTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput
   tb_auditoria?: Prisma.tb_auditoriaCreateNestedManyWithoutTb_usuariosInput
   tb_consentimientos_informados?: Prisma.tb_consentimientos_informadosCreateNestedManyWithoutTb_usuariosInput
+  tb_consentimientos_informados_tb_consentimientos_informados_id_usuario_estadoTotb_usuarios?: Prisma.tb_consentimientos_informadosCreateNestedManyWithoutTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput
   tb_facturas?: Prisma.tb_facturasCreateNestedManyWithoutTb_usuariosInput
   tb_movimientos_inventario?: Prisma.tb_movimientos_inventarioCreateNestedManyWithoutTb_usuariosInput
   tb_medicos?: Prisma.tb_medicosCreateNestedOneWithoutTb_usuariosInput
@@ -727,8 +775,10 @@ export type tb_usuariosUncheckedCreateWithoutTb_archivos_estudiosInput = {
   debe_cambiar_password?: boolean
   ultimo_acceso?: Date | string | null
   fecha_creacion?: Date | string
+  tb_archivos_estudios_tb_archivos_estudios_id_usuario_estadoTotb_usuarios?: Prisma.tb_archivos_estudiosUncheckedCreateNestedManyWithoutTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput
   tb_auditoria?: Prisma.tb_auditoriaUncheckedCreateNestedManyWithoutTb_usuariosInput
   tb_consentimientos_informados?: Prisma.tb_consentimientos_informadosUncheckedCreateNestedManyWithoutTb_usuariosInput
+  tb_consentimientos_informados_tb_consentimientos_informados_id_usuario_estadoTotb_usuarios?: Prisma.tb_consentimientos_informadosUncheckedCreateNestedManyWithoutTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput
   tb_facturas?: Prisma.tb_facturasUncheckedCreateNestedManyWithoutTb_usuariosInput
   tb_movimientos_inventario?: Prisma.tb_movimientos_inventarioUncheckedCreateNestedManyWithoutTb_usuariosInput
 }
@@ -736,6 +786,50 @@ export type tb_usuariosUncheckedCreateWithoutTb_archivos_estudiosInput = {
 export type tb_usuariosCreateOrConnectWithoutTb_archivos_estudiosInput = {
   where: Prisma.tb_usuariosWhereUniqueInput
   create: Prisma.XOR<Prisma.tb_usuariosCreateWithoutTb_archivos_estudiosInput, Prisma.tb_usuariosUncheckedCreateWithoutTb_archivos_estudiosInput>
+}
+
+export type tb_usuariosCreateWithoutTb_archivos_estudios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput = {
+  username: string
+  nombre: string
+  correo?: string | null
+  password_hash: string
+  estado?: boolean
+  debe_cambiar_password?: boolean
+  ultimo_acceso?: Date | string | null
+  fecha_creacion?: Date | string
+  tb_archivos_estudios?: Prisma.tb_archivos_estudiosCreateNestedManyWithoutTb_usuariosInput
+  tb_auditoria?: Prisma.tb_auditoriaCreateNestedManyWithoutTb_usuariosInput
+  tb_consentimientos_informados?: Prisma.tb_consentimientos_informadosCreateNestedManyWithoutTb_usuariosInput
+  tb_consentimientos_informados_tb_consentimientos_informados_id_usuario_estadoTotb_usuarios?: Prisma.tb_consentimientos_informadosCreateNestedManyWithoutTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput
+  tb_facturas?: Prisma.tb_facturasCreateNestedManyWithoutTb_usuariosInput
+  tb_movimientos_inventario?: Prisma.tb_movimientos_inventarioCreateNestedManyWithoutTb_usuariosInput
+  tb_medicos?: Prisma.tb_medicosCreateNestedOneWithoutTb_usuariosInput
+  tb_roles: Prisma.tb_rolesCreateNestedOneWithoutTb_usuariosInput
+}
+
+export type tb_usuariosUncheckedCreateWithoutTb_archivos_estudios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput = {
+  id_usuario?: number
+  username: string
+  nombre: string
+  correo?: string | null
+  password_hash: string
+  id_rol: number
+  id_doctor?: number | null
+  estado?: boolean
+  debe_cambiar_password?: boolean
+  ultimo_acceso?: Date | string | null
+  fecha_creacion?: Date | string
+  tb_archivos_estudios?: Prisma.tb_archivos_estudiosUncheckedCreateNestedManyWithoutTb_usuariosInput
+  tb_auditoria?: Prisma.tb_auditoriaUncheckedCreateNestedManyWithoutTb_usuariosInput
+  tb_consentimientos_informados?: Prisma.tb_consentimientos_informadosUncheckedCreateNestedManyWithoutTb_usuariosInput
+  tb_consentimientos_informados_tb_consentimientos_informados_id_usuario_estadoTotb_usuarios?: Prisma.tb_consentimientos_informadosUncheckedCreateNestedManyWithoutTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput
+  tb_facturas?: Prisma.tb_facturasUncheckedCreateNestedManyWithoutTb_usuariosInput
+  tb_movimientos_inventario?: Prisma.tb_movimientos_inventarioUncheckedCreateNestedManyWithoutTb_usuariosInput
+}
+
+export type tb_usuariosCreateOrConnectWithoutTb_archivos_estudios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput = {
+  where: Prisma.tb_usuariosWhereUniqueInput
+  create: Prisma.XOR<Prisma.tb_usuariosCreateWithoutTb_archivos_estudios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput, Prisma.tb_usuariosUncheckedCreateWithoutTb_archivos_estudios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput>
 }
 
 export type tb_usuariosUpsertWithoutTb_archivos_estudiosInput = {
@@ -758,8 +852,10 @@ export type tb_usuariosUpdateWithoutTb_archivos_estudiosInput = {
   debe_cambiar_password?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ultimo_acceso?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tb_archivos_estudios_tb_archivos_estudios_id_usuario_estadoTotb_usuarios?: Prisma.tb_archivos_estudiosUpdateManyWithoutTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosNestedInput
   tb_auditoria?: Prisma.tb_auditoriaUpdateManyWithoutTb_usuariosNestedInput
   tb_consentimientos_informados?: Prisma.tb_consentimientos_informadosUpdateManyWithoutTb_usuariosNestedInput
+  tb_consentimientos_informados_tb_consentimientos_informados_id_usuario_estadoTotb_usuarios?: Prisma.tb_consentimientos_informadosUpdateManyWithoutTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosNestedInput
   tb_facturas?: Prisma.tb_facturasUpdateManyWithoutTb_usuariosNestedInput
   tb_movimientos_inventario?: Prisma.tb_movimientos_inventarioUpdateManyWithoutTb_usuariosNestedInput
   tb_medicos?: Prisma.tb_medicosUpdateOneWithoutTb_usuariosNestedInput
@@ -778,8 +874,60 @@ export type tb_usuariosUncheckedUpdateWithoutTb_archivos_estudiosInput = {
   debe_cambiar_password?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ultimo_acceso?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tb_archivos_estudios_tb_archivos_estudios_id_usuario_estadoTotb_usuarios?: Prisma.tb_archivos_estudiosUncheckedUpdateManyWithoutTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosNestedInput
   tb_auditoria?: Prisma.tb_auditoriaUncheckedUpdateManyWithoutTb_usuariosNestedInput
   tb_consentimientos_informados?: Prisma.tb_consentimientos_informadosUncheckedUpdateManyWithoutTb_usuariosNestedInput
+  tb_consentimientos_informados_tb_consentimientos_informados_id_usuario_estadoTotb_usuarios?: Prisma.tb_consentimientos_informadosUncheckedUpdateManyWithoutTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosNestedInput
+  tb_facturas?: Prisma.tb_facturasUncheckedUpdateManyWithoutTb_usuariosNestedInput
+  tb_movimientos_inventario?: Prisma.tb_movimientos_inventarioUncheckedUpdateManyWithoutTb_usuariosNestedInput
+}
+
+export type tb_usuariosUpsertWithoutTb_archivos_estudios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput = {
+  update: Prisma.XOR<Prisma.tb_usuariosUpdateWithoutTb_archivos_estudios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput, Prisma.tb_usuariosUncheckedUpdateWithoutTb_archivos_estudios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput>
+  create: Prisma.XOR<Prisma.tb_usuariosCreateWithoutTb_archivos_estudios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput, Prisma.tb_usuariosUncheckedCreateWithoutTb_archivos_estudios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput>
+  where?: Prisma.tb_usuariosWhereInput
+}
+
+export type tb_usuariosUpdateToOneWithWhereWithoutTb_archivos_estudios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput = {
+  where?: Prisma.tb_usuariosWhereInput
+  data: Prisma.XOR<Prisma.tb_usuariosUpdateWithoutTb_archivos_estudios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput, Prisma.tb_usuariosUncheckedUpdateWithoutTb_archivos_estudios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput>
+}
+
+export type tb_usuariosUpdateWithoutTb_archivos_estudios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput = {
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  nombre?: Prisma.StringFieldUpdateOperationsInput | string
+  correo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password_hash?: Prisma.StringFieldUpdateOperationsInput | string
+  estado?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  debe_cambiar_password?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  ultimo_acceso?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tb_archivos_estudios?: Prisma.tb_archivos_estudiosUpdateManyWithoutTb_usuariosNestedInput
+  tb_auditoria?: Prisma.tb_auditoriaUpdateManyWithoutTb_usuariosNestedInput
+  tb_consentimientos_informados?: Prisma.tb_consentimientos_informadosUpdateManyWithoutTb_usuariosNestedInput
+  tb_consentimientos_informados_tb_consentimientos_informados_id_usuario_estadoTotb_usuarios?: Prisma.tb_consentimientos_informadosUpdateManyWithoutTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosNestedInput
+  tb_facturas?: Prisma.tb_facturasUpdateManyWithoutTb_usuariosNestedInput
+  tb_movimientos_inventario?: Prisma.tb_movimientos_inventarioUpdateManyWithoutTb_usuariosNestedInput
+  tb_medicos?: Prisma.tb_medicosUpdateOneWithoutTb_usuariosNestedInput
+  tb_roles?: Prisma.tb_rolesUpdateOneRequiredWithoutTb_usuariosNestedInput
+}
+
+export type tb_usuariosUncheckedUpdateWithoutTb_archivos_estudios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput = {
+  id_usuario?: Prisma.IntFieldUpdateOperationsInput | number
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  nombre?: Prisma.StringFieldUpdateOperationsInput | string
+  correo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password_hash?: Prisma.StringFieldUpdateOperationsInput | string
+  id_rol?: Prisma.IntFieldUpdateOperationsInput | number
+  id_doctor?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  estado?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  debe_cambiar_password?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  ultimo_acceso?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tb_archivos_estudios?: Prisma.tb_archivos_estudiosUncheckedUpdateManyWithoutTb_usuariosNestedInput
+  tb_auditoria?: Prisma.tb_auditoriaUncheckedUpdateManyWithoutTb_usuariosNestedInput
+  tb_consentimientos_informados?: Prisma.tb_consentimientos_informadosUncheckedUpdateManyWithoutTb_usuariosNestedInput
+  tb_consentimientos_informados_tb_consentimientos_informados_id_usuario_estadoTotb_usuarios?: Prisma.tb_consentimientos_informadosUncheckedUpdateManyWithoutTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosNestedInput
   tb_facturas?: Prisma.tb_facturasUncheckedUpdateManyWithoutTb_usuariosNestedInput
   tb_movimientos_inventario?: Prisma.tb_movimientos_inventarioUncheckedUpdateManyWithoutTb_usuariosNestedInput
 }
@@ -794,7 +942,9 @@ export type tb_usuariosCreateWithoutTb_consentimientos_informadosInput = {
   ultimo_acceso?: Date | string | null
   fecha_creacion?: Date | string
   tb_archivos_estudios?: Prisma.tb_archivos_estudiosCreateNestedManyWithoutTb_usuariosInput
+  tb_archivos_estudios_tb_archivos_estudios_id_usuario_estadoTotb_usuarios?: Prisma.tb_archivos_estudiosCreateNestedManyWithoutTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput
   tb_auditoria?: Prisma.tb_auditoriaCreateNestedManyWithoutTb_usuariosInput
+  tb_consentimientos_informados_tb_consentimientos_informados_id_usuario_estadoTotb_usuarios?: Prisma.tb_consentimientos_informadosCreateNestedManyWithoutTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput
   tb_facturas?: Prisma.tb_facturasCreateNestedManyWithoutTb_usuariosInput
   tb_movimientos_inventario?: Prisma.tb_movimientos_inventarioCreateNestedManyWithoutTb_usuariosInput
   tb_medicos?: Prisma.tb_medicosCreateNestedOneWithoutTb_usuariosInput
@@ -814,7 +964,9 @@ export type tb_usuariosUncheckedCreateWithoutTb_consentimientos_informadosInput 
   ultimo_acceso?: Date | string | null
   fecha_creacion?: Date | string
   tb_archivos_estudios?: Prisma.tb_archivos_estudiosUncheckedCreateNestedManyWithoutTb_usuariosInput
+  tb_archivos_estudios_tb_archivos_estudios_id_usuario_estadoTotb_usuarios?: Prisma.tb_archivos_estudiosUncheckedCreateNestedManyWithoutTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput
   tb_auditoria?: Prisma.tb_auditoriaUncheckedCreateNestedManyWithoutTb_usuariosInput
+  tb_consentimientos_informados_tb_consentimientos_informados_id_usuario_estadoTotb_usuarios?: Prisma.tb_consentimientos_informadosUncheckedCreateNestedManyWithoutTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput
   tb_facturas?: Prisma.tb_facturasUncheckedCreateNestedManyWithoutTb_usuariosInput
   tb_movimientos_inventario?: Prisma.tb_movimientos_inventarioUncheckedCreateNestedManyWithoutTb_usuariosInput
 }
@@ -822,6 +974,50 @@ export type tb_usuariosUncheckedCreateWithoutTb_consentimientos_informadosInput 
 export type tb_usuariosCreateOrConnectWithoutTb_consentimientos_informadosInput = {
   where: Prisma.tb_usuariosWhereUniqueInput
   create: Prisma.XOR<Prisma.tb_usuariosCreateWithoutTb_consentimientos_informadosInput, Prisma.tb_usuariosUncheckedCreateWithoutTb_consentimientos_informadosInput>
+}
+
+export type tb_usuariosCreateWithoutTb_consentimientos_informados_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput = {
+  username: string
+  nombre: string
+  correo?: string | null
+  password_hash: string
+  estado?: boolean
+  debe_cambiar_password?: boolean
+  ultimo_acceso?: Date | string | null
+  fecha_creacion?: Date | string
+  tb_archivos_estudios?: Prisma.tb_archivos_estudiosCreateNestedManyWithoutTb_usuariosInput
+  tb_archivos_estudios_tb_archivos_estudios_id_usuario_estadoTotb_usuarios?: Prisma.tb_archivos_estudiosCreateNestedManyWithoutTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput
+  tb_auditoria?: Prisma.tb_auditoriaCreateNestedManyWithoutTb_usuariosInput
+  tb_consentimientos_informados?: Prisma.tb_consentimientos_informadosCreateNestedManyWithoutTb_usuariosInput
+  tb_facturas?: Prisma.tb_facturasCreateNestedManyWithoutTb_usuariosInput
+  tb_movimientos_inventario?: Prisma.tb_movimientos_inventarioCreateNestedManyWithoutTb_usuariosInput
+  tb_medicos?: Prisma.tb_medicosCreateNestedOneWithoutTb_usuariosInput
+  tb_roles: Prisma.tb_rolesCreateNestedOneWithoutTb_usuariosInput
+}
+
+export type tb_usuariosUncheckedCreateWithoutTb_consentimientos_informados_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput = {
+  id_usuario?: number
+  username: string
+  nombre: string
+  correo?: string | null
+  password_hash: string
+  id_rol: number
+  id_doctor?: number | null
+  estado?: boolean
+  debe_cambiar_password?: boolean
+  ultimo_acceso?: Date | string | null
+  fecha_creacion?: Date | string
+  tb_archivos_estudios?: Prisma.tb_archivos_estudiosUncheckedCreateNestedManyWithoutTb_usuariosInput
+  tb_archivos_estudios_tb_archivos_estudios_id_usuario_estadoTotb_usuarios?: Prisma.tb_archivos_estudiosUncheckedCreateNestedManyWithoutTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput
+  tb_auditoria?: Prisma.tb_auditoriaUncheckedCreateNestedManyWithoutTb_usuariosInput
+  tb_consentimientos_informados?: Prisma.tb_consentimientos_informadosUncheckedCreateNestedManyWithoutTb_usuariosInput
+  tb_facturas?: Prisma.tb_facturasUncheckedCreateNestedManyWithoutTb_usuariosInput
+  tb_movimientos_inventario?: Prisma.tb_movimientos_inventarioUncheckedCreateNestedManyWithoutTb_usuariosInput
+}
+
+export type tb_usuariosCreateOrConnectWithoutTb_consentimientos_informados_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput = {
+  where: Prisma.tb_usuariosWhereUniqueInput
+  create: Prisma.XOR<Prisma.tb_usuariosCreateWithoutTb_consentimientos_informados_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput, Prisma.tb_usuariosUncheckedCreateWithoutTb_consentimientos_informados_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput>
 }
 
 export type tb_usuariosUpsertWithoutTb_consentimientos_informadosInput = {
@@ -845,7 +1041,9 @@ export type tb_usuariosUpdateWithoutTb_consentimientos_informadosInput = {
   ultimo_acceso?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tb_archivos_estudios?: Prisma.tb_archivos_estudiosUpdateManyWithoutTb_usuariosNestedInput
+  tb_archivos_estudios_tb_archivos_estudios_id_usuario_estadoTotb_usuarios?: Prisma.tb_archivos_estudiosUpdateManyWithoutTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosNestedInput
   tb_auditoria?: Prisma.tb_auditoriaUpdateManyWithoutTb_usuariosNestedInput
+  tb_consentimientos_informados_tb_consentimientos_informados_id_usuario_estadoTotb_usuarios?: Prisma.tb_consentimientos_informadosUpdateManyWithoutTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosNestedInput
   tb_facturas?: Prisma.tb_facturasUpdateManyWithoutTb_usuariosNestedInput
   tb_movimientos_inventario?: Prisma.tb_movimientos_inventarioUpdateManyWithoutTb_usuariosNestedInput
   tb_medicos?: Prisma.tb_medicosUpdateOneWithoutTb_usuariosNestedInput
@@ -865,7 +1063,59 @@ export type tb_usuariosUncheckedUpdateWithoutTb_consentimientos_informadosInput 
   ultimo_acceso?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tb_archivos_estudios?: Prisma.tb_archivos_estudiosUncheckedUpdateManyWithoutTb_usuariosNestedInput
+  tb_archivos_estudios_tb_archivos_estudios_id_usuario_estadoTotb_usuarios?: Prisma.tb_archivos_estudiosUncheckedUpdateManyWithoutTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosNestedInput
   tb_auditoria?: Prisma.tb_auditoriaUncheckedUpdateManyWithoutTb_usuariosNestedInput
+  tb_consentimientos_informados_tb_consentimientos_informados_id_usuario_estadoTotb_usuarios?: Prisma.tb_consentimientos_informadosUncheckedUpdateManyWithoutTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosNestedInput
+  tb_facturas?: Prisma.tb_facturasUncheckedUpdateManyWithoutTb_usuariosNestedInput
+  tb_movimientos_inventario?: Prisma.tb_movimientos_inventarioUncheckedUpdateManyWithoutTb_usuariosNestedInput
+}
+
+export type tb_usuariosUpsertWithoutTb_consentimientos_informados_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput = {
+  update: Prisma.XOR<Prisma.tb_usuariosUpdateWithoutTb_consentimientos_informados_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput, Prisma.tb_usuariosUncheckedUpdateWithoutTb_consentimientos_informados_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput>
+  create: Prisma.XOR<Prisma.tb_usuariosCreateWithoutTb_consentimientos_informados_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput, Prisma.tb_usuariosUncheckedCreateWithoutTb_consentimientos_informados_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput>
+  where?: Prisma.tb_usuariosWhereInput
+}
+
+export type tb_usuariosUpdateToOneWithWhereWithoutTb_consentimientos_informados_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput = {
+  where?: Prisma.tb_usuariosWhereInput
+  data: Prisma.XOR<Prisma.tb_usuariosUpdateWithoutTb_consentimientos_informados_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput, Prisma.tb_usuariosUncheckedUpdateWithoutTb_consentimientos_informados_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput>
+}
+
+export type tb_usuariosUpdateWithoutTb_consentimientos_informados_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput = {
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  nombre?: Prisma.StringFieldUpdateOperationsInput | string
+  correo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password_hash?: Prisma.StringFieldUpdateOperationsInput | string
+  estado?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  debe_cambiar_password?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  ultimo_acceso?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tb_archivos_estudios?: Prisma.tb_archivos_estudiosUpdateManyWithoutTb_usuariosNestedInput
+  tb_archivos_estudios_tb_archivos_estudios_id_usuario_estadoTotb_usuarios?: Prisma.tb_archivos_estudiosUpdateManyWithoutTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosNestedInput
+  tb_auditoria?: Prisma.tb_auditoriaUpdateManyWithoutTb_usuariosNestedInput
+  tb_consentimientos_informados?: Prisma.tb_consentimientos_informadosUpdateManyWithoutTb_usuariosNestedInput
+  tb_facturas?: Prisma.tb_facturasUpdateManyWithoutTb_usuariosNestedInput
+  tb_movimientos_inventario?: Prisma.tb_movimientos_inventarioUpdateManyWithoutTb_usuariosNestedInput
+  tb_medicos?: Prisma.tb_medicosUpdateOneWithoutTb_usuariosNestedInput
+  tb_roles?: Prisma.tb_rolesUpdateOneRequiredWithoutTb_usuariosNestedInput
+}
+
+export type tb_usuariosUncheckedUpdateWithoutTb_consentimientos_informados_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput = {
+  id_usuario?: Prisma.IntFieldUpdateOperationsInput | number
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  nombre?: Prisma.StringFieldUpdateOperationsInput | string
+  correo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password_hash?: Prisma.StringFieldUpdateOperationsInput | string
+  id_rol?: Prisma.IntFieldUpdateOperationsInput | number
+  id_doctor?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  estado?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  debe_cambiar_password?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  ultimo_acceso?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tb_archivos_estudios?: Prisma.tb_archivos_estudiosUncheckedUpdateManyWithoutTb_usuariosNestedInput
+  tb_archivos_estudios_tb_archivos_estudios_id_usuario_estadoTotb_usuarios?: Prisma.tb_archivos_estudiosUncheckedUpdateManyWithoutTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosNestedInput
+  tb_auditoria?: Prisma.tb_auditoriaUncheckedUpdateManyWithoutTb_usuariosNestedInput
+  tb_consentimientos_informados?: Prisma.tb_consentimientos_informadosUncheckedUpdateManyWithoutTb_usuariosNestedInput
   tb_facturas?: Prisma.tb_facturasUncheckedUpdateManyWithoutTb_usuariosNestedInput
   tb_movimientos_inventario?: Prisma.tb_movimientos_inventarioUncheckedUpdateManyWithoutTb_usuariosNestedInput
 }
@@ -880,8 +1130,10 @@ export type tb_usuariosCreateWithoutTb_facturasInput = {
   ultimo_acceso?: Date | string | null
   fecha_creacion?: Date | string
   tb_archivos_estudios?: Prisma.tb_archivos_estudiosCreateNestedManyWithoutTb_usuariosInput
+  tb_archivos_estudios_tb_archivos_estudios_id_usuario_estadoTotb_usuarios?: Prisma.tb_archivos_estudiosCreateNestedManyWithoutTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput
   tb_auditoria?: Prisma.tb_auditoriaCreateNestedManyWithoutTb_usuariosInput
   tb_consentimientos_informados?: Prisma.tb_consentimientos_informadosCreateNestedManyWithoutTb_usuariosInput
+  tb_consentimientos_informados_tb_consentimientos_informados_id_usuario_estadoTotb_usuarios?: Prisma.tb_consentimientos_informadosCreateNestedManyWithoutTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput
   tb_movimientos_inventario?: Prisma.tb_movimientos_inventarioCreateNestedManyWithoutTb_usuariosInput
   tb_medicos?: Prisma.tb_medicosCreateNestedOneWithoutTb_usuariosInput
   tb_roles: Prisma.tb_rolesCreateNestedOneWithoutTb_usuariosInput
@@ -900,8 +1152,10 @@ export type tb_usuariosUncheckedCreateWithoutTb_facturasInput = {
   ultimo_acceso?: Date | string | null
   fecha_creacion?: Date | string
   tb_archivos_estudios?: Prisma.tb_archivos_estudiosUncheckedCreateNestedManyWithoutTb_usuariosInput
+  tb_archivos_estudios_tb_archivos_estudios_id_usuario_estadoTotb_usuarios?: Prisma.tb_archivos_estudiosUncheckedCreateNestedManyWithoutTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput
   tb_auditoria?: Prisma.tb_auditoriaUncheckedCreateNestedManyWithoutTb_usuariosInput
   tb_consentimientos_informados?: Prisma.tb_consentimientos_informadosUncheckedCreateNestedManyWithoutTb_usuariosInput
+  tb_consentimientos_informados_tb_consentimientos_informados_id_usuario_estadoTotb_usuarios?: Prisma.tb_consentimientos_informadosUncheckedCreateNestedManyWithoutTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput
   tb_movimientos_inventario?: Prisma.tb_movimientos_inventarioUncheckedCreateNestedManyWithoutTb_usuariosInput
 }
 
@@ -931,8 +1185,10 @@ export type tb_usuariosUpdateWithoutTb_facturasInput = {
   ultimo_acceso?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tb_archivos_estudios?: Prisma.tb_archivos_estudiosUpdateManyWithoutTb_usuariosNestedInput
+  tb_archivos_estudios_tb_archivos_estudios_id_usuario_estadoTotb_usuarios?: Prisma.tb_archivos_estudiosUpdateManyWithoutTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosNestedInput
   tb_auditoria?: Prisma.tb_auditoriaUpdateManyWithoutTb_usuariosNestedInput
   tb_consentimientos_informados?: Prisma.tb_consentimientos_informadosUpdateManyWithoutTb_usuariosNestedInput
+  tb_consentimientos_informados_tb_consentimientos_informados_id_usuario_estadoTotb_usuarios?: Prisma.tb_consentimientos_informadosUpdateManyWithoutTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosNestedInput
   tb_movimientos_inventario?: Prisma.tb_movimientos_inventarioUpdateManyWithoutTb_usuariosNestedInput
   tb_medicos?: Prisma.tb_medicosUpdateOneWithoutTb_usuariosNestedInput
   tb_roles?: Prisma.tb_rolesUpdateOneRequiredWithoutTb_usuariosNestedInput
@@ -951,8 +1207,10 @@ export type tb_usuariosUncheckedUpdateWithoutTb_facturasInput = {
   ultimo_acceso?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tb_archivos_estudios?: Prisma.tb_archivos_estudiosUncheckedUpdateManyWithoutTb_usuariosNestedInput
+  tb_archivos_estudios_tb_archivos_estudios_id_usuario_estadoTotb_usuarios?: Prisma.tb_archivos_estudiosUncheckedUpdateManyWithoutTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosNestedInput
   tb_auditoria?: Prisma.tb_auditoriaUncheckedUpdateManyWithoutTb_usuariosNestedInput
   tb_consentimientos_informados?: Prisma.tb_consentimientos_informadosUncheckedUpdateManyWithoutTb_usuariosNestedInput
+  tb_consentimientos_informados_tb_consentimientos_informados_id_usuario_estadoTotb_usuarios?: Prisma.tb_consentimientos_informadosUncheckedUpdateManyWithoutTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosNestedInput
   tb_movimientos_inventario?: Prisma.tb_movimientos_inventarioUncheckedUpdateManyWithoutTb_usuariosNestedInput
 }
 
@@ -966,8 +1224,10 @@ export type tb_usuariosCreateWithoutTb_medicosInput = {
   ultimo_acceso?: Date | string | null
   fecha_creacion?: Date | string
   tb_archivos_estudios?: Prisma.tb_archivos_estudiosCreateNestedManyWithoutTb_usuariosInput
+  tb_archivos_estudios_tb_archivos_estudios_id_usuario_estadoTotb_usuarios?: Prisma.tb_archivos_estudiosCreateNestedManyWithoutTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput
   tb_auditoria?: Prisma.tb_auditoriaCreateNestedManyWithoutTb_usuariosInput
   tb_consentimientos_informados?: Prisma.tb_consentimientos_informadosCreateNestedManyWithoutTb_usuariosInput
+  tb_consentimientos_informados_tb_consentimientos_informados_id_usuario_estadoTotb_usuarios?: Prisma.tb_consentimientos_informadosCreateNestedManyWithoutTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput
   tb_facturas?: Prisma.tb_facturasCreateNestedManyWithoutTb_usuariosInput
   tb_movimientos_inventario?: Prisma.tb_movimientos_inventarioCreateNestedManyWithoutTb_usuariosInput
   tb_roles: Prisma.tb_rolesCreateNestedOneWithoutTb_usuariosInput
@@ -985,8 +1245,10 @@ export type tb_usuariosUncheckedCreateWithoutTb_medicosInput = {
   ultimo_acceso?: Date | string | null
   fecha_creacion?: Date | string
   tb_archivos_estudios?: Prisma.tb_archivos_estudiosUncheckedCreateNestedManyWithoutTb_usuariosInput
+  tb_archivos_estudios_tb_archivos_estudios_id_usuario_estadoTotb_usuarios?: Prisma.tb_archivos_estudiosUncheckedCreateNestedManyWithoutTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput
   tb_auditoria?: Prisma.tb_auditoriaUncheckedCreateNestedManyWithoutTb_usuariosInput
   tb_consentimientos_informados?: Prisma.tb_consentimientos_informadosUncheckedCreateNestedManyWithoutTb_usuariosInput
+  tb_consentimientos_informados_tb_consentimientos_informados_id_usuario_estadoTotb_usuarios?: Prisma.tb_consentimientos_informadosUncheckedCreateNestedManyWithoutTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput
   tb_facturas?: Prisma.tb_facturasUncheckedCreateNestedManyWithoutTb_usuariosInput
   tb_movimientos_inventario?: Prisma.tb_movimientos_inventarioUncheckedCreateNestedManyWithoutTb_usuariosInput
 }
@@ -1017,8 +1279,10 @@ export type tb_usuariosUpdateWithoutTb_medicosInput = {
   ultimo_acceso?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tb_archivos_estudios?: Prisma.tb_archivos_estudiosUpdateManyWithoutTb_usuariosNestedInput
+  tb_archivos_estudios_tb_archivos_estudios_id_usuario_estadoTotb_usuarios?: Prisma.tb_archivos_estudiosUpdateManyWithoutTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosNestedInput
   tb_auditoria?: Prisma.tb_auditoriaUpdateManyWithoutTb_usuariosNestedInput
   tb_consentimientos_informados?: Prisma.tb_consentimientos_informadosUpdateManyWithoutTb_usuariosNestedInput
+  tb_consentimientos_informados_tb_consentimientos_informados_id_usuario_estadoTotb_usuarios?: Prisma.tb_consentimientos_informadosUpdateManyWithoutTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosNestedInput
   tb_facturas?: Prisma.tb_facturasUpdateManyWithoutTb_usuariosNestedInput
   tb_movimientos_inventario?: Prisma.tb_movimientos_inventarioUpdateManyWithoutTb_usuariosNestedInput
   tb_roles?: Prisma.tb_rolesUpdateOneRequiredWithoutTb_usuariosNestedInput
@@ -1036,8 +1300,10 @@ export type tb_usuariosUncheckedUpdateWithoutTb_medicosInput = {
   ultimo_acceso?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tb_archivos_estudios?: Prisma.tb_archivos_estudiosUncheckedUpdateManyWithoutTb_usuariosNestedInput
+  tb_archivos_estudios_tb_archivos_estudios_id_usuario_estadoTotb_usuarios?: Prisma.tb_archivos_estudiosUncheckedUpdateManyWithoutTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosNestedInput
   tb_auditoria?: Prisma.tb_auditoriaUncheckedUpdateManyWithoutTb_usuariosNestedInput
   tb_consentimientos_informados?: Prisma.tb_consentimientos_informadosUncheckedUpdateManyWithoutTb_usuariosNestedInput
+  tb_consentimientos_informados_tb_consentimientos_informados_id_usuario_estadoTotb_usuarios?: Prisma.tb_consentimientos_informadosUncheckedUpdateManyWithoutTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosNestedInput
   tb_facturas?: Prisma.tb_facturasUncheckedUpdateManyWithoutTb_usuariosNestedInput
   tb_movimientos_inventario?: Prisma.tb_movimientos_inventarioUncheckedUpdateManyWithoutTb_usuariosNestedInput
 }
@@ -1052,8 +1318,10 @@ export type tb_usuariosCreateWithoutTb_movimientos_inventarioInput = {
   ultimo_acceso?: Date | string | null
   fecha_creacion?: Date | string
   tb_archivos_estudios?: Prisma.tb_archivos_estudiosCreateNestedManyWithoutTb_usuariosInput
+  tb_archivos_estudios_tb_archivos_estudios_id_usuario_estadoTotb_usuarios?: Prisma.tb_archivos_estudiosCreateNestedManyWithoutTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput
   tb_auditoria?: Prisma.tb_auditoriaCreateNestedManyWithoutTb_usuariosInput
   tb_consentimientos_informados?: Prisma.tb_consentimientos_informadosCreateNestedManyWithoutTb_usuariosInput
+  tb_consentimientos_informados_tb_consentimientos_informados_id_usuario_estadoTotb_usuarios?: Prisma.tb_consentimientos_informadosCreateNestedManyWithoutTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput
   tb_facturas?: Prisma.tb_facturasCreateNestedManyWithoutTb_usuariosInput
   tb_medicos?: Prisma.tb_medicosCreateNestedOneWithoutTb_usuariosInput
   tb_roles: Prisma.tb_rolesCreateNestedOneWithoutTb_usuariosInput
@@ -1072,8 +1340,10 @@ export type tb_usuariosUncheckedCreateWithoutTb_movimientos_inventarioInput = {
   ultimo_acceso?: Date | string | null
   fecha_creacion?: Date | string
   tb_archivos_estudios?: Prisma.tb_archivos_estudiosUncheckedCreateNestedManyWithoutTb_usuariosInput
+  tb_archivos_estudios_tb_archivos_estudios_id_usuario_estadoTotb_usuarios?: Prisma.tb_archivos_estudiosUncheckedCreateNestedManyWithoutTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput
   tb_auditoria?: Prisma.tb_auditoriaUncheckedCreateNestedManyWithoutTb_usuariosInput
   tb_consentimientos_informados?: Prisma.tb_consentimientos_informadosUncheckedCreateNestedManyWithoutTb_usuariosInput
+  tb_consentimientos_informados_tb_consentimientos_informados_id_usuario_estadoTotb_usuarios?: Prisma.tb_consentimientos_informadosUncheckedCreateNestedManyWithoutTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput
   tb_facturas?: Prisma.tb_facturasUncheckedCreateNestedManyWithoutTb_usuariosInput
 }
 
@@ -1103,8 +1373,10 @@ export type tb_usuariosUpdateWithoutTb_movimientos_inventarioInput = {
   ultimo_acceso?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tb_archivos_estudios?: Prisma.tb_archivos_estudiosUpdateManyWithoutTb_usuariosNestedInput
+  tb_archivos_estudios_tb_archivos_estudios_id_usuario_estadoTotb_usuarios?: Prisma.tb_archivos_estudiosUpdateManyWithoutTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosNestedInput
   tb_auditoria?: Prisma.tb_auditoriaUpdateManyWithoutTb_usuariosNestedInput
   tb_consentimientos_informados?: Prisma.tb_consentimientos_informadosUpdateManyWithoutTb_usuariosNestedInput
+  tb_consentimientos_informados_tb_consentimientos_informados_id_usuario_estadoTotb_usuarios?: Prisma.tb_consentimientos_informadosUpdateManyWithoutTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosNestedInput
   tb_facturas?: Prisma.tb_facturasUpdateManyWithoutTb_usuariosNestedInput
   tb_medicos?: Prisma.tb_medicosUpdateOneWithoutTb_usuariosNestedInput
   tb_roles?: Prisma.tb_rolesUpdateOneRequiredWithoutTb_usuariosNestedInput
@@ -1123,8 +1395,10 @@ export type tb_usuariosUncheckedUpdateWithoutTb_movimientos_inventarioInput = {
   ultimo_acceso?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tb_archivos_estudios?: Prisma.tb_archivos_estudiosUncheckedUpdateManyWithoutTb_usuariosNestedInput
+  tb_archivos_estudios_tb_archivos_estudios_id_usuario_estadoTotb_usuarios?: Prisma.tb_archivos_estudiosUncheckedUpdateManyWithoutTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosNestedInput
   tb_auditoria?: Prisma.tb_auditoriaUncheckedUpdateManyWithoutTb_usuariosNestedInput
   tb_consentimientos_informados?: Prisma.tb_consentimientos_informadosUncheckedUpdateManyWithoutTb_usuariosNestedInput
+  tb_consentimientos_informados_tb_consentimientos_informados_id_usuario_estadoTotb_usuarios?: Prisma.tb_consentimientos_informadosUncheckedUpdateManyWithoutTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosNestedInput
   tb_facturas?: Prisma.tb_facturasUncheckedUpdateManyWithoutTb_usuariosNestedInput
 }
 
@@ -1138,8 +1412,10 @@ export type tb_usuariosCreateWithoutTb_rolesInput = {
   ultimo_acceso?: Date | string | null
   fecha_creacion?: Date | string
   tb_archivos_estudios?: Prisma.tb_archivos_estudiosCreateNestedManyWithoutTb_usuariosInput
+  tb_archivos_estudios_tb_archivos_estudios_id_usuario_estadoTotb_usuarios?: Prisma.tb_archivos_estudiosCreateNestedManyWithoutTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput
   tb_auditoria?: Prisma.tb_auditoriaCreateNestedManyWithoutTb_usuariosInput
   tb_consentimientos_informados?: Prisma.tb_consentimientos_informadosCreateNestedManyWithoutTb_usuariosInput
+  tb_consentimientos_informados_tb_consentimientos_informados_id_usuario_estadoTotb_usuarios?: Prisma.tb_consentimientos_informadosCreateNestedManyWithoutTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput
   tb_facturas?: Prisma.tb_facturasCreateNestedManyWithoutTb_usuariosInput
   tb_movimientos_inventario?: Prisma.tb_movimientos_inventarioCreateNestedManyWithoutTb_usuariosInput
   tb_medicos?: Prisma.tb_medicosCreateNestedOneWithoutTb_usuariosInput
@@ -1157,8 +1433,10 @@ export type tb_usuariosUncheckedCreateWithoutTb_rolesInput = {
   ultimo_acceso?: Date | string | null
   fecha_creacion?: Date | string
   tb_archivos_estudios?: Prisma.tb_archivos_estudiosUncheckedCreateNestedManyWithoutTb_usuariosInput
+  tb_archivos_estudios_tb_archivos_estudios_id_usuario_estadoTotb_usuarios?: Prisma.tb_archivos_estudiosUncheckedCreateNestedManyWithoutTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput
   tb_auditoria?: Prisma.tb_auditoriaUncheckedCreateNestedManyWithoutTb_usuariosInput
   tb_consentimientos_informados?: Prisma.tb_consentimientos_informadosUncheckedCreateNestedManyWithoutTb_usuariosInput
+  tb_consentimientos_informados_tb_consentimientos_informados_id_usuario_estadoTotb_usuarios?: Prisma.tb_consentimientos_informadosUncheckedCreateNestedManyWithoutTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput
   tb_facturas?: Prisma.tb_facturasUncheckedCreateNestedManyWithoutTb_usuariosInput
   tb_movimientos_inventario?: Prisma.tb_movimientos_inventarioUncheckedCreateNestedManyWithoutTb_usuariosInput
 }
@@ -1216,7 +1494,9 @@ export type tb_usuariosCreateWithoutTb_auditoriaInput = {
   ultimo_acceso?: Date | string | null
   fecha_creacion?: Date | string
   tb_archivos_estudios?: Prisma.tb_archivos_estudiosCreateNestedManyWithoutTb_usuariosInput
+  tb_archivos_estudios_tb_archivos_estudios_id_usuario_estadoTotb_usuarios?: Prisma.tb_archivos_estudiosCreateNestedManyWithoutTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput
   tb_consentimientos_informados?: Prisma.tb_consentimientos_informadosCreateNestedManyWithoutTb_usuariosInput
+  tb_consentimientos_informados_tb_consentimientos_informados_id_usuario_estadoTotb_usuarios?: Prisma.tb_consentimientos_informadosCreateNestedManyWithoutTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput
   tb_facturas?: Prisma.tb_facturasCreateNestedManyWithoutTb_usuariosInput
   tb_movimientos_inventario?: Prisma.tb_movimientos_inventarioCreateNestedManyWithoutTb_usuariosInput
   tb_medicos?: Prisma.tb_medicosCreateNestedOneWithoutTb_usuariosInput
@@ -1236,7 +1516,9 @@ export type tb_usuariosUncheckedCreateWithoutTb_auditoriaInput = {
   ultimo_acceso?: Date | string | null
   fecha_creacion?: Date | string
   tb_archivos_estudios?: Prisma.tb_archivos_estudiosUncheckedCreateNestedManyWithoutTb_usuariosInput
+  tb_archivos_estudios_tb_archivos_estudios_id_usuario_estadoTotb_usuarios?: Prisma.tb_archivos_estudiosUncheckedCreateNestedManyWithoutTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosInput
   tb_consentimientos_informados?: Prisma.tb_consentimientos_informadosUncheckedCreateNestedManyWithoutTb_usuariosInput
+  tb_consentimientos_informados_tb_consentimientos_informados_id_usuario_estadoTotb_usuarios?: Prisma.tb_consentimientos_informadosUncheckedCreateNestedManyWithoutTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput
   tb_facturas?: Prisma.tb_facturasUncheckedCreateNestedManyWithoutTb_usuariosInput
   tb_movimientos_inventario?: Prisma.tb_movimientos_inventarioUncheckedCreateNestedManyWithoutTb_usuariosInput
 }
@@ -1267,7 +1549,9 @@ export type tb_usuariosUpdateWithoutTb_auditoriaInput = {
   ultimo_acceso?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tb_archivos_estudios?: Prisma.tb_archivos_estudiosUpdateManyWithoutTb_usuariosNestedInput
+  tb_archivos_estudios_tb_archivos_estudios_id_usuario_estadoTotb_usuarios?: Prisma.tb_archivos_estudiosUpdateManyWithoutTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosNestedInput
   tb_consentimientos_informados?: Prisma.tb_consentimientos_informadosUpdateManyWithoutTb_usuariosNestedInput
+  tb_consentimientos_informados_tb_consentimientos_informados_id_usuario_estadoTotb_usuarios?: Prisma.tb_consentimientos_informadosUpdateManyWithoutTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosNestedInput
   tb_facturas?: Prisma.tb_facturasUpdateManyWithoutTb_usuariosNestedInput
   tb_movimientos_inventario?: Prisma.tb_movimientos_inventarioUpdateManyWithoutTb_usuariosNestedInput
   tb_medicos?: Prisma.tb_medicosUpdateOneWithoutTb_usuariosNestedInput
@@ -1287,7 +1571,9 @@ export type tb_usuariosUncheckedUpdateWithoutTb_auditoriaInput = {
   ultimo_acceso?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tb_archivos_estudios?: Prisma.tb_archivos_estudiosUncheckedUpdateManyWithoutTb_usuariosNestedInput
+  tb_archivos_estudios_tb_archivos_estudios_id_usuario_estadoTotb_usuarios?: Prisma.tb_archivos_estudiosUncheckedUpdateManyWithoutTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosNestedInput
   tb_consentimientos_informados?: Prisma.tb_consentimientos_informadosUncheckedUpdateManyWithoutTb_usuariosNestedInput
+  tb_consentimientos_informados_tb_consentimientos_informados_id_usuario_estadoTotb_usuarios?: Prisma.tb_consentimientos_informadosUncheckedUpdateManyWithoutTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosNestedInput
   tb_facturas?: Prisma.tb_facturasUncheckedUpdateManyWithoutTb_usuariosNestedInput
   tb_movimientos_inventario?: Prisma.tb_movimientos_inventarioUncheckedUpdateManyWithoutTb_usuariosNestedInput
 }
@@ -1315,8 +1601,10 @@ export type tb_usuariosUpdateWithoutTb_rolesInput = {
   ultimo_acceso?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tb_archivos_estudios?: Prisma.tb_archivos_estudiosUpdateManyWithoutTb_usuariosNestedInput
+  tb_archivos_estudios_tb_archivos_estudios_id_usuario_estadoTotb_usuarios?: Prisma.tb_archivos_estudiosUpdateManyWithoutTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosNestedInput
   tb_auditoria?: Prisma.tb_auditoriaUpdateManyWithoutTb_usuariosNestedInput
   tb_consentimientos_informados?: Prisma.tb_consentimientos_informadosUpdateManyWithoutTb_usuariosNestedInput
+  tb_consentimientos_informados_tb_consentimientos_informados_id_usuario_estadoTotb_usuarios?: Prisma.tb_consentimientos_informadosUpdateManyWithoutTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosNestedInput
   tb_facturas?: Prisma.tb_facturasUpdateManyWithoutTb_usuariosNestedInput
   tb_movimientos_inventario?: Prisma.tb_movimientos_inventarioUpdateManyWithoutTb_usuariosNestedInput
   tb_medicos?: Prisma.tb_medicosUpdateOneWithoutTb_usuariosNestedInput
@@ -1334,8 +1622,10 @@ export type tb_usuariosUncheckedUpdateWithoutTb_rolesInput = {
   ultimo_acceso?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tb_archivos_estudios?: Prisma.tb_archivos_estudiosUncheckedUpdateManyWithoutTb_usuariosNestedInput
+  tb_archivos_estudios_tb_archivos_estudios_id_usuario_estadoTotb_usuarios?: Prisma.tb_archivos_estudiosUncheckedUpdateManyWithoutTb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosNestedInput
   tb_auditoria?: Prisma.tb_auditoriaUncheckedUpdateManyWithoutTb_usuariosNestedInput
   tb_consentimientos_informados?: Prisma.tb_consentimientos_informadosUncheckedUpdateManyWithoutTb_usuariosNestedInput
+  tb_consentimientos_informados_tb_consentimientos_informados_id_usuario_estadoTotb_usuarios?: Prisma.tb_consentimientos_informadosUncheckedUpdateManyWithoutTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosNestedInput
   tb_facturas?: Prisma.tb_facturasUncheckedUpdateManyWithoutTb_usuariosNestedInput
   tb_movimientos_inventario?: Prisma.tb_movimientos_inventarioUncheckedUpdateManyWithoutTb_usuariosNestedInput
 }
@@ -1360,16 +1650,20 @@ export type tb_usuariosUncheckedUpdateManyWithoutTb_rolesInput = {
 
 export type Tb_usuariosCountOutputType = {
   tb_archivos_estudios: number
+  tb_archivos_estudios_tb_archivos_estudios_id_usuario_estadoTotb_usuarios: number
   tb_auditoria: number
   tb_consentimientos_informados: number
+  tb_consentimientos_informados_tb_consentimientos_informados_id_usuario_estadoTotb_usuarios: number
   tb_facturas: number
   tb_movimientos_inventario: number
 }
 
 export type Tb_usuariosCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tb_archivos_estudios?: boolean | Tb_usuariosCountOutputTypeCountTb_archivos_estudiosArgs
+  tb_archivos_estudios_tb_archivos_estudios_id_usuario_estadoTotb_usuarios?: boolean | Tb_usuariosCountOutputTypeCountTb_archivos_estudios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosArgs
   tb_auditoria?: boolean | Tb_usuariosCountOutputTypeCountTb_auditoriaArgs
   tb_consentimientos_informados?: boolean | Tb_usuariosCountOutputTypeCountTb_consentimientos_informadosArgs
+  tb_consentimientos_informados_tb_consentimientos_informados_id_usuario_estadoTotb_usuarios?: boolean | Tb_usuariosCountOutputTypeCountTb_consentimientos_informados_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosArgs
   tb_facturas?: boolean | Tb_usuariosCountOutputTypeCountTb_facturasArgs
   tb_movimientos_inventario?: boolean | Tb_usuariosCountOutputTypeCountTb_movimientos_inventarioArgs
 }
@@ -1394,6 +1688,13 @@ export type Tb_usuariosCountOutputTypeCountTb_archivos_estudiosArgs<ExtArgs exte
 /**
  * Tb_usuariosCountOutputType without action
  */
+export type Tb_usuariosCountOutputTypeCountTb_archivos_estudios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.tb_archivos_estudiosWhereInput
+}
+
+/**
+ * Tb_usuariosCountOutputType without action
+ */
 export type Tb_usuariosCountOutputTypeCountTb_auditoriaArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.tb_auditoriaWhereInput
 }
@@ -1402,6 +1703,13 @@ export type Tb_usuariosCountOutputTypeCountTb_auditoriaArgs<ExtArgs extends runt
  * Tb_usuariosCountOutputType without action
  */
 export type Tb_usuariosCountOutputTypeCountTb_consentimientos_informadosArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.tb_consentimientos_informadosWhereInput
+}
+
+/**
+ * Tb_usuariosCountOutputType without action
+ */
+export type Tb_usuariosCountOutputTypeCountTb_consentimientos_informados_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.tb_consentimientos_informadosWhereInput
 }
 
@@ -1433,8 +1741,10 @@ export type tb_usuariosSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   ultimo_acceso?: boolean
   fecha_creacion?: boolean
   tb_archivos_estudios?: boolean | Prisma.tb_usuarios$tb_archivos_estudiosArgs<ExtArgs>
+  tb_archivos_estudios_tb_archivos_estudios_id_usuario_estadoTotb_usuarios?: boolean | Prisma.tb_usuarios$tb_archivos_estudios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosArgs<ExtArgs>
   tb_auditoria?: boolean | Prisma.tb_usuarios$tb_auditoriaArgs<ExtArgs>
   tb_consentimientos_informados?: boolean | Prisma.tb_usuarios$tb_consentimientos_informadosArgs<ExtArgs>
+  tb_consentimientos_informados_tb_consentimientos_informados_id_usuario_estadoTotb_usuarios?: boolean | Prisma.tb_usuarios$tb_consentimientos_informados_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosArgs<ExtArgs>
   tb_facturas?: boolean | Prisma.tb_usuarios$tb_facturasArgs<ExtArgs>
   tb_movimientos_inventario?: boolean | Prisma.tb_usuarios$tb_movimientos_inventarioArgs<ExtArgs>
   tb_medicos?: boolean | Prisma.tb_usuarios$tb_medicosArgs<ExtArgs>
@@ -1491,8 +1801,10 @@ export type tb_usuariosSelectScalar = {
 export type tb_usuariosOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id_usuario" | "username" | "nombre" | "correo" | "password_hash" | "id_rol" | "id_doctor" | "estado" | "debe_cambiar_password" | "ultimo_acceso" | "fecha_creacion", ExtArgs["result"]["tb_usuarios"]>
 export type tb_usuariosInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tb_archivos_estudios?: boolean | Prisma.tb_usuarios$tb_archivos_estudiosArgs<ExtArgs>
+  tb_archivos_estudios_tb_archivos_estudios_id_usuario_estadoTotb_usuarios?: boolean | Prisma.tb_usuarios$tb_archivos_estudios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosArgs<ExtArgs>
   tb_auditoria?: boolean | Prisma.tb_usuarios$tb_auditoriaArgs<ExtArgs>
   tb_consentimientos_informados?: boolean | Prisma.tb_usuarios$tb_consentimientos_informadosArgs<ExtArgs>
+  tb_consentimientos_informados_tb_consentimientos_informados_id_usuario_estadoTotb_usuarios?: boolean | Prisma.tb_usuarios$tb_consentimientos_informados_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosArgs<ExtArgs>
   tb_facturas?: boolean | Prisma.tb_usuarios$tb_facturasArgs<ExtArgs>
   tb_movimientos_inventario?: boolean | Prisma.tb_usuarios$tb_movimientos_inventarioArgs<ExtArgs>
   tb_medicos?: boolean | Prisma.tb_usuarios$tb_medicosArgs<ExtArgs>
@@ -1512,8 +1824,10 @@ export type $tb_usuariosPayload<ExtArgs extends runtime.Types.Extensions.Interna
   name: "tb_usuarios"
   objects: {
     tb_archivos_estudios: Prisma.$tb_archivos_estudiosPayload<ExtArgs>[]
+    tb_archivos_estudios_tb_archivos_estudios_id_usuario_estadoTotb_usuarios: Prisma.$tb_archivos_estudiosPayload<ExtArgs>[]
     tb_auditoria: Prisma.$tb_auditoriaPayload<ExtArgs>[]
     tb_consentimientos_informados: Prisma.$tb_consentimientos_informadosPayload<ExtArgs>[]
+    tb_consentimientos_informados_tb_consentimientos_informados_id_usuario_estadoTotb_usuarios: Prisma.$tb_consentimientos_informadosPayload<ExtArgs>[]
     tb_facturas: Prisma.$tb_facturasPayload<ExtArgs>[]
     tb_movimientos_inventario: Prisma.$tb_movimientos_inventarioPayload<ExtArgs>[]
     tb_medicos: Prisma.$tb_medicosPayload<ExtArgs> | null
@@ -1926,8 +2240,10 @@ readonly fields: tb_usuariosFieldRefs;
 export interface Prisma__tb_usuariosClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   tb_archivos_estudios<T extends Prisma.tb_usuarios$tb_archivos_estudiosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.tb_usuarios$tb_archivos_estudiosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$tb_archivos_estudiosPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  tb_archivos_estudios_tb_archivos_estudios_id_usuario_estadoTotb_usuarios<T extends Prisma.tb_usuarios$tb_archivos_estudios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.tb_usuarios$tb_archivos_estudios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$tb_archivos_estudiosPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   tb_auditoria<T extends Prisma.tb_usuarios$tb_auditoriaArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.tb_usuarios$tb_auditoriaArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$tb_auditoriaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   tb_consentimientos_informados<T extends Prisma.tb_usuarios$tb_consentimientos_informadosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.tb_usuarios$tb_consentimientos_informadosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$tb_consentimientos_informadosPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  tb_consentimientos_informados_tb_consentimientos_informados_id_usuario_estadoTotb_usuarios<T extends Prisma.tb_usuarios$tb_consentimientos_informados_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.tb_usuarios$tb_consentimientos_informados_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$tb_consentimientos_informadosPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   tb_facturas<T extends Prisma.tb_usuarios$tb_facturasArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.tb_usuarios$tb_facturasArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$tb_facturasPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   tb_movimientos_inventario<T extends Prisma.tb_usuarios$tb_movimientos_inventarioArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.tb_usuarios$tb_movimientos_inventarioArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$tb_movimientos_inventarioPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   tb_medicos<T extends Prisma.tb_usuarios$tb_medicosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.tb_usuarios$tb_medicosArgs<ExtArgs>>): Prisma.Prisma__tb_medicosClient<runtime.Types.Result.GetResult<Prisma.$tb_medicosPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
@@ -2397,6 +2713,30 @@ export type tb_usuarios$tb_archivos_estudiosArgs<ExtArgs extends runtime.Types.E
 }
 
 /**
+ * tb_usuarios.tb_archivos_estudios_tb_archivos_estudios_id_usuario_estadoTotb_usuarios
+ */
+export type tb_usuarios$tb_archivos_estudios_tb_archivos_estudios_id_usuario_estadoTotb_usuariosArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the tb_archivos_estudios
+   */
+  select?: Prisma.tb_archivos_estudiosSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the tb_archivos_estudios
+   */
+  omit?: Prisma.tb_archivos_estudiosOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.tb_archivos_estudiosInclude<ExtArgs> | null
+  where?: Prisma.tb_archivos_estudiosWhereInput
+  orderBy?: Prisma.tb_archivos_estudiosOrderByWithRelationInput | Prisma.tb_archivos_estudiosOrderByWithRelationInput[]
+  cursor?: Prisma.tb_archivos_estudiosWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.Tb_archivos_estudiosScalarFieldEnum | Prisma.Tb_archivos_estudiosScalarFieldEnum[]
+}
+
+/**
  * tb_usuarios.tb_auditoria
  */
 export type tb_usuarios$tb_auditoriaArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2424,6 +2764,30 @@ export type tb_usuarios$tb_auditoriaArgs<ExtArgs extends runtime.Types.Extension
  * tb_usuarios.tb_consentimientos_informados
  */
 export type tb_usuarios$tb_consentimientos_informadosArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the tb_consentimientos_informados
+   */
+  select?: Prisma.tb_consentimientos_informadosSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the tb_consentimientos_informados
+   */
+  omit?: Prisma.tb_consentimientos_informadosOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.tb_consentimientos_informadosInclude<ExtArgs> | null
+  where?: Prisma.tb_consentimientos_informadosWhereInput
+  orderBy?: Prisma.tb_consentimientos_informadosOrderByWithRelationInput | Prisma.tb_consentimientos_informadosOrderByWithRelationInput[]
+  cursor?: Prisma.tb_consentimientos_informadosWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.Tb_consentimientos_informadosScalarFieldEnum | Prisma.Tb_consentimientos_informadosScalarFieldEnum[]
+}
+
+/**
+ * tb_usuarios.tb_consentimientos_informados_tb_consentimientos_informados_id_usuario_estadoTotb_usuarios
+ */
+export type tb_usuarios$tb_consentimientos_informados_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the tb_consentimientos_informados
    */

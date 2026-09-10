@@ -72,7 +72,8 @@ Orden de ejecución preparado:
 10. `010_especialidades_expediente_psicologico.sql`
 11. `011_administracion_contenido_web.sql`
 12. `012_facturacion_caja_inventario.sql`
-13. `seed.sql`
+13. `013_archivos_consentimientos.sql`
+14. `seed.sql`
 
 En una base y volumen nuevos, Docker ejecuta las migraciones y el seed en ese
 orden mediante `/docker-entrypoint-initdb.d`. PostgreSQL no vuelve a ejecutar
@@ -218,6 +219,7 @@ general del proyecto.
 - Recetas inmutables con anulación justificada, procedimientos y laboratorio con finalización protegida.
 - Facturación con total automático, impresión, anulación justificada y resumen diario de caja.
 - Proveedores, insumos, alertas de mínimo y kardex inmutable de entradas, salidas y mermas.
+- Archivos de estudios y consentimientos con almacenamiento privado, descarga autenticada y verificación SHA-256.
 - Bitácora append-only de creaciones, modificaciones y cambios sensibles, con snapshots saneados antes/después.
 - Visor de auditoría exclusivo para administradores, con filtros, paginación y detalle en modal.
 - Prueba de aislamiento disponible en `database/tests/authorization.sql`.
@@ -257,12 +259,16 @@ docker run --rm \
 docker run --rm -p 3000:3000 clinica-ami-admin
 ```
 
+
+
 El valor `NODE_ENV=development` de este ejemplo permite probar las cookies por
 HTTP local. Dockploy debe ejecutar el API en modo producción detrás de HTTPS.
 
 El contenedor del API requiere `DATABASE_URL`, `JWT_ACCESS_SECRET`,
 `JWT_REFRESH_SECRET`, `JWT_ISSUER`, `JWT_AUDIENCE` y `ADMIN_ORIGINS`. Los
-secretos JWT deben ser distintos y tener al menos 32 caracteres. El panel no
+secretos JWT deben ser distintos y tener al menos 32 caracteres. También admite
+`PRIVATE_STORAGE_ROOT`; por defecto utiliza `/app/storage/private` dentro del
+contenedor. El panel no
 recibe secretos; `NEXT_PUBLIC_API_URL` se incorpora durante su compilación.
 
 ### Configuración en Dockploy
@@ -270,13 +276,15 @@ recibe secretos; `NEXT_PUBLIC_API_URL` se incorpora durante su compilación.
 Se deben crear dos servicios desde el mismo repositorio y `Dockerfile`:
 
 - API: destino de build `api-runner`, puerto `4000` y variables privadas del
-  entorno.
+  entorno. Debe montar un volumen persistente en `/app/storage/private` y definir
+  `PRIVATE_STORAGE_ROOT=/app/storage/private`.
 - Administración: destino de build `admin-runner`, puerto `3000` y argumento
   de build `NEXT_PUBLIC_API_URL` apuntando al dominio HTTPS del API.
 
 Ambas imágenes incluyen una comprobación de salud. PostgreSQL, las migraciones,
 el almacenamiento clínico privado y los respaldos se administran como servicios
-separados.
+separados. El volumen privado debe incluirse en la política de respaldo y nunca
+debe exponerse como directorio público del panel o del servidor web.
 
 No se debe ejecutar el seed de demostración automáticamente sobre una base de
 datos que ya contenga información de producción.

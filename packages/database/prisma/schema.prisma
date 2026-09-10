@@ -32,21 +32,31 @@ model tb_anuncios {
 
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
 model tb_archivos_estudios {
-  id_archivo   Int          @id @default(autoincrement())
-  id_paciente  Int
-  id_consulta  Int
-  tipo_estudio String       @db.VarChar(100)
-  ruta_archivo String       @db.VarChar(500)
-  fecha_subida DateTime     @default(now()) @db.Timestamp(6)
-  id_usuario   Int
-  descripcion  String?
-  estado       Boolean      @default(true)
-  tb_consultas tb_consultas @relation(fields: [id_consulta], references: [id_consulta], map: "fk_tb_archivos_consulta")
-  tb_pacientes tb_pacientes @relation(fields: [id_paciente], references: [id_paciente], map: "fk_tb_archivos_paciente")
-  tb_usuarios  tb_usuarios  @relation(fields: [id_usuario], references: [id_usuario], map: "fk_tb_archivos_usuario")
+  id_archivo                                                      Int          @id @default(autoincrement())
+  id_paciente                                                     Int
+  id_consulta                                                     Int
+  tipo_estudio                                                    String       @db.VarChar(100)
+  ruta_archivo                                                    String       @db.VarChar(500)
+  fecha_subida                                                    DateTime     @default(now()) @db.Timestamp(6)
+  id_usuario                                                      Int
+  descripcion                                                     String?
+  estado                                                          Boolean      @default(true)
+  nombre_original                                                 String?      @db.VarChar(255)
+  tipo_mime                                                       String?      @db.VarChar(100)
+  tamano_bytes                                                    BigInt?
+  hash_sha256                                                     String?      @db.Char(64)
+  fecha_estado                                                    DateTime?    @db.Timestamp(6)
+  motivo_estado                                                   String?
+  id_usuario_estado                                               Int?
+  tb_consultas                                                    tb_consultas @relation(fields: [id_consulta], references: [id_consulta], map: "fk_tb_archivos_consulta")
+  tb_pacientes                                                    tb_pacientes @relation(fields: [id_paciente], references: [id_paciente], map: "fk_tb_archivos_paciente")
+  tb_usuarios                                                     tb_usuarios  @relation(fields: [id_usuario], references: [id_usuario], map: "fk_tb_archivos_usuario")
+  tb_usuarios_tb_archivos_estudios_id_usuario_estadoTotb_usuarios tb_usuarios? @relation("tb_archivos_estudios_id_usuario_estadoTotb_usuarios", fields: [id_usuario_estado], references: [id_usuario], onDelete: Restrict, map: "fk_tb_archivos_usuario_estado")
 
   @@index([id_consulta], map: "ix_tb_archivos_consulta")
   @@index([id_paciente], map: "ix_tb_archivos_paciente")
+  @@index([estado, fecha_subida(sort: Desc), id_archivo(sort: Desc)], map: "ix_tb_archivos_estado_fecha_id")
+  @@index([id_paciente, fecha_subida(sort: Desc), id_archivo(sort: Desc)], map: "ix_tb_archivos_paciente_fecha_id")
 }
 
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
@@ -109,21 +119,31 @@ model tb_clinicas {
 /// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
 model tb_consentimientos_informados {
-  id_consentimiento Int          @id @default(autoincrement())
-  id_paciente       Int
-  id_servicio       Int
-  fecha_firma       DateTime?    @db.Timestamp(6)
-  estado_firma      String       @default("pendiente") @db.VarChar(20)
-  ruta_documento    String?      @db.VarChar(500)
-  id_usuario        Int?
-  observaciones     String?
-  fecha_creacion    DateTime     @default(now()) @db.Timestamp(6)
-  tb_pacientes      tb_pacientes @relation(fields: [id_paciente], references: [id_paciente], map: "fk_tb_consentimientos_paciente")
-  tb_servicios      tb_servicios @relation(fields: [id_servicio], references: [id], map: "fk_tb_consentimientos_servicio")
-  tb_usuarios       tb_usuarios? @relation(fields: [id_usuario], references: [id_usuario], onDelete: Restrict, map: "fk_tb_consentimientos_usuario")
+  id_consentimiento                                                        Int          @id @default(autoincrement())
+  id_paciente                                                              Int
+  id_servicio                                                              Int
+  fecha_firma                                                              DateTime?    @db.Timestamp(6)
+  estado_firma                                                             String       @default("pendiente") @db.VarChar(20)
+  ruta_documento                                                           String?      @db.VarChar(500)
+  id_usuario                                                               Int?
+  observaciones                                                            String?
+  fecha_creacion                                                           DateTime     @default(now()) @db.Timestamp(6)
+  nombre_original                                                          String?      @db.VarChar(255)
+  tipo_mime                                                                String?      @db.VarChar(100)
+  tamano_bytes                                                             BigInt?
+  hash_sha256                                                              String?      @db.Char(64)
+  fecha_estado                                                             DateTime?    @db.Timestamp(6)
+  motivo_estado                                                            String?
+  id_usuario_estado                                                        Int?
+  tb_pacientes                                                             tb_pacientes @relation(fields: [id_paciente], references: [id_paciente], map: "fk_tb_consentimientos_paciente")
+  tb_servicios                                                             tb_servicios @relation(fields: [id_servicio], references: [id], map: "fk_tb_consentimientos_servicio")
+  tb_usuarios                                                              tb_usuarios? @relation(fields: [id_usuario], references: [id_usuario], onDelete: Restrict, map: "fk_tb_consentimientos_usuario")
+  tb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuarios tb_usuarios? @relation("tb_consentimientos_informados_id_usuario_estadoTotb_usuarios", fields: [id_usuario_estado], references: [id_usuario], onDelete: Restrict, map: "fk_tb_consentimientos_usuario_estado")
 
   @@index([id_paciente], map: "ix_tb_consentimientos_paciente")
   @@index([id_servicio], map: "ix_tb_consentimientos_servicio")
+  @@index([estado_firma, fecha_creacion(sort: Desc), id_consentimiento(sort: Desc)], map: "ix_tb_consentimientos_estado_fecha_id")
+  @@index([id_paciente, fecha_creacion(sort: Desc), id_consentimiento(sort: Desc)], map: "ix_tb_consentimientos_paciente_fecha_id")
 }
 
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
@@ -554,24 +574,26 @@ model tb_signos_vitales_medidas {
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
 /// This model contains an expression index which requires additional setup for migrations. Visit https://pris.ly/d/expression-indexes for more info.
 model tb_usuarios {
-  id_usuario                    Int                             @id @default(autoincrement())
-  username                      String                          @unique @db.VarChar(80)
-  nombre                        String                          @db.VarChar(150)
-  correo                        String?                         @db.VarChar(150)
-  password_hash                 String                          @db.VarChar(255)
-  id_rol                        Int
-  id_doctor                     Int?                            @unique(map: "ux_tb_usuarios_doctor", where: raw("(id_doctor IS NOT NULL)"))
-  estado                        Boolean                         @default(true)
-  debe_cambiar_password         Boolean                         @default(true)
-  ultimo_acceso                 DateTime?                       @db.Timestamp(6)
-  fecha_creacion                DateTime                        @default(now()) @db.Timestamp(6)
-  tb_archivos_estudios          tb_archivos_estudios[]
-  tb_auditoria                  tb_auditoria[]
-  tb_consentimientos_informados tb_consentimientos_informados[]
-  tb_facturas                   tb_facturas[]
-  tb_movimientos_inventario     tb_movimientos_inventario[]
-  tb_medicos                    tb_medicos?                     @relation(fields: [id_doctor], references: [id], onDelete: Restrict, map: "fk_tb_usuarios_doctor")
-  tb_roles                      tb_roles                        @relation(fields: [id_rol], references: [id_rol], map: "fk_tb_usuarios_rol")
+  id_usuario                                                                                 Int                             @id @default(autoincrement())
+  username                                                                                   String                          @unique @db.VarChar(80)
+  nombre                                                                                     String                          @db.VarChar(150)
+  correo                                                                                     String?                         @db.VarChar(150)
+  password_hash                                                                              String                          @db.VarChar(255)
+  id_rol                                                                                     Int
+  id_doctor                                                                                  Int?                            @unique(map: "ux_tb_usuarios_doctor", where: raw("(id_doctor IS NOT NULL)"))
+  estado                                                                                     Boolean                         @default(true)
+  debe_cambiar_password                                                                      Boolean                         @default(true)
+  ultimo_acceso                                                                              DateTime?                       @db.Timestamp(6)
+  fecha_creacion                                                                             DateTime                        @default(now()) @db.Timestamp(6)
+  tb_archivos_estudios                                                                       tb_archivos_estudios[]
+  tb_archivos_estudios_tb_archivos_estudios_id_usuario_estadoTotb_usuarios                   tb_archivos_estudios[]          @relation("tb_archivos_estudios_id_usuario_estadoTotb_usuarios")
+  tb_auditoria                                                                               tb_auditoria[]
+  tb_consentimientos_informados                                                              tb_consentimientos_informados[]
+  tb_consentimientos_informados_tb_consentimientos_informados_id_usuario_estadoTotb_usuarios tb_consentimientos_informados[] @relation("tb_consentimientos_informados_id_usuario_estadoTotb_usuarios")
+  tb_facturas                                                                                tb_facturas[]
+  tb_movimientos_inventario                                                                  tb_movimientos_inventario[]
+  tb_medicos                                                                                 tb_medicos?                     @relation(fields: [id_doctor], references: [id], onDelete: Restrict, map: "fk_tb_usuarios_doctor")
+  tb_roles                                                                                   tb_roles                        @relation(fields: [id_rol], references: [id_rol], map: "fk_tb_usuarios_rol")
 
   @@index([id_rol], map: "ix_tb_usuarios_rol")
   @@index([id_rol, estado, id_usuario], map: "ix_tb_usuarios_rol_estado_id")

@@ -32,6 +32,8 @@ export type Tb_consentimientos_informadosAvgAggregateOutputType = {
   id_paciente: number | null
   id_servicio: number | null
   id_usuario: number | null
+  tamano_bytes: number | null
+  id_usuario_estado: number | null
 }
 
 export type Tb_consentimientos_informadosSumAggregateOutputType = {
@@ -39,6 +41,8 @@ export type Tb_consentimientos_informadosSumAggregateOutputType = {
   id_paciente: number | null
   id_servicio: number | null
   id_usuario: number | null
+  tamano_bytes: bigint | null
+  id_usuario_estado: number | null
 }
 
 export type Tb_consentimientos_informadosMinAggregateOutputType = {
@@ -51,6 +55,13 @@ export type Tb_consentimientos_informadosMinAggregateOutputType = {
   id_usuario: number | null
   observaciones: string | null
   fecha_creacion: Date | null
+  nombre_original: string | null
+  tipo_mime: string | null
+  tamano_bytes: bigint | null
+  hash_sha256: string | null
+  fecha_estado: Date | null
+  motivo_estado: string | null
+  id_usuario_estado: number | null
 }
 
 export type Tb_consentimientos_informadosMaxAggregateOutputType = {
@@ -63,6 +74,13 @@ export type Tb_consentimientos_informadosMaxAggregateOutputType = {
   id_usuario: number | null
   observaciones: string | null
   fecha_creacion: Date | null
+  nombre_original: string | null
+  tipo_mime: string | null
+  tamano_bytes: bigint | null
+  hash_sha256: string | null
+  fecha_estado: Date | null
+  motivo_estado: string | null
+  id_usuario_estado: number | null
 }
 
 export type Tb_consentimientos_informadosCountAggregateOutputType = {
@@ -75,6 +93,13 @@ export type Tb_consentimientos_informadosCountAggregateOutputType = {
   id_usuario: number
   observaciones: number
   fecha_creacion: number
+  nombre_original: number
+  tipo_mime: number
+  tamano_bytes: number
+  hash_sha256: number
+  fecha_estado: number
+  motivo_estado: number
+  id_usuario_estado: number
   _all: number
 }
 
@@ -84,6 +109,8 @@ export type Tb_consentimientos_informadosAvgAggregateInputType = {
   id_paciente?: true
   id_servicio?: true
   id_usuario?: true
+  tamano_bytes?: true
+  id_usuario_estado?: true
 }
 
 export type Tb_consentimientos_informadosSumAggregateInputType = {
@@ -91,6 +118,8 @@ export type Tb_consentimientos_informadosSumAggregateInputType = {
   id_paciente?: true
   id_servicio?: true
   id_usuario?: true
+  tamano_bytes?: true
+  id_usuario_estado?: true
 }
 
 export type Tb_consentimientos_informadosMinAggregateInputType = {
@@ -103,6 +132,13 @@ export type Tb_consentimientos_informadosMinAggregateInputType = {
   id_usuario?: true
   observaciones?: true
   fecha_creacion?: true
+  nombre_original?: true
+  tipo_mime?: true
+  tamano_bytes?: true
+  hash_sha256?: true
+  fecha_estado?: true
+  motivo_estado?: true
+  id_usuario_estado?: true
 }
 
 export type Tb_consentimientos_informadosMaxAggregateInputType = {
@@ -115,6 +151,13 @@ export type Tb_consentimientos_informadosMaxAggregateInputType = {
   id_usuario?: true
   observaciones?: true
   fecha_creacion?: true
+  nombre_original?: true
+  tipo_mime?: true
+  tamano_bytes?: true
+  hash_sha256?: true
+  fecha_estado?: true
+  motivo_estado?: true
+  id_usuario_estado?: true
 }
 
 export type Tb_consentimientos_informadosCountAggregateInputType = {
@@ -127,6 +170,13 @@ export type Tb_consentimientos_informadosCountAggregateInputType = {
   id_usuario?: true
   observaciones?: true
   fecha_creacion?: true
+  nombre_original?: true
+  tipo_mime?: true
+  tamano_bytes?: true
+  hash_sha256?: true
+  fecha_estado?: true
+  motivo_estado?: true
+  id_usuario_estado?: true
   _all?: true
 }
 
@@ -226,6 +276,13 @@ export type Tb_consentimientos_informadosGroupByOutputType = {
   id_usuario: number | null
   observaciones: string | null
   fecha_creacion: Date
+  nombre_original: string | null
+  tipo_mime: string | null
+  tamano_bytes: bigint | null
+  hash_sha256: string | null
+  fecha_estado: Date | null
+  motivo_estado: string | null
+  id_usuario_estado: number | null
   _count: Tb_consentimientos_informadosCountAggregateOutputType | null
   _avg: Tb_consentimientos_informadosAvgAggregateOutputType | null
   _sum: Tb_consentimientos_informadosSumAggregateOutputType | null
@@ -261,9 +318,17 @@ export type tb_consentimientos_informadosWhereInput = {
   id_usuario?: Prisma.IntNullableFilter<"tb_consentimientos_informados"> | number | null
   observaciones?: Prisma.StringNullableFilter<"tb_consentimientos_informados"> | string | null
   fecha_creacion?: Prisma.DateTimeFilter<"tb_consentimientos_informados"> | Date | string
+  nombre_original?: Prisma.StringNullableFilter<"tb_consentimientos_informados"> | string | null
+  tipo_mime?: Prisma.StringNullableFilter<"tb_consentimientos_informados"> | string | null
+  tamano_bytes?: Prisma.BigIntNullableFilter<"tb_consentimientos_informados"> | bigint | number | null
+  hash_sha256?: Prisma.StringNullableFilter<"tb_consentimientos_informados"> | string | null
+  fecha_estado?: Prisma.DateTimeNullableFilter<"tb_consentimientos_informados"> | Date | string | null
+  motivo_estado?: Prisma.StringNullableFilter<"tb_consentimientos_informados"> | string | null
+  id_usuario_estado?: Prisma.IntNullableFilter<"tb_consentimientos_informados"> | number | null
   tb_pacientes?: Prisma.XOR<Prisma.Tb_pacientesScalarRelationFilter, Prisma.tb_pacientesWhereInput>
   tb_servicios?: Prisma.XOR<Prisma.Tb_serviciosScalarRelationFilter, Prisma.tb_serviciosWhereInput>
   tb_usuarios?: Prisma.XOR<Prisma.Tb_usuariosNullableScalarRelationFilter, Prisma.tb_usuariosWhereInput> | null
+  tb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuarios?: Prisma.XOR<Prisma.Tb_usuariosNullableScalarRelationFilter, Prisma.tb_usuariosWhereInput> | null
 }
 
 export type tb_consentimientos_informadosOrderByWithRelationInput = {
@@ -276,9 +341,17 @@ export type tb_consentimientos_informadosOrderByWithRelationInput = {
   id_usuario?: Prisma.SortOrderInput | Prisma.SortOrder
   observaciones?: Prisma.SortOrderInput | Prisma.SortOrder
   fecha_creacion?: Prisma.SortOrder
+  nombre_original?: Prisma.SortOrderInput | Prisma.SortOrder
+  tipo_mime?: Prisma.SortOrderInput | Prisma.SortOrder
+  tamano_bytes?: Prisma.SortOrderInput | Prisma.SortOrder
+  hash_sha256?: Prisma.SortOrderInput | Prisma.SortOrder
+  fecha_estado?: Prisma.SortOrderInput | Prisma.SortOrder
+  motivo_estado?: Prisma.SortOrderInput | Prisma.SortOrder
+  id_usuario_estado?: Prisma.SortOrderInput | Prisma.SortOrder
   tb_pacientes?: Prisma.tb_pacientesOrderByWithRelationInput
   tb_servicios?: Prisma.tb_serviciosOrderByWithRelationInput
   tb_usuarios?: Prisma.tb_usuariosOrderByWithRelationInput
+  tb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuarios?: Prisma.tb_usuariosOrderByWithRelationInput
 }
 
 export type tb_consentimientos_informadosWhereUniqueInput = Prisma.AtLeast<{
@@ -294,9 +367,17 @@ export type tb_consentimientos_informadosWhereUniqueInput = Prisma.AtLeast<{
   id_usuario?: Prisma.IntNullableFilter<"tb_consentimientos_informados"> | number | null
   observaciones?: Prisma.StringNullableFilter<"tb_consentimientos_informados"> | string | null
   fecha_creacion?: Prisma.DateTimeFilter<"tb_consentimientos_informados"> | Date | string
+  nombre_original?: Prisma.StringNullableFilter<"tb_consentimientos_informados"> | string | null
+  tipo_mime?: Prisma.StringNullableFilter<"tb_consentimientos_informados"> | string | null
+  tamano_bytes?: Prisma.BigIntNullableFilter<"tb_consentimientos_informados"> | bigint | number | null
+  hash_sha256?: Prisma.StringNullableFilter<"tb_consentimientos_informados"> | string | null
+  fecha_estado?: Prisma.DateTimeNullableFilter<"tb_consentimientos_informados"> | Date | string | null
+  motivo_estado?: Prisma.StringNullableFilter<"tb_consentimientos_informados"> | string | null
+  id_usuario_estado?: Prisma.IntNullableFilter<"tb_consentimientos_informados"> | number | null
   tb_pacientes?: Prisma.XOR<Prisma.Tb_pacientesScalarRelationFilter, Prisma.tb_pacientesWhereInput>
   tb_servicios?: Prisma.XOR<Prisma.Tb_serviciosScalarRelationFilter, Prisma.tb_serviciosWhereInput>
   tb_usuarios?: Prisma.XOR<Prisma.Tb_usuariosNullableScalarRelationFilter, Prisma.tb_usuariosWhereInput> | null
+  tb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuarios?: Prisma.XOR<Prisma.Tb_usuariosNullableScalarRelationFilter, Prisma.tb_usuariosWhereInput> | null
 }, "id_consentimiento">
 
 export type tb_consentimientos_informadosOrderByWithAggregationInput = {
@@ -309,6 +390,13 @@ export type tb_consentimientos_informadosOrderByWithAggregationInput = {
   id_usuario?: Prisma.SortOrderInput | Prisma.SortOrder
   observaciones?: Prisma.SortOrderInput | Prisma.SortOrder
   fecha_creacion?: Prisma.SortOrder
+  nombre_original?: Prisma.SortOrderInput | Prisma.SortOrder
+  tipo_mime?: Prisma.SortOrderInput | Prisma.SortOrder
+  tamano_bytes?: Prisma.SortOrderInput | Prisma.SortOrder
+  hash_sha256?: Prisma.SortOrderInput | Prisma.SortOrder
+  fecha_estado?: Prisma.SortOrderInput | Prisma.SortOrder
+  motivo_estado?: Prisma.SortOrderInput | Prisma.SortOrder
+  id_usuario_estado?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.tb_consentimientos_informadosCountOrderByAggregateInput
   _avg?: Prisma.tb_consentimientos_informadosAvgOrderByAggregateInput
   _max?: Prisma.tb_consentimientos_informadosMaxOrderByAggregateInput
@@ -329,6 +417,13 @@ export type tb_consentimientos_informadosScalarWhereWithAggregatesInput = {
   id_usuario?: Prisma.IntNullableWithAggregatesFilter<"tb_consentimientos_informados"> | number | null
   observaciones?: Prisma.StringNullableWithAggregatesFilter<"tb_consentimientos_informados"> | string | null
   fecha_creacion?: Prisma.DateTimeWithAggregatesFilter<"tb_consentimientos_informados"> | Date | string
+  nombre_original?: Prisma.StringNullableWithAggregatesFilter<"tb_consentimientos_informados"> | string | null
+  tipo_mime?: Prisma.StringNullableWithAggregatesFilter<"tb_consentimientos_informados"> | string | null
+  tamano_bytes?: Prisma.BigIntNullableWithAggregatesFilter<"tb_consentimientos_informados"> | bigint | number | null
+  hash_sha256?: Prisma.StringNullableWithAggregatesFilter<"tb_consentimientos_informados"> | string | null
+  fecha_estado?: Prisma.DateTimeNullableWithAggregatesFilter<"tb_consentimientos_informados"> | Date | string | null
+  motivo_estado?: Prisma.StringNullableWithAggregatesFilter<"tb_consentimientos_informados"> | string | null
+  id_usuario_estado?: Prisma.IntNullableWithAggregatesFilter<"tb_consentimientos_informados"> | number | null
 }
 
 export type tb_consentimientos_informadosCreateInput = {
@@ -337,9 +432,16 @@ export type tb_consentimientos_informadosCreateInput = {
   ruta_documento?: string | null
   observaciones?: string | null
   fecha_creacion?: Date | string
+  nombre_original?: string | null
+  tipo_mime?: string | null
+  tamano_bytes?: bigint | number | null
+  hash_sha256?: string | null
+  fecha_estado?: Date | string | null
+  motivo_estado?: string | null
   tb_pacientes: Prisma.tb_pacientesCreateNestedOneWithoutTb_consentimientos_informadosInput
   tb_servicios: Prisma.tb_serviciosCreateNestedOneWithoutTb_consentimientos_informadosInput
   tb_usuarios?: Prisma.tb_usuariosCreateNestedOneWithoutTb_consentimientos_informadosInput
+  tb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuarios?: Prisma.tb_usuariosCreateNestedOneWithoutTb_consentimientos_informados_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput
 }
 
 export type tb_consentimientos_informadosUncheckedCreateInput = {
@@ -352,6 +454,13 @@ export type tb_consentimientos_informadosUncheckedCreateInput = {
   id_usuario?: number | null
   observaciones?: string | null
   fecha_creacion?: Date | string
+  nombre_original?: string | null
+  tipo_mime?: string | null
+  tamano_bytes?: bigint | number | null
+  hash_sha256?: string | null
+  fecha_estado?: Date | string | null
+  motivo_estado?: string | null
+  id_usuario_estado?: number | null
 }
 
 export type tb_consentimientos_informadosUpdateInput = {
@@ -360,9 +469,16 @@ export type tb_consentimientos_informadosUpdateInput = {
   ruta_documento?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   observaciones?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  nombre_original?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tipo_mime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tamano_bytes?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  hash_sha256?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fecha_estado?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  motivo_estado?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tb_pacientes?: Prisma.tb_pacientesUpdateOneRequiredWithoutTb_consentimientos_informadosNestedInput
   tb_servicios?: Prisma.tb_serviciosUpdateOneRequiredWithoutTb_consentimientos_informadosNestedInput
   tb_usuarios?: Prisma.tb_usuariosUpdateOneWithoutTb_consentimientos_informadosNestedInput
+  tb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuarios?: Prisma.tb_usuariosUpdateOneWithoutTb_consentimientos_informados_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosNestedInput
 }
 
 export type tb_consentimientos_informadosUncheckedUpdateInput = {
@@ -375,6 +491,13 @@ export type tb_consentimientos_informadosUncheckedUpdateInput = {
   id_usuario?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   observaciones?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  nombre_original?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tipo_mime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tamano_bytes?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  hash_sha256?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fecha_estado?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  motivo_estado?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id_usuario_estado?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type tb_consentimientos_informadosCreateManyInput = {
@@ -387,6 +510,13 @@ export type tb_consentimientos_informadosCreateManyInput = {
   id_usuario?: number | null
   observaciones?: string | null
   fecha_creacion?: Date | string
+  nombre_original?: string | null
+  tipo_mime?: string | null
+  tamano_bytes?: bigint | number | null
+  hash_sha256?: string | null
+  fecha_estado?: Date | string | null
+  motivo_estado?: string | null
+  id_usuario_estado?: number | null
 }
 
 export type tb_consentimientos_informadosUpdateManyMutationInput = {
@@ -395,6 +525,12 @@ export type tb_consentimientos_informadosUpdateManyMutationInput = {
   ruta_documento?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   observaciones?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  nombre_original?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tipo_mime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tamano_bytes?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  hash_sha256?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fecha_estado?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  motivo_estado?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type tb_consentimientos_informadosUncheckedUpdateManyInput = {
@@ -407,6 +543,13 @@ export type tb_consentimientos_informadosUncheckedUpdateManyInput = {
   id_usuario?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   observaciones?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  nombre_original?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tipo_mime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tamano_bytes?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  hash_sha256?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fecha_estado?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  motivo_estado?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id_usuario_estado?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type tb_consentimientos_informadosCountOrderByAggregateInput = {
@@ -419,6 +562,13 @@ export type tb_consentimientos_informadosCountOrderByAggregateInput = {
   id_usuario?: Prisma.SortOrder
   observaciones?: Prisma.SortOrder
   fecha_creacion?: Prisma.SortOrder
+  nombre_original?: Prisma.SortOrder
+  tipo_mime?: Prisma.SortOrder
+  tamano_bytes?: Prisma.SortOrder
+  hash_sha256?: Prisma.SortOrder
+  fecha_estado?: Prisma.SortOrder
+  motivo_estado?: Prisma.SortOrder
+  id_usuario_estado?: Prisma.SortOrder
 }
 
 export type tb_consentimientos_informadosAvgOrderByAggregateInput = {
@@ -426,6 +576,8 @@ export type tb_consentimientos_informadosAvgOrderByAggregateInput = {
   id_paciente?: Prisma.SortOrder
   id_servicio?: Prisma.SortOrder
   id_usuario?: Prisma.SortOrder
+  tamano_bytes?: Prisma.SortOrder
+  id_usuario_estado?: Prisma.SortOrder
 }
 
 export type tb_consentimientos_informadosMaxOrderByAggregateInput = {
@@ -438,6 +590,13 @@ export type tb_consentimientos_informadosMaxOrderByAggregateInput = {
   id_usuario?: Prisma.SortOrder
   observaciones?: Prisma.SortOrder
   fecha_creacion?: Prisma.SortOrder
+  nombre_original?: Prisma.SortOrder
+  tipo_mime?: Prisma.SortOrder
+  tamano_bytes?: Prisma.SortOrder
+  hash_sha256?: Prisma.SortOrder
+  fecha_estado?: Prisma.SortOrder
+  motivo_estado?: Prisma.SortOrder
+  id_usuario_estado?: Prisma.SortOrder
 }
 
 export type tb_consentimientos_informadosMinOrderByAggregateInput = {
@@ -450,6 +609,13 @@ export type tb_consentimientos_informadosMinOrderByAggregateInput = {
   id_usuario?: Prisma.SortOrder
   observaciones?: Prisma.SortOrder
   fecha_creacion?: Prisma.SortOrder
+  nombre_original?: Prisma.SortOrder
+  tipo_mime?: Prisma.SortOrder
+  tamano_bytes?: Prisma.SortOrder
+  hash_sha256?: Prisma.SortOrder
+  fecha_estado?: Prisma.SortOrder
+  motivo_estado?: Prisma.SortOrder
+  id_usuario_estado?: Prisma.SortOrder
 }
 
 export type tb_consentimientos_informadosSumOrderByAggregateInput = {
@@ -457,6 +623,8 @@ export type tb_consentimientos_informadosSumOrderByAggregateInput = {
   id_paciente?: Prisma.SortOrder
   id_servicio?: Prisma.SortOrder
   id_usuario?: Prisma.SortOrder
+  tamano_bytes?: Prisma.SortOrder
+  id_usuario_estado?: Prisma.SortOrder
 }
 
 export type Tb_consentimientos_informadosListRelationFilter = {
@@ -467,10 +635,6 @@ export type Tb_consentimientos_informadosListRelationFilter = {
 
 export type tb_consentimientos_informadosOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
-}
-
-export type NullableDateTimeFieldUpdateOperationsInput = {
-  set?: Date | string | null
 }
 
 export type tb_consentimientos_informadosCreateNestedManyWithoutTb_pacientesInput = {
@@ -564,10 +728,24 @@ export type tb_consentimientos_informadosCreateNestedManyWithoutTb_usuariosInput
   connect?: Prisma.tb_consentimientos_informadosWhereUniqueInput | Prisma.tb_consentimientos_informadosWhereUniqueInput[]
 }
 
+export type tb_consentimientos_informadosCreateNestedManyWithoutTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput = {
+  create?: Prisma.XOR<Prisma.tb_consentimientos_informadosCreateWithoutTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput, Prisma.tb_consentimientos_informadosUncheckedCreateWithoutTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput> | Prisma.tb_consentimientos_informadosCreateWithoutTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput[] | Prisma.tb_consentimientos_informadosUncheckedCreateWithoutTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput[]
+  connectOrCreate?: Prisma.tb_consentimientos_informadosCreateOrConnectWithoutTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput | Prisma.tb_consentimientos_informadosCreateOrConnectWithoutTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput[]
+  createMany?: Prisma.tb_consentimientos_informadosCreateManyTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInputEnvelope
+  connect?: Prisma.tb_consentimientos_informadosWhereUniqueInput | Prisma.tb_consentimientos_informadosWhereUniqueInput[]
+}
+
 export type tb_consentimientos_informadosUncheckedCreateNestedManyWithoutTb_usuariosInput = {
   create?: Prisma.XOR<Prisma.tb_consentimientos_informadosCreateWithoutTb_usuariosInput, Prisma.tb_consentimientos_informadosUncheckedCreateWithoutTb_usuariosInput> | Prisma.tb_consentimientos_informadosCreateWithoutTb_usuariosInput[] | Prisma.tb_consentimientos_informadosUncheckedCreateWithoutTb_usuariosInput[]
   connectOrCreate?: Prisma.tb_consentimientos_informadosCreateOrConnectWithoutTb_usuariosInput | Prisma.tb_consentimientos_informadosCreateOrConnectWithoutTb_usuariosInput[]
   createMany?: Prisma.tb_consentimientos_informadosCreateManyTb_usuariosInputEnvelope
+  connect?: Prisma.tb_consentimientos_informadosWhereUniqueInput | Prisma.tb_consentimientos_informadosWhereUniqueInput[]
+}
+
+export type tb_consentimientos_informadosUncheckedCreateNestedManyWithoutTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput = {
+  create?: Prisma.XOR<Prisma.tb_consentimientos_informadosCreateWithoutTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput, Prisma.tb_consentimientos_informadosUncheckedCreateWithoutTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput> | Prisma.tb_consentimientos_informadosCreateWithoutTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput[] | Prisma.tb_consentimientos_informadosUncheckedCreateWithoutTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput[]
+  connectOrCreate?: Prisma.tb_consentimientos_informadosCreateOrConnectWithoutTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput | Prisma.tb_consentimientos_informadosCreateOrConnectWithoutTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput[]
+  createMany?: Prisma.tb_consentimientos_informadosCreateManyTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInputEnvelope
   connect?: Prisma.tb_consentimientos_informadosWhereUniqueInput | Prisma.tb_consentimientos_informadosWhereUniqueInput[]
 }
 
@@ -585,6 +763,20 @@ export type tb_consentimientos_informadosUpdateManyWithoutTb_usuariosNestedInput
   deleteMany?: Prisma.tb_consentimientos_informadosScalarWhereInput | Prisma.tb_consentimientos_informadosScalarWhereInput[]
 }
 
+export type tb_consentimientos_informadosUpdateManyWithoutTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosNestedInput = {
+  create?: Prisma.XOR<Prisma.tb_consentimientos_informadosCreateWithoutTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput, Prisma.tb_consentimientos_informadosUncheckedCreateWithoutTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput> | Prisma.tb_consentimientos_informadosCreateWithoutTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput[] | Prisma.tb_consentimientos_informadosUncheckedCreateWithoutTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput[]
+  connectOrCreate?: Prisma.tb_consentimientos_informadosCreateOrConnectWithoutTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput | Prisma.tb_consentimientos_informadosCreateOrConnectWithoutTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput[]
+  upsert?: Prisma.tb_consentimientos_informadosUpsertWithWhereUniqueWithoutTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput | Prisma.tb_consentimientos_informadosUpsertWithWhereUniqueWithoutTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput[]
+  createMany?: Prisma.tb_consentimientos_informadosCreateManyTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInputEnvelope
+  set?: Prisma.tb_consentimientos_informadosWhereUniqueInput | Prisma.tb_consentimientos_informadosWhereUniqueInput[]
+  disconnect?: Prisma.tb_consentimientos_informadosWhereUniqueInput | Prisma.tb_consentimientos_informadosWhereUniqueInput[]
+  delete?: Prisma.tb_consentimientos_informadosWhereUniqueInput | Prisma.tb_consentimientos_informadosWhereUniqueInput[]
+  connect?: Prisma.tb_consentimientos_informadosWhereUniqueInput | Prisma.tb_consentimientos_informadosWhereUniqueInput[]
+  update?: Prisma.tb_consentimientos_informadosUpdateWithWhereUniqueWithoutTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput | Prisma.tb_consentimientos_informadosUpdateWithWhereUniqueWithoutTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput[]
+  updateMany?: Prisma.tb_consentimientos_informadosUpdateManyWithWhereWithoutTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput | Prisma.tb_consentimientos_informadosUpdateManyWithWhereWithoutTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput[]
+  deleteMany?: Prisma.tb_consentimientos_informadosScalarWhereInput | Prisma.tb_consentimientos_informadosScalarWhereInput[]
+}
+
 export type tb_consentimientos_informadosUncheckedUpdateManyWithoutTb_usuariosNestedInput = {
   create?: Prisma.XOR<Prisma.tb_consentimientos_informadosCreateWithoutTb_usuariosInput, Prisma.tb_consentimientos_informadosUncheckedCreateWithoutTb_usuariosInput> | Prisma.tb_consentimientos_informadosCreateWithoutTb_usuariosInput[] | Prisma.tb_consentimientos_informadosUncheckedCreateWithoutTb_usuariosInput[]
   connectOrCreate?: Prisma.tb_consentimientos_informadosCreateOrConnectWithoutTb_usuariosInput | Prisma.tb_consentimientos_informadosCreateOrConnectWithoutTb_usuariosInput[]
@@ -599,14 +791,35 @@ export type tb_consentimientos_informadosUncheckedUpdateManyWithoutTb_usuariosNe
   deleteMany?: Prisma.tb_consentimientos_informadosScalarWhereInput | Prisma.tb_consentimientos_informadosScalarWhereInput[]
 }
 
+export type tb_consentimientos_informadosUncheckedUpdateManyWithoutTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosNestedInput = {
+  create?: Prisma.XOR<Prisma.tb_consentimientos_informadosCreateWithoutTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput, Prisma.tb_consentimientos_informadosUncheckedCreateWithoutTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput> | Prisma.tb_consentimientos_informadosCreateWithoutTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput[] | Prisma.tb_consentimientos_informadosUncheckedCreateWithoutTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput[]
+  connectOrCreate?: Prisma.tb_consentimientos_informadosCreateOrConnectWithoutTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput | Prisma.tb_consentimientos_informadosCreateOrConnectWithoutTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput[]
+  upsert?: Prisma.tb_consentimientos_informadosUpsertWithWhereUniqueWithoutTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput | Prisma.tb_consentimientos_informadosUpsertWithWhereUniqueWithoutTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput[]
+  createMany?: Prisma.tb_consentimientos_informadosCreateManyTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInputEnvelope
+  set?: Prisma.tb_consentimientos_informadosWhereUniqueInput | Prisma.tb_consentimientos_informadosWhereUniqueInput[]
+  disconnect?: Prisma.tb_consentimientos_informadosWhereUniqueInput | Prisma.tb_consentimientos_informadosWhereUniqueInput[]
+  delete?: Prisma.tb_consentimientos_informadosWhereUniqueInput | Prisma.tb_consentimientos_informadosWhereUniqueInput[]
+  connect?: Prisma.tb_consentimientos_informadosWhereUniqueInput | Prisma.tb_consentimientos_informadosWhereUniqueInput[]
+  update?: Prisma.tb_consentimientos_informadosUpdateWithWhereUniqueWithoutTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput | Prisma.tb_consentimientos_informadosUpdateWithWhereUniqueWithoutTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput[]
+  updateMany?: Prisma.tb_consentimientos_informadosUpdateManyWithWhereWithoutTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput | Prisma.tb_consentimientos_informadosUpdateManyWithWhereWithoutTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput[]
+  deleteMany?: Prisma.tb_consentimientos_informadosScalarWhereInput | Prisma.tb_consentimientos_informadosScalarWhereInput[]
+}
+
 export type tb_consentimientos_informadosCreateWithoutTb_pacientesInput = {
   fecha_firma?: Date | string | null
   estado_firma?: string
   ruta_documento?: string | null
   observaciones?: string | null
   fecha_creacion?: Date | string
+  nombre_original?: string | null
+  tipo_mime?: string | null
+  tamano_bytes?: bigint | number | null
+  hash_sha256?: string | null
+  fecha_estado?: Date | string | null
+  motivo_estado?: string | null
   tb_servicios: Prisma.tb_serviciosCreateNestedOneWithoutTb_consentimientos_informadosInput
   tb_usuarios?: Prisma.tb_usuariosCreateNestedOneWithoutTb_consentimientos_informadosInput
+  tb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuarios?: Prisma.tb_usuariosCreateNestedOneWithoutTb_consentimientos_informados_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput
 }
 
 export type tb_consentimientos_informadosUncheckedCreateWithoutTb_pacientesInput = {
@@ -618,6 +831,13 @@ export type tb_consentimientos_informadosUncheckedCreateWithoutTb_pacientesInput
   id_usuario?: number | null
   observaciones?: string | null
   fecha_creacion?: Date | string
+  nombre_original?: string | null
+  tipo_mime?: string | null
+  tamano_bytes?: bigint | number | null
+  hash_sha256?: string | null
+  fecha_estado?: Date | string | null
+  motivo_estado?: string | null
+  id_usuario_estado?: number | null
 }
 
 export type tb_consentimientos_informadosCreateOrConnectWithoutTb_pacientesInput = {
@@ -659,6 +879,13 @@ export type tb_consentimientos_informadosScalarWhereInput = {
   id_usuario?: Prisma.IntNullableFilter<"tb_consentimientos_informados"> | number | null
   observaciones?: Prisma.StringNullableFilter<"tb_consentimientos_informados"> | string | null
   fecha_creacion?: Prisma.DateTimeFilter<"tb_consentimientos_informados"> | Date | string
+  nombre_original?: Prisma.StringNullableFilter<"tb_consentimientos_informados"> | string | null
+  tipo_mime?: Prisma.StringNullableFilter<"tb_consentimientos_informados"> | string | null
+  tamano_bytes?: Prisma.BigIntNullableFilter<"tb_consentimientos_informados"> | bigint | number | null
+  hash_sha256?: Prisma.StringNullableFilter<"tb_consentimientos_informados"> | string | null
+  fecha_estado?: Prisma.DateTimeNullableFilter<"tb_consentimientos_informados"> | Date | string | null
+  motivo_estado?: Prisma.StringNullableFilter<"tb_consentimientos_informados"> | string | null
+  id_usuario_estado?: Prisma.IntNullableFilter<"tb_consentimientos_informados"> | number | null
 }
 
 export type tb_consentimientos_informadosCreateWithoutTb_serviciosInput = {
@@ -667,8 +894,15 @@ export type tb_consentimientos_informadosCreateWithoutTb_serviciosInput = {
   ruta_documento?: string | null
   observaciones?: string | null
   fecha_creacion?: Date | string
+  nombre_original?: string | null
+  tipo_mime?: string | null
+  tamano_bytes?: bigint | number | null
+  hash_sha256?: string | null
+  fecha_estado?: Date | string | null
+  motivo_estado?: string | null
   tb_pacientes: Prisma.tb_pacientesCreateNestedOneWithoutTb_consentimientos_informadosInput
   tb_usuarios?: Prisma.tb_usuariosCreateNestedOneWithoutTb_consentimientos_informadosInput
+  tb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuarios?: Prisma.tb_usuariosCreateNestedOneWithoutTb_consentimientos_informados_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput
 }
 
 export type tb_consentimientos_informadosUncheckedCreateWithoutTb_serviciosInput = {
@@ -680,6 +914,13 @@ export type tb_consentimientos_informadosUncheckedCreateWithoutTb_serviciosInput
   id_usuario?: number | null
   observaciones?: string | null
   fecha_creacion?: Date | string
+  nombre_original?: string | null
+  tipo_mime?: string | null
+  tamano_bytes?: bigint | number | null
+  hash_sha256?: string | null
+  fecha_estado?: Date | string | null
+  motivo_estado?: string | null
+  id_usuario_estado?: number | null
 }
 
 export type tb_consentimientos_informadosCreateOrConnectWithoutTb_serviciosInput = {
@@ -714,8 +955,15 @@ export type tb_consentimientos_informadosCreateWithoutTb_usuariosInput = {
   ruta_documento?: string | null
   observaciones?: string | null
   fecha_creacion?: Date | string
+  nombre_original?: string | null
+  tipo_mime?: string | null
+  tamano_bytes?: bigint | number | null
+  hash_sha256?: string | null
+  fecha_estado?: Date | string | null
+  motivo_estado?: string | null
   tb_pacientes: Prisma.tb_pacientesCreateNestedOneWithoutTb_consentimientos_informadosInput
   tb_servicios: Prisma.tb_serviciosCreateNestedOneWithoutTb_consentimientos_informadosInput
+  tb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuarios?: Prisma.tb_usuariosCreateNestedOneWithoutTb_consentimientos_informados_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput
 }
 
 export type tb_consentimientos_informadosUncheckedCreateWithoutTb_usuariosInput = {
@@ -727,6 +975,13 @@ export type tb_consentimientos_informadosUncheckedCreateWithoutTb_usuariosInput 
   ruta_documento?: string | null
   observaciones?: string | null
   fecha_creacion?: Date | string
+  nombre_original?: string | null
+  tipo_mime?: string | null
+  tamano_bytes?: bigint | number | null
+  hash_sha256?: string | null
+  fecha_estado?: Date | string | null
+  motivo_estado?: string | null
+  id_usuario_estado?: number | null
 }
 
 export type tb_consentimientos_informadosCreateOrConnectWithoutTb_usuariosInput = {
@@ -736,6 +991,51 @@ export type tb_consentimientos_informadosCreateOrConnectWithoutTb_usuariosInput 
 
 export type tb_consentimientos_informadosCreateManyTb_usuariosInputEnvelope = {
   data: Prisma.tb_consentimientos_informadosCreateManyTb_usuariosInput | Prisma.tb_consentimientos_informadosCreateManyTb_usuariosInput[]
+  skipDuplicates?: boolean
+}
+
+export type tb_consentimientos_informadosCreateWithoutTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput = {
+  fecha_firma?: Date | string | null
+  estado_firma?: string
+  ruta_documento?: string | null
+  observaciones?: string | null
+  fecha_creacion?: Date | string
+  nombre_original?: string | null
+  tipo_mime?: string | null
+  tamano_bytes?: bigint | number | null
+  hash_sha256?: string | null
+  fecha_estado?: Date | string | null
+  motivo_estado?: string | null
+  tb_pacientes: Prisma.tb_pacientesCreateNestedOneWithoutTb_consentimientos_informadosInput
+  tb_servicios: Prisma.tb_serviciosCreateNestedOneWithoutTb_consentimientos_informadosInput
+  tb_usuarios?: Prisma.tb_usuariosCreateNestedOneWithoutTb_consentimientos_informadosInput
+}
+
+export type tb_consentimientos_informadosUncheckedCreateWithoutTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput = {
+  id_consentimiento?: number
+  id_paciente: number
+  id_servicio: number
+  fecha_firma?: Date | string | null
+  estado_firma?: string
+  ruta_documento?: string | null
+  id_usuario?: number | null
+  observaciones?: string | null
+  fecha_creacion?: Date | string
+  nombre_original?: string | null
+  tipo_mime?: string | null
+  tamano_bytes?: bigint | number | null
+  hash_sha256?: string | null
+  fecha_estado?: Date | string | null
+  motivo_estado?: string | null
+}
+
+export type tb_consentimientos_informadosCreateOrConnectWithoutTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput = {
+  where: Prisma.tb_consentimientos_informadosWhereUniqueInput
+  create: Prisma.XOR<Prisma.tb_consentimientos_informadosCreateWithoutTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput, Prisma.tb_consentimientos_informadosUncheckedCreateWithoutTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput>
+}
+
+export type tb_consentimientos_informadosCreateManyTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInputEnvelope = {
+  data: Prisma.tb_consentimientos_informadosCreateManyTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput | Prisma.tb_consentimientos_informadosCreateManyTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput[]
   skipDuplicates?: boolean
 }
 
@@ -755,6 +1055,22 @@ export type tb_consentimientos_informadosUpdateManyWithWhereWithoutTb_usuariosIn
   data: Prisma.XOR<Prisma.tb_consentimientos_informadosUpdateManyMutationInput, Prisma.tb_consentimientos_informadosUncheckedUpdateManyWithoutTb_usuariosInput>
 }
 
+export type tb_consentimientos_informadosUpsertWithWhereUniqueWithoutTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput = {
+  where: Prisma.tb_consentimientos_informadosWhereUniqueInput
+  update: Prisma.XOR<Prisma.tb_consentimientos_informadosUpdateWithoutTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput, Prisma.tb_consentimientos_informadosUncheckedUpdateWithoutTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput>
+  create: Prisma.XOR<Prisma.tb_consentimientos_informadosCreateWithoutTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput, Prisma.tb_consentimientos_informadosUncheckedCreateWithoutTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput>
+}
+
+export type tb_consentimientos_informadosUpdateWithWhereUniqueWithoutTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput = {
+  where: Prisma.tb_consentimientos_informadosWhereUniqueInput
+  data: Prisma.XOR<Prisma.tb_consentimientos_informadosUpdateWithoutTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput, Prisma.tb_consentimientos_informadosUncheckedUpdateWithoutTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput>
+}
+
+export type tb_consentimientos_informadosUpdateManyWithWhereWithoutTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput = {
+  where: Prisma.tb_consentimientos_informadosScalarWhereInput
+  data: Prisma.XOR<Prisma.tb_consentimientos_informadosUpdateManyMutationInput, Prisma.tb_consentimientos_informadosUncheckedUpdateManyWithoutTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput>
+}
+
 export type tb_consentimientos_informadosCreateManyTb_pacientesInput = {
   id_consentimiento?: number
   id_servicio: number
@@ -764,6 +1080,13 @@ export type tb_consentimientos_informadosCreateManyTb_pacientesInput = {
   id_usuario?: number | null
   observaciones?: string | null
   fecha_creacion?: Date | string
+  nombre_original?: string | null
+  tipo_mime?: string | null
+  tamano_bytes?: bigint | number | null
+  hash_sha256?: string | null
+  fecha_estado?: Date | string | null
+  motivo_estado?: string | null
+  id_usuario_estado?: number | null
 }
 
 export type tb_consentimientos_informadosUpdateWithoutTb_pacientesInput = {
@@ -772,8 +1095,15 @@ export type tb_consentimientos_informadosUpdateWithoutTb_pacientesInput = {
   ruta_documento?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   observaciones?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  nombre_original?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tipo_mime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tamano_bytes?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  hash_sha256?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fecha_estado?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  motivo_estado?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tb_servicios?: Prisma.tb_serviciosUpdateOneRequiredWithoutTb_consentimientos_informadosNestedInput
   tb_usuarios?: Prisma.tb_usuariosUpdateOneWithoutTb_consentimientos_informadosNestedInput
+  tb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuarios?: Prisma.tb_usuariosUpdateOneWithoutTb_consentimientos_informados_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosNestedInput
 }
 
 export type tb_consentimientos_informadosUncheckedUpdateWithoutTb_pacientesInput = {
@@ -785,6 +1115,13 @@ export type tb_consentimientos_informadosUncheckedUpdateWithoutTb_pacientesInput
   id_usuario?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   observaciones?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  nombre_original?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tipo_mime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tamano_bytes?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  hash_sha256?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fecha_estado?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  motivo_estado?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id_usuario_estado?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type tb_consentimientos_informadosUncheckedUpdateManyWithoutTb_pacientesInput = {
@@ -796,6 +1133,13 @@ export type tb_consentimientos_informadosUncheckedUpdateManyWithoutTb_pacientesI
   id_usuario?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   observaciones?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  nombre_original?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tipo_mime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tamano_bytes?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  hash_sha256?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fecha_estado?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  motivo_estado?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id_usuario_estado?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type tb_consentimientos_informadosCreateManyTb_serviciosInput = {
@@ -807,6 +1151,13 @@ export type tb_consentimientos_informadosCreateManyTb_serviciosInput = {
   id_usuario?: number | null
   observaciones?: string | null
   fecha_creacion?: Date | string
+  nombre_original?: string | null
+  tipo_mime?: string | null
+  tamano_bytes?: bigint | number | null
+  hash_sha256?: string | null
+  fecha_estado?: Date | string | null
+  motivo_estado?: string | null
+  id_usuario_estado?: number | null
 }
 
 export type tb_consentimientos_informadosUpdateWithoutTb_serviciosInput = {
@@ -815,8 +1166,15 @@ export type tb_consentimientos_informadosUpdateWithoutTb_serviciosInput = {
   ruta_documento?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   observaciones?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  nombre_original?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tipo_mime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tamano_bytes?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  hash_sha256?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fecha_estado?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  motivo_estado?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tb_pacientes?: Prisma.tb_pacientesUpdateOneRequiredWithoutTb_consentimientos_informadosNestedInput
   tb_usuarios?: Prisma.tb_usuariosUpdateOneWithoutTb_consentimientos_informadosNestedInput
+  tb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuarios?: Prisma.tb_usuariosUpdateOneWithoutTb_consentimientos_informados_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosNestedInput
 }
 
 export type tb_consentimientos_informadosUncheckedUpdateWithoutTb_serviciosInput = {
@@ -828,6 +1186,13 @@ export type tb_consentimientos_informadosUncheckedUpdateWithoutTb_serviciosInput
   id_usuario?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   observaciones?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  nombre_original?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tipo_mime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tamano_bytes?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  hash_sha256?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fecha_estado?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  motivo_estado?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id_usuario_estado?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type tb_consentimientos_informadosUncheckedUpdateManyWithoutTb_serviciosInput = {
@@ -839,6 +1204,13 @@ export type tb_consentimientos_informadosUncheckedUpdateManyWithoutTb_serviciosI
   id_usuario?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   observaciones?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  nombre_original?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tipo_mime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tamano_bytes?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  hash_sha256?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fecha_estado?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  motivo_estado?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id_usuario_estado?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type tb_consentimientos_informadosCreateManyTb_usuariosInput = {
@@ -850,6 +1222,31 @@ export type tb_consentimientos_informadosCreateManyTb_usuariosInput = {
   ruta_documento?: string | null
   observaciones?: string | null
   fecha_creacion?: Date | string
+  nombre_original?: string | null
+  tipo_mime?: string | null
+  tamano_bytes?: bigint | number | null
+  hash_sha256?: string | null
+  fecha_estado?: Date | string | null
+  motivo_estado?: string | null
+  id_usuario_estado?: number | null
+}
+
+export type tb_consentimientos_informadosCreateManyTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput = {
+  id_consentimiento?: number
+  id_paciente: number
+  id_servicio: number
+  fecha_firma?: Date | string | null
+  estado_firma?: string
+  ruta_documento?: string | null
+  id_usuario?: number | null
+  observaciones?: string | null
+  fecha_creacion?: Date | string
+  nombre_original?: string | null
+  tipo_mime?: string | null
+  tamano_bytes?: bigint | number | null
+  hash_sha256?: string | null
+  fecha_estado?: Date | string | null
+  motivo_estado?: string | null
 }
 
 export type tb_consentimientos_informadosUpdateWithoutTb_usuariosInput = {
@@ -858,8 +1255,15 @@ export type tb_consentimientos_informadosUpdateWithoutTb_usuariosInput = {
   ruta_documento?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   observaciones?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  nombre_original?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tipo_mime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tamano_bytes?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  hash_sha256?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fecha_estado?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  motivo_estado?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tb_pacientes?: Prisma.tb_pacientesUpdateOneRequiredWithoutTb_consentimientos_informadosNestedInput
   tb_servicios?: Prisma.tb_serviciosUpdateOneRequiredWithoutTb_consentimientos_informadosNestedInput
+  tb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuarios?: Prisma.tb_usuariosUpdateOneWithoutTb_consentimientos_informados_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosNestedInput
 }
 
 export type tb_consentimientos_informadosUncheckedUpdateWithoutTb_usuariosInput = {
@@ -871,6 +1275,13 @@ export type tb_consentimientos_informadosUncheckedUpdateWithoutTb_usuariosInput 
   ruta_documento?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   observaciones?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  nombre_original?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tipo_mime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tamano_bytes?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  hash_sha256?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fecha_estado?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  motivo_estado?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id_usuario_estado?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type tb_consentimientos_informadosUncheckedUpdateManyWithoutTb_usuariosInput = {
@@ -882,6 +1293,66 @@ export type tb_consentimientos_informadosUncheckedUpdateManyWithoutTb_usuariosIn
   ruta_documento?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   observaciones?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  nombre_original?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tipo_mime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tamano_bytes?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  hash_sha256?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fecha_estado?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  motivo_estado?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id_usuario_estado?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+}
+
+export type tb_consentimientos_informadosUpdateWithoutTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput = {
+  fecha_firma?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  estado_firma?: Prisma.StringFieldUpdateOperationsInput | string
+  ruta_documento?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  observaciones?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  nombre_original?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tipo_mime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tamano_bytes?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  hash_sha256?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fecha_estado?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  motivo_estado?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tb_pacientes?: Prisma.tb_pacientesUpdateOneRequiredWithoutTb_consentimientos_informadosNestedInput
+  tb_servicios?: Prisma.tb_serviciosUpdateOneRequiredWithoutTb_consentimientos_informadosNestedInput
+  tb_usuarios?: Prisma.tb_usuariosUpdateOneWithoutTb_consentimientos_informadosNestedInput
+}
+
+export type tb_consentimientos_informadosUncheckedUpdateWithoutTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput = {
+  id_consentimiento?: Prisma.IntFieldUpdateOperationsInput | number
+  id_paciente?: Prisma.IntFieldUpdateOperationsInput | number
+  id_servicio?: Prisma.IntFieldUpdateOperationsInput | number
+  fecha_firma?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  estado_firma?: Prisma.StringFieldUpdateOperationsInput | string
+  ruta_documento?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id_usuario?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  observaciones?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  nombre_original?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tipo_mime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tamano_bytes?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  hash_sha256?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fecha_estado?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  motivo_estado?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+}
+
+export type tb_consentimientos_informadosUncheckedUpdateManyWithoutTb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosInput = {
+  id_consentimiento?: Prisma.IntFieldUpdateOperationsInput | number
+  id_paciente?: Prisma.IntFieldUpdateOperationsInput | number
+  id_servicio?: Prisma.IntFieldUpdateOperationsInput | number
+  fecha_firma?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  estado_firma?: Prisma.StringFieldUpdateOperationsInput | string
+  ruta_documento?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id_usuario?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  observaciones?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  nombre_original?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tipo_mime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tamano_bytes?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  hash_sha256?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fecha_estado?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  motivo_estado?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 
@@ -896,9 +1367,17 @@ export type tb_consentimientos_informadosSelect<ExtArgs extends runtime.Types.Ex
   id_usuario?: boolean
   observaciones?: boolean
   fecha_creacion?: boolean
+  nombre_original?: boolean
+  tipo_mime?: boolean
+  tamano_bytes?: boolean
+  hash_sha256?: boolean
+  fecha_estado?: boolean
+  motivo_estado?: boolean
+  id_usuario_estado?: boolean
   tb_pacientes?: boolean | Prisma.tb_pacientesDefaultArgs<ExtArgs>
   tb_servicios?: boolean | Prisma.tb_serviciosDefaultArgs<ExtArgs>
   tb_usuarios?: boolean | Prisma.tb_consentimientos_informados$tb_usuariosArgs<ExtArgs>
+  tb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuarios?: boolean | Prisma.tb_consentimientos_informados$tb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosArgs<ExtArgs>
 }, ExtArgs["result"]["tb_consentimientos_informados"]>
 
 export type tb_consentimientos_informadosSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -911,9 +1390,17 @@ export type tb_consentimientos_informadosSelectCreateManyAndReturn<ExtArgs exten
   id_usuario?: boolean
   observaciones?: boolean
   fecha_creacion?: boolean
+  nombre_original?: boolean
+  tipo_mime?: boolean
+  tamano_bytes?: boolean
+  hash_sha256?: boolean
+  fecha_estado?: boolean
+  motivo_estado?: boolean
+  id_usuario_estado?: boolean
   tb_pacientes?: boolean | Prisma.tb_pacientesDefaultArgs<ExtArgs>
   tb_servicios?: boolean | Prisma.tb_serviciosDefaultArgs<ExtArgs>
   tb_usuarios?: boolean | Prisma.tb_consentimientos_informados$tb_usuariosArgs<ExtArgs>
+  tb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuarios?: boolean | Prisma.tb_consentimientos_informados$tb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosArgs<ExtArgs>
 }, ExtArgs["result"]["tb_consentimientos_informados"]>
 
 export type tb_consentimientos_informadosSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -926,9 +1413,17 @@ export type tb_consentimientos_informadosSelectUpdateManyAndReturn<ExtArgs exten
   id_usuario?: boolean
   observaciones?: boolean
   fecha_creacion?: boolean
+  nombre_original?: boolean
+  tipo_mime?: boolean
+  tamano_bytes?: boolean
+  hash_sha256?: boolean
+  fecha_estado?: boolean
+  motivo_estado?: boolean
+  id_usuario_estado?: boolean
   tb_pacientes?: boolean | Prisma.tb_pacientesDefaultArgs<ExtArgs>
   tb_servicios?: boolean | Prisma.tb_serviciosDefaultArgs<ExtArgs>
   tb_usuarios?: boolean | Prisma.tb_consentimientos_informados$tb_usuariosArgs<ExtArgs>
+  tb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuarios?: boolean | Prisma.tb_consentimientos_informados$tb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosArgs<ExtArgs>
 }, ExtArgs["result"]["tb_consentimientos_informados"]>
 
 export type tb_consentimientos_informadosSelectScalar = {
@@ -941,23 +1436,33 @@ export type tb_consentimientos_informadosSelectScalar = {
   id_usuario?: boolean
   observaciones?: boolean
   fecha_creacion?: boolean
+  nombre_original?: boolean
+  tipo_mime?: boolean
+  tamano_bytes?: boolean
+  hash_sha256?: boolean
+  fecha_estado?: boolean
+  motivo_estado?: boolean
+  id_usuario_estado?: boolean
 }
 
-export type tb_consentimientos_informadosOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id_consentimiento" | "id_paciente" | "id_servicio" | "fecha_firma" | "estado_firma" | "ruta_documento" | "id_usuario" | "observaciones" | "fecha_creacion", ExtArgs["result"]["tb_consentimientos_informados"]>
+export type tb_consentimientos_informadosOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id_consentimiento" | "id_paciente" | "id_servicio" | "fecha_firma" | "estado_firma" | "ruta_documento" | "id_usuario" | "observaciones" | "fecha_creacion" | "nombre_original" | "tipo_mime" | "tamano_bytes" | "hash_sha256" | "fecha_estado" | "motivo_estado" | "id_usuario_estado", ExtArgs["result"]["tb_consentimientos_informados"]>
 export type tb_consentimientos_informadosInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tb_pacientes?: boolean | Prisma.tb_pacientesDefaultArgs<ExtArgs>
   tb_servicios?: boolean | Prisma.tb_serviciosDefaultArgs<ExtArgs>
   tb_usuarios?: boolean | Prisma.tb_consentimientos_informados$tb_usuariosArgs<ExtArgs>
+  tb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuarios?: boolean | Prisma.tb_consentimientos_informados$tb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosArgs<ExtArgs>
 }
 export type tb_consentimientos_informadosIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tb_pacientes?: boolean | Prisma.tb_pacientesDefaultArgs<ExtArgs>
   tb_servicios?: boolean | Prisma.tb_serviciosDefaultArgs<ExtArgs>
   tb_usuarios?: boolean | Prisma.tb_consentimientos_informados$tb_usuariosArgs<ExtArgs>
+  tb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuarios?: boolean | Prisma.tb_consentimientos_informados$tb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosArgs<ExtArgs>
 }
 export type tb_consentimientos_informadosIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tb_pacientes?: boolean | Prisma.tb_pacientesDefaultArgs<ExtArgs>
   tb_servicios?: boolean | Prisma.tb_serviciosDefaultArgs<ExtArgs>
   tb_usuarios?: boolean | Prisma.tb_consentimientos_informados$tb_usuariosArgs<ExtArgs>
+  tb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuarios?: boolean | Prisma.tb_consentimientos_informados$tb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosArgs<ExtArgs>
 }
 
 export type $tb_consentimientos_informadosPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -966,6 +1471,7 @@ export type $tb_consentimientos_informadosPayload<ExtArgs extends runtime.Types.
     tb_pacientes: Prisma.$tb_pacientesPayload<ExtArgs>
     tb_servicios: Prisma.$tb_serviciosPayload<ExtArgs>
     tb_usuarios: Prisma.$tb_usuariosPayload<ExtArgs> | null
+    tb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuarios: Prisma.$tb_usuariosPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id_consentimiento: number
@@ -977,6 +1483,13 @@ export type $tb_consentimientos_informadosPayload<ExtArgs extends runtime.Types.
     id_usuario: number | null
     observaciones: string | null
     fecha_creacion: Date
+    nombre_original: string | null
+    tipo_mime: string | null
+    tamano_bytes: bigint | null
+    hash_sha256: string | null
+    fecha_estado: Date | null
+    motivo_estado: string | null
+    id_usuario_estado: number | null
   }, ExtArgs["result"]["tb_consentimientos_informados"]>
   composites: {}
 }
@@ -1374,6 +1887,7 @@ export interface Prisma__tb_consentimientos_informadosClient<T, Null = never, Ex
   tb_pacientes<T extends Prisma.tb_pacientesDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.tb_pacientesDefaultArgs<ExtArgs>>): Prisma.Prisma__tb_pacientesClient<runtime.Types.Result.GetResult<Prisma.$tb_pacientesPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   tb_servicios<T extends Prisma.tb_serviciosDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.tb_serviciosDefaultArgs<ExtArgs>>): Prisma.Prisma__tb_serviciosClient<runtime.Types.Result.GetResult<Prisma.$tb_serviciosPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   tb_usuarios<T extends Prisma.tb_consentimientos_informados$tb_usuariosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.tb_consentimientos_informados$tb_usuariosArgs<ExtArgs>>): Prisma.Prisma__tb_usuariosClient<runtime.Types.Result.GetResult<Prisma.$tb_usuariosPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  tb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuarios<T extends Prisma.tb_consentimientos_informados$tb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.tb_consentimientos_informados$tb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosArgs<ExtArgs>>): Prisma.Prisma__tb_usuariosClient<runtime.Types.Result.GetResult<Prisma.$tb_usuariosPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1412,6 +1926,13 @@ export interface tb_consentimientos_informadosFieldRefs {
   readonly id_usuario: Prisma.FieldRef<"tb_consentimientos_informados", 'Int'>
   readonly observaciones: Prisma.FieldRef<"tb_consentimientos_informados", 'String'>
   readonly fecha_creacion: Prisma.FieldRef<"tb_consentimientos_informados", 'DateTime'>
+  readonly nombre_original: Prisma.FieldRef<"tb_consentimientos_informados", 'String'>
+  readonly tipo_mime: Prisma.FieldRef<"tb_consentimientos_informados", 'String'>
+  readonly tamano_bytes: Prisma.FieldRef<"tb_consentimientos_informados", 'BigInt'>
+  readonly hash_sha256: Prisma.FieldRef<"tb_consentimientos_informados", 'String'>
+  readonly fecha_estado: Prisma.FieldRef<"tb_consentimientos_informados", 'DateTime'>
+  readonly motivo_estado: Prisma.FieldRef<"tb_consentimientos_informados", 'String'>
+  readonly id_usuario_estado: Prisma.FieldRef<"tb_consentimientos_informados", 'Int'>
 }
     
 
@@ -1816,6 +2337,25 @@ export type tb_consentimientos_informadosDeleteManyArgs<ExtArgs extends runtime.
  * tb_consentimientos_informados.tb_usuarios
  */
 export type tb_consentimientos_informados$tb_usuariosArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the tb_usuarios
+   */
+  select?: Prisma.tb_usuariosSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the tb_usuarios
+   */
+  omit?: Prisma.tb_usuariosOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.tb_usuariosInclude<ExtArgs> | null
+  where?: Prisma.tb_usuariosWhereInput
+}
+
+/**
+ * tb_consentimientos_informados.tb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuarios
+ */
+export type tb_consentimientos_informados$tb_usuarios_tb_consentimientos_informados_id_usuario_estadoTotb_usuariosArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the tb_usuarios
    */

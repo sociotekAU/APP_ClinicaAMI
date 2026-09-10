@@ -30,11 +30,11 @@ describe("AuditService", () => {
     expect(sanitizeAuditValue({
       username: "demo",
       password: "visible-no",
-      nested: { refreshToken: "visible-no", note: "conservar" },
+      nested: { refreshToken: "visible-no", ruta_documento: "consents/secreto.pdf", note: "conservar" },
     })).toEqual({
       username: "demo",
       password: "[REDACTADO]",
-      nested: { refreshToken: "[REDACTADO]", note: "conservar" },
+      nested: { refreshToken: "[REDACTADO]", ruta_documento: "[REDACTADO]", note: "conservar" },
     });
   });
 
@@ -143,5 +143,21 @@ describe("AuditService", () => {
     expect(snapshot.mock.calls[0]?.[0]).toContain("tb_detalle_factura");
     expect(snapshot.mock.calls[0]?.[0]).toContain("conceptos");
     expect(movement).toMatchObject({ target: { module: "inventario", entity: "movimiento_inventario", table: "tb_movimientos_inventario" } });
+  });
+
+  it("incluye archivos privados y decisiones de consentimiento en la trazabilidad", async () => {
+    const snapshot = vi.fn().mockResolvedValue([{ snapshot: { id: 14 } }]);
+    const service = new AuditService({ client: { $queryRawUnsafe: snapshot } } as unknown as DatabaseService);
+
+    const study = await service.prepare(request({ url: "/api/v1/study-files/14/status", params: { id: "14" } }));
+    const consent = request({ url: "/api/v1/consents/6/status", params: { id: "6" }, body: { status: "revocado", reason: "Solicitud expresa del paciente" } });
+    const preparedConsent = await service.prepare(consent);
+    const create = vi.fn().mockResolvedValue({});
+    (service as unknown as { database: { client: { tb_auditoria: { create: typeof create } } } }).database.client.tb_auditoria = { create };
+    await service.record(consent, { data: { id: 6, status: "revocado" } }, preparedConsent);
+
+    expect(study).toMatchObject({ target: { module: "archivos_estudios", entity: "archivo_estudio", table: "tb_archivos_estudios" } });
+    expect(preparedConsent).toMatchObject({ target: { module: "consentimientos", entity: "consentimiento_informado", table: "tb_consentimientos_informados" } });
+    expect(create).toHaveBeenCalledWith({ data: expect.objectContaining({ accion: "anulacion", motivo: "Solicitud expresa del paciente" }) });
   });
 });
