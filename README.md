@@ -220,6 +220,7 @@ general del proyecto.
 - Facturación con total automático, impresión, anulación justificada y resumen diario de caja.
 - Proveedores, insumos, alertas de mínimo y kardex inmutable de entradas, salidas y mermas.
 - Archivos de estudios y consentimientos con almacenamiento privado, descarga autenticada y verificación SHA-256.
+- Crédito reutilizable de SOCIOTEC en login y menú ERP, con página pública en `/desarrollado-por`.
 - Bitácora append-only de creaciones, modificaciones y cambios sensibles, con snapshots saneados antes/después.
 - Visor de auditoría exclusivo para administradores, con filtros, paginación y detalle en modal.
 - Prueba de aislamiento disponible en `database/tests/authorization.sql`.

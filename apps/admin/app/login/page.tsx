@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { HeartPulse, LockKeyhole, ShieldCheck } from "lucide-react";
 import { LoginForm } from "../../components/auth/login-form";
+import { DeveloperCredit } from "../../components/developer-credit/developer-credit";
 
 export const metadata: Metadata = {
   title: "Iniciar sesión",
@@ -51,6 +52,7 @@ export default function LoginPage() {
           <p className="access-note">
             Este sistema es de uso autorizado. La actividad puede ser registrada con fines de seguridad.
           </p>
+          <DeveloperCredit variant="easter-egg" />
         </div>
       </section>
     </main>

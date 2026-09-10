@@ -45,6 +45,7 @@ import {
 import { ApiClientError, apiRequest } from "../../lib/api-client";
 import { confirmLogout, showError } from "../../lib/alerts";
 import { isAdministratorRole } from "../../lib/roles";
+import { DeveloperCredit } from "../developer-credit/developer-credit";
 
 const NAVIGATION_SECTIONS: ErpNavigationSection[] = [
   "Atención",
@@ -252,12 +253,15 @@ export function ErpShell({ children }: Readonly<{ children: ReactNode }>) {
             })}
           </nav>
 
-          <div className="erp-sidebar-footer">
-            <ShieldCheck aria-hidden="true" />
-            <div>
-              <strong>Acceso por rol</strong>
-              <span>{context.user.role.name}</span>
+          <div className="erp-sidebar-footer-group">
+            <div className="erp-sidebar-footer">
+              <ShieldCheck aria-hidden="true" />
+              <div>
+                <strong>Acceso por rol</strong>
+                <span>{context.user.role.name}</span>
+              </div>
             </div>
+            <DeveloperCredit variant="sidebar" />
           </div>
         </aside>
 
