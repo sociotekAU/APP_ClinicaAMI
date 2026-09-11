@@ -6,10 +6,10 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: {
-    default: "Clínica A.M.I. | Sistema administrativo",
+    default: "Clínica A.M.I. | Alternativa Médica Integral",
     template: "%s | Clínica A.M.I.",
   },
-  description: "Sistema administrativo y clínico de Alternativa Médica Integral A.M.I.",
+  description: "Sitio web de Alternativa Médica Integral A.M.I.",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
