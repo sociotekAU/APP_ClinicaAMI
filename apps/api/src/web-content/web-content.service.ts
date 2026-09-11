@@ -2,6 +2,7 @@ import { HttpStatus, Injectable } from "@nestjs/common";
 import type {
   AnnouncementPosition,
   PaginatedData,
+  PublicWebContent,
   WebAnnouncementItem,
   WebAnnouncementStyleItem,
   WebContact,
@@ -64,7 +65,7 @@ type StyleRow = {
 type AnnouncementRow = {
   id: number; titulo: string; descripcion: string | null; fecha_inicio: Date; fecha_fin: Date;
   imagen_url: string | null; estado: boolean; fecha_creacion: Date;
-  tb_estilos: { id: number; nombre: string; estado: boolean };
+  tb_estilos: { id: number; nombre: string; color_fondo: string; color_texto: string; icono: string | null; posicion: string; estado: boolean };
   tb_promociones: { id: number; titulo: string; estado: boolean } | null;
 };
 
@@ -302,7 +303,7 @@ export class WebContentService {
       : query.sortBy === "endDate" ? { fecha_fin: query.sortDirection }
         : query.sortBy === "createdAt" ? { fecha_creacion: query.sortDirection }
           : { fecha_inicio: query.sortDirection };
-    const include = { tb_estilos: { select: { id: true, nombre: true, estado: true } }, tb_promociones: { select: { id: true, titulo: true, estado: true } } } as const;
+    const include = this.announcementInclude();
     const [rows, totalItems] = await Promise.all([
       this.database.client.tb_anuncios.findMany({ where, include, orderBy: [primaryOrder, { id: "asc" }], skip: paginationOffset(query.page, query.pageSize), take: query.pageSize }),
       this.database.client.tb_anuncios.count({ where }),
@@ -370,6 +371,49 @@ export class WebContentService {
     };
   }
 
+  async getPublicContent(): Promise<PublicWebContent> {
+    const preview = await this.getPreview();
+
+    return {
+      generatedAt: preview.generatedAt,
+      contact: preview.contact ? {
+        companyName: preview.contact.companyName,
+        shortName: preview.contact.shortName,
+        phone: preview.contact.phone,
+        email: preview.contact.email,
+        facebook: preview.contact.facebook,
+        instagram: preview.contact.instagram,
+        logoUrl: preview.contact.logoUrl,
+        location: preview.contact.location,
+        googleMapsUrl: preview.contact.googleMapsUrl,
+        homeVideoUrl: preview.contact.homeVideoUrl,
+        slogan: preview.contact.slogan,
+        weekdayHours: preview.contact.weekdayHours,
+        saturdayHours: preview.contact.saturdayHours,
+      } : null,
+      services: preview.services.map(({ id, name, description, imageUrl }) => ({ id, name, description, imageUrl })),
+      professionals: preview.professionals.map(({ id, name, specialty, publicProfile, photoUrl }) => ({ id, name, specialty, publicProfile, photoUrl })),
+      gallery: preview.gallery.map(({ id, title, description, imageUrl }) => ({ id, title, description, imageUrl })),
+      promotions: preview.promotions.map(({ id, title, description, startDate, endDate, imageUrl }) => ({ id, title, description, startDate, endDate, imageUrl })),
+      announcements: preview.announcements.map(({ id, title, description, style, promotion, startDate, endDate, imageUrl }) => ({
+        id,
+        title,
+        description,
+        style: {
+          name: style.name,
+          backgroundColor: style.backgroundColor,
+          textColor: style.textColor,
+          icon: style.icon,
+          position: style.position,
+        },
+        promotion: promotion ? { id: promotion.id, title: promotion.title } : null,
+        startDate,
+        endDate,
+        imageUrl,
+      })),
+    };
+  }
+
   private validateDates(startDate: string, endDate: string): void {
     if (endDate < startDate) {
       throw new AppException("VALIDATION_ERROR", "La fecha final no puede ser anterior a la inicial.", HttpStatus.BAD_REQUEST, [
@@ -407,7 +451,10 @@ export class WebContentService {
   }
 
   private announcementInclude() {
-    return { tb_estilos: { select: { id: true, nombre: true, estado: true } }, tb_promociones: { select: { id: true, titulo: true, estado: true } } } as const;
+    return {
+      tb_estilos: { select: { id: true, nombre: true, color_fondo: true, color_texto: true, icono: true, posicion: true, estado: true } },
+      tb_promociones: { select: { id: true, titulo: true, estado: true } },
+    } as const;
   }
 
   private toContact(row: ContactRow): WebContact { return {
@@ -446,7 +493,15 @@ export class WebContentService {
 
   private toAnnouncement(row: AnnouncementRow, today?: string): WebAnnouncementItem { return {
     id: row.id, title: row.titulo, description: row.descripcion,
-    style: { id: row.tb_estilos.id, name: row.tb_estilos.nombre, active: row.tb_estilos.estado },
+    style: {
+      id: row.tb_estilos.id,
+      name: row.tb_estilos.nombre,
+      backgroundColor: row.tb_estilos.color_fondo,
+      textColor: row.tb_estilos.color_texto,
+      icon: row.tb_estilos.icono,
+      position: row.tb_estilos.posicion as AnnouncementPosition,
+      active: row.tb_estilos.estado,
+    },
     promotion: row.tb_promociones ? { id: row.tb_promociones.id, title: row.tb_promociones.titulo, active: row.tb_promociones.estado } : null,
     startDate: dateOnly(row.fecha_inicio), endDate: dateOnly(row.fecha_fin), imageUrl: row.imagen_url, active: row.estado,
     publicationState: publicationState(row.estado, row.fecha_inicio, row.fecha_fin, today), createdAt: row.fecha_creacion.toISOString(),

@@ -935,7 +935,15 @@ export interface WebAnnouncementItem {
   id: number;
   title: string;
   description: string | null;
-  style: { id: number; name: string; active: boolean };
+  style: {
+    id: number;
+    name: string;
+    backgroundColor: string;
+    textColor: string;
+    icon: string | null;
+    position: AnnouncementPosition;
+    active: boolean;
+  };
   promotion: { id: number; title: string; active: boolean } | null;
   startDate: string;
   endDate: string;
@@ -968,6 +976,80 @@ export interface WebContentPreview {
   gallery: WebGalleryItem[];
   promotions: WebPromotionItem[];
   announcements: WebAnnouncementItem[];
+}
+
+export interface PublicWebContact {
+  companyName: string;
+  shortName: string | null;
+  phone: string;
+  email: string | null;
+  facebook: string | null;
+  instagram: string | null;
+  logoUrl: string | null;
+  location: string;
+  googleMapsUrl: string | null;
+  homeVideoUrl: string | null;
+  slogan: string | null;
+  weekdayHours: string | null;
+  saturdayHours: string | null;
+}
+
+export interface PublicWebService {
+  id: number;
+  name: string;
+  description: string | null;
+  imageUrl: string | null;
+}
+
+export interface PublicWebProfessional {
+  id: number;
+  name: string;
+  specialty: string;
+  publicProfile: string | null;
+  photoUrl: string | null;
+}
+
+export interface PublicWebGalleryItem {
+  id: number;
+  title: string;
+  description: string | null;
+  imageUrl: string;
+}
+
+export interface PublicWebPromotion {
+  id: number;
+  title: string;
+  description: string | null;
+  startDate: string;
+  endDate: string;
+  imageUrl: string | null;
+}
+
+export interface PublicWebAnnouncement {
+  id: number;
+  title: string;
+  description: string | null;
+  style: {
+    name: string;
+    backgroundColor: string;
+    textColor: string;
+    icon: string | null;
+    position: AnnouncementPosition;
+  };
+  promotion: { id: number; title: string } | null;
+  startDate: string;
+  endDate: string;
+  imageUrl: string | null;
+}
+
+export interface PublicWebContent {
+  generatedAt: string;
+  contact: PublicWebContact | null;
+  services: PublicWebService[];
+  professionals: PublicWebProfessional[];
+  gallery: PublicWebGalleryItem[];
+  promotions: PublicWebPromotion[];
+  announcements: PublicWebAnnouncement[];
 }
 
 export type AuditAction =
