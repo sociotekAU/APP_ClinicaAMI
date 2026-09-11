@@ -7,6 +7,11 @@ const API_URL = (process.env.NEXT_PUBLIC_API_URL ?? "http://127.0.0.1:4000/api/v
 const ITEM_TYPES: InventoryItemType[] = ["medicamento", "reactivo_laboratorio", "material_clinico"];
 const AVAILABILITY: PublicInventoryAvailability[] = ["available", "limited", "unavailable"];
 
+export type PublicProductResult =
+  | { status: "success"; product: PublicInventoryItem }
+  | { status: "not-found" }
+  | { status: "unavailable" };
+
 function isPublicInventoryItem(value: unknown): value is PublicInventoryItem {
   if (!value || typeof value !== "object") return false;
   const item = value as Partial<PublicInventoryItem>;
@@ -38,11 +43,21 @@ export async function getPublicProducts(): Promise<PublicInventoryItem[] | null>
   }
 }
 
-export async function getPublicProduct(id: number): Promise<PublicInventoryItem | null> {
+export async function getPublicProduct(id: number): Promise<PublicProductResult> {
   try {
-    const data = await requestPublicProducts(`/${id}`);
-    return isPublicInventoryItem(data) ? data : null;
+    const response = await fetch(`${API_URL}/public/inventory/items/${id}`, {
+      headers: { accept: "application/json" },
+      next: { revalidate: 60 },
+      signal: AbortSignal.timeout(5_000),
+    });
+    if (response.status === 404) return { status: "not-found" };
+    if (!response.ok) return { status: "unavailable" };
+
+    const body = (await response.json()) as Partial<ApiSuccess<unknown>>;
+    return isPublicInventoryItem(body.data)
+      ? { status: "success", product: body.data }
+      : { status: "unavailable" };
   } catch {
-    return null;
+    return { status: "unavailable" };
   }
 }

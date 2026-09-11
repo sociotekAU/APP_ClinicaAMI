@@ -1,14 +1,12 @@
 import type { InventoryItemType, PublicInventoryAvailability } from "@ami/contracts";
 import type { Metadata } from "next";
-import { ArrowLeft, ArrowRight, FlaskConical, PackageOpen, Pill, Stethoscope, type LucideIcon } from "lucide-react";
+import { ArrowRight, ChevronRight, FlaskConical, Pill, Stethoscope, WifiOff, type LucideIcon } from "lucide-react";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import { getPublicProduct } from "../../../../lib/public-products";
 import styles from "../products.module.css";
 
-export const metadata: Metadata = {
-  title: "Detalle de producto",
-  description: "Información pública de un producto disponible en Clínica A.M.I.",
-};
+type ProductPageProps = Readonly<{ params: Promise<{ id: string }> }>;
 
 const TYPE_DETAILS: Record<InventoryItemType, { label: string; Icon: LucideIcon }> = {
   medicamento: { label: "Medicamento", Icon: Pill },
@@ -22,32 +20,61 @@ const AVAILABILITY_LABELS: Record<PublicInventoryAvailability, string> = {
   unavailable: "Consultar disponibilidad",
 };
 
-export default async function ProductDetailPage({ params }: Readonly<{ params: Promise<{ id: string }> }>) {
-  const { id } = await params;
-  const productId = Number(id);
-  const product = Number.isSafeInteger(productId) && productId > 0
-    ? await getPublicProduct(productId)
-    : null;
+function parseProductId(value: string): number | null {
+  const id = Number(value);
+  return Number.isSafeInteger(id) && id > 0 ? id : null;
+}
 
-  if (!product) {
+export async function generateMetadata({ params }: ProductPageProps): Promise<Metadata> {
+  const { id } = await params;
+  const productId = parseProductId(id);
+  if (!productId) return { title: "Producto no encontrado", robots: { index: false, follow: false } };
+
+  const result = await getPublicProduct(productId);
+  if (result.status !== "success") {
+    return result.status === "not-found"
+      ? { title: "Producto no encontrado", robots: { index: false, follow: false } }
+      : { title: "Detalle de producto" };
+  }
+
+  return {
+    title: result.product.name,
+    description: `Consulta la categoría, presentación y disponibilidad de ${result.product.name} en Clínica A.M.I.`,
+  };
+}
+
+export default async function ProductDetailPage({ params }: ProductPageProps) {
+  const { id } = await params;
+  const productId = parseProductId(id);
+  if (!productId) notFound();
+
+  const result = await getPublicProduct(productId);
+  if (result.status === "not-found") notFound();
+
+  if (result.status === "unavailable") {
     return (
-      <section className={styles.detailMissing}>
-        <PackageOpen aria-hidden="true" />
-        <p className={styles.eyebrow}>Producto no disponible</p>
-        <h1>No encontramos este producto.</h1>
-        <p>Es posible que ya no esté activo o que el enlace haya cambiado.</p>
-        <Link href="/productos"><ArrowLeft aria-hidden="true" /> Volver al catálogo</Link>
+      <section className={styles.detailMissing} role="status">
+        <WifiOff aria-hidden="true" />
+        <p className={styles.eyebrow}>Conexión no disponible</p>
+        <h1>No pudimos cargar el producto.</h1>
+        <p>Intenta nuevamente más tarde o vuelve al catálogo para consultar otros productos.</p>
+        <Link href="/productos">Volver al catálogo <ArrowRight aria-hidden="true" /></Link>
       </section>
     );
   }
 
+  const product = result.product;
   const { Icon, label } = TYPE_DETAILS[product.type];
   return (
     <div className={styles.detailPage}>
       <div className={styles.detailInner}>
-        <Link className={styles.backLink} href="/productos">
-          <ArrowLeft aria-hidden="true" /> Volver a productos
-        </Link>
+        <nav className={styles.breadcrumbs} aria-label="Ruta de navegación">
+          <Link href="/">Inicio</Link>
+          <ChevronRight aria-hidden="true" />
+          <Link href="/productos">Productos</Link>
+          <ChevronRight aria-hidden="true" />
+          <span aria-current="page">{product.name}</span>
+        </nav>
 
         <article className={styles.detailCard}>
           <div className={`${styles.detailVisual} ${styles[product.type]}`}>
@@ -61,14 +88,17 @@ export default async function ProductDetailPage({ params }: Readonly<{ params: P
             <p className={styles.eyebrow}>Producto de Clínica A.M.I.</p>
             <h1>{product.name}</h1>
             {product.medicationName && product.medicationName !== product.name && (
-              <p className={styles.medicationName}>{product.medicationName}</p>
+              <div className={styles.medicationReference}>
+                <span>Referencia farmacéutica</span>
+                <p>{product.medicationName}</p>
+              </div>
             )}
             <dl className={styles.productFacts}>
               <div><dt>Categoría</dt><dd>{label}</dd></div>
               <div><dt>Presentación</dt><dd>{product.unit}</dd></div>
             </dl>
             <p className={styles.availabilityNote}>La disponibilidad puede cambiar. Confírmala directamente con nuestro equipo.</p>
-            <Link className={styles.contactAction} href="/contacto">
+            <Link className={styles.contactAction} href="/contacto" aria-label={`Consultar disponibilidad de ${product.name}`}>
               Consultar disponibilidad <ArrowRight aria-hidden="true" />
             </Link>
           </div>

@@ -101,16 +101,21 @@
 
 .detailPage { min-height: 42rem; background: linear-gradient(135deg, #eff6fa 0%, #f8fafb 62%, #f5efe3 100%); }
 .detailInner { width: min(100% - 2.5rem, 74rem); margin-inline: auto; padding-block: clamp(3rem, 7vw, 6rem); }
-.backLink { min-height: 2.75rem; display: inline-flex; align-items: center; gap: 0.45rem; margin-bottom: 1.5rem; color: #0b4c81; font-size: 0.9rem; font-weight: 800; text-decoration: none; }
-.backLink svg { width: 1rem; height: 1rem; }
-.detailCard { overflow: hidden; display: grid; grid-template-columns: minmax(20rem, 0.82fr) minmax(0, 1.18fr); border: 1px solid #d3e0e8; border-radius: 1.25rem; background: #fff; box-shadow: 0 1.8rem 5rem rgb(6 31 55 / 12%); }
+.breadcrumbs { min-height: 2.75rem; display: flex; align-items: center; gap: 0.4rem; margin-bottom: 1.5rem; color: #667985; font-size: 0.875rem; }
+.breadcrumbs a { color: #0b4c81; font-weight: 800; text-decoration: none; }
+.breadcrumbs a:hover { text-decoration: underline; text-underline-offset: 0.2em; }
+.breadcrumbs svg { flex: 0 0 auto; width: 0.9rem; height: 0.9rem; }
+.breadcrumbs span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.detailCard { overflow: hidden; display: grid; grid-template-columns: minmax(20rem, 0.82fr) minmax(0, 1.18fr); border: 1px solid #d3e0e8; border-radius: 1.25rem; background: #fff; box-shadow: 0 1.8rem 5rem rgb(6 31 55 / 12%); animation: detail-enter 500ms ease-out both; }
 .detailVisual { min-height: 36rem; display: grid; place-content: center; justify-items: center; gap: 1.2rem; color: #fff; }
 .detailVisual svg { width: 6rem; height: 6rem; stroke-width: 1.2; }
 .detailVisual span { font-size: 0.82rem; font-weight: 850; letter-spacing: 0.12em; text-transform: uppercase; }
 .detailContent { display: flex; flex-direction: column; align-items: flex-start; justify-content: center; padding: clamp(2rem, 6vw, 5rem); }
 .detailContent h1,
 .detailMissing h1 { margin: 0; color: #061f37; font-family: Georgia, "Times New Roman", serif; font-size: clamp(2.7rem, 5vw, 4.8rem); font-weight: 500; line-height: 1; letter-spacing: -0.05em; }
-.medicationName { margin: 1rem 0 0; color: #62717d; font-size: 1.05rem; line-height: 1.6; }
+.medicationReference { display: grid; gap: 0.3rem; margin-top: 1.25rem; }
+.medicationReference span { color: #7c8c97; font-size: 0.75rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; }
+.medicationReference p { margin: 0; color: #435460; font-size: 1.05rem; line-height: 1.6; }
 .productFacts { width: 100%; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); margin: 2rem 0 0; border-block: 1px solid #dce5ec; }
 .productFacts > div { display: grid; gap: 0.3rem; padding: 1.2rem 0; }
 .productFacts > div + div { padding-left: 1.2rem; border-left: 1px solid #dce5ec; }
@@ -127,6 +132,17 @@
 .detailMissing > a { min-height: 2.75rem; display: inline-flex; align-items: center; gap: 0.45rem; margin-top: 0.5rem; padding: 0.7rem 1rem; border-radius: 0.65rem; color: #fff; background: #0b4c81; font-weight: 800; text-decoration: none; }
 .detailMissing > a svg { width: 1rem; height: 1rem; }
 
+.loadingBreadcrumb,
+.loadingDetailVisual,
+.loadingDetailContent span { display: block; border-radius: 0.8rem; background: linear-gradient(100deg, #e3eaf0 20%, #f4f7f9 50%, #e3eaf0 80%); background-size: 220% 100%; animation: shimmer 1.35s ease-in-out infinite; }
+.loadingBreadcrumb { width: min(24rem, 72vw); height: 1rem; margin-block: 0.9rem 2.35rem; }
+.loadingDetailVisual { min-height: 36rem; border-radius: 0; background-color: #dbe5eb; }
+.loadingDetailContent { display: grid; align-content: center; gap: 1rem; padding: clamp(2rem, 6vw, 5rem); }
+.loadingDetailContent span:nth-child(1) { width: 8rem; height: 1rem; }
+.loadingDetailContent span:nth-child(2) { width: 90%; height: 7rem; }
+.loadingDetailContent span:nth-child(3) { width: 100%; height: 5rem; }
+.loadingDetailContent span:nth-child(4) { width: 13rem; height: 3rem; }
+
 .loadingCopy { width: min(44rem, 72vw); display: grid; gap: 1rem; }
 .loadingCopy span,
 .loadingToolbar,
@@ -138,6 +154,10 @@
 .loadingGrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.15rem; margin-top: 2rem; }
 .loadingGrid span { min-height: 24rem; background-color: #e8eef2; }
 @keyframes shimmer { to { background-position: -220% 0; } }
+@keyframes detail-enter {
+  from { opacity: 0; transform: translateY(0.75rem); }
+  to { opacity: 1; transform: translateY(0); }
+}
 
 @media (max-width: 64rem) {
   .toolbar { grid-template-columns: 1fr; }
@@ -166,7 +186,9 @@
   .productBody { padding: 1.1rem; }
   .detailCard { grid-template-columns: 1fr; }
   .detailVisual { min-height: 17rem; }
+  .loadingDetailVisual { min-height: 17rem; }
   .detailContent { padding: 2rem 1.35rem 2.4rem; }
+  .loadingDetailContent { min-height: 25rem; padding: 2rem 1.35rem 2.4rem; }
   .productFacts { grid-template-columns: 1fr; }
   .productFacts > div + div { padding-left: 0; border-top: 1px solid #dce5ec; border-left: 0; }
 }
@@ -185,5 +207,9 @@
   .searchControl { transition: none; }
   .loadingCopy span,
   .loadingToolbar,
-  .loadingGrid span { animation: none; }
+  .loadingGrid span,
+  .loadingBreadcrumb,
+  .loadingDetailVisual,
+  .loadingDetailContent span,
+  .detailCard { animation: none; }
 }
