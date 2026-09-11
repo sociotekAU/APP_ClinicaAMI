@@ -1,0 +1,107 @@
+.popupDialog {
+  position: fixed;
+  z-index: 100;
+  width: min(34rem, calc(100vw - 2rem));
+  max-width: none;
+  max-height: calc(100dvh - 2rem);
+  overflow: visible;
+  padding: 0;
+  border: 0;
+  border-radius: 1.15rem;
+  color: var(--popup-fg);
+  background: transparent;
+  box-shadow: 0 2rem 6rem rgb(3 18 31 / 34%);
+}
+
+.popupDialog::backdrop {
+  background: rgb(3 18 31 / 58%);
+  backdrop-filter: blur(5px);
+  animation: backdrop-enter 240ms ease-out both;
+}
+
+.center { inset: 0; margin: auto; }
+.topLeft { inset: 1.25rem auto auto 1.25rem; margin: 0; }
+.topRight { inset: 1.25rem 1.25rem auto auto; margin: 0; }
+.bottomLeft { inset: auto auto 1.25rem 1.25rem; margin: 0; }
+.bottomRight { inset: auto 1.25rem 1.25rem auto; margin: 0; }
+
+.popupPanel {
+  position: relative;
+  max-height: calc(100dvh - 2rem);
+  overflow: hidden auto;
+  border: 1px solid rgb(255 255 255 / 15%);
+  border-radius: inherit;
+  color: var(--popup-fg);
+  background: var(--popup-bg);
+  animation: popup-enter 340ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.closeButton {
+  position: absolute;
+  z-index: 2;
+  top: 0.8rem;
+  right: 0.8rem;
+  width: 2.75rem;
+  height: 2.75rem;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgb(255 255 255 / 25%);
+  border-radius: 50%;
+  color: inherit;
+  background: rgb(3 18 31 / 42%);
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+}
+
+.closeButton:hover { background: rgb(3 18 31 / 64%); }
+.closeButton:focus-visible { outline: 3px solid currentColor; outline-offset: 2px; }
+.closeButton svg { width: 1.15rem; height: 1.15rem; }
+
+.popupImage { max-height: 16rem; overflow: hidden; background: rgb(0 0 0 / 14%); }
+.popupImage img { width: 100%; height: 100%; max-height: 16rem; display: block; object-fit: cover; }
+.popupContent { padding: clamp(1.4rem, 4vw, 2.2rem); }
+.popupMeta { display: flex; align-items: center; justify-content: space-between; gap: 0.8rem; margin-bottom: 1.25rem; }
+.popupMeta > span:first-child { display: inline-flex; align-items: center; gap: 0.45rem; font-size: 0.78rem; font-weight: 850; letter-spacing: 0.07em; text-transform: uppercase; }
+.popupMeta svg { width: 1rem; height: 1rem; }
+.activeBadge { flex: 0 0 auto; padding: 0.35rem 0.6rem; border: 1px solid currentColor; border-radius: 999px; font-size: 0.7rem; font-weight: 850; letter-spacing: 0.06em; text-transform: uppercase; opacity: 0.88; }
+.popupContent h2 { margin: 0; font-family: Georgia, "Times New Roman", serif; font-size: clamp(2rem, 7vw, 3rem); font-weight: 500; line-height: 1.02; letter-spacing: -0.04em; }
+.popupContent > p { margin: 1rem 0 0; font-size: 1rem; line-height: 1.7; opacity: 0.84; white-space: pre-line; }
+.popupDates,
+.linkedPromotion { display: flex; align-items: flex-start; gap: 0.5rem; margin-top: 1.35rem; font-size: 0.875rem; line-height: 1.55; opacity: 0.9; }
+.popupDates svg,
+.linkedPromotion svg { flex: 0 0 auto; width: 1rem; height: 1rem; margin-top: 0.2rem; }
+.linkedPromotion strong { font-weight: 850; }
+.popupNavigation { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid currentColor; }
+.popupNavigation > span { font-size: 0.8rem; font-weight: 800; opacity: 0.78; }
+.popupNavigation > div { display: flex; gap: 0.5rem; }
+.popupNavigation button { width: 2.75rem; height: 2.75rem; display: grid; place-items: center; border: 1px solid currentColor; border-radius: 50%; color: inherit; background: transparent; cursor: pointer; }
+.popupNavigation button:hover { background: rgb(255 255 255 / 12%); }
+.popupNavigation button:focus-visible { outline: 3px solid currentColor; outline-offset: 2px; }
+.popupNavigation svg { width: 1rem; height: 1rem; }
+
+@keyframes backdrop-enter { from { opacity: 0; } to { opacity: 1; } }
+@keyframes popup-enter { from { opacity: 0; transform: translateY(0.8rem) scale(0.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
+
+@media (max-width: 40rem) {
+  .popupDialog,
+  .center,
+  .topLeft,
+  .topRight,
+  .bottomLeft,
+  .bottomRight {
+    width: calc(100vw - 1.25rem);
+    max-height: calc(100dvh - 1.25rem);
+    inset: auto 0.625rem 0.625rem;
+    margin: 0 auto;
+  }
+
+  .popupPanel { max-height: calc(100dvh - 1.25rem); }
+  .popupMeta { align-items: flex-start; flex-direction: column; }
+  .popupImage,
+  .popupImage img { max-height: 13rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .popupDialog::backdrop,
+  .popupPanel { animation: none; }
+}

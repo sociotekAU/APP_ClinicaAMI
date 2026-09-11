@@ -17,6 +17,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import Link from "next/link";
+import { PublicAnnouncementPopups } from "../../components/public-site/public-announcement-popups";
 import { PublicGalleryCarousel, Reveal } from "../../components/public-site/public-home-interactions";
 import { getPublicWebContent } from "../../lib/public-web-content";
 import styles from "./home.module.css";
@@ -72,6 +73,7 @@ export default async function HomePage() {
   const services = content?.services ?? [];
   const gallery = content?.gallery ?? [];
   const professionals = content?.professionals ?? [];
+  const announcements = content?.announcements ?? [];
   const galleryItems = gallery.flatMap((item) => {
     const imageUrl = safeMediaUrl(item.imageUrl);
     return imageUrl ? [{ ...item, imageUrl }] : [];
@@ -88,6 +90,8 @@ export default async function HomePage() {
 
   return (
     <div className={styles.home}>
+      {announcements.length > 0 && <PublicAnnouncementPopups announcements={announcements} />}
+
       <section className={styles.hero} aria-labelledby="public-home-title">
         <div className={styles.heroInner}>
           <div className={styles.heroCopy}>
