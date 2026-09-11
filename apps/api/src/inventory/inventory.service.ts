@@ -1,5 +1,5 @@
 import { HttpStatus, Injectable } from "@nestjs/common";
-import type { AuthUser, InventoryItemListItem, InventoryMovementListItem, InventoryOptions, PaginatedData, SupplierListItem } from "@ami/contracts";
+import type { AuthUser, InventoryItemListItem, InventoryMovementListItem, InventoryOptions, PaginatedData, PublicInventoryItem, SupplierListItem } from "@ami/contracts";
 import { AppException } from "../common/errors/app.exception";
 import { createPageMeta, paginationOffset } from "../common/pagination/pagination";
 import { DatabaseService } from "../database/database.service";
@@ -17,6 +17,28 @@ const MOVEMENT_INCLUDE = {
   tb_usuarios: true,
 };
 
+const PUBLIC_ITEM_SELECT = {
+  id_insumo: true,
+  nombre: true,
+  tipo: true,
+  stock_actual: true,
+  stock_minimo: true,
+  stock_bajo: true,
+  unidad_medida: true,
+  tb_medicamentos: { select: { nombre_comercial: true } },
+};
+
+type PublicItemRow = {
+  id_insumo: number;
+  nombre: string;
+  tipo: string;
+  stock_actual: unknown;
+  stock_minimo: unknown;
+  stock_bajo: boolean | null;
+  unidad_medida: string;
+  tb_medicamentos: { nombre_comercial: string } | null;
+};
+
 function optionalText(value: string | undefined): string | null {
   const normalized = value?.trim();
   return normalized ? normalized : null;
@@ -25,6 +47,24 @@ function optionalText(value: string | undefined): string | null {
 @Injectable()
 export class InventoryService {
   constructor(private readonly database: DatabaseService) {}
+
+  async listPublicItems(): Promise<PublicInventoryItem[]> {
+    const rows = await this.database.client.tb_insumos_inventario.findMany({
+      where: { estado: true },
+      select: PUBLIC_ITEM_SELECT,
+      orderBy: [{ nombre: "asc" }, { id_insumo: "asc" }],
+    });
+    return rows.map((row) => this.toPublicItem(row));
+  }
+
+  async publicItem(id: number): Promise<PublicInventoryItem> {
+    const row = await this.database.client.tb_insumos_inventario.findFirst({
+      where: { id_insumo: id, estado: true },
+      select: PUBLIC_ITEM_SELECT,
+    });
+    if (!row) this.notFound("El producto solicitado no está disponible.");
+    return this.toPublicItem(row);
+  }
 
   async options(): Promise<InventoryOptions> {
     const [suppliers, medications, items] = await Promise.all([
@@ -191,6 +231,24 @@ export class InventoryService {
 
   private toItem(row: { id_insumo: number; nombre: string; tipo: string; stock_actual: unknown; stock_minimo: unknown; stock_bajo: boolean | null; precio_costo: unknown; unidad_medida: string; estado: boolean; fecha_creacion: Date; tb_proveedores: { id_proveedor: number; nombre_empresa: string } | null; tb_medicamentos: { id_medicamento: number; nombre_comercial: string } | null; _count: { tb_movimientos_inventario: number } }): InventoryItemListItem {
     return { id: row.id_insumo, name: row.nombre, type: row.tipo as InventoryItemListItem["type"], currentStock: Number(row.stock_actual), minimumStock: Number(row.stock_minimo), lowStock: row.stock_bajo ?? Number(row.stock_actual) <= Number(row.stock_minimo), costPrice: Number(row.precio_costo), unit: row.unidad_medida, active: row.estado, supplier: row.tb_proveedores ? { id: row.tb_proveedores.id_proveedor, name: row.tb_proveedores.nombre_empresa } : null, medication: row.tb_medicamentos ? { id: row.tb_medicamentos.id_medicamento, name: row.tb_medicamentos.nombre_comercial } : null, movementCount: row._count.tb_movimientos_inventario, createdAt: row.fecha_creacion.toISOString() };
+  }
+
+  private toPublicItem(row: PublicItemRow): PublicInventoryItem {
+    const stock = Number(row.stock_actual);
+    const minimumStock = Number(row.stock_minimo);
+    const availability = stock <= 0
+      ? "unavailable"
+      : (row.stock_bajo ?? stock <= minimumStock)
+        ? "limited"
+        : "available";
+    return {
+      id: row.id_insumo,
+      name: row.nombre,
+      type: row.tipo as PublicInventoryItem["type"],
+      unit: row.unidad_medida,
+      availability,
+      medicationName: row.tb_medicamentos?.nombre_comercial ?? null,
+    };
   }
 
   private toMovement(row: { id_movimiento: number; tipo_movimiento: string; cantidad: unknown; fecha: Date; observaciones: string | null; stock_anterior: unknown; stock_resultante: unknown; tb_insumos_inventario: { id_insumo: number; nombre: string; unidad_medida: string }; tb_usuarios: { id_usuario: number; nombre: string; username: string } }): InventoryMovementListItem {

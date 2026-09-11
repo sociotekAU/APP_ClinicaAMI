@@ -661,6 +661,17 @@ export interface SupplierInput {
 
 export type InventoryItemType = "medicamento" | "reactivo_laboratorio" | "material_clinico";
 
+export type PublicInventoryAvailability = "available" | "limited" | "unavailable";
+
+export interface PublicInventoryItem {
+  id: number;
+  name: string;
+  type: InventoryItemType;
+  unit: string;
+  availability: PublicInventoryAvailability;
+  medicationName: string | null;
+}
+
 export interface InventoryItemListItem {
   id: number;
   name: string;

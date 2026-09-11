@@ -42,4 +42,29 @@ describe("InventoryService", () => {
     await service.listItems({ page: 1, pageSize: 10, status: "low", sortBy: "stock", sortDirection: "asc" });
     expect(findMany).toHaveBeenCalledWith(expect.objectContaining({ where: expect.objectContaining({ estado: true, stock_bajo: true }), orderBy: expect.arrayContaining([{ stock_actual: "asc" }]) }));
   });
+
+  it("publica únicamente datos seguros de insumos activos", async () => {
+    const findMany = vi.fn().mockResolvedValue([
+      {
+        id_insumo: 7,
+        nombre: "Vitamina C",
+        tipo: "medicamento",
+        stock_actual: 3,
+        stock_minimo: 5,
+        stock_bajo: true,
+        unidad_medida: "frasco",
+        tb_medicamentos: { nombre_comercial: "Ácido ascórbico" },
+      },
+    ]);
+    const database = { client: { tb_insumos_inventario: { findMany } } } as unknown as DatabaseService;
+    const service = new InventoryService(database);
+
+    const products = await service.listPublicItems();
+
+    expect(findMany).toHaveBeenCalledWith(expect.objectContaining({ where: { estado: true } }));
+    expect(products).toEqual([{ id: 7, name: "Vitamina C", type: "medicamento", unit: "frasco", availability: "limited", medicationName: "Ácido ascórbico" }]);
+    expect(products[0]).not.toHaveProperty("supplier");
+    expect(products[0]).not.toHaveProperty("costPrice");
+    expect(products[0]).not.toHaveProperty("currentStock");
+  });
 });

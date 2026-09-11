@@ -19,6 +19,12 @@
   background: linear-gradient(125deg, #f7fbfe 0%, #eef6fb 58%, #f8f3e9 100%);
 }
 
+.heroCopy > * { animation: fade-up 720ms cubic-bezier(0.22, 1, 0.36, 1) both; }
+.heroCopy > :nth-child(2) { animation-delay: 90ms; }
+.heroCopy > :nth-child(3) { animation-delay: 180ms; }
+.heroCopy > :nth-child(4) { animation-delay: 270ms; }
+.heroVisual { animation: fade-scale 900ms 140ms cubic-bezier(0.22, 1, 0.36, 1) both; }
+
 .hero::before {
   position: absolute;
   z-index: -1;
@@ -99,7 +105,9 @@
   box-shadow: 0 1.6rem 4rem rgb(6 31 55 / 18%);
 }
 
-.heroVisual > img { object-fit: cover; object-position: center; }
+.heroVisual > img,
+.heroVisual > video { width: 100%; height: 100%; object-fit: cover; object-position: center; }
+.heroVisual > video { position: absolute; inset: 0; }
 
 .heroLocation {
   position: absolute;
@@ -116,12 +124,14 @@
   background: rgb(6 31 55 / 86%);
   box-shadow: 0 0.7rem 2rem rgb(6 31 55 / 22%);
   backdrop-filter: blur(12px);
+  text-decoration: none;
 }
 
 .heroLocation > svg { flex: 0 0 auto; width: 1.3rem; height: 1.3rem; color: #ddb979; }
-.heroLocation div { display: grid; gap: 0.16rem; }
+.heroLocation > span { display: grid; gap: 0.16rem; }
 .heroLocation strong { font-size: 0.9rem; }
 .heroLocation span { color: rgb(255 255 255 / 72%); font-size: 0.78rem; }
+.heroLocation:hover { background: rgb(6 31 55 / 94%); }
 
 .contactStrip {
   width: min(100% - 2.5rem, 82rem);
@@ -132,6 +142,7 @@
   border-radius: 0.9rem;
   background: #fff;
   box-shadow: 0 1rem 2.75rem rgb(6 31 55 / 8%);
+  animation: fade-up 700ms 360ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .contactStrip > div,
@@ -212,46 +223,77 @@
 .serviceIcon { width: 2.75rem; height: 2.75rem; display: grid; place-items: center; margin-bottom: 1rem; border-radius: 50%; color: #0b4c81; background: #eaf4fb; }
 .serviceIcon svg { width: 1.25rem; height: 1.25rem; }
 .serviceCard h3 { max-width: 13rem; margin: 0; color: #122e44; font-size: 1rem; line-height: 1.4; }
+.serviceCard p { margin: 0.55rem 0 0; color: #687985; font-size: 0.8rem; line-height: 1.5; }
 .serviceCard:hover .serviceNumber { color: rgb(255 255 255 / 45%); }
 .serviceCard:hover .serviceIcon { color: #061f37; background: #ddb979; }
 .serviceCard:hover h3 { color: #fff; }
+.serviceCard:hover p { color: rgb(255 255 255 / 72%); }
 
-.gallerySection { padding-top: 1rem; }
-
-.galleryGrid {
-  display: grid;
-  grid-template-columns: minmax(0, 1.38fr) minmax(19rem, 0.62fr);
-  grid-template-rows: repeat(2, minmax(15rem, 1fr));
-  gap: 1rem;
-}
-
-.galleryGrid figure {
-  position: relative;
-  min-height: 0;
-  overflow: hidden;
+.contentState {
   margin: 0;
-  border-radius: 0.9rem;
-  background: #dfe9ef;
+  padding: 1.25rem;
+  border: 1px dashed #c8d6e0;
+  border-radius: 0.8rem;
+  color: #62717d;
+  background: #f7fafc;
+  line-height: 1.6;
+  text-align: center;
 }
 
-.galleryGrid img { object-fit: cover; transition: transform 500ms ease; }
-.galleryGrid figure:hover img { transform: scale(1.025); }
-.galleryGrid figcaption {
-  position: absolute;
-  right: 0.8rem;
-  bottom: 0.8rem;
-  left: 0.8rem;
-  padding: 0.65rem 0.8rem;
-  border-radius: 0.55rem;
-  color: #fff;
-  background: rgb(6 31 55 / 82%);
-  font-size: 0.8rem;
-  font-weight: 750;
-  backdrop-filter: blur(10px);
-}
+.reveal { --reveal-delay: 0ms; }
+.revealEnhanced { transition: opacity 720ms cubic-bezier(0.22, 1, 0.36, 1), transform 720ms cubic-bezier(0.22, 1, 0.36, 1); transition-delay: var(--reveal-delay); }
+.revealHidden { opacity: 0; transform: translateY(2.25rem) scale(0.99); }
+.revealVisible { opacity: 1; transform: translateY(0) scale(1); }
+.revealEnhanced.revealVisible .serviceCard { animation: card-enter 560ms cubic-bezier(0.22, 1, 0.36, 1) both; animation-delay: var(--card-delay, 0ms); }
 
-.galleryPrimary { grid-row: 1 / 3; }
-.galleryPrimary img { object-position: center; }
+.gallerySection {
+  width: min(100% - 2.5rem, 72rem);
+  padding-top: clamp(2rem, 5vw, 4rem);
+}
+.carousel { overflow: hidden; border: 1px solid #cad9e4; border-radius: 1.15rem; background: #061f37; box-shadow: 0 1.5rem 4rem rgb(6 31 55 / 14%); }
+.carouselViewport { position: relative; height: clamp(20rem, 45vw, 34rem); overflow: hidden; background: radial-gradient(circle at center, #163f5e 0%, #061f37 72%); }
+.carouselSlide { position: absolute; inset: 0; width: 100%; height: 100%; padding: 0; border: 0; opacity: 0; background: transparent; cursor: zoom-in; pointer-events: none; transition: opacity 700ms ease, transform 900ms cubic-bezier(0.22, 1, 0.36, 1); transform: scale(1.025); }
+.carouselSlideActive { opacity: 1; pointer-events: auto; transform: scale(1); }
+.carouselSlide img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.carouselExpand { position: absolute; top: 1rem; right: 1rem; display: inline-flex; align-items: center; gap: 0.45rem; padding: 0.6rem 0.75rem; border: 1px solid rgb(255 255 255 / 26%); border-radius: 999px; color: #fff; background: rgb(6 31 55 / 75%); font-size: 0.875rem; font-weight: 800; opacity: 0; transform: translateY(-0.5rem); transition: opacity 180ms ease, transform 180ms ease; backdrop-filter: blur(10px); }
+.carouselExpand svg { width: 1rem; height: 1rem; }
+.carouselSlide:hover .carouselExpand,
+.carouselSlide:focus-visible .carouselExpand { opacity: 1; transform: translateY(0); }
+.carouselArrow { position: absolute; z-index: 3; top: 50%; width: 3rem; height: 3rem; display: grid; place-items: center; padding: 0; border: 1px solid rgb(255 255 255 / 28%); border-radius: 50%; color: #fff; background: rgb(6 31 55 / 76%); cursor: pointer; transform: translateY(-50%); transition: color 160ms ease, background 160ms ease, transform 160ms ease; backdrop-filter: blur(10px); }
+.carouselArrow:hover { color: #061f37; background: #ddb979; transform: translateY(-50%) scale(1.05); }
+.carouselArrow svg { width: 1.3rem; height: 1.3rem; }
+.carouselArrowPrevious { left: 1rem; }
+.carouselArrowNext { right: 1rem; }
+.carouselFooter { min-height: 7rem; display: flex; align-items: center; justify-content: space-between; gap: 2rem; padding: 1.2rem 1.4rem; color: #fff; }
+.carouselCaption { display: flex; align-items: flex-start; gap: 1rem; }
+.carouselCaption > span { padding-top: 0.15rem; color: #ddb979; font-size: 0.72rem; font-weight: 850; letter-spacing: 0.12em; }
+.carouselCaption > div { display: grid; gap: 0.28rem; }
+.carouselCaption strong { font-family: Georgia, "Times New Roman", serif; font-size: 1.15rem; font-weight: 500; }
+.carouselCaption p { max-width: 45rem; margin: 0; color: rgb(255 255 255 / 62%); font-size: 0.875rem; line-height: 1.5; }
+.carouselDots { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 0.1rem; }
+.carouselDots button { width: 2.75rem; height: 2.75rem; display: grid; place-items: center; padding: 0; border: 0; border-radius: 50%; background: transparent; cursor: pointer; }
+.carouselDots button::before { width: 0.55rem; height: 0.55rem; border-radius: 50%; background: rgb(255 255 255 / 36%); content: ""; transition: width 180ms ease, background 180ms ease; }
+.carouselDots .carouselDotActive::before { width: 1.65rem; border-radius: 999px; background: #ddb979; }
+.carouselSlide:focus-visible,
+.carouselArrow:focus-visible,
+.carouselDots button:focus-visible,
+.lightbox button:focus-visible { outline: 3px solid #ddb979; outline-offset: 3px; }
+
+.lightbox { width: min(94vw, 92rem); max-width: none; max-height: 94vh; padding: 0; border: 0; overflow: visible; color: #fff; background: transparent; }
+.lightbox::backdrop { background: rgb(2 13 23 / 88%); backdrop-filter: blur(10px); }
+.lightbox[open] { animation: lightbox-enter 260ms ease both; }
+.lightboxPanel { position: relative; overflow: hidden; border: 1px solid rgb(255 255 255 / 16%); border-radius: 1rem; background: #031522; box-shadow: 0 2rem 7rem rgb(0 0 0 / 55%); }
+.lightboxPanel > img { display: block; width: 100%; height: min(76vh, 52rem); object-fit: contain; background: #020d16; }
+.lightboxClose { position: absolute; z-index: 4; top: 0.85rem; right: 0.85rem; width: 2.75rem; height: 2.75rem; display: grid; place-items: center; padding: 0; border: 1px solid rgb(255 255 255 / 24%); border-radius: 50%; color: #fff; background: rgb(6 31 55 / 82%); cursor: pointer; backdrop-filter: blur(10px); }
+.lightboxClose:hover { color: #061f37; background: #ddb979; }
+.lightboxClose svg { width: 1.15rem; height: 1.15rem; }
+.lightboxArrow { position: absolute; z-index: 3; top: 50%; width: 3.1rem; height: 3.1rem; display: grid; place-items: center; padding: 0; border: 1px solid rgb(255 255 255 / 24%); border-radius: 50%; color: #fff; background: rgb(6 31 55 / 78%); cursor: pointer; transform: translateY(-50%); backdrop-filter: blur(10px); }
+.lightboxArrow:hover { color: #061f37; background: #ddb979; }
+.lightboxArrowPrevious { left: 1rem; }
+.lightboxArrowNext { right: 1rem; }
+.lightboxCaption { display: grid; gap: 0.35rem; padding: 1rem 1.25rem 1.2rem; }
+.lightboxCaption strong { font-family: Georgia, "Times New Roman", serif; font-size: 1.2rem; font-weight: 500; }
+.lightboxCaption p { margin: 0; color: rgb(255 255 255 / 62%); line-height: 1.55; }
 
 .professionalsSection {
   color: #fff;
@@ -282,11 +324,44 @@
 }
 
 .professionalPhoto { position: relative; aspect-ratio: 1 / 1.08; overflow: hidden; background: #e5e8ea; }
-.professionalPhoto img { object-fit: cover; filter: grayscale(100%); transition: filter 250ms ease, transform 350ms ease; }
+.professionalPhoto img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%); transition: filter 250ms ease, transform 350ms ease; }
 .professionalCard:hover .professionalPhoto img { filter: grayscale(0%); transform: scale(1.02); }
 .professionalCard > div:last-child { padding: 1.15rem; }
 .professionalCard h3 { margin: 0; color: #fff; font-family: Georgia, "Times New Roman", serif; font-size: 1.15rem; font-weight: 500; }
 .professionalCard p { min-height: 2.8em; margin: 0.45rem 0 0; color: rgb(255 255 255 / 58%); font-size: 0.8rem; line-height: 1.4; }
+.professionalCard .professionalProfile { min-height: 0; color: rgb(255 255 255 / 72%); line-height: 1.55; }
+.professionalsDirectory { margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid rgb(255 255 255 / 12%); }
+.directoryLabel { margin: 0 0 1rem; color: #ddb979; font-size: 0.75rem; font-weight: 850; letter-spacing: 0.12em; text-transform: uppercase; }
+.professionalsDirectoryGrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.75rem; }
+.professionalDirectoryCard { position: relative; min-height: 7rem; padding: 1.15rem 1.2rem 1.15rem 1.45rem; border: 1px solid rgb(255 255 255 / 11%); border-radius: 0.75rem; background: rgb(255 255 255 / 4%); transition: border-color 180ms ease, background 180ms ease, transform 180ms ease; }
+.professionalDirectoryCard::before { position: absolute; inset: 1rem auto 1rem 0; width: 3px; border-radius: 0 3px 3px 0; background: #b8873f; content: ""; }
+.professionalDirectoryCard:hover { border-color: rgb(221 185 121 / 34%); background: rgb(255 255 255 / 7%); transform: translateY(-2px); }
+.professionalDirectoryCard h3 { margin: 0; color: #fff; font-family: Georgia, "Times New Roman", serif; font-size: 1.05rem; font-weight: 500; }
+.professionalDirectoryCard p { margin: 0.5rem 0 0; color: rgb(255 255 255 / 56%); font-size: 0.82rem; line-height: 1.45; }
+.professionalsSection .contentState { border-color: rgb(255 255 255 / 20%); color: rgb(255 255 255 / 68%); background: rgb(255 255 255 / 5%); }
+
+.loadingPage { min-height: 100vh; }
+.loadingHero,
+.loadingSection { width: min(100% - 2.5rem, 82rem); margin-inline: auto; }
+.loadingHero { display: grid; grid-template-columns: 0.86fr 1.14fr; align-items: center; gap: clamp(2.5rem, 6vw, 6rem); padding-block: clamp(3rem, 8vw, 6rem); }
+.loadingCopy { display: grid; gap: 1.25rem; }
+.loadingLine,
+.loadingTitle,
+.loadingVisual,
+.loadingHeading,
+.loadingCard { display: block; border-radius: 0.75rem; background: linear-gradient(100deg, #e6edf2 20%, #f4f7f9 50%, #e6edf2 80%); background-size: 220% 100%; animation: loading-shimmer 1.4s ease-in-out infinite; }
+.loadingLine { width: 72%; height: 1rem; }
+.loadingTitle { width: 92%; height: 8rem; }
+.loadingVisual { min-height: 31rem; border-radius: 1.25rem 1.25rem 5.5rem 1.25rem; }
+.loadingSection { padding-block: 4rem; }
+.loadingHeading { width: min(24rem, 70%); height: 3rem; margin-bottom: 2rem; }
+.loadingCards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+.loadingCard { min-height: 12rem; }
+@keyframes loading-shimmer { to { background-position: -220% 0; } }
+@keyframes fade-up { from { opacity: 0; transform: translateY(1.5rem); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fade-scale { from { opacity: 0; transform: scale(0.965); } to { opacity: 1; transform: scale(1); } }
+@keyframes card-enter { from { opacity: 0; transform: translateY(1.25rem); } to { opacity: 1; transform: translateY(0); } }
+@keyframes lightbox-enter { from { opacity: 0; transform: scale(0.97); } to { opacity: 1; transform: scale(1); } }
 
 .professionalsAction {
   display: flex;
@@ -307,16 +382,18 @@
   .heroInner { grid-template-columns: minmax(0, 0.9fr) minmax(24rem, 1.1fr); gap: 2.5rem; }
   .servicesGrid,
   .professionalsGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .professionalsDirectoryGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .loadingCards { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 56rem) {
   .heroInner { grid-template-columns: 1fr; }
+  .loadingHero { grid-template-columns: 1fr; }
   .heroCopy { max-width: 46rem; }
   .heroVisual { min-height: clamp(24rem, 70vw, 34rem); }
   .contactStrip { grid-template-columns: 1fr; margin-top: 0; border-radius: 0; border-inline: 0; }
   .contactStrip > :not(:last-child) { border-right: 0; border-bottom: 1px solid #e2e9ef; }
-  .galleryGrid { grid-template-columns: 1fr 1fr; grid-template-rows: minmax(22rem, 1fr) minmax(15rem, 0.7fr); }
-  .galleryPrimary { grid-column: 1 / 3; grid-row: auto; }
+  .carouselViewport { height: clamp(20rem, 58vw, 31rem); }
 }
 
 @media (max-width: 42rem) {
@@ -336,17 +413,47 @@
   .servicesGrid,
   .professionalsGrid { grid-template-columns: 1fr; }
   .serviceCard { min-height: 10rem; }
-  .galleryGrid { grid-template-columns: 1fr; grid-template-rows: none; }
-  .galleryGrid figure,
-  .galleryPrimary { grid-column: auto; min-height: 19rem; }
-  .galleryPrimary { min-height: 23rem; }
+  .carouselViewport { height: clamp(17rem, 70vw, 22rem); }
+  .carouselArrow { width: 2.75rem; height: 2.75rem; }
+  .carouselArrowPrevious { left: 0.65rem; }
+  .carouselArrowNext { right: 0.65rem; }
+  .carouselFooter { align-items: flex-start; flex-direction: column; gap: 1rem; }
+  .carouselDots { justify-content: flex-start; }
+  .carouselExpand { opacity: 1; transform: none; }
+  .lightbox { width: 96vw; }
+  .lightboxPanel > img { height: 72vh; }
+  .lightboxArrow { width: 2.75rem; height: 2.75rem; }
+  .lightboxArrowPrevious { left: 0.65rem; }
+  .lightboxArrowNext { right: 0.65rem; }
+  .professionalsDirectoryGrid { grid-template-columns: 1fr; }
   .professionalsAction { align-items: flex-start; flex-direction: column; }
+  .loadingHero,
+  .loadingSection { width: min(100% - 1.5rem, 82rem); }
+  .loadingVisual { min-height: 24rem; }
+  .loadingCards { grid-template-columns: 1fr; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .primaryAction,
   .secondaryAction,
   .serviceCard,
-  .galleryGrid img,
-  .professionalPhoto img { transition: none; }
+  .carouselSlide,
+  .carouselExpand,
+  .carouselArrow,
+  .carouselDots button::before,
+  .professionalPhoto img,
+  .professionalDirectoryCard,
+  .revealEnhanced { transition: none; }
+  .heroCopy > *,
+  .heroVisual,
+  .contactStrip,
+  .revealEnhanced.revealVisible .serviceCard,
+  .lightbox[open] { animation: none; }
+  .revealHidden,
+  .revealVisible { opacity: 1; transform: none; }
+  .loadingLine,
+  .loadingTitle,
+  .loadingVisual,
+  .loadingHeading,
+  .loadingCard { animation: none; }
 }
