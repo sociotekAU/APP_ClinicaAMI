@@ -14,10 +14,16 @@ describe("inventory DTOs", () => {
   });
 
   it("rechaza cantidades negativas y tipos desconocidos", async () => {
-    const item = plainToInstance(InventoryItemInputDto, { name: "Guantes", type: "otro", minimumStock: -1, costPrice: -2, unit: "caja" });
+    const item = plainToInstance(InventoryItemInputDto, { name: "Guantes", type: "otro", minimumStock: -1, costPrice: -2, unit: "caja", imageUrl: "javascript:alert(1)" });
     const movement = plainToInstance(InventoryMovementInputDto, { itemId: 1, type: "ajuste", quantity: 0 });
-    expect((await validate(item)).map((error) => error.property)).toEqual(expect.arrayContaining(["type", "minimumStock", "costPrice"]));
+    expect((await validate(item)).map((error) => error.property)).toEqual(expect.arrayContaining(["type", "minimumStock", "costPrice", "imageUrl"]));
     expect((await validate(movement)).map((error) => error.property)).toEqual(expect.arrayContaining(["type", "quantity"]));
+  });
+
+  it("acepta una URL pública o una ruta local para la imagen del producto", async () => {
+    const base = { name: "Guantes", type: "material_clinico", minimumStock: 1, costPrice: 2, unit: "caja" };
+    expect(await validate(plainToInstance(InventoryItemInputDto, { ...base, imageUrl: "https://images.example.com/guantes.webp" }))).toHaveLength(0);
+    expect(await validate(plainToInstance(InventoryItemInputDto, { ...base, imageUrl: "/productos/guantes.webp" }))).toHaveLength(0);
   });
 
   it("valida el formato de correo del proveedor", async () => {

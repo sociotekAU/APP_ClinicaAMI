@@ -3,7 +3,9 @@ import type { Metadata } from "next";
 import { ArrowRight, ChevronRight, FlaskConical, Pill, Stethoscope, WifiOff, type LucideIcon } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getPublicProduct } from "../../../../lib/public-products";
+import { RelatedProductsCarousel } from "../../../../components/public-site/related-products-carousel";
+import { getPublicProduct, getPublicProducts } from "../../../../lib/public-products";
+import { safePublicationMediaUrl } from "../../../../lib/publication-presentation";
 import styles from "../products.module.css";
 
 type ProductPageProps = Readonly<{ params: Promise<{ id: string }> }>;
@@ -48,7 +50,10 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
   const productId = parseProductId(id);
   if (!productId) notFound();
 
-  const result = await getPublicProduct(productId);
+  const [result, products] = await Promise.all([
+    getPublicProduct(productId),
+    getPublicProducts(),
+  ]);
   if (result.status === "not-found") notFound();
 
   if (result.status === "unavailable") {
@@ -65,6 +70,8 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
 
   const product = result.product;
   const { Icon, label } = TYPE_DETAILS[product.type];
+  const imageUrl = safePublicationMediaUrl(product.imageUrl);
+  const relatedProducts = (products ?? []).filter((candidate) => candidate.id !== product.id);
   return (
     <div className={styles.detailPage}>
       <div className={styles.detailInner}>
@@ -77,8 +84,10 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
         </nav>
 
         <article className={styles.detailCard}>
-          <div className={`${styles.detailVisual} ${styles[product.type]}`}>
-            <Icon aria-hidden="true" />
+          <div className={`${styles.detailVisual} ${imageUrl ? styles.detailVisualImage : styles[product.type]}`}>
+            {imageUrl
+              ? <img src={imageUrl} alt={`Imagen de ${product.name}`} width="1200" height="1200" decoding="async" />
+              : <Icon aria-hidden="true" />}
             <span>{label}</span>
           </div>
           <div className={styles.detailContent}>
@@ -103,6 +112,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
             </Link>
           </div>
         </article>
+        <RelatedProductsCarousel products={relatedProducts} />
       </div>
     </div>
   );

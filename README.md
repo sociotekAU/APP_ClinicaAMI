@@ -73,7 +73,8 @@ Orden de ejecución preparado:
 11. `011_administracion_contenido_web.sql`
 12. `012_facturacion_caja_inventario.sql`
 13. `013_archivos_consentimientos.sql`
-14. `seed.sql`
+14. `014_imagen_productos_inventario.sql`
+15. `seed.sql`
 
 En una base y volumen nuevos, Docker ejecuta las migraciones y el seed en ese
 orden mediante `/docker-entrypoint-initdb.d`. PostgreSQL no vuelve a ejecutar
@@ -290,4 +291,4 @@ debe exponerse como directorio público del panel o del servidor web.
 No se debe ejecutar el seed de demostración automáticamente sobre una base de
 datos que ya contenga información de producción.
 
-*- empezaremos con la landing page 
+*- empezaremos con la landing page

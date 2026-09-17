@@ -53,6 +53,7 @@ describe("InventoryService", () => {
         stock_minimo: 5,
         stock_bajo: true,
         unidad_medida: "frasco",
+        imagen_url: "https://images.example.com/vitamina-c.webp",
         tb_medicamentos: { nombre_comercial: "Ácido ascórbico" },
       },
     ]);
@@ -62,7 +63,7 @@ describe("InventoryService", () => {
     const products = await service.listPublicItems();
 
     expect(findMany).toHaveBeenCalledWith(expect.objectContaining({ where: { estado: true } }));
-    expect(products).toEqual([{ id: 7, name: "Vitamina C", type: "medicamento", unit: "frasco", availability: "limited", medicationName: "Ácido ascórbico" }]);
+    expect(products).toEqual([{ id: 7, name: "Vitamina C", type: "medicamento", unit: "frasco", imageUrl: "https://images.example.com/vitamina-c.webp", availability: "limited", medicationName: "Ácido ascórbico" }]);
     expect(products[0]).not.toHaveProperty("supplier");
     expect(products[0]).not.toHaveProperty("costPrice");
     expect(products[0]).not.toHaveProperty("currentStock");

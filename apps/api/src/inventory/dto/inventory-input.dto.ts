@@ -1,6 +1,8 @@
 import { Type } from "class-transformer";
-import { IsEmail, IsIn, IsInt, IsNumber, IsOptional, IsString, MaxLength, Min, MinLength } from "class-validator";
+import { IsEmail, IsIn, IsInt, IsNumber, IsOptional, IsString, Matches, MaxLength, Min, MinLength } from "class-validator";
 import type { InventoryItemType, InventoryMovementType } from "@ami/contracts";
+
+const MEDIA_URL = /^(\/(?!\/)[^\s]*|https?:\/\/[^\s]+)$/i;
 
 export class SupplierInputDto {
   @IsString() @MinLength(2) @MaxLength(150)
@@ -40,6 +42,9 @@ export class InventoryItemInputDto {
 
   @IsString() @MinLength(1) @MaxLength(30)
   unit!: string;
+
+  @IsOptional() @IsString() @Matches(MEDIA_URL, { message: "imageUrl debe ser una ruta local o una dirección http/https válida." }) @MaxLength(500)
+  imageUrl?: string | null;
 }
 
 export class InventoryMovementInputDto {

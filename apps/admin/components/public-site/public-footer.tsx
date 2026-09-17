@@ -1,4 +1,3 @@
-import { LockKeyhole } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./public-shell.module.css";
@@ -28,11 +27,6 @@ export function PublicFooter() {
             <Link href={item.href} key={item.href}>{item.label}</Link>
           ))}
         </nav>
-
-        <Link className={styles.footerAccess} href="/login">
-          <LockKeyhole aria-hidden="true" />
-          Acceso administrativo
-        </Link>
       </div>
       <div className={styles.footerLegal}>
         <span>© {new Date().getFullYear()} Clínica A.M.I.</span>

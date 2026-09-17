@@ -1,4 +1,4 @@
-import { CalendarDays, LockKeyhole, Menu } from "lucide-react";
+import { CalendarDays, Menu } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./public-shell.module.css";
@@ -46,10 +46,6 @@ export function PublicHeader() {
         </nav>
 
         <div className={styles.headerActions}>
-          <Link className={styles.loginLink} href="/login">
-            <LockKeyhole aria-hidden="true" />
-            <span>Acceso</span>
-          </Link>
           <Link className={styles.appointmentLink} href="/agendar-cita">
             <CalendarDays aria-hidden="true" />
             Agendar cita
@@ -65,10 +61,6 @@ export function PublicHeader() {
             <Link className={styles.mobileAppointmentLink} href="/agendar-cita">
               <CalendarDays aria-hidden="true" />
               Agendar cita
-            </Link>
-            <Link className={styles.mobileAccessLink} href="/login">
-              <LockKeyhole aria-hidden="true" />
-              Acceso al sistema
             </Link>
           </nav>
         </details>

@@ -56,6 +56,7 @@ export type Tb_insumos_inventarioMinAggregateOutputType = {
   stock_minimo: runtime.Decimal | null
   precio_costo: runtime.Decimal | null
   unidad_medida: string | null
+  imagen_url: string | null
   estado: boolean | null
   fecha_creacion: Date | null
   stock_bajo: boolean | null
@@ -71,6 +72,7 @@ export type Tb_insumos_inventarioMaxAggregateOutputType = {
   stock_minimo: runtime.Decimal | null
   precio_costo: runtime.Decimal | null
   unidad_medida: string | null
+  imagen_url: string | null
   estado: boolean | null
   fecha_creacion: Date | null
   stock_bajo: boolean | null
@@ -86,6 +88,7 @@ export type Tb_insumos_inventarioCountAggregateOutputType = {
   stock_minimo: number
   precio_costo: number
   unidad_medida: number
+  imagen_url: number
   estado: number
   fecha_creacion: number
   stock_bajo: number
@@ -121,6 +124,7 @@ export type Tb_insumos_inventarioMinAggregateInputType = {
   stock_minimo?: true
   precio_costo?: true
   unidad_medida?: true
+  imagen_url?: true
   estado?: true
   fecha_creacion?: true
   stock_bajo?: true
@@ -136,6 +140,7 @@ export type Tb_insumos_inventarioMaxAggregateInputType = {
   stock_minimo?: true
   precio_costo?: true
   unidad_medida?: true
+  imagen_url?: true
   estado?: true
   fecha_creacion?: true
   stock_bajo?: true
@@ -151,6 +156,7 @@ export type Tb_insumos_inventarioCountAggregateInputType = {
   stock_minimo?: true
   precio_costo?: true
   unidad_medida?: true
+  imagen_url?: true
   estado?: true
   fecha_creacion?: true
   stock_bajo?: true
@@ -253,6 +259,7 @@ export type Tb_insumos_inventarioGroupByOutputType = {
   stock_minimo: runtime.Decimal
   precio_costo: runtime.Decimal
   unidad_medida: string
+  imagen_url: string | null
   estado: boolean
   fecha_creacion: Date
   stock_bajo: boolean | null
@@ -291,6 +298,7 @@ export type tb_insumos_inventarioWhereInput = {
   stock_minimo?: Prisma.DecimalFilter<"tb_insumos_inventario"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   precio_costo?: Prisma.DecimalFilter<"tb_insumos_inventario"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   unidad_medida?: Prisma.StringFilter<"tb_insumos_inventario"> | string
+  imagen_url?: Prisma.StringNullableFilter<"tb_insumos_inventario"> | string | null
   estado?: Prisma.BoolFilter<"tb_insumos_inventario"> | boolean
   fecha_creacion?: Prisma.DateTimeFilter<"tb_insumos_inventario"> | Date | string
   stock_bajo?: Prisma.BoolNullableFilter<"tb_insumos_inventario"> | boolean | null
@@ -309,6 +317,7 @@ export type tb_insumos_inventarioOrderByWithRelationInput = {
   stock_minimo?: Prisma.SortOrder
   precio_costo?: Prisma.SortOrder
   unidad_medida?: Prisma.SortOrder
+  imagen_url?: Prisma.SortOrderInput | Prisma.SortOrder
   estado?: Prisma.SortOrder
   fecha_creacion?: Prisma.SortOrder
   stock_bajo?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -330,6 +339,7 @@ export type tb_insumos_inventarioWhereUniqueInput = Prisma.AtLeast<{
   stock_minimo?: Prisma.DecimalFilter<"tb_insumos_inventario"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   precio_costo?: Prisma.DecimalFilter<"tb_insumos_inventario"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   unidad_medida?: Prisma.StringFilter<"tb_insumos_inventario"> | string
+  imagen_url?: Prisma.StringNullableFilter<"tb_insumos_inventario"> | string | null
   estado?: Prisma.BoolFilter<"tb_insumos_inventario"> | boolean
   fecha_creacion?: Prisma.DateTimeFilter<"tb_insumos_inventario"> | Date | string
   stock_bajo?: Prisma.BoolNullableFilter<"tb_insumos_inventario"> | boolean | null
@@ -348,6 +358,7 @@ export type tb_insumos_inventarioOrderByWithAggregationInput = {
   stock_minimo?: Prisma.SortOrder
   precio_costo?: Prisma.SortOrder
   unidad_medida?: Prisma.SortOrder
+  imagen_url?: Prisma.SortOrderInput | Prisma.SortOrder
   estado?: Prisma.SortOrder
   fecha_creacion?: Prisma.SortOrder
   stock_bajo?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -371,6 +382,7 @@ export type tb_insumos_inventarioScalarWhereWithAggregatesInput = {
   stock_minimo?: Prisma.DecimalWithAggregatesFilter<"tb_insumos_inventario"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   precio_costo?: Prisma.DecimalWithAggregatesFilter<"tb_insumos_inventario"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   unidad_medida?: Prisma.StringWithAggregatesFilter<"tb_insumos_inventario"> | string
+  imagen_url?: Prisma.StringNullableWithAggregatesFilter<"tb_insumos_inventario"> | string | null
   estado?: Prisma.BoolWithAggregatesFilter<"tb_insumos_inventario"> | boolean
   fecha_creacion?: Prisma.DateTimeWithAggregatesFilter<"tb_insumos_inventario"> | Date | string
   stock_bajo?: Prisma.BoolNullableWithAggregatesFilter<"tb_insumos_inventario"> | boolean | null
@@ -383,6 +395,7 @@ export type tb_insumos_inventarioCreateInput = {
   stock_minimo?: runtime.Decimal | runtime.DecimalJsLike | number | string
   precio_costo?: runtime.Decimal | runtime.DecimalJsLike | number | string
   unidad_medida?: string
+  imagen_url?: string | null
   estado?: boolean
   fecha_creacion?: Date | string
   stock_bajo?: boolean | null
@@ -401,6 +414,7 @@ export type tb_insumos_inventarioUncheckedCreateInput = {
   stock_minimo?: runtime.Decimal | runtime.DecimalJsLike | number | string
   precio_costo?: runtime.Decimal | runtime.DecimalJsLike | number | string
   unidad_medida?: string
+  imagen_url?: string | null
   estado?: boolean
   fecha_creacion?: Date | string
   stock_bajo?: boolean | null
@@ -414,6 +428,7 @@ export type tb_insumos_inventarioUpdateInput = {
   stock_minimo?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   precio_costo?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   unidad_medida?: Prisma.StringFieldUpdateOperationsInput | string
+  imagen_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   estado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   stock_bajo?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -432,6 +447,7 @@ export type tb_insumos_inventarioUncheckedUpdateInput = {
   stock_minimo?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   precio_costo?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   unidad_medida?: Prisma.StringFieldUpdateOperationsInput | string
+  imagen_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   estado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   stock_bajo?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -448,6 +464,7 @@ export type tb_insumos_inventarioCreateManyInput = {
   stock_minimo?: runtime.Decimal | runtime.DecimalJsLike | number | string
   precio_costo?: runtime.Decimal | runtime.DecimalJsLike | number | string
   unidad_medida?: string
+  imagen_url?: string | null
   estado?: boolean
   fecha_creacion?: Date | string
   stock_bajo?: boolean | null
@@ -460,6 +477,7 @@ export type tb_insumos_inventarioUpdateManyMutationInput = {
   stock_minimo?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   precio_costo?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   unidad_medida?: Prisma.StringFieldUpdateOperationsInput | string
+  imagen_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   estado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   stock_bajo?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -475,6 +493,7 @@ export type tb_insumos_inventarioUncheckedUpdateManyInput = {
   stock_minimo?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   precio_costo?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   unidad_medida?: Prisma.StringFieldUpdateOperationsInput | string
+  imagen_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   estado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   stock_bajo?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -490,6 +509,7 @@ export type tb_insumos_inventarioCountOrderByAggregateInput = {
   stock_minimo?: Prisma.SortOrder
   precio_costo?: Prisma.SortOrder
   unidad_medida?: Prisma.SortOrder
+  imagen_url?: Prisma.SortOrder
   estado?: Prisma.SortOrder
   fecha_creacion?: Prisma.SortOrder
   stock_bajo?: Prisma.SortOrder
@@ -514,6 +534,7 @@ export type tb_insumos_inventarioMaxOrderByAggregateInput = {
   stock_minimo?: Prisma.SortOrder
   precio_costo?: Prisma.SortOrder
   unidad_medida?: Prisma.SortOrder
+  imagen_url?: Prisma.SortOrder
   estado?: Prisma.SortOrder
   fecha_creacion?: Prisma.SortOrder
   stock_bajo?: Prisma.SortOrder
@@ -529,6 +550,7 @@ export type tb_insumos_inventarioMinOrderByAggregateInput = {
   stock_minimo?: Prisma.SortOrder
   precio_costo?: Prisma.SortOrder
   unidad_medida?: Prisma.SortOrder
+  imagen_url?: Prisma.SortOrder
   estado?: Prisma.SortOrder
   fecha_creacion?: Prisma.SortOrder
   stock_bajo?: Prisma.SortOrder
@@ -667,6 +689,7 @@ export type tb_insumos_inventarioCreateWithoutTb_medicamentosInput = {
   stock_minimo?: runtime.Decimal | runtime.DecimalJsLike | number | string
   precio_costo?: runtime.Decimal | runtime.DecimalJsLike | number | string
   unidad_medida?: string
+  imagen_url?: string | null
   estado?: boolean
   fecha_creacion?: Date | string
   stock_bajo?: boolean | null
@@ -683,6 +706,7 @@ export type tb_insumos_inventarioUncheckedCreateWithoutTb_medicamentosInput = {
   stock_minimo?: runtime.Decimal | runtime.DecimalJsLike | number | string
   precio_costo?: runtime.Decimal | runtime.DecimalJsLike | number | string
   unidad_medida?: string
+  imagen_url?: string | null
   estado?: boolean
   fecha_creacion?: Date | string
   stock_bajo?: boolean | null
@@ -728,6 +752,7 @@ export type tb_insumos_inventarioScalarWhereInput = {
   stock_minimo?: Prisma.DecimalFilter<"tb_insumos_inventario"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   precio_costo?: Prisma.DecimalFilter<"tb_insumos_inventario"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   unidad_medida?: Prisma.StringFilter<"tb_insumos_inventario"> | string
+  imagen_url?: Prisma.StringNullableFilter<"tb_insumos_inventario"> | string | null
   estado?: Prisma.BoolFilter<"tb_insumos_inventario"> | boolean
   fecha_creacion?: Prisma.DateTimeFilter<"tb_insumos_inventario"> | Date | string
   stock_bajo?: Prisma.BoolNullableFilter<"tb_insumos_inventario"> | boolean | null
@@ -740,6 +765,7 @@ export type tb_insumos_inventarioCreateWithoutTb_movimientos_inventarioInput = {
   stock_minimo?: runtime.Decimal | runtime.DecimalJsLike | number | string
   precio_costo?: runtime.Decimal | runtime.DecimalJsLike | number | string
   unidad_medida?: string
+  imagen_url?: string | null
   estado?: boolean
   fecha_creacion?: Date | string
   stock_bajo?: boolean | null
@@ -757,6 +783,7 @@ export type tb_insumos_inventarioUncheckedCreateWithoutTb_movimientos_inventario
   stock_minimo?: runtime.Decimal | runtime.DecimalJsLike | number | string
   precio_costo?: runtime.Decimal | runtime.DecimalJsLike | number | string
   unidad_medida?: string
+  imagen_url?: string | null
   estado?: boolean
   fecha_creacion?: Date | string
   stock_bajo?: boolean | null
@@ -785,6 +812,7 @@ export type tb_insumos_inventarioUpdateWithoutTb_movimientos_inventarioInput = {
   stock_minimo?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   precio_costo?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   unidad_medida?: Prisma.StringFieldUpdateOperationsInput | string
+  imagen_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   estado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   stock_bajo?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -802,6 +830,7 @@ export type tb_insumos_inventarioUncheckedUpdateWithoutTb_movimientos_inventario
   stock_minimo?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   precio_costo?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   unidad_medida?: Prisma.StringFieldUpdateOperationsInput | string
+  imagen_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   estado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   stock_bajo?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -814,6 +843,7 @@ export type tb_insumos_inventarioCreateWithoutTb_proveedoresInput = {
   stock_minimo?: runtime.Decimal | runtime.DecimalJsLike | number | string
   precio_costo?: runtime.Decimal | runtime.DecimalJsLike | number | string
   unidad_medida?: string
+  imagen_url?: string | null
   estado?: boolean
   fecha_creacion?: Date | string
   stock_bajo?: boolean | null
@@ -830,6 +860,7 @@ export type tb_insumos_inventarioUncheckedCreateWithoutTb_proveedoresInput = {
   stock_minimo?: runtime.Decimal | runtime.DecimalJsLike | number | string
   precio_costo?: runtime.Decimal | runtime.DecimalJsLike | number | string
   unidad_medida?: string
+  imagen_url?: string | null
   estado?: boolean
   fecha_creacion?: Date | string
   stock_bajo?: boolean | null
@@ -871,6 +902,7 @@ export type tb_insumos_inventarioCreateManyTb_medicamentosInput = {
   stock_minimo?: runtime.Decimal | runtime.DecimalJsLike | number | string
   precio_costo?: runtime.Decimal | runtime.DecimalJsLike | number | string
   unidad_medida?: string
+  imagen_url?: string | null
   estado?: boolean
   fecha_creacion?: Date | string
   stock_bajo?: boolean | null
@@ -883,6 +915,7 @@ export type tb_insumos_inventarioUpdateWithoutTb_medicamentosInput = {
   stock_minimo?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   precio_costo?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   unidad_medida?: Prisma.StringFieldUpdateOperationsInput | string
+  imagen_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   estado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   stock_bajo?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -899,6 +932,7 @@ export type tb_insumos_inventarioUncheckedUpdateWithoutTb_medicamentosInput = {
   stock_minimo?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   precio_costo?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   unidad_medida?: Prisma.StringFieldUpdateOperationsInput | string
+  imagen_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   estado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   stock_bajo?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -914,6 +948,7 @@ export type tb_insumos_inventarioUncheckedUpdateManyWithoutTb_medicamentosInput 
   stock_minimo?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   precio_costo?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   unidad_medida?: Prisma.StringFieldUpdateOperationsInput | string
+  imagen_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   estado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   stock_bajo?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -928,6 +963,7 @@ export type tb_insumos_inventarioCreateManyTb_proveedoresInput = {
   stock_minimo?: runtime.Decimal | runtime.DecimalJsLike | number | string
   precio_costo?: runtime.Decimal | runtime.DecimalJsLike | number | string
   unidad_medida?: string
+  imagen_url?: string | null
   estado?: boolean
   fecha_creacion?: Date | string
   stock_bajo?: boolean | null
@@ -940,6 +976,7 @@ export type tb_insumos_inventarioUpdateWithoutTb_proveedoresInput = {
   stock_minimo?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   precio_costo?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   unidad_medida?: Prisma.StringFieldUpdateOperationsInput | string
+  imagen_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   estado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   stock_bajo?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -956,6 +993,7 @@ export type tb_insumos_inventarioUncheckedUpdateWithoutTb_proveedoresInput = {
   stock_minimo?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   precio_costo?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   unidad_medida?: Prisma.StringFieldUpdateOperationsInput | string
+  imagen_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   estado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   stock_bajo?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -971,6 +1009,7 @@ export type tb_insumos_inventarioUncheckedUpdateManyWithoutTb_proveedoresInput =
   stock_minimo?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   precio_costo?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   unidad_medida?: Prisma.StringFieldUpdateOperationsInput | string
+  imagen_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   estado?: Prisma.BoolFieldUpdateOperationsInput | boolean
   fecha_creacion?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   stock_bajo?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -1017,6 +1056,7 @@ export type tb_insumos_inventarioSelect<ExtArgs extends runtime.Types.Extensions
   stock_minimo?: boolean
   precio_costo?: boolean
   unidad_medida?: boolean
+  imagen_url?: boolean
   estado?: boolean
   fecha_creacion?: boolean
   stock_bajo?: boolean
@@ -1036,6 +1076,7 @@ export type tb_insumos_inventarioSelectCreateManyAndReturn<ExtArgs extends runti
   stock_minimo?: boolean
   precio_costo?: boolean
   unidad_medida?: boolean
+  imagen_url?: boolean
   estado?: boolean
   fecha_creacion?: boolean
   stock_bajo?: boolean
@@ -1053,6 +1094,7 @@ export type tb_insumos_inventarioSelectUpdateManyAndReturn<ExtArgs extends runti
   stock_minimo?: boolean
   precio_costo?: boolean
   unidad_medida?: boolean
+  imagen_url?: boolean
   estado?: boolean
   fecha_creacion?: boolean
   stock_bajo?: boolean
@@ -1070,12 +1112,13 @@ export type tb_insumos_inventarioSelectScalar = {
   stock_minimo?: boolean
   precio_costo?: boolean
   unidad_medida?: boolean
+  imagen_url?: boolean
   estado?: boolean
   fecha_creacion?: boolean
   stock_bajo?: boolean
 }
 
-export type tb_insumos_inventarioOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id_insumo" | "nombre" | "tipo" | "id_proveedor" | "id_medicamento" | "stock_actual" | "stock_minimo" | "precio_costo" | "unidad_medida" | "estado" | "fecha_creacion" | "stock_bajo", ExtArgs["result"]["tb_insumos_inventario"]>
+export type tb_insumos_inventarioOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id_insumo" | "nombre" | "tipo" | "id_proveedor" | "id_medicamento" | "stock_actual" | "stock_minimo" | "precio_costo" | "unidad_medida" | "imagen_url" | "estado" | "fecha_creacion" | "stock_bajo", ExtArgs["result"]["tb_insumos_inventario"]>
 export type tb_insumos_inventarioInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tb_medicamentos?: boolean | Prisma.tb_insumos_inventario$tb_medicamentosArgs<ExtArgs>
   tb_proveedores?: boolean | Prisma.tb_insumos_inventario$tb_proveedoresArgs<ExtArgs>
@@ -1108,6 +1151,7 @@ export type $tb_insumos_inventarioPayload<ExtArgs extends runtime.Types.Extensio
     stock_minimo: runtime.Decimal
     precio_costo: runtime.Decimal
     unidad_medida: string
+    imagen_url: string | null
     estado: boolean
     fecha_creacion: Date
     stock_bajo: boolean | null
@@ -1546,6 +1590,7 @@ export interface tb_insumos_inventarioFieldRefs {
   readonly stock_minimo: Prisma.FieldRef<"tb_insumos_inventario", 'Decimal'>
   readonly precio_costo: Prisma.FieldRef<"tb_insumos_inventario", 'Decimal'>
   readonly unidad_medida: Prisma.FieldRef<"tb_insumos_inventario", 'String'>
+  readonly imagen_url: Prisma.FieldRef<"tb_insumos_inventario", 'String'>
   readonly estado: Prisma.FieldRef<"tb_insumos_inventario", 'Boolean'>
   readonly fecha_creacion: Prisma.FieldRef<"tb_insumos_inventario", 'DateTime'>
   readonly stock_bajo: Prisma.FieldRef<"tb_insumos_inventario", 'Boolean'>

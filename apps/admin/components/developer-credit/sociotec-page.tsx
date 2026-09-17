@@ -46,9 +46,9 @@ export function SociotecPage() {
           <Code2 size={20} aria-hidden="true" />
           <span>SOCIOTEC</span>
         </a>
-        <Link className={styles.backLink} href="/login">
+        <Link className={styles.backLink} href="/">
           <ArrowLeft size={17} aria-hidden="true" />
-          Volver al sistema
+          Volver a Clínica A.M.I.
         </Link>
       </header>
 

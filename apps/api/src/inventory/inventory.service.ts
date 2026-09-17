@@ -25,6 +25,7 @@ const PUBLIC_ITEM_SELECT = {
   stock_minimo: true,
   stock_bajo: true,
   unidad_medida: true,
+  imagen_url: true,
   tb_medicamentos: { select: { nombre_comercial: true } },
 };
 
@@ -36,6 +37,7 @@ type PublicItemRow = {
   stock_minimo: unknown;
   stock_bajo: boolean | null;
   unidad_medida: string;
+  imagen_url: string | null;
   tb_medicamentos: { nombre_comercial: string } | null;
 };
 
@@ -162,6 +164,7 @@ export class InventoryService {
       minimumStock: Number(current.stock_minimo),
       costPrice: Number(current.precio_costo),
       unit: current.unidad_medida,
+      imageUrl: current.imagen_url,
     });
     const row = await this.database.client.tb_insumos_inventario.update({ where: { id_insumo: id }, data: { estado: active }, include: ITEM_INCLUDE });
     return this.toItem(row);
@@ -209,7 +212,7 @@ export class InventoryService {
   }
 
   private itemData(input: InventoryItemInputDto) {
-    return { nombre: input.name.trim(), tipo: input.type, id_proveedor: input.supplierId ?? null, id_medicamento: input.type === "medicamento" ? input.medicationId ?? null : null, stock_minimo: input.minimumStock, precio_costo: input.costPrice, unidad_medida: input.unit.trim() };
+    return { nombre: input.name.trim(), tipo: input.type, id_proveedor: input.supplierId ?? null, id_medicamento: input.type === "medicamento" ? input.medicationId ?? null : null, stock_minimo: input.minimumStock, precio_costo: input.costPrice, unidad_medida: input.unit.trim(), imagen_url: optionalText(input.imageUrl ?? undefined) };
   }
 
   private async validateItemRelations(input: InventoryItemInputDto): Promise<void> {
@@ -229,8 +232,8 @@ export class InventoryService {
     return { id: row.id_proveedor, companyName: row.nombre_empresa, contact: row.contacto, phone: row.telefono, email: row.correo, address: row.direccion, active: row.estado, itemCount: row._count.tb_insumos_inventario, createdAt: row.fecha_creacion.toISOString() };
   }
 
-  private toItem(row: { id_insumo: number; nombre: string; tipo: string; stock_actual: unknown; stock_minimo: unknown; stock_bajo: boolean | null; precio_costo: unknown; unidad_medida: string; estado: boolean; fecha_creacion: Date; tb_proveedores: { id_proveedor: number; nombre_empresa: string } | null; tb_medicamentos: { id_medicamento: number; nombre_comercial: string } | null; _count: { tb_movimientos_inventario: number } }): InventoryItemListItem {
-    return { id: row.id_insumo, name: row.nombre, type: row.tipo as InventoryItemListItem["type"], currentStock: Number(row.stock_actual), minimumStock: Number(row.stock_minimo), lowStock: row.stock_bajo ?? Number(row.stock_actual) <= Number(row.stock_minimo), costPrice: Number(row.precio_costo), unit: row.unidad_medida, active: row.estado, supplier: row.tb_proveedores ? { id: row.tb_proveedores.id_proveedor, name: row.tb_proveedores.nombre_empresa } : null, medication: row.tb_medicamentos ? { id: row.tb_medicamentos.id_medicamento, name: row.tb_medicamentos.nombre_comercial } : null, movementCount: row._count.tb_movimientos_inventario, createdAt: row.fecha_creacion.toISOString() };
+  private toItem(row: { id_insumo: number; nombre: string; tipo: string; stock_actual: unknown; stock_minimo: unknown; stock_bajo: boolean | null; precio_costo: unknown; unidad_medida: string; imagen_url: string | null; estado: boolean; fecha_creacion: Date; tb_proveedores: { id_proveedor: number; nombre_empresa: string } | null; tb_medicamentos: { id_medicamento: number; nombre_comercial: string } | null; _count: { tb_movimientos_inventario: number } }): InventoryItemListItem {
+    return { id: row.id_insumo, name: row.nombre, type: row.tipo as InventoryItemListItem["type"], currentStock: Number(row.stock_actual), minimumStock: Number(row.stock_minimo), lowStock: row.stock_bajo ?? Number(row.stock_actual) <= Number(row.stock_minimo), costPrice: Number(row.precio_costo), unit: row.unidad_medida, imageUrl: row.imagen_url, active: row.estado, supplier: row.tb_proveedores ? { id: row.tb_proveedores.id_proveedor, name: row.tb_proveedores.nombre_empresa } : null, medication: row.tb_medicamentos ? { id: row.tb_medicamentos.id_medicamento, name: row.tb_medicamentos.nombre_comercial } : null, movementCount: row._count.tb_movimientos_inventario, createdAt: row.fecha_creacion.toISOString() };
   }
 
   private toPublicItem(row: PublicItemRow): PublicInventoryItem {
@@ -246,6 +249,7 @@ export class InventoryService {
       name: row.nombre,
       type: row.tipo as PublicInventoryItem["type"],
       unit: row.unidad_medida,
+      imageUrl: row.imagen_url,
       availability,
       medicationName: row.tb_medicamentos?.nombre_comercial ?? null,
     };

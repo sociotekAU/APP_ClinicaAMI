@@ -106,7 +106,6 @@
 
 .headerActions { display: flex; align-items: center; gap: 0.5rem; }
 
-.loginLink,
 .appointmentLink {
   min-height: 2.75rem;
   display: inline-flex;
@@ -119,11 +118,6 @@
   text-decoration: none;
 }
 
-.loginLink {
-  padding: 0.68rem 0.6rem;
-  color: var(--public-blue);
-}
-
 .appointmentLink {
   padding: 0.68rem 1rem;
   color: #fff;
@@ -132,9 +126,7 @@
   transition: background 150ms ease, transform 150ms ease;
 }
 
-.loginLink:hover { background: var(--public-blue-soft); }
 .appointmentLink:hover { background: var(--public-navy); transform: translateY(-1px); }
-.loginLink svg,
 .appointmentLink svg { width: 1rem; height: 1rem; }
 
 .mobileMenu { position: relative; display: none; margin-left: auto; }
@@ -170,7 +162,6 @@
 }
 
 .mobileNavLink,
-.mobileAccessLink,
 .mobileAppointmentLink {
   min-height: 2.9rem;
   display: flex;
@@ -185,11 +176,9 @@
 }
 
 .mobileNavLink:hover,
-.mobileAccessLink:hover { background: var(--public-blue-soft); }
+.mobileNavLink:focus-visible { background: var(--public-blue-soft); }
 .mobileAppointmentLink { margin-top: 0.35rem; color: #fff; background: var(--public-blue); }
-.mobileAccessLink { color: var(--public-muted); }
-.mobileAppointmentLink svg,
-.mobileAccessLink svg { width: 1rem; height: 1rem; }
+.mobileAppointmentLink svg { width: 1rem; height: 1rem; }
 
 .main {
   flex: 1;
@@ -233,7 +222,7 @@
 .footerInner {
   width: min(100% - 2.5rem, 82rem);
   display: grid;
-  grid-template-columns: minmax(15rem, 1fr) auto minmax(12rem, 1fr);
+  grid-template-columns: minmax(15rem, 1fr) auto;
   align-items: center;
   gap: 2rem;
   margin-inline: auto;
@@ -247,13 +236,8 @@
 .footerBrand span { font-size: 0.72rem; letter-spacing: 0.045em; text-transform: uppercase; }
 
 .footerNav { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 0.35rem 1rem; }
-.footerNav a,
-.footerAccess { color: rgb(255 255 255 / 70%); font-size: 0.8rem; font-weight: 650; text-decoration: none; }
-.footerNav a:hover,
-.footerAccess:hover { color: var(--public-gold-light); }
-
-.footerAccess { display: inline-flex; align-items: center; justify-self: end; gap: 0.4rem; }
-.footerAccess svg { width: 0.9rem; height: 0.9rem; }
+.footerNav a { color: rgb(255 255 255 / 70%); font-size: 0.8rem; font-weight: 650; text-decoration: none; }
+.footerNav a:hover { color: var(--public-gold-light); }
 
 .footerLegal {
   width: min(100% - 2.5rem, 82rem);
@@ -282,7 +266,6 @@
   .mobileMenu { display: block; }
   .footerInner { width: min(100% - 2rem, 82rem); grid-template-columns: 1fr; justify-items: start; gap: 1.5rem; }
   .footerNav { justify-content: flex-start; }
-  .footerAccess { justify-self: start; }
   .footerLegal { width: min(100% - 2rem, 82rem); align-items: flex-start; flex-direction: column; gap: 0.25rem; }
 }
 

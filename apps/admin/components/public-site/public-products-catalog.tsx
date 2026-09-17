@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useMemo, useState } from "react";
 import styles from "../../app/(public)/productos/products.module.css";
 import { filterPublicProducts, type PublicProductFilter } from "../../lib/public-product-filter";
+import { safePublicationMediaUrl } from "../../lib/publication-presentation";
 
 const FILTERS: ReadonlyArray<{ value: PublicProductFilter; label: string }> = [
   { value: "all", label: "Todos" },
@@ -88,10 +89,13 @@ export function PublicProductsCatalog({ products }: Readonly<{ products: PublicI
             <div className={styles.productGrid}>
               {filteredProducts.map((product) => {
                 const { Icon, label } = TYPE_DETAILS[product.type];
+                const imageUrl = safePublicationMediaUrl(product.imageUrl);
                 return (
                   <Link className={styles.productCard} href={`/productos/${product.id}`} key={product.id} aria-label={`Ver ${product.name}`}>
-                    <span className={`${styles.productVisual} ${styles[product.type]}`}>
-                      <Icon aria-hidden="true" />
+                    <span className={`${styles.productVisual} ${imageUrl ? styles.productVisualImage : styles[product.type]}`}>
+                      {imageUrl
+                        ? <img src={imageUrl} alt="" width="900" height="600" loading="lazy" decoding="async" />
+                        : <Icon aria-hidden="true" />}
                       <span>{label}</span>
                     </span>
                     <span className={styles.productBody}>

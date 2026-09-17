@@ -336,6 +336,7 @@ export const Tb_insumos_inventarioScalarFieldEnum = {
   stock_minimo: 'stock_minimo',
   precio_costo: 'precio_costo',
   unidad_medida: 'unidad_medida',
+  imagen_url: 'imagen_url',
   estado: 'estado',
   fecha_creacion: 'fecha_creacion',
   stock_bajo: 'stock_bajo'

@@ -668,6 +668,7 @@ export interface PublicInventoryItem {
   name: string;
   type: InventoryItemType;
   unit: string;
+  imageUrl: string | null;
   availability: PublicInventoryAvailability;
   medicationName: string | null;
 }
@@ -681,6 +682,7 @@ export interface InventoryItemListItem {
   lowStock: boolean;
   costPrice: number;
   unit: string;
+  imageUrl: string | null;
   active: boolean;
   supplier: { id: number; name: string } | null;
   medication: { id: number; name: string } | null;
@@ -696,6 +698,7 @@ export interface InventoryItemInput {
   minimumStock: number;
   costPrice: number;
   unit: string;
+  imageUrl?: string | null;
 }
 
 export type InventoryMovementType = "entrada" | "salida" | "merma";

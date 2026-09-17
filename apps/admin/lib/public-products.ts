@@ -1,5 +1,6 @@
 import type { ApiSuccess, InventoryItemType, PublicInventoryAvailability, PublicInventoryItem } from "@ami/contracts";
 import "server-only";
+import { safePublicationMediaUrl } from "./publication-presentation";
 
 const API_URL = (process.env.NEXT_PUBLIC_API_URL ?? "http://127.0.0.1:4000/api/v1")
   .replace(/\/+$/, "");
@@ -20,6 +21,7 @@ function isPublicInventoryItem(value: unknown): value is PublicInventoryItem {
     && typeof item.unit === "string"
     && ITEM_TYPES.includes(item.type as InventoryItemType)
     && AVAILABILITY.includes(item.availability as PublicInventoryAvailability)
+    && (item.imageUrl === null || (typeof item.imageUrl === "string" && safePublicationMediaUrl(item.imageUrl) !== null))
     && (item.medicationName === null || typeof item.medicationName === "string");
 }
 

@@ -1,8 +1,12 @@
 "use client";
 
 import $ from "jquery";
-import "select2";
+import select2Installer from "select2";
 import { useEffect, useMemo, useRef } from "react";
+
+type Select2Installer = (root: Window, jquery: JQueryStatic) => JQueryStatic;
+
+const installSelect2 = select2Installer as unknown as Select2Installer;
 
 export interface Select2Option {
   active: boolean;
@@ -49,6 +53,7 @@ export function Select2Field({
   useEffect(() => {
     const element = selectRef.current;
     if (!element) return;
+    if (typeof $.fn.select2 !== "function") installSelect2(window, $);
     const select = $(element);
     const modal = element.closest<HTMLElement>(".crud-modal");
     select.select2({

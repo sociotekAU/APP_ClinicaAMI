@@ -311,6 +311,7 @@ model tb_insumos_inventario {
   stock_minimo              Decimal                     @default(0) @db.Decimal(12, 2)
   precio_costo              Decimal                     @default(0) @db.Decimal(12, 2)
   unidad_medida             String                      @default("unidad") @db.VarChar(30)
+  imagen_url                String?                     @db.VarChar(500)
   estado                    Boolean                     @default(true)
   fecha_creacion            DateTime                    @default(now()) @db.Timestamp(6)
   stock_bajo                Boolean?                    @default(dbgenerated("(stock_actual <= stock_minimo)"))

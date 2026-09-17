@@ -3,8 +3,8 @@ import { describe, expect, it } from "vitest";
 import { filterPublicProducts } from "./public-product-filter";
 
 const products: PublicInventoryItem[] = [
-  { id: 1, name: "Acetaminofén 500 mg", type: "medicamento", unit: "tableta", availability: "available", medicationName: "Acetaminofén" },
-  { id: 2, name: "Guantes de nitrilo", type: "material_clinico", unit: "caja", availability: "limited", medicationName: null },
+  { id: 1, name: "Acetaminofén 500 mg", type: "medicamento", unit: "tableta", imageUrl: "/productos/acetaminofen.webp", availability: "available", medicationName: "Acetaminofén" },
+  { id: 2, name: "Guantes de nitrilo", type: "material_clinico", unit: "caja", imageUrl: null, availability: "limited", medicationName: null },
 ];
 
 describe("filterPublicProducts", () => {

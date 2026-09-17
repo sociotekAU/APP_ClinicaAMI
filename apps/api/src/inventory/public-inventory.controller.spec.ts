@@ -17,6 +17,7 @@ describe("PublicInventoryController", () => {
       name: "Vitamina C",
       type: "medicamento" as const,
       unit: "frasco",
+      imageUrl: "https://images.example.com/vitamina-c.webp",
       availability: "available" as const,
       medicationName: "Ácido ascórbico",
     };

@@ -77,6 +77,11 @@
 .productVisual::after { position: absolute; width: 12rem; height: 12rem; border: 1px solid rgb(255 255 255 / 16%); border-radius: 50%; content: ""; transform: translate(44%, 50%); }
 .productVisual svg { width: 3.25rem; height: 3.25rem; stroke-width: 1.45; }
 .productVisual > span { font-size: 0.8rem; font-weight: 850; letter-spacing: 0.09em; text-transform: uppercase; }
+.productVisualImage { display: block; background: #0c3445; }
+.productVisualImage::after { inset: auto 0 0; width: auto; height: 55%; border: 0; border-radius: 0; background: linear-gradient(transparent, rgb(6 31 55 / 78%)); transform: none; }
+.productVisualImage img { width: 100%; height: 100%; display: block; object-fit: cover; transition: transform 240ms ease; }
+.productVisualImage > span { position: absolute; z-index: 1; right: 1rem; bottom: 0.85rem; left: 1rem; color: #fff; }
+.productCard:hover .productVisualImage img { transform: scale(1.035); }
 .medicamento { background: linear-gradient(145deg, #0b4c81, #12314d); }
 .reactivo_laboratorio { background: linear-gradient(145deg, #236670, #0c3445); }
 .material_clinico { background: linear-gradient(145deg, #87662f, #4b3514); }
@@ -107,9 +112,13 @@
 .breadcrumbs svg { flex: 0 0 auto; width: 0.9rem; height: 0.9rem; }
 .breadcrumbs span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .detailCard { overflow: hidden; display: grid; grid-template-columns: minmax(20rem, 0.82fr) minmax(0, 1.18fr); border: 1px solid #d3e0e8; border-radius: 1.25rem; background: #fff; box-shadow: 0 1.8rem 5rem rgb(6 31 55 / 12%); animation: detail-enter 500ms ease-out both; }
-.detailVisual { min-height: 36rem; display: grid; place-content: center; justify-items: center; gap: 1.2rem; color: #fff; }
+.detailVisual { position: relative; overflow: hidden; min-height: 36rem; display: grid; place-content: center; justify-items: center; gap: 1.2rem; color: #fff; }
 .detailVisual svg { width: 6rem; height: 6rem; stroke-width: 1.2; }
 .detailVisual span { font-size: 0.82rem; font-weight: 850; letter-spacing: 0.12em; text-transform: uppercase; }
+.detailVisualImage { display: block; background: #0c3445; }
+.detailVisualImage::after { position: absolute; inset: auto 0 0; height: 45%; background: linear-gradient(transparent, rgb(6 31 55 / 82%)); content: ""; }
+.detailVisualImage img { width: 100%; height: 100%; min-height: 36rem; display: block; object-fit: cover; }
+.detailVisualImage span { position: absolute; z-index: 1; right: 1.5rem; bottom: 1.35rem; left: 1.5rem; }
 .detailContent { display: flex; flex-direction: column; align-items: flex-start; justify-content: center; padding: clamp(2rem, 6vw, 5rem); }
 .detailContent h1,
 .detailMissing h1 { margin: 0; color: #061f37; font-family: Georgia, "Times New Roman", serif; font-size: clamp(2.7rem, 5vw, 4.8rem); font-weight: 500; line-height: 1; letter-spacing: -0.05em; }
@@ -125,6 +134,39 @@
 .contactAction { min-height: 3rem; display: inline-flex; align-items: center; justify-content: center; gap: 0.55rem; margin-top: 1.5rem; padding: 0.75rem 1.05rem; border-radius: 0.7rem; color: #fff; background: #0b4c81; font-weight: 850; text-decoration: none; box-shadow: 0 0.8rem 2rem rgb(11 76 129 / 18%); }
 .contactAction:hover { background: #061f37; }
 .contactAction svg { width: 1rem; height: 1rem; }
+
+.relatedSection { display: grid; gap: 1.5rem; margin-top: clamp(3rem, 7vw, 5rem); }
+.relatedHeader { display: flex; align-items: end; justify-content: space-between; gap: 1.5rem; }
+.relatedHeader .eyebrow { margin-bottom: 0.45rem; }
+.relatedHeader h2 { margin: 0; color: #061f37; font-family: Georgia, "Times New Roman", serif; font-size: clamp(2rem, 4vw, 3.25rem); font-weight: 500; letter-spacing: -0.04em; }
+.carouselControls { display: flex; gap: 0.55rem; }
+.carouselControls button { width: 3rem; height: 3rem; display: grid; place-items: center; border: 1px solid #c9d8e2; border-radius: 50%; color: #0b4c81; background: #fff; cursor: pointer; transition: color 150ms ease, border-color 150ms ease, background 150ms ease, transform 150ms ease; }
+.carouselControls button:hover { border-color: #0b4c81; color: #fff; background: #0b4c81; transform: translateY(-1px); }
+.carouselControls button:focus-visible { outline: 3px solid #b8873f; outline-offset: 3px; }
+.carouselControls svg { width: 1.15rem; height: 1.15rem; }
+.relatedTrack { display: grid; grid-auto-columns: minmax(17rem, 21.5rem); grid-auto-flow: column; gap: 1rem; margin: 0; padding: 0.15rem 0.1rem 1.1rem; overflow-x: auto; list-style: none; scroll-behavior: smooth; scroll-snap-type: x mandatory; scrollbar-color: #9bb4c4 #e5edf2; scrollbar-width: thin; }
+.relatedTrack > li { min-width: 0; scroll-snap-align: start; }
+.relatedCard { height: 100%; overflow: hidden; display: grid; grid-template-rows: 10.5rem 1fr; border: 1px solid #d7e2e9; border-radius: 1rem; color: inherit; background: #fff; box-shadow: 0 0.8rem 2.2rem rgb(6 31 55 / 7%); text-decoration: none; transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease; }
+.relatedCard:hover { border-color: #9fb9ca; box-shadow: 0 1.2rem 3rem rgb(6 31 55 / 12%); transform: translateY(-3px); }
+.relatedCard:focus-visible { outline: 3px solid #b8873f; outline-offset: 3px; }
+.relatedVisual { position: relative; overflow: hidden; display: grid; place-content: center; justify-items: center; gap: 0.7rem; color: #fff; }
+.relatedVisual svg { width: 2.8rem; height: 2.8rem; stroke-width: 1.45; }
+.relatedVisual > span { font-size: 0.72rem; font-weight: 850; letter-spacing: 0.09em; text-transform: uppercase; }
+.relatedVisualImage { display: block; background: #0c3445; }
+.relatedVisualImage::after { position: absolute; inset: auto 0 0; height: 55%; background: linear-gradient(transparent, rgb(6 31 55 / 80%)); content: ""; }
+.relatedVisualImage img { width: 100%; height: 100%; display: block; object-fit: cover; transition: transform 240ms ease; }
+.relatedVisualImage > span { position: absolute; z-index: 1; right: 1rem; bottom: 0.8rem; left: 1rem; color: #fff; }
+.relatedCard:hover .relatedVisualImage img { transform: scale(1.035); }
+.relatedBody { display: flex; flex-direction: column; align-items: flex-start; padding: 1.15rem; }
+.relatedBody .availability { margin-bottom: 0.7rem; }
+.relatedBody > strong { color: #061f37; font-family: Georgia, "Times New Roman", serif; font-size: 1.2rem; font-weight: 500; line-height: 1.18; }
+.relatedBody > small { margin-top: 0.55rem; color: #62717d; font-size: 0.82rem; }
+.relatedLink { display: inline-flex; align-items: center; gap: 0.4rem; margin-top: auto; padding-top: 1.25rem; color: #0b4c81; font-size: 0.82rem; font-weight: 850; }
+.relatedLink svg { width: 0.95rem; height: 0.95rem; }
+.relatedEmpty { min-height: 14rem; display: grid; place-content: center; justify-items: center; gap: 0.65rem; padding: 2rem; border: 1px dashed #bfd0db; border-radius: 1rem; color: #62717d; background: rgb(255 255 255 / 72%); text-align: center; }
+.relatedEmpty > svg { width: 2.8rem; height: 2.8rem; color: #b8873f; stroke-width: 1.35; }
+.relatedEmpty h3 { margin: 0.3rem 0 0; color: #061f37; font-family: Georgia, "Times New Roman", serif; font-size: clamp(1.6rem, 3vw, 2.25rem); font-weight: 500; }
+.relatedEmpty p { margin: 0; line-height: 1.6; }
 
 .detailMissing { width: min(100% - 2.5rem, 58rem); min-height: 38rem; display: grid; place-content: center; justify-items: center; gap: 0.9rem; margin-inline: auto; text-align: center; }
 .detailMissing > svg { width: 3.5rem; height: 3.5rem; color: #b8873f; stroke-width: 1.3; }
@@ -186,8 +228,11 @@
   .productBody { padding: 1.1rem; }
   .detailCard { grid-template-columns: 1fr; }
   .detailVisual { min-height: 17rem; }
+  .detailVisualImage img { height: 17rem; min-height: 17rem; }
   .loadingDetailVisual { min-height: 17rem; }
   .detailContent { padding: 2rem 1.35rem 2.4rem; }
+  .relatedHeader { align-items: flex-start; }
+  .relatedTrack { grid-auto-columns: minmax(15.5rem, 82vw); }
   .loadingDetailContent { min-height: 25rem; padding: 2rem 1.35rem 2.4rem; }
   .productFacts { grid-template-columns: 1fr; }
   .productFacts > div + div { padding-left: 0; border-top: 1px solid #dce5ec; border-left: 0; }
@@ -203,6 +248,8 @@
   .filterButton,
   .filterButtonActive,
   .productCard,
+  .relatedCard,
+  .carouselControls button,
   .productLink svg,
   .searchControl { transition: none; }
   .loadingCopy span,
