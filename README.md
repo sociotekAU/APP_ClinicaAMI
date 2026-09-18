@@ -275,13 +275,22 @@ recibe secretos; `NEXT_PUBLIC_API_URL` se incorpora durante su compilación.
 
 ### Configuración en Dockploy
 
-Se deben crear dos servicios desde el mismo repositorio y `Dockerfile`:
+Para evitar que el servidor de producción compile todo el monorepo en cada
+despliegue, se deben crear dos servicios desde el mismo repositorio usando los
+Dockerfiles especializados:
 
-- API: destino de build `api-runner`, puerto `4000` y variables privadas del
-  entorno. Debe montar un volumen persistente en `/app/storage/private` y definir
+- API: Dockerfile `Dockerfile.api`, contexto `.`, destino de build `api-runner`,
+  puerto `4000` y variables privadas del entorno. Debe montar un volumen
+  persistente en `/app/storage/private` y definir
   `PRIVATE_STORAGE_ROOT=/app/storage/private`.
-- Administración: destino de build `admin-runner`, puerto `3000` y argumento
-  de build `NEXT_PUBLIC_API_URL` apuntando al dominio HTTPS del API.
+- Administración y web pública: Dockerfile `Dockerfile.web`, contexto `.`,
+  destino de build `web-runner`, puerto `3000` y argumento de build
+  `NEXT_PUBLIC_API_URL` apuntando al dominio HTTPS del API.
+
+El `Dockerfile` raíz se conserva para compatibilidad y desarrollo local. En
+producción se recomiendan los archivos especializados porque `Dockerfile.web`
+no instala ni compila Prisma/NestJS y `Dockerfile.api` no instala ni compila
+Next.js.
 
 Ambas imágenes incluyen una comprobación de salud. PostgreSQL, las migraciones,
 el almacenamiento clínico privado y los respaldos se administran como servicios

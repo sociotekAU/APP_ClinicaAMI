@@ -1,0 +1,70 @@
+# syntax=docker/dockerfile:1.7
+
+ARG NODE_VERSION=24.19.0
+
+FROM node:${NODE_VERSION}-bookworm-slim AS api-tooling
+
+ENV PNPM_HOME=/pnpm
+ENV PATH=${PNPM_HOME}:${PATH}
+WORKDIR /workspace
+
+RUN apt-get update \
+    && apt-get install --yes --no-install-recommends openssl \
+    && rm -rf /var/lib/apt/lists/* \
+    && corepack enable \
+    && corepack prepare pnpm@11.19.0 --activate
+
+FROM api-tooling AS api-dependencies
+
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml tsconfig.base.json ./
+COPY apps/api/package.json ./apps/api/package.json
+COPY packages/contracts/package.json ./packages/contracts/package.json
+COPY packages/database/package.json ./packages/database/package.json
+
+RUN --mount=type=cache,id=ami-pnpm-store,target=/pnpm/store \
+    pnpm --filter @ami/api... install --frozen-lockfile \
+      --fetch-retries=5 \
+      --fetch-timeout=120000 \
+      --network-concurrency=4
+
+FROM api-dependencies AS api-build
+
+COPY apps/api ./apps/api
+COPY packages/contracts ./packages/contracts
+COPY packages/database ./packages/database
+
+RUN DATABASE_URL=postgresql://build:build@127.0.0.1:5432/build \
+    pnpm --filter @ami/database db:generate
+RUN pnpm --filter @ami/contracts build \
+    && pnpm --filter @ami/database build \
+    && pnpm --filter @ami/api build
+
+FROM api-build AS api-package
+
+RUN pnpm --filter @ami/api deploy --prod --legacy /output/api \
+    && pnpm --filter @ami/database deploy --prod --no-optional --legacy /output/database \
+    && rm -f /output/api/node_modules/@ami/database \
+    && cp -R /output/database /output/api/node_modules/@ami/database
+
+FROM node:${NODE_VERSION}-bookworm-slim AS api-runner
+
+ENV NODE_ENV=production
+ENV API_PORT=4000
+WORKDIR /app
+
+RUN apt-get update \
+    && apt-get install --yes --no-install-recommends openssl \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY --from=api-package --chown=node:node /output/api ./
+
+RUN mkdir -p /app/storage/private \
+    && chown -R node:node /app/storage
+
+USER node
+EXPOSE 4000
+
+HEALTHCHECK --interval=30s --timeout=5s --start-period=20s --retries=3 \
+  CMD ["node", "-e", "fetch('http://127.0.0.1:4000/api/v1/health').then((response)=>{if(!response.ok)process.exit(1)}).catch(()=>process.exit(1))"]
+
+CMD ["node", "dist/main.js"]

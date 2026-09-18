@@ -80,3 +80,7 @@ temp/
 # Herramientas locales de Codex/agentes
 .codex/
 .agents/
+
+
+
+/database/seed.sql
